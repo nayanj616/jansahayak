@@ -1,0 +1,20 @@
+{
+  "city": "Gwalior",
+  "ulb_name": "Gwalior Municipal Corporation",
+  "ulb_lgd_code": 250694,
+  "source_file": "gwalior_wards_verified.json",
+  "missing_ward_numbers": [
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "exclusion_reason_from_source": "Ward numbering differs between sources for these wards",
+  "verification_status": "disputed",
+  "action_required": "Obtain authoritative ward mapping and reconcile numbering across sources.",
+  "interpretation": "These are absent from the supplied dataset due to a stated numbering discrepancy. Their absence does not establish that the wards do not exist.",
+  "confirmed_nonexistent": false
+}

@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/gwalior_wards.schema.json",
+  "title": "Gwalior ward master record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ward_id",
+    "ward_no",
+    "ward_name",
+    "ward_name_original",
+    "lgd_code",
+    "city",
+    "state",
+    "country",
+    "ulb_name",
+    "ulb_lgd_code",
+    "latitude",
+    "longitude",
+    "boundary_geojson",
+    "boundary_status",
+    "center_source",
+    "councillor_name",
+    "supervisor_name",
+    "sanitary_inspector_name",
+    "sanitation_zone",
+    "active",
+    "verification_status",
+    "source_name",
+    "source_url",
+    "source_updated_at",
+    "last_verified_at",
+    "notes"
+  ],
+  "properties": {
+    "ward_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ward_no": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "ward_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ward_name_original": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lgd_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "city": {
+      "const": "Gwalior"
+    },
+    "state": {
+      "const": "Madhya Pradesh"
+    },
+    "country": {
+      "const": "India"
+    },
+    "ulb_name": {
+      "const": "Gwalior Municipal Corporation"
+    },
+    "ulb_lgd_code": {
+      "const": 250694
+    },
+    "latitude": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -180,
+      "maximum": 180
+    },
+    "boundary_geojson": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "boundary_status": {
+      "enum": [
+        "unavailable",
+        "approximate",
+        "verified"
+      ]
+    },
+    "center_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "councillor_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supervisor_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sanitary_inspector_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sanitation_zone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "verification_status": {
+      "enum": [
+        "pending",
+        "verified",
+        "disputed"
+      ]
+    },
+    "source_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "source_updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "last_verified_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

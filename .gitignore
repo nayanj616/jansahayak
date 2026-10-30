@@ -20,6 +20,12 @@
 # production
 /build
 
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
 # misc
 .DS_Store
 *.pem

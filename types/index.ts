@@ -1,7 +1,8 @@
 /**
  * JanSahayak Core TypeScript Definitions
- * Phase 1 Foundation
  */
+
+export * from './database';
 
 export type DemoRole = 'citizen' | 'worker' | 'officer';
 
@@ -13,6 +14,7 @@ export interface DemoSessionUser {
   ward?: string;
   zone?: string;
   avatarInitials: string;
+  dbUserId?: string;
 }
 
 export interface DemoSessionPayload {
@@ -20,27 +22,6 @@ export interface DemoSessionPayload {
   issuedAt: number;
   expiresAt: number;
 }
-
-// Swachh Gwalior Domain Types
-export type ComplaintStatus =
-  | 'reported'
-  | 'assigned'
-  | 'in_progress'
-  | 'cleaned'
-  | 'verified'
-  | 'rejected';
-
-export type ComplaintPriority = 'low' | 'medium' | 'high' | 'urgent';
-
-export type ComplaintCategory =
-  | 'garbage_dump'
-  | 'overflowing_bin'
-  | 'drain_blockage'
-  | 'dead_animal'
-  | 'construction_debris'
-  | 'open_defecation'
-  | 'sweeping_needed'
-  | 'other';
 
 export interface GwaliorWard {
   wardNumber: number;
@@ -55,9 +36,9 @@ export interface GwaliorWard {
 export interface ComplaintSummary {
   id: string;
   title: string;
-  category: ComplaintCategory;
-  status: ComplaintStatus;
-  priority: ComplaintPriority;
+  category: string;
+  status: string;
+  priority: string;
   wardNumber: number;
   address: string;
   landmark?: string;
@@ -79,6 +60,8 @@ export interface CleanlinessAnalysisResult {
   recommendation: 'approve' | 'manual_review' | 'rework';
   processedAt: string;
   modelUsed: string;
+  rawResponse?: Record<string, unknown>;
+  errorMessage?: string;
 }
 
 export interface CivicAnswerResult {
@@ -119,4 +102,3 @@ export interface CivicService {
   estimatedDays: string;
   portalUrl?: string;
 }
-

@@ -36,6 +36,12 @@ export function getSigningKey(): Uint8Array {
   return ephemeralDevKey;
 }
 
+export const DEMO_USER_IDS: Record<DemoRole, string> = {
+  citizen: 'c0000000-0000-4000-8000-000000000001',
+  worker: 'b0000000-0000-4000-8000-000000000002',
+  officer: 'a0000000-0000-4000-8000-000000000003',
+};
+
 export const DEMO_PROFILES: Record<DemoRole, DemoSessionUser> = {
   citizen: {
     role: 'citizen',
@@ -45,6 +51,7 @@ export const DEMO_PROFILES: Record<DemoRole, DemoSessionUser> = {
     ward: 'Demonstration Sector: Lashkar Area (Unverified Ward 24)',
     zone: 'Lashkar Demonstration Zone',
     avatarInitials: 'C',
+    dbUserId: DEMO_USER_IDS.citizen,
   },
   worker: {
     role: 'worker',
@@ -54,6 +61,7 @@ export const DEMO_PROFILES: Record<DemoRole, DemoSessionUser> = {
     ward: 'Demonstration Sector: Morar Area (Unverified Ward 12)',
     zone: 'Morar Demonstration Zone',
     avatarInitials: 'W',
+    dbUserId: DEMO_USER_IDS.worker,
   },
   officer: {
     role: 'officer',
@@ -63,6 +71,7 @@ export const DEMO_PROFILES: Record<DemoRole, DemoSessionUser> = {
     ward: 'All Demonstration Sectors (1-66 Preview)',
     zone: 'GMC Administration (Demo Evaluation)',
     avatarInitials: 'O',
+    dbUserId: DEMO_USER_IDS.officer,
   },
 };
 
