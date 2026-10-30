@@ -271,13 +271,13 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
             <div className="max-w-2xl">
               <span className="text-xs font-bold uppercase tracking-wider text-blue-700">
-                Gwalior Municipal Coverage
+                Gwalior Municipal Coverage Preview
               </span>
               <h2 className="text-2xl font-bold text-slate-900 tracking-tight mt-1">
-                Ward-Level Sanitation Infrastructure
+                Demonstration Sanitation Sectors
               </h2>
               <p className="text-sm text-slate-600">
-                Integrated OpenStreetMap demonstration visualization of Gwalior Municipal Corporation wards.
+                Interactive OpenStreetMap demonstration visualization of approximate Gwalior demonstration zones. Official ward boundaries and live dispatch will bind in Phase 2.
               </p>
             </div>
 

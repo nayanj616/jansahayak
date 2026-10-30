@@ -50,61 +50,69 @@ export const COMPLAINT_CATEGORIES: {
   },
 ];
 
-// Representative Gwalior Municipal Corporation Administrative Wards
+/**
+ * DEMONSTRATION GEOGRAPHIC SECTORS
+ *
+ * IMPORTANT ACADEMIC DEMARCATION:
+ * The coordinates and sector boundaries below are demonstration approximations
+ * representing general geographic sectors across Gwalior for academic prototyping.
+ * They do NOT represent verified official municipal ward boundaries or official
+ * employee rosters of the Gwalior Municipal Corporation (GMC).
+ * Verified GIS shapefiles and official administrative wards will be integrated in Phase 2.
+ */
 export const GWALIOR_REPRESENTATIVE_WARDS: GwaliorWard[] = [
   {
     wardNumber: 1,
-    wardName: 'Hazira & Resham Mill',
-    zone: 'Gwalior Fort Zone',
-    supervisorName: 'R. K. Sharma',
-    supervisorContact: '+91 751-2400101',
+    wardName: 'Hazira Area (Demonstration Zone 1)',
+    zone: 'Gwalior Fort Sector (Demo)',
+    supervisorName: 'Demonstration Supervisor (Unverified)',
+    supervisorContact: 'GMC Central Helpline: 0751-2438300',
     latitude: 26.2332,
     longitude: 78.1812,
   },
   {
     wardNumber: 12,
-    wardName: 'Morar Cantt & Station Road',
-    zone: 'Morar Zone',
-    supervisorName: 'V. S. Chauhan',
-    supervisorContact: '+91 751-2400112',
+    wardName: 'Morar Area (Demonstration Zone 12)',
+    zone: 'Morar Sector (Demo)',
+    supervisorName: 'Demonstration Supervisor (Unverified)',
+    supervisorContact: 'GMC Central Helpline: 0751-2438300',
     latitude: 26.2255,
     longitude: 78.2289,
   },
   {
     wardNumber: 24,
-    wardName: 'Maharaj Bada & Sarafa Bazar',
-    zone: 'Lashkar Zone',
-    supervisorName: 'A. K. Verma',
-    supervisorContact: '+91 751-2400124',
+    wardName: 'Maharaj Bada Area (Demonstration Zone 24)',
+    zone: 'Lashkar Sector (Demo)',
+    supervisorName: 'Demonstration Supervisor (Unverified)',
+    supervisorContact: 'GMC Central Helpline: 0751-2438300',
     latitude: 26.2081,
     longitude: 78.1636,
   },
   {
     wardNumber: 35,
-    wardName: 'Thatipur & Balwant Nagar',
-    zone: 'Thatipur Zone',
-    supervisorName: 'D. N. Tomar',
-    supervisorContact: '+91 751-2400135',
+    wardName: 'Thatipur Area (Demonstration Zone 35)',
+    zone: 'Thatipur Sector (Demo)',
+    supervisorName: 'Demonstration Supervisor (Unverified)',
+    supervisorContact: 'GMC Central Helpline: 0751-2438300',
     latitude: 26.2198,
     longitude: 78.2045,
   },
   {
     wardNumber: 48,
-    wardName: 'City Center & University Road',
-    zone: 'Lashkar East Zone',
-    supervisorName: 'P. K. Mishra',
-    supervisorContact: '+91 751-2400148',
+    wardName: 'City Center Area (Demonstration Zone 48)',
+    zone: 'Lashkar East Sector (Demo)',
+    supervisorName: 'Demonstration Supervisor (Unverified)',
+    supervisorContact: 'GMC Central Helpline: 0751-2438300',
     latitude: 26.2052,
     longitude: 78.1923,
   },
   {
     wardNumber: 66,
-    wardName: 'Gwalior Fort & Tansen Nagar',
-    zone: 'Heritage Zone',
-    supervisorName: 'M. S. Kushwah',
-    supervisorContact: '+91 751-2400166',
+    wardName: 'Gwalior Fort Area (Demonstration Zone 66)',
+    zone: 'Heritage Sector (Demo)',
+    supervisorName: 'Demonstration Supervisor (Unverified)',
+    supervisorContact: 'GMC Central Helpline: 0751-2438300',
     latitude: 26.2307,
     longitude: 78.1691,
   },
 ];
-

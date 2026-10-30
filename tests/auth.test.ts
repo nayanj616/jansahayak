@@ -4,6 +4,7 @@ import {
   createDemoToken,
   verifyDemoToken,
   DEMO_PROFILES,
+  getSigningKey,
 } from '../lib/auth/tokens';
 import { setRoleRequestSchema } from '../lib/validation/demo-session';
 import type { DemoRole } from '../types';
@@ -39,21 +40,56 @@ test('Demo Session: rejects tampered or malformed tokens', async () => {
   assert.strictEqual(verifiedTampered, null);
 });
 
-test('Validation: accepts valid demo roles', () => {
-  const validCitizen = setRoleRequestSchema.safeParse({ role: 'citizen' });
+test('Demo Session: rejects expired tokens', async () => {
+  const profile = DEMO_PROFILES.citizen;
+  // Create an expired token by setting negative expiry duration
+  const expiredToken = await createDemoToken(profile, -1);
+  const verified = await verifyDemoToken(expiredToken);
+  assert.strictEqual(verified, null, 'Expired token must be rejected');
+});
+
+test('Demo Session: signing key has cryptographic entropy and minimum length', () => {
+  const key = getSigningKey();
+  assert.ok(key instanceof Uint8Array);
+  assert.ok(key.length >= 32, 'Key must be at least 256 bits (32 bytes)');
+});
+
+test('Validation: accepts valid demo roles and relative redirect URLs', () => {
+  const validCitizen = setRoleRequestSchema.safeParse({
+    role: 'citizen',
+    redirectUrl: '/citizen',
+  });
   assert.ok(validCitizen.success);
 
-  const validWorker = setRoleRequestSchema.safeParse({ role: 'worker' });
+  const validWorker = setRoleRequestSchema.safeParse({
+    role: 'worker',
+    redirectUrl: '/worker',
+  });
   assert.ok(validWorker.success);
 
-  const validOfficer = setRoleRequestSchema.safeParse({ role: 'officer' });
+  const validOfficer = setRoleRequestSchema.safeParse({
+    role: 'officer',
+    redirectUrl: '/officer',
+  });
   assert.ok(validOfficer.success);
 });
 
-test('Validation: rejects unauthorized or invalid roles', () => {
+test('Validation: rejects unauthorized roles and dangerous open redirect URLs', () => {
   const invalidRole = setRoleRequestSchema.safeParse({ role: 'superadmin' });
   assert.strictEqual(invalidRole.success, false);
 
   const emptyRole = setRoleRequestSchema.safeParse({});
   assert.strictEqual(emptyRole.success, false);
+
+  const externalRedirect = setRoleRequestSchema.safeParse({
+    role: 'citizen',
+    redirectUrl: 'https://malicious-site.example.com/exploit',
+  });
+  assert.strictEqual(externalRedirect.success, false);
+
+  const protocolRelative = setRoleRequestSchema.safeParse({
+    role: 'citizen',
+    redirectUrl: '//malicious-site.example.com',
+  });
+  assert.strictEqual(protocolRelative.success, false);
 });

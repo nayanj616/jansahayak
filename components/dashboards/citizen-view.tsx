@@ -51,8 +51,8 @@ export function CitizenView({ session }: CitizenViewProps) {
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-emerald-600 shrink-0" />
           <span>
-            Assigned Location: <strong>{session.user.ward || 'Ward 24 (Lashkar)'}</strong> &bull;{' '}
-            {session.user.zone || 'Lashkar Zone'}
+            Demonstration Area: <strong>{session.user.ward || 'Demonstration Sector: Lashkar Area'}</strong> &bull;{' '}
+            {session.user.zone || 'Lashkar Demonstration Zone'} (Unverified Boundary)
           </span>
         </div>
         <div className="flex items-center gap-2 text-emerald-700">

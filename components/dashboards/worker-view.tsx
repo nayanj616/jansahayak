@@ -24,34 +24,34 @@ interface WorkerViewProps {
 export function WorkerView({ session }: WorkerViewProps) {
   const [actionNotice, setActionNotice] = React.useState<string | null>(null);
 
-  // 3 Stat counters matching visual reference image
+  // Clearly labeled zero-value placeholders until real Supabase data is connected
   const stats = [
     {
       label: 'Assigned',
-      value: 5,
+      value: 0,
       icon: ClipboardList,
       color: 'text-blue-700',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-100',
-      description: 'Pending field inspection',
+      description: '0 pending tasks (Phase 1 placeholder)',
     },
     {
       label: 'In Progress',
-      value: 2,
+      value: 0,
       icon: Clock,
       color: 'text-amber-700',
       bgColor: 'bg-amber-50',
       borderColor: 'border-amber-100',
-      description: 'Active cleanup underway',
+      description: '0 active cleanups (Phase 1 placeholder)',
     },
     {
       label: 'Completed',
-      value: 1,
+      value: 0,
       icon: CheckCircle2,
       color: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
       borderColor: 'border-emerald-100',
-      description: 'Awaiting officer sign-off',
+      description: '0 completed tasks (Phase 1 placeholder)',
     },
   ];
 
@@ -95,22 +95,22 @@ export function WorkerView({ session }: WorkerViewProps) {
         </div>
       </div>
 
-      {/* Field Worker Profile Badge Banner */}
+      {/* Field Worker Profile Badge Banner with Demonstration Labels */}
       <div className="rounded-xl border border-blue-100 bg-blue-50/60 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-blue-900">
         <div className="flex items-center gap-2">
           <HardHat className="h-4 w-4 text-blue-600 shrink-0" />
           <span>
-            Field Unit: <strong>{session.user.name}</strong> &bull;{' '}
-            {session.user.ward || 'Ward 12 (Morar)'} &bull; {session.user.zone || 'Morar Zone'}
+            Field Persona: <strong>{session.user.name}</strong> &bull;{' '}
+            {session.user.ward || 'Demonstration Sector: Morar Area'}
           </span>
         </div>
         <div className="flex items-center gap-2 text-blue-700">
           <MapPin className="h-3.5 w-3.5" />
-          <span>Sector Beat: Morar Central &amp; Station Road</span>
+          <span>Demonstration Zone (Unverified Boundary)</span>
         </div>
       </div>
 
-      {/* 3 Stat Counter Cards matching visual reference image */}
+      {/* 3 Stat Counter Cards with Zero-Value Placeholders */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
@@ -161,7 +161,7 @@ export function WorkerView({ session }: WorkerViewProps) {
           <EmptyState
             icon={ClipboardList}
             title="No assignments yet"
-            description="New assignments will appear here. When complaints are allocated to your ward by the municipal officer, tasks and before-photos will be listed here."
+            description="New assignments will appear here. No field tasks have been allocated to your demonstration beat yet. Real records will connect via Supabase in Phase 2."
           />
         </CardContent>
       </Card>
@@ -192,4 +192,3 @@ export function WorkerView({ session }: WorkerViewProps) {
     </div>
   );
 }
-

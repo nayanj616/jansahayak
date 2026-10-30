@@ -25,34 +25,34 @@ export function OfficerView({ session }: OfficerViewProps) {
   const [timeframe, setTimeframe] = React.useState('Last 30 days');
   const [activeModal, setActiveModal] = React.useState<string | null>(null);
 
-  // 3 Stats matching reference image
+  // Clearly labeled zero-value placeholders until real Supabase data is connected
   const stats = [
     {
       label: 'Total Complaints',
-      value: 24,
+      value: 0,
       icon: ClipboardList,
       color: 'text-blue-700',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-100',
-      description: 'City-wide reports logged',
+      description: '0 complaints logged (Phase 1 placeholder)',
     },
     {
       label: 'In Progress',
-      value: 6,
+      value: 0,
       icon: Clock,
       color: 'text-amber-700',
       bgColor: 'bg-amber-50',
       borderColor: 'border-amber-100',
-      description: 'Under worker remediation',
+      description: '0 in progress (Phase 1 placeholder)',
     },
     {
       label: 'Completed',
-      value: 12,
+      value: 0,
       icon: CheckCircle2,
       color: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
       borderColor: 'border-emerald-100',
-      description: 'Verified & closed',
+      description: '0 completed (Phase 1 placeholder)',
     },
   ];
 
@@ -75,7 +75,7 @@ export function OfficerView({ session }: OfficerViewProps) {
             className="text-xs"
           >
             <Filter className="h-3.5 w-3.5 mr-1" />
-            Ward Filter (All 66 Wards)
+            Demonstration Sectors (1-66)
           </Button>
           <Button
             size="sm"
@@ -83,7 +83,7 @@ export function OfficerView({ session }: OfficerViewProps) {
             className="bg-indigo-700 hover:bg-indigo-800 text-white text-xs gap-1.5"
           >
             <Bot className="h-3.5 w-3.5" />
-            AI Verifications (3 Pending)
+            AI Verifications (0 Pending &bull; Phase 1 Preview)
           </Button>
         </div>
       </div>
@@ -93,16 +93,16 @@ export function OfficerView({ session }: OfficerViewProps) {
         <div className="flex items-center gap-2">
           <Building2 className="h-4 w-4 text-purple-700 shrink-0" />
           <span>
-            Designation: <strong>{session.user.designation}</strong> &bull; GMC Headquarters
+            Designation: <strong>{session.user.designation}</strong> &bull; GMC Administration Demo
           </span>
         </div>
         <div className="flex items-center gap-2 text-purple-700">
           <MapPin className="h-3.5 w-3.5" />
-          <span>Administrative Jurisdiction: All Wards (1 to 66)</span>
+          <span>Evaluation Scope: Demonstration Zones 1 to 66 (Unverified Boundaries)</span>
         </div>
       </div>
 
-      {/* 3 Stat Counters matching visual reference */}
+      {/* 3 Stat Counters with Zero-Value Placeholders */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
@@ -132,7 +132,7 @@ export function OfficerView({ session }: OfficerViewProps) {
         })}
       </div>
 
-      {/* Complaint Overview Chart Card matching visual reference */}
+      {/* Complaint Overview Chart Card with Zero Baseline Placeholder */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div>
@@ -158,7 +158,7 @@ export function OfficerView({ session }: OfficerViewProps) {
         </CardContent>
       </Card>
 
-      {/* Bottom 3 Quick Access Cards matching visual reference */}
+      {/* Bottom 3 Quick Access Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Card 1: AI Verification */}
         <Card
@@ -173,7 +173,7 @@ export function OfficerView({ session }: OfficerViewProps) {
               <div>
                 <CardTitle className="text-sm font-semibold">AI Verification</CardTitle>
                 <CardDescription className="text-xs">
-                  Review pending verifications
+                  Review pending verifications (0 Pending)
                 </CardDescription>
               </div>
             </div>
@@ -194,14 +194,14 @@ export function OfficerView({ session }: OfficerViewProps) {
                 <MapPin className="h-4 w-4" />
               </div>
               <div>
-                <CardTitle className="text-sm font-semibold">Ward-wise View</CardTitle>
+                <CardTitle className="text-sm font-semibold">Demonstration Sectors View</CardTitle>
                 <CardDescription className="text-xs">
-                  Explore complaints by ward
+                  Explore demonstration sectors (Unverified)
                 </CardDescription>
               </div>
             </div>
             <p className="text-xs text-slate-500 pt-1">
-              Sanitation metrics across Lashkar, Morar, Thatipur, and Heritage zones.
+              Sanitation metrics across Lashkar, Morar, Thatipur, and Heritage demonstration zones.
             </p>
           </CardHeader>
         </Card>
@@ -219,7 +219,7 @@ export function OfficerView({ session }: OfficerViewProps) {
               <div>
                 <CardTitle className="text-sm font-semibold">Analytics</CardTitle>
                 <CardDescription className="text-xs">
-                  City-wide insights
+                  City-wide insights (Phase 1 Baseline)
                 </CardDescription>
               </div>
             </div>
