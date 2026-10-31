@@ -2,6 +2,8 @@ import { GET as getTasks, POST as postTasks } from '../app/api/tasks/route';
 import { createDemoToken, DEMO_PROFILES, DEMO_COOKIE_NAME, DEMO_USER_IDS } from '../lib/auth/tokens';
 import { getDb } from '../lib/db/client';
 import { createAssignment } from '../lib/db/assignments';
+import { createComplaint } from '../lib/db/complaints';
+import { uploadAndLinkComplaintImage } from '../lib/storage';
 import { NextRequest } from 'next/server';
 
 async function runWorkerE2E() {
@@ -23,68 +25,56 @@ async function runWorkerE2E() {
   console.log('    Officer:', DEMO_PROFILES.officer.name, `(${officerId})`);
   console.log('    Citizen:', DEMO_PROFILES.citizen.name, `(${citizenId})`);
 
-  // 2. Locate or create a test complaint to assign to worker
-  const db = getDb();
-
-  // Find a complaint that is either submitted or assigned
-  const { data: complaintList } = await db
-    .from('complaints')
-    .select('*, images:complaint_images(*)')
-    .order('created_at', { ascending: false })
-    .limit(5);
-
-  let targetComplaint = complaintList?.find(
-    (c) => c.status === 'submitted' || c.status === 'assigned'
+  // 2. Create a dedicated isolated test complaint for this test run
+  // (Never modifies, resets, or deletes existing demo complaints like GWL-2026-1076)
+  const testRunId = Date.now();
+  console.log('[2] Creating dedicated test complaint for this isolated run...');
+  const testComplaint = await createComplaint(
+    {
+      category: 'overflowing_bin',
+      ward_id: 'GWL-W-012', // Morar Beat (Worker's ward)
+      priority: 'high',
+      location_description: 'Morar Beat Sector 3 - E2E Verification Site',
+      description: `E2E Automated Worker Workflow Verification [Run ${testRunId}]`,
+      location_source: 'gps',
+      latitude: 26.2285,
+      longitude: 78.2241,
+      location_accuracy_m: 8,
+    },
+    citizenId
   );
 
-  if (!targetComplaint && complaintList && complaintList.length > 0) {
-    // If all are completed/under_review, pick the first one and reset its status for testing
-    targetComplaint = complaintList[0];
-    await db.from('complaints').update({ status: 'submitted' }).eq('id', targetComplaint.id);
-    // Delete any existing assignments for clean test
-    await db.from('assignments').delete().eq('complaint_id', targetComplaint.id);
-  }
+  // Upload original before-photo to private complaint-originals bucket
+  const beforeJpegBase64 =
+    '/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=';
+  const beforeBuffer = Buffer.from(beforeJpegBase64, 'base64');
+  await uploadAndLinkComplaintImage({
+    complaintId: testComplaint.id,
+    imageType: 'before',
+    bucket: 'complaint-originals',
+    fileBuffer: beforeBuffer,
+    contentType: 'image/jpeg',
+    originalFilename: 'isolated_before_evidence.jpg',
+    uploadedBy: citizenId,
+  });
 
-  if (!targetComplaint) {
-    throw new Error('No complaint found in live database to test worker workflow.');
-  }
+  console.log('    Created Isolated Test Complaint:');
+  console.log('    ID:', testComplaint.id);
+  console.log('    Code:', testComplaint.complaint_code);
+  console.log('    Category:', testComplaint.category);
+  console.log('    Initial Status:', testComplaint.status, '(Clean from DB: submitted)');
 
-  console.log('[2] Target Complaint for Field Assignment:');
-  console.log('    ID:', targetComplaint.id);
-  console.log('    Code:', targetComplaint.complaint_code);
-  console.log('    Category:', targetComplaint.category);
-  console.log('    Current Status:', targetComplaint.status);
-
-  // 3. Ensure assignment exists for this worker
-  const { data: existingAssignment } = await db
-    .from('assignments')
-    .select('*')
-    .eq('complaint_id', targetComplaint.id)
-    .eq('worker_id', workerId)
-    .single();
-
-  let assignmentId: string;
-
-  if (!existingAssignment) {
-    console.log('[3] Creating new assignment for worker...');
-    const created = await createAssignment(
-      targetComplaint.id,
-      workerId,
-      officerId,
-      'E2E Test: Assigned by Municipal Officer to Morar Sanitation Worker'
-    );
-    assignmentId = created.id;
-    console.log('    Created Assignment ID:', assignmentId);
-  } else {
-    assignmentId = existingAssignment.id;
-    // Reset status to 'assigned' for clean test run
-    await db
-      .from('assignments')
-      .update({ status: 'assigned', started_at: null, completed_at: null })
-      .eq('id', assignmentId);
-    await db.from('complaints').update({ status: 'assigned' }).eq('id', targetComplaint.id);
-    console.log('[3] Existing Assignment reset to "assigned":', assignmentId);
-  }
+  // 3. Create assignment via createAssignment service
+  console.log('[3] Creating new assignment for worker via createAssignment...');
+  const createdAssignment = await createAssignment(
+    testComplaint.id,
+    workerId,
+    officerId,
+    `E2E Test: Assigned by Municipal Officer to Morar Sanitation Worker [${testRunId}]`
+  );
+  const assignmentId = createdAssignment.id;
+  console.log('    Created Assignment ID:', assignmentId);
+  console.log('    Assignment Status:', createdAssignment.status);
 
   // 4. Test Role Guards: Citizen and Officer must NOT access worker tasks API
   console.log('[4] Verifying Role Guard Isolation:');
@@ -108,7 +98,7 @@ async function runWorkerE2E() {
     throw new Error(`Expected 403 Forbidden for Officer on /api/tasks, got ${officerRes.status}`);
   }
 
-  // 5. Worker GET /api/tasks
+  // 5. Worker GET /api/tasks: Scoped only to authenticated worker
   console.log('[5] Querying Worker Tasks (GET /api/tasks):');
   const workerGetReq = new NextRequest('http://localhost:3000/api/tasks', {
     method: 'GET',
@@ -118,6 +108,15 @@ async function runWorkerE2E() {
   console.log('    Worker GET /api/tasks -> Status:', workerGetRes.status, '(200 expected)');
   const workerGetData = await workerGetRes.json();
   console.log('    Total tasks returned for worker:', workerGetData.count);
+
+  // Verify worker sees ONLY their own assignments (cross-worker isolation)
+  const hasUnauthorizedTask = workerGetData.tasks?.some(
+    (t: { worker_id: string }) => t.worker_id !== workerId
+  );
+  if (hasUnauthorizedTask) {
+    throw new Error('Data breach: worker received tasks belonging to another worker!');
+  }
+  console.log('    Cross-worker isolation verified: 100% of returned tasks belong to authenticated worker.');
 
   const foundTask = workerGetData.tasks?.find((t: { id: string }) => t.id === assignmentId);
   if (!foundTask) {
@@ -252,21 +251,30 @@ async function runWorkerE2E() {
     }
   }
 
-  // 10. Verify Complaint History Trail
-  console.log('[10] Verifying Audit History in Database:');
+  // 10. Verify Complaint History Trail for Test Complaint
+  console.log('[10] Verifying Audit History in Database for Test Complaint:');
+  const db = getDb();
   const { data: historyRecords } = await db
     .from('complaint_history')
     .select('*')
-    .eq('complaint_id', targetComplaint.id)
+    .eq('complaint_id', testComplaint.id)
     .order('created_at', { ascending: true });
 
   console.log('    Total history events for complaint:', historyRecords?.length);
+  const submitEvent = historyRecords?.find((h) => h.action === 'submitted');
+  const assignEvent = historyRecords?.find((h) => h.action === 'assigned');
   const startEvent = historyRecords?.find((h) => h.action === 'work_started');
   const completeEvent = historyRecords?.find((h) => h.action === 'cleanup_completed');
 
+  console.log('    Submitted Event Logged:', Boolean(submitEvent));
+  console.log('    Assigned Event Logged:', Boolean(assignEvent));
   console.log('    Work Started Event Logged:', Boolean(startEvent));
   console.log('    Cleanup Completed Event Logged:', Boolean(completeEvent));
   console.log('    Completion Event Remarks:', completeEvent?.remarks);
+
+  if (historyRecords?.length !== 4) {
+    throw new Error(`Expected exactly 4 history events for fresh test complaint, got ${historyRecords?.length}`);
+  }
 
   // 11. Test Duplicate Completion Prevention
   console.log('[11] Testing Duplicate Completion Prevention:');

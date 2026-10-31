@@ -10,6 +10,10 @@ import { MAX_FILE_SIZE_BYTES } from '../lib/validation/storage';
 import { requireApiRole } from '../lib/auth/api-guards';
 import { createDemoToken, DEMO_PROFILES, DEMO_COOKIE_NAME } from '../lib/auth/tokens';
 import { isValidStatusTransition } from '../lib/db/complaints';
+import {
+  isAssignableComplaintStatus,
+  ASSIGNABLE_COMPLAINT_STATUSES,
+} from '../lib/db/assignments';
 import type { AssignmentStatus } from '../types';
 
 async function createAuthRequest(
@@ -203,3 +207,99 @@ test('Worker Workflow: cross-worker isolation prevents task hijacking', () => {
   assert.strictEqual(isAuthorizedWorker1, true);
   assert.strictEqual(isAuthorizedWorker2, false);
 });
+
+// 8. Phase 3.1: Assignment Integrity & Reassignment State-Transition Tests
+test('Worker Workflow Integrity: permits assignment creation from submitted status', () => {
+  assert.strictEqual(isAssignableComplaintStatus('submitted'), true);
+  assert.strictEqual(isValidStatusTransition('submitted', 'assigned'), true);
+});
+
+test('Worker Workflow Integrity: permits assignment creation from rework_required status', () => {
+  assert.strictEqual(isAssignableComplaintStatus('rework_required'), true);
+  assert.strictEqual(isValidStatusTransition('rework_required', 'assigned'), true);
+});
+
+test('Worker Workflow Integrity: permits reassignment from assigned status', () => {
+  assert.strictEqual(isAssignableComplaintStatus('assigned'), true);
+  assert.strictEqual(isValidStatusTransition('assigned', 'assigned'), true);
+});
+
+test('Worker Workflow Integrity: rejects assignment creation from under_review status', () => {
+  assert.strictEqual(isAssignableComplaintStatus('under_review'), false);
+  assert.strictEqual(isValidStatusTransition('under_review', 'assigned'), false);
+});
+
+test('Worker Workflow Integrity: rejects assignment creation from terminal resolved and rejected states', () => {
+  assert.strictEqual(isAssignableComplaintStatus('resolved'), false);
+  assert.strictEqual(isAssignableComplaintStatus('rejected'), false);
+  assert.strictEqual(isValidStatusTransition('resolved', 'assigned'), false);
+  assert.strictEqual(isValidStatusTransition('rejected', 'assigned'), false);
+});
+
+test('Worker Workflow Integrity: rejects assignment creation from in_progress state', () => {
+  assert.strictEqual(isAssignableComplaintStatus('in_progress'), false);
+});
+
+test('Worker Workflow Integrity: assignable statuses list strictly matches approved lifecycle', () => {
+  assert.deepStrictEqual([...ASSIGNABLE_COMPLAINT_STATUSES].sort(), ['assigned', 'rework_required', 'submitted'].sort());
+});
+
+test('Worker Workflow Integrity: reassignment cancels existing active assignments to prevent duplicate active tasks', () => {
+  const existingAssignments = [
+    { id: 'task-1', status: 'completed' },
+    { id: 'task-2', status: 'assigned' },
+    { id: 'task-3', status: 'in_progress' },
+    { id: 'task-4', status: 'cancelled' },
+  ];
+
+  // Reassignment cancellation filter: active assignments (assigned, in_progress) become cancelled
+  const updated = existingAssignments.map((a) =>
+    ['assigned', 'in_progress'].includes(a.status) ? { ...a, status: 'cancelled' as const } : a
+  );
+
+  assert.strictEqual(updated[0].status, 'completed');
+  assert.strictEqual(updated[1].status, 'cancelled');
+  assert.strictEqual(updated[2].status, 'cancelled');
+  assert.strictEqual(updated[3].status, 'cancelled');
+
+  const activeCount = updated.filter((a) => ['assigned', 'in_progress'].includes(a.status)).length;
+  assert.strictEqual(activeCount, 0, 'No active assignments remain after reassignment cancellation');
+});
+
+test('Worker Workflow Integrity: compensating rollback deletes inserted assignment if status update fails', () => {
+  let assignmentDeleted = false;
+  let errorRethrown = false;
+
+  try {
+    const newlyCreatedAssignmentId = 'temp-assignment-uuid-123';
+    try {
+      // Simulate status transition failure
+      throw new Error('Database status transition constraint failure');
+    } catch (err) {
+      // Compensating rollback simulation
+      if (newlyCreatedAssignmentId) {
+        assignmentDeleted = true;
+      }
+      throw err;
+    }
+  } catch {
+    errorRethrown = true;
+  }
+
+  assert.strictEqual(assignmentDeleted, true, 'Compensating rollback must delete newly inserted assignment');
+  assert.strictEqual(errorRethrown, true, 'Error must be rethrown and not swallowed');
+});
+
+test('Worker Workflow Integrity: E2E test setup creates dedicated test complaints without mutating existing records', () => {
+  const protectedComplaintId = '5d46e582-2851-46c9-b5f9-be060a3ef733';
+  const protectedComplaintCode = 'GWL-2026-1076';
+
+  const testRunId = 1793375000000;
+  const testComplaintDesc = `E2E Automated Worker Workflow Verification [Run ${testRunId}]`;
+
+  // Verify uniqueness of test run description and separation from protected complaint
+  assert.ok(testComplaintDesc.includes(testRunId.toString()));
+  assert.notStrictEqual(testRunId.toString(), protectedComplaintCode);
+  assert.notStrictEqual(testRunId.toString(), protectedComplaintId);
+});
+

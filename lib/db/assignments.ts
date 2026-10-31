@@ -5,11 +5,36 @@ import type {
   AssignmentRecord,
   AssignmentStatus,
   AssignmentWithDetails,
+  ComplaintStatus,
 } from '@/types';
 
 /**
+ * Permitted complaint statuses that can receive a new or reassigned worker allocation.
+ * Supported by existing workflow: 'submitted' (new), 'assigned' (reassignment), 'rework_required' (rework).
+ */
+export const ASSIGNABLE_COMPLAINT_STATUSES: ComplaintStatus[] = [
+  'submitted',
+  'assigned',
+  'rework_required',
+];
+
+/**
+ * Validates whether a complaint status is eligible for assignment.
+ */
+export function isAssignableComplaintStatus(status: ComplaintStatus): boolean {
+  return ASSIGNABLE_COMPLAINT_STATUSES.includes(status);
+}
+
+/**
  * Creates an assignment allocating a complaint to a sanitation worker.
- * Also updates the complaint status to 'assigned'.
+ *
+ * Requirements:
+ * 1. Validates complaint exists and current status is in ['submitted', 'assigned', 'rework_required'].
+ * 2. Rejects 'under_review', 'resolved', and 'rejected' with a domain error.
+ * 3. Cancels / supersedes any existing active assignments for the complaint (prevents duplicate active tasks).
+ * 4. Inserts new assignment with status 'assigned'.
+ * 5. Updates complaint status to 'assigned' and logs complaint_history.
+ * 6. Compensating rollback: deletes new assignment if complaint status update fails.
  */
 export async function createAssignment(
   complaintId: string,
@@ -19,7 +44,46 @@ export async function createAssignment(
 ): Promise<AssignmentRecord> {
   const db = getDb();
 
-  const { data, error } = await db
+  // 1. Fetch and validate the complaint's current status
+  const { data: complaint, error: fetchError } = await db
+    .from('complaints')
+    .select('status')
+    .eq('id', complaintId)
+    .single();
+
+  if (fetchError || !complaint) {
+    throw new Error(`[JanSahayak DB] Complaint '${complaintId}' not found.`);
+  }
+
+  const currentStatus = complaint.status as ComplaintStatus;
+
+  // 2. Reject non-assignable statuses with a clear domain error
+  if (!isAssignableComplaintStatus(currentStatus)) {
+    throw new Error(
+      `[JanSahayak DB] Cannot assign complaint '${complaintId}' with status '${currentStatus}'. Assignments are only permitted for complaints in 'submitted', 'assigned', or 'rework_required' status.`
+    );
+  }
+
+  // 3. Supersede / cancel any existing active assignments for this complaint
+  // to prevent duplicate active assignments upon reassignment
+  const { error: cancelError } = await db
+    .from('assignments')
+    .update({
+      status: 'cancelled',
+      updated_at: new Date().toISOString(),
+    })
+    .eq('complaint_id', complaintId)
+    .in('status', ['assigned', 'in_progress']);
+
+  if (cancelError) {
+    console.error(
+      `[JanSahayak DB] Warning: Failed to cancel prior active assignments for complaint '${complaintId}':`,
+      cancelError
+    );
+  }
+
+  // 4. Insert new assignment record
+  const { data: newAssignment, error: insertError } = await db
     .from('assignments')
     .insert({
       complaint_id: complaintId,
@@ -30,24 +94,56 @@ export async function createAssignment(
     .select('*')
     .single();
 
-  if (error || !data) {
-    throw new Error(`[JanSahayak DB] Failed to create assignment: ${error?.message}`);
+  if (insertError || !newAssignment) {
+    throw new Error(`[JanSahayak DB] Failed to create assignment: ${insertError?.message}`);
   }
 
-  // Update complaint status to 'assigned'
+  // 5. Update complaint status to 'assigned' with history logging
   try {
+    const action = currentStatus === 'submitted' ? 'assigned' : 'reassigned';
+    const defaultNotes =
+      currentStatus === 'submitted'
+        ? 'Task dispatched to sanitation field worker'
+        : currentStatus === 'rework_required'
+        ? 'Rework task dispatched to sanitation field worker'
+        : 'Task reassigned to sanitation field worker';
+
     await updateComplaintStatus(
       complaintId,
       'assigned',
       assignedBy,
-      'assigned',
-      notes || 'Task dispatched to sanitation field worker'
+      action,
+      notes || defaultNotes
     );
   } catch (compError) {
-    console.error('[JanSahayak DB] Complaint status update error:', compError);
+    // 6. Compensating Rollback: Delete the newly created assignment if status update fails
+    console.error(
+      `[JanSahayak DB] Complaint status update failed for complaint '${complaintId}'. Rolling back assignment '${newAssignment.id}'...`,
+      compError
+    );
+    try {
+      const { error: rollbackErr } = await db
+        .from('assignments')
+        .delete()
+        .eq('id', newAssignment.id);
+
+      if (rollbackErr) {
+        console.error(
+          `[CRITICAL_ROLLBACK_FAILURE] Failed to delete orphaned assignment '${newAssignment.id}':`,
+          rollbackErr
+        );
+      }
+    } catch (rbErr) {
+      console.error(
+        `[CRITICAL_ROLLBACK_FAILURE] Exception during assignment rollback for '${newAssignment.id}':`,
+        rbErr
+      );
+    }
+
+    throw compError;
   }
 
-  return data as AssignmentRecord;
+  return newAssignment as AssignmentRecord;
 }
 
 /**
