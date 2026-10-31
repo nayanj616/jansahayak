@@ -15,7 +15,7 @@ flowchart TD
         PublicViews["Public Portals (Landing, Schemes, Swachh)"]
         CitizenDash["Citizen Dashboard (/citizen)"]
         WorkerDash["Worker Dashboard (/worker)"]
-        OfficerDash["Officer Dashboard (/officer - Preview)"]
+        OfficerDash["Officer Dashboard (/officer)"]
     end
 
     subgraph Server["Next.js 16 Application Server (App Router)"]

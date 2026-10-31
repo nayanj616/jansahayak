@@ -13,7 +13,7 @@ flowchart LR
     P1AB --> P2["Phase 2<br/>Citizen Workflow"]
     P2 --> P3["Phase 3 & 3.1<br/>Worker Workflow"]
     P3 --> P32["Phase 3.2<br/>Hygiene & Docs"]
-    P32 -.-> P4A["Phase 4A<br/>Officer Workflow<br/>(Pending)"]
+    P32 --> P4A["Phase 4A<br/>Officer Workflow<br/>(Completed)"]
     P4A -.-> P4B["Phase 4B<br/>Gemini AI<br/>(Pending)"]
 ```
 
@@ -81,7 +81,7 @@ flowchart LR
 ---
 
 ### Phase 3.2: Repository Hygiene, Documentation & Alignment
-**Status:** **COMPLETED (Current Phase)**
+**Status:** **COMPLETED**
 - Removed unused dependencies (`@hookform/resolvers`, `react-hook-form`, `react-leaflet`).
 - Purged unused template SVGs from `public/`.
 - Strengthened `.gitignore` covering bytecode, test logs, coverage, and environment secret files.
@@ -92,12 +92,18 @@ flowchart LR
 ---
 
 ### Phase 4A: Municipal Officer Workflow
-**Status:** **PENDING**
-- City-wide complaint overview and filtering across all Gwalior municipal sectors.
-- Manual and semi-automated worker task dispatch/reassignment interface.
-- Review queue for complaints in `under_review` status.
-- Final complaint resolution (`resolved`) or rework rejection (`rework_required`) with audit notes.
-- Real-time aggregation metrics and ward performance charts.
+**Status:** **COMPLETED (Current Phase)**
+- Live Municipal Officer dashboard (`components/dashboards/officer-view.tsx`) backed by real Supabase data.
+- Server-side prefetching of wards, workers, and complaints with on-demand signed URL generation for evidence photos.
+- Filter toolbar supporting multi-criteria filtering across 59 GMC wards, 12 sanitation categories, and complaint lifecycle statuses.
+- Protected endpoints:
+  - `GET /api/complaints/[id]`: on-demand signed URL generation for detail inspection.
+  - `POST /api/assignments`: worker dispatch and reassignment with cancellation safeguards.
+  - `GET /api/assignments/workers`: active field sanitation worker listing.
+  - `POST /api/complaints/review`: officer quality review actions (`approve` -> `resolved`, `rework` -> `rework_required`, `reject` -> `rejected`).
+- State machine enforcement, immutable `complaint_history` audit logging, and in-app alerts in `notifications`.
+- PostgREST 1-to-many joined assignment normalization (`normalizeActiveAssignment`).
+- Verified test suite: 79/79 Node/TS tests passed, 21/21 Python tests passed, isolated officer E2E script verified (100% pass, zero demo record mutation), 0 ESLint errors, clean production build.
 
 ---
 

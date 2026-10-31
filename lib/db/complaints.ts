@@ -105,6 +105,67 @@ export async function createComplaint(
 }
 
 /**
+ * Normalizes the assignments array returned from Supabase PostgREST join.
+ *
+ * Selection semantics:
+ * 1. Prefer 'in_progress' (work actively executing in the field).
+ * 2. Otherwise prefer 'assigned' (dispatched work pending start).
+ * 3. Otherwise return the most recent historical assignment (e.g. 'completed' for 'under_review' complaints, or 'cancelled').
+ * 4. Return null when there are no assignments (empty array).
+ *
+ * Sets `current_or_latest_assignment` as the primary property, and mirrors to `active_assignment`
+ * for backward compatibility across all consumers.
+ */
+export function normalizeActiveAssignment<
+  T extends {
+    current_or_latest_assignment?: unknown;
+    active_assignment?: unknown;
+  }
+>(
+  complaint: T
+): T & {
+  current_or_latest_assignment: unknown;
+  active_assignment: unknown;
+} {
+  if (!complaint) return complaint;
+
+  const rawList =
+    (Array.isArray(complaint.current_or_latest_assignment)
+      ? complaint.current_or_latest_assignment
+      : null) ||
+    (Array.isArray(complaint.active_assignment)
+      ? complaint.active_assignment
+      : null);
+
+  let resolved: unknown = null;
+
+  if (rawList && rawList.length > 0) {
+    const list = rawList as Array<{ status: string; [key: string]: unknown }>;
+    resolved =
+      list.find((a) => a.status === 'in_progress') ||
+      list.find((a) => a.status === 'assigned') ||
+      list[list.length - 1] ||
+      null;
+  } else if (
+    complaint.current_or_latest_assignment &&
+    !Array.isArray(complaint.current_or_latest_assignment)
+  ) {
+    resolved = complaint.current_or_latest_assignment;
+  } else if (
+    complaint.active_assignment &&
+    !Array.isArray(complaint.active_assignment)
+  ) {
+    resolved = complaint.active_assignment;
+  }
+
+  return {
+    ...complaint,
+    current_or_latest_assignment: resolved,
+    active_assignment: resolved,
+  };
+}
+
+/**
  * Retrieves a single complaint by UUID with joined ward and image relations.
  */
 export async function getComplaintById(
@@ -120,7 +181,7 @@ export async function getComplaintById(
       ward:wards(*),
       reporter:demo_users!complaints_reporter_id_fkey(*),
       images:complaint_images(*),
-      active_assignment:assignments(*, worker:demo_users!assignments_worker_id_fkey(*)),
+      current_or_latest_assignment:assignments(*, worker:demo_users!assignments_worker_id_fkey(*)),
       ai_verification:ai_verifications(*),
       history:complaint_history(*)
     `
@@ -132,13 +193,14 @@ export async function getComplaintById(
     return null;
   }
 
-  return data as unknown as ComplaintWithDetails;
+  return normalizeActiveAssignment(data as unknown as ComplaintWithDetails);
 }
 
 export interface ComplaintFilterOptions {
   status?: ComplaintStatus | ComplaintStatus[];
   reporterId?: string;
   wardId?: string;
+  category?: string;
   limit?: number;
   offset?: number;
 }
@@ -169,6 +231,10 @@ export async function getComplaints(
 
   if (options.wardId) {
     query = query.eq('ward_id', options.wardId);
+  }
+
+  if (options.category) {
+    query = query.eq('category', options.category);
   }
 
   if (options.limit) {
@@ -203,6 +269,8 @@ export async function getComplaintsWithDetails(
       ward:wards(*),
       reporter:demo_users!complaints_reporter_id_fkey(*),
       images:complaint_images(*),
+      current_or_latest_assignment:assignments(*, worker:demo_users!assignments_worker_id_fkey(*)),
+      ai_verification:ai_verifications(*),
       history:complaint_history(*)
     `
     )
@@ -224,6 +292,10 @@ export async function getComplaintsWithDetails(
     query = query.eq('ward_id', options.wardId);
   }
 
+  if (options.category) {
+    query = query.eq('category', options.category);
+  }
+
   if (options.limit) {
     query = query.limit(options.limit);
   }
@@ -238,7 +310,7 @@ export async function getComplaintsWithDetails(
     throw new Error(`[JanSahayak DB] Failed to query complaints with details: ${error.message}`);
   }
 
-  return (data || []) as unknown as ComplaintWithDetails[];
+  return ((data || []) as unknown as ComplaintWithDetails[]).map(normalizeActiveAssignment);
 }
 
 /**

@@ -13,9 +13,11 @@ import {
 } from 'recharts';
 import { BarChart3, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import type { ComplaintWithDetails } from '@/types';
 
 interface ComplaintChartProps {
   timeframe?: string;
+  complaints?: ComplaintWithDetails[];
 }
 
 // Zero-value baseline placeholder data (no fabricated operational numbers)
@@ -34,7 +36,10 @@ function subscribe() {
   return () => {};
 }
 
-export function ComplaintOverviewChart({ timeframe = 'Last 30 days' }: ComplaintChartProps) {
+export function ComplaintOverviewChart({
+  timeframe = 'Last 30 days',
+  complaints,
+}: ComplaintChartProps) {
   const isClient = React.useSyncExternalStore(
     subscribe,
     () => true,
@@ -43,10 +48,108 @@ export function ComplaintOverviewChart({ timeframe = 'Last 30 days' }: Complaint
 
   const [showZeroBaseline, setShowZeroBaseline] = React.useState(false);
 
+  const realChartData = React.useMemo(() => {
+    if (!complaints || complaints.length === 0) return null;
+    return [
+      {
+        status: 'Submitted',
+        Count: complaints.filter((c) => c.status === 'submitted').length,
+      },
+      {
+        status: 'Assigned',
+        Count: complaints.filter((c) => c.status === 'assigned').length,
+      },
+      {
+        status: 'In Progress',
+        Count: complaints.filter((c) => c.status === 'in_progress').length,
+      },
+      {
+        status: 'Under Review',
+        Count: complaints.filter((c) => c.status === 'under_review').length,
+      },
+      {
+        status: 'Rework',
+        Count: complaints.filter((c) => c.status === 'rework_required').length,
+      },
+      {
+        status: 'Resolved',
+        Count: complaints.filter((c) => c.status === 'resolved').length,
+      },
+      {
+        status: 'Rejected',
+        Count: complaints.filter((c) => c.status === 'rejected').length,
+      },
+    ];
+  }, [complaints]);
+
   if (!isClient) {
     return (
       <div className="h-64 w-full flex items-center justify-center bg-slate-50/50 rounded-lg">
         <p className="text-xs text-slate-400">Loading chart analytics...</p>
+      </div>
+    );
+  }
+
+  // If real live complaints are provided, render the live chart directly
+  if (realChartData) {
+    return (
+      <div className="w-full space-y-3">
+        <div className="flex items-center justify-between px-1">
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[11px] font-medium text-emerald-800">
+            <BarChart3 className="h-3 w-3 shrink-0" />
+            Live Supabase Analytics ({complaints?.length || 0} Total Records)
+          </span>
+          <span className="text-xs text-slate-500 font-medium">Status Distribution</span>
+        </div>
+
+        <div className="h-72 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={realChartData}
+              margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+              barGap={4}
+            >
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+              <XAxis
+                dataKey="status"
+                tickLine={false}
+                axisLine={{ stroke: '#e2e8f0' }}
+                tick={{ fill: '#64748b', fontSize: 11 }}
+              />
+              <YAxis
+                allowDecimals={false}
+                tickLine={false}
+                axisLine={{ stroke: '#e2e8f0' }}
+                tick={{ fill: '#64748b', fontSize: 11 }}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#ffffff',
+                  borderColor: '#e2e8f0',
+                  borderRadius: '8px',
+                  fontSize: '12px',
+                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+                }}
+              />
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                iconType="circle"
+                iconSize={8}
+                wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }}
+              />
+              <Bar
+                dataKey="Count"
+                fill="#4f46e5"
+                radius={[4, 4, 0, 0]}
+                name="Complaints"
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <p className="text-[11px] text-center text-slate-400">
+          Distribution computed dynamically from live complaint records across Gwalior sectors.
+        </p>
       </div>
     );
   }

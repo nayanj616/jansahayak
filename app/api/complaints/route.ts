@@ -52,15 +52,23 @@ export async function GET(request: NextRequest) {
 
     const wardIdFilter = searchParams.get('ward_id') || undefined;
     const statusFilter = (searchParams.get('status') as ComplaintStatus) || undefined;
+    const categoryFilter = searchParams.get('category') || undefined;
+    const withSignedUrls = searchParams.get('with_signed_urls') === 'true';
 
     const complaints = await getComplaintsWithDetails({
       reporterId: reporterIdFilter,
       wardId: wardIdFilter,
       status: statusFilter,
+      category: categoryFilter,
     });
 
-    // Attach fresh time-limited private signed URLs for all complaint images
-    const enrichedComplaints = await attachSignedUrlsToComplaints(complaints);
+    // For citizen: always attach signed URLs (backwards compatibility)
+    // For officer: attach signed URLs only if explicitly requested (with_signed_urls=true)
+    // to avoid generating signed URLs for every complaint merely to display queue/metrics (Requirement D)
+    const enrichedComplaints =
+      session.user.role === 'citizen' || withSignedUrls
+        ? await attachSignedUrlsToComplaints(complaints)
+        : complaints;
 
     return NextResponse.json({
       success: true,

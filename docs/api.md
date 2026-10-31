@@ -92,17 +92,101 @@ Clears the demonstration session cookie.
 Handles grievance retrieval and citizen complaint submission.
 
 #### `GET /api/complaints`
-Retrieves complaints with joined ward details, images, and lifecycle audit history.
+Retrieves complaints with joined ward details, images, assignments, and lifecycle audit history.
 
 - **Authorization:** Requires authenticated session (`requireApiSession`).
 - **Scoping & RBAC:**
   - **Citizen:** Strictly scoped to the citizen's own complaints (`reporter_id = dbUserId`). Cannot view other citizens' complaints.
-  - **Officer:** Can view all complaints across Gwalior, or filter by `reporter_id`, `ward_id`, or `status`.
+  - **Officer:** Can view all complaints across Gwalior, or filter by `reporter_id`, `ward_id`, `status`, or `category`.
   - **Worker:** Rejected with `403 Forbidden` (workers access tasks via `/api/tasks`).
 - **Query Parameters:**
   - `ward_id` (string, optional): Filter by ward ID (e.g. `GWL-W-024`).
-  - `status` (string, optional): Filter by complaint status (e.g. `submitted`, `in_progress`).
+  - `status` (string, optional): Filter by complaint status (e.g. `submitted`, `in_progress`, `under_review`).
+  - `category` (string, optional): Filter by sanitation category (e.g. `overflowing_bin`, `garbage_dump`).
   - `reporter_id` (string, optional, Officer only): Filter by reporter UUID.
+  - `with_signed_urls` (boolean, optional, default `false` for officer): When true, generates time-limited signed URLs for all complaints in batch.
+
+---
+
+#### `GET /api/complaints/[id]`
+Retrieves a single complaint by UUID with full joined relations and fresh private signed URLs.
+
+- **Authorization:** Requires authenticated session (`requireApiSession`).
+- **Scoping & RBAC:**
+  - **Citizen:** Authorized only if `complaint.reporter_id === session.dbUserId`.
+  - **Officer:** Authorized for all city complaints.
+  - **Worker:** Rejected with `403 Forbidden`.
+- **Success Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "complaint": {
+      "id": "c1111111-1111-1111-1111-111111111111",
+      "complaint_code": "GWL-2026-0001",
+      "status": "under_review",
+      "category": "overflowing_bin",
+      "location_description": "Near Post Office, Sarafa Bazaar",
+      "ward": { "ward_no": 24, "ward_name": "Maharaj Bada / Lashkar" },
+      "images": [
+        {
+          "id": "i1...",
+          "image_type": "before",
+          "bucket_name": "complaint-originals",
+          "signed_url": "https://..."
+        },
+        {
+          "id": "i2...",
+          "image_type": "after",
+          "bucket_name": "cleanup-evidence",
+          "signed_url": "https://..."
+        }
+      ],
+      "current_or_latest_assignment": {
+        "id": "a1...",
+        "status": "completed",
+        "worker": { "display_name": "Rajesh Kumar" }
+      },
+      "active_assignment": {
+        "id": "a1...",
+        "status": "completed",
+        "worker": { "display_name": "Rajesh Kumar" }
+      },
+      "history": [...]
+    }
+  }
+  ```
+
+---
+
+#### `POST /api/complaints/review`
+Executes Municipal Officer review decisions on complaints in `under_review` status.
+
+- **Authorization:** Requires `officer` role (`requireApiRole('officer')`).
+- **Request Format:** `application/json`
+- **Fields:**
+  | Field | Type | Required | Constraints |
+  | :--- | :--- | :--- | :--- |
+  | `complaint_id` | `UUID` | **Yes** | Valid complaint UUID |
+  | `action` | `string` | **Yes** | `'approve'`, `'rework'`, or `'reject'` |
+  | `remarks` | `string` | **Yes** | 1 to 1000 characters (Mandatory audit remarks) |
+- **Actions & Transitions:**
+  - `action: 'approve'` -> transitions complaint to `resolved` (History: `officer_approved`).
+  - `action: 'rework'` -> transitions complaint to `rework_required` (History: `officer_rework_requested`).
+  - `action: 'reject'` -> transitions complaint to `rejected` (History: `officer_rejected`).
+- **Audit & Notification Delivery:**
+  - Logs officer UUID, action, and evaluation remarks to `complaint_history`.
+  - Updates `human_review_status`, `reviewed_by`, `review_remarks`, `reviewed_at` on `ai_verifications` if a record exists.
+  - Creates in-app alerts in `notifications` for citizen (`resolved`, `rejected`) or worker (`rework_required`).
+- **Success Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "message": "Complaint GWL-2026-0001 successfully approved and marked resolved.",
+    "action": "approve",
+    "complaint": { ... },
+    "notificationSent": true
+  }
+  ```
 - **Success Response (`200 OK`):**
   ```json
   {
@@ -275,5 +359,64 @@ Uploads after-cleanup photo proof and completes the assignment.
     "success": true,
     "message": "Cleanup completed successfully and submitted for officer review",
     "task": { ... }
+  }
+  ```
+
+---
+
+### 2.4. `/api/assignments`
+
+Handles worker task allocation and reassignment by Municipal Officers.
+
+#### `POST /api/assignments`
+Dispatches or reassigns a sanitation complaint to a field worker.
+
+- **Authorization:** Requires `officer` role (`requireApiRole('officer')`).
+- **Request Format:** `application/json`
+- **Fields:**
+  | Field | Type | Required | Constraints |
+  | :--- | :--- | :--- | :--- |
+  | `complaint_id` | `UUID` | **Yes** | Valid complaint UUID |
+  | `worker_id` | `UUID` | **Yes** | Valid worker UUID in `demo_users` (`role = worker`) |
+  | `notes` | `string` | No | Max 1000 chars (Operational dispatch instructions) |
+- **Execution & Safeguards:**
+  1. Validates complaint status is in `['submitted', 'assigned', 'rework_required']`. Rejects terminal or active review states.
+  2. Cancels prior active assignments (`assigned`, `in_progress`) to prevent duplicate active tasks.
+  3. Inserts new assignment with `assigned` status.
+  4. Updates complaint status to `assigned` and logs dispatch notes in `complaint_history.remarks`.
+  5. Dispatches in-app task notification to the assigned worker.
+- **Success Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "message": "Task successfully dispatched to sanitation worker Rajesh Kumar.",
+    "assignment": { ... },
+    "complaint": { ... },
+    "notificationSent": true
+  }
+  ```
+
+---
+
+### 2.5. `/api/assignments/workers`
+
+#### `GET /api/assignments/workers`
+Retrieves all active field sanitation workers available for task allocation.
+
+- **Authorization:** Requires `officer` role (`requireApiRole('officer')`).
+- **Success Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "count": 1,
+    "workers": [
+      {
+        "id": "b0000000-0000-4000-8000-000000000002",
+        "display_name": "Sanitation Worker Demo",
+        "role": "worker",
+        "ward_id": "GWL-W-012",
+        "is_active": true
+      }
+    ]
   }
   ```

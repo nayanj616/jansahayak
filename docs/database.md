@@ -73,19 +73,14 @@ Stores geographic and administrative reference metadata for Gwalior Municipal Co
 ---
 
 ### 3.2. `demo_users`
-Stores deterministic demonstration persona accounts used for academic evaluation.
+Stores deterministic demonstration persona accounts used for academic evaluation. Additional profile metadata (email, designation, zone, avatar initials) is provided at the session layer via `DEMO_PROFILES` (`lib/auth/tokens.ts`).
 
 | Column | Type | Nullable | Description |
 | :--- | :--- | :--- | :--- |
 | `id` | `UUID` | **PK, No** | Primary key |
+| `display_name` | `VARCHAR(255)` | **No** | Full display name |
 | `role` | `VARCHAR(50)` | **No** | Role: `citizen`, `worker`, or `officer` |
-| `full_name` | `VARCHAR(255)` | **No** | Full display name |
-| `email` | `VARCHAR(255)` | **No, Unique** | Demonstration email address |
-| `phone` | `VARCHAR(50)` | Yes | Demonstration phone contact |
 | `ward_id` | `VARCHAR(32)` | Yes | FK -> `wards.ward_id` (for worker and citizen) |
-| `zone` | `VARCHAR(100)` | Yes | Assigned administrative zone |
-| `designation` | `VARCHAR(100)` | Yes | Title/designation (e.g., `Field Sanitation Assistant`) |
-| `avatar_initials` | `VARCHAR(10)` | Yes | 2-letter avatar initials |
 | `is_active` | `BOOLEAN` | **No** | Account active flag (default `true`) |
 | `created_at` | `TIMESTAMPTZ` | **No** | Row creation timestamp |
 | `updated_at` | `TIMESTAMPTZ` | **No** | Row update timestamp |
@@ -99,17 +94,17 @@ Stores citizen-reported sanitation grievances, location descriptions, GPS coordi
 | :--- | :--- | :--- | :--- |
 | `id` | `UUID` | **PK, No** | Primary key |
 | `complaint_code` | `VARCHAR(50)` | **No, Unique** | Human-readable code (`GWL-YYYY-XXXX`) |
-| `reporter_id` | `UUID` | **No** | FK -> `demo_users.id` (Citizen who reported) |
-| `ward_id` | `VARCHAR(32)` | **No** | FK -> `wards.ward_id` (GMC Ward) |
+| `reporter_id` | `UUID` | Yes | FK -> `demo_users.id` (Citizen who reported) |
+| `ward_id` | `VARCHAR(32)` | Yes | FK -> `wards.ward_id` (GMC Ward) |
 | `category` | `VARCHAR(100)` | **No** | Sanitation category enum value |
-| `priority` | `VARCHAR(50)` | **No** | Priority: `low`, `normal`, `urgent`, `critical` |
-| `status` | `VARCHAR(50)` | **No** | Lifecycle status: `submitted`, `assigned`, etc. |
 | `description` | `TEXT` | Yes | Grievance description |
-| `location_desc` | `TEXT` | Yes | Physical landmark or street address description |
+| `priority` | `VARCHAR(50)` | **No** | Priority: `low`, `normal`, `high`, `urgent` |
+| `location_description` | `TEXT` | Yes | Physical landmark or street address description |
 | `latitude` | `NUMERIC(10, 7)` | Yes | GPS latitude |
 | `longitude` | `NUMERIC(10, 7)` | Yes | GPS longitude |
 | `location_accuracy_m` | `NUMERIC(8, 2)` | Yes | Geolocation accuracy in meters |
 | `location_source` | `VARCHAR(50)` | Yes | Detection source (`gps`, `manual`) |
+| `status` | `VARCHAR(50)` | **No** | Lifecycle status: `submitted`, `assigned`, etc. |
 | `created_at` | `TIMESTAMPTZ` | **No** | Submission timestamp |
 | `updated_at` | `TIMESTAMPTZ` | **No** | Update timestamp |
 
@@ -122,19 +117,18 @@ Stores metadata and private storage paths for all photographs associated with a 
 | :--- | :--- | :--- | :--- |
 | `id` | `UUID` | **PK, No** | Primary key |
 | `complaint_id` | `UUID` | **No** | FK -> `complaints.id` |
-| `image_type` | `VARCHAR(50)` | **No** | Type: `original`, `evidence`, `ai_annotated`, `comparison` |
-| `bucket_id` | `VARCHAR(100)` | **No** | Private storage bucket name |
-| `storage_path` | `VARCHAR(500)` | **No** | Object path inside the private bucket |
-| `file_name` | `VARCHAR(255)` | Yes | Original uploaded file name |
+| `image_type` | `VARCHAR(50)` | **No** | Type: `before`, `after`, `annotated`, `comparison`, `original` |
+| `bucket_name` | `VARCHAR(100)` | **No** | Private storage bucket name |
+| `object_path` | `VARCHAR(500)` | **No** | Object path inside the private bucket |
+| `content_type` | `VARCHAR(100)` | Yes | MIME type (`image/jpeg`, `image/png`, `image/webp`) |
 | `file_size_bytes` | `BIGINT` | Yes | Size of image in bytes |
-| `mime_type` | `VARCHAR(100)` | Yes | MIME type (`image/jpeg`, `image/png`, `image/webp`) |
 | `uploaded_by` | `UUID` | Yes | FK -> `demo_users.id` |
 | `created_at` | `TIMESTAMPTZ` | **No** | Row creation timestamp |
 
 ---
 
 ### 3.5. `assignments`
-Stores task dispatches allocating complaints to field sanitation workers.
+Stores task dispatches allocating complaints to field sanitation workers. Note that operational dispatch instructions are audited in `complaint_history.remarks` rather than in this table.
 
 | Column | Type | Nullable | Description |
 | :--- | :--- | :--- | :--- |
@@ -143,12 +137,9 @@ Stores task dispatches allocating complaints to field sanitation workers.
 | `worker_id` | `UUID` | **No** | FK -> `demo_users.id` (Sanitation worker) |
 | `assigned_by` | `UUID` | Yes | FK -> `demo_users.id` (Officer who assigned) |
 | `status` | `VARCHAR(50)` | **No** | Task status: `assigned`, `in_progress`, `completed`, `cancelled` |
-| `priority` | `VARCHAR(50)` | **No** | Task priority |
-| `instructions` | `TEXT` | Yes | Operational instructions for worker |
 | `assigned_at` | `TIMESTAMPTZ` | **No** | Assignment timestamp |
 | `started_at` | `TIMESTAMPTZ` | Yes | Timestamp worker marked task `in_progress` |
 | `completed_at` | `TIMESTAMPTZ` | Yes | Timestamp worker completed cleanup |
-| `created_at` | `TIMESTAMPTZ` | **No** | Row creation timestamp |
 | `updated_at` | `TIMESTAMPTZ` | **No** | Row update timestamp |
 
 ---
@@ -161,18 +152,16 @@ Stores an immutable audit trail of every status transition and administrative ac
 | `id` | `UUID` | **PK, No** | Primary key |
 | `complaint_id` | `UUID` | **No** | FK -> `complaints.id` |
 | `actor_id` | `UUID` | Yes | FK -> `demo_users.id` (Actor performing action) |
-| `actor_role` | `VARCHAR(50)` | **No** | Role: `citizen`, `worker`, `officer`, `system` |
-| `action` | `VARCHAR(100)` | **No** | Action name (e.g., `submitted`, `task_started`, `cleanup_completed`) |
-| `previous_status` | `VARCHAR(50)` | Yes | Previous status |
+| `old_status` | `VARCHAR(50)` | Yes | Previous status |
 | `new_status` | `VARCHAR(50)` | Yes | New status after action |
-| `remarks` | `TEXT` | Yes | Explanatory remarks or comments |
-| `metadata` | `JSONB` | Yes | Structured action context |
+| `action` | `VARCHAR(100)` | **No** | Action name (e.g., `submitted`, `assigned`, `work_started`, `cleanup_completed`, `officer_approved`) |
+| `remarks` | `TEXT` | Yes | Explanatory remarks or officer review notes |
 | `created_at` | `TIMESTAMPTZ` | **No** | Event timestamp |
 
 ---
 
 ### 3.7. `ai_verifications`
-Stores multimodal cleanliness verification scores and analysis from Google Gemini (Phase 4B).
+Stores multimodal cleanliness verification scores and analysis from Google Gemini (Phase 4B) along with officer human review tracking.
 
 | Column | Type | Nullable | Description |
 | :--- | :--- | :--- | :--- |
@@ -180,14 +169,19 @@ Stores multimodal cleanliness verification scores and analysis from Google Gemin
 | `complaint_id` | `UUID` | **No** | FK -> `complaints.id` |
 | `before_image_id` | `UUID` | Yes | FK -> `complaint_images.id` (Original photo) |
 | `after_image_id` | `UUID` | Yes | FK -> `complaint_images.id` (Evidence photo) |
-| `verification_score` | `NUMERIC(5, 2)` | Yes | Quantitative score (0.00 to 100.00) |
-| `confidence_score` | `NUMERIC(5, 2)` | Yes | Confidence score (0.00 to 1.00) |
-| `status` | `VARCHAR(50)` | **No** | Verification status: `pending`, `passed`, `failed`, `inconclusive` |
-| `detected_debris` | `TEXT[]` | Yes | Array of detected debris tags |
-| `cleanliness_rating` | `VARCHAR(50)` | Yes | Qualitative rating (`clean`, `partially_clean`, `unclean`) |
-| `raw_response` | `JSONB` | Yes | Full Gemini response payload |
-| `verified_at` | `TIMESTAMPTZ` | Yes | Verification execution timestamp |
+| `processing_status` | `VARCHAR(50)` | **No** | AI status: `pending`, `completed`, `failed` |
+| `model_name` | `VARCHAR(100)` | Yes | Gemini model identifier |
+| `model_version` | `VARCHAR(50)` | Yes | Model release version |
+| `metrics` | `JSONB` | Yes | Quantitative detection metrics |
+| `waste_reduction_percentage` | `NUMERIC(5, 2)` | Yes | Estimated waste reduction percentage |
+| `processing_error` | `TEXT` | Yes | Model or pipeline error message if failed |
+| `processed_at` | `TIMESTAMPTZ` | Yes | Processing execution timestamp |
+| `human_review_status` | `VARCHAR(50)` | **No** | Review status: `pending`, `approved`, `rejected`, `rework_required` |
+| `reviewed_by` | `UUID` | Yes | FK -> `demo_users.id` (Reviewing officer) |
+| `review_remarks` | `TEXT` | Yes | Officer review notes |
+| `reviewed_at` | `TIMESTAMPTZ` | Yes | Officer review timestamp |
 | `created_at` | `TIMESTAMPTZ` | **No** | Row creation timestamp |
+| `updated_at` | `TIMESTAMPTZ` | **No** | Row update timestamp |
 
 ---
 
@@ -197,13 +191,11 @@ Stores in-app alerts and notifications for users.
 | Column | Type | Nullable | Description |
 | :--- | :--- | :--- | :--- |
 | `id` | `UUID` | **PK, No** | Primary key |
-| `user_id` | `UUID` | **No** | FK -> `demo_users.id` |
+| `recipient_id` | `UUID` | **No** | FK -> `demo_users.id` |
+| `complaint_id` | `UUID` | Yes | FK -> `complaints.id` |
 | `title` | `VARCHAR(255)` | **No** | Short notification title |
 | `message` | `TEXT` | **No** | Notification body text |
-| `type` | `VARCHAR(50)` | **No** | Type: `complaint_update`, `task_assigned`, `system` |
-| `is_read` | `BOOLEAN` | **No** | Read status flag (default `false`) |
-| `link_url` | `VARCHAR(500)` | Yes | Navigation URL when notification is clicked |
-| `metadata` | `JSONB` | Yes | Additional contextual metadata |
+| `read_at` | `TIMESTAMPTZ` | Yes | Timestamp notification was read (null if unread) |
 | `created_at` | `TIMESTAMPTZ` | **No** | Row creation timestamp |
 
 ---

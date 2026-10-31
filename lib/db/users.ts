@@ -84,6 +84,13 @@ export async function getDemoUsersByRole(role: DemoUserRole): Promise<DemoUserRe
 }
 
 /**
+ * Retrieves all active sanitation field workers available for task allocation.
+ */
+export async function getSanitationWorkers(): Promise<DemoUserRecord[]> {
+  return getDemoUsersByRole('worker');
+}
+
+/**
  * Resolves the database UUID for a given demo role, ensuring the record exists.
  */
 export async function resolveDemoUserId(role: DemoRole): Promise<string> {

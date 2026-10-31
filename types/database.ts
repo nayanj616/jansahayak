@@ -196,6 +196,14 @@ export interface ComplaintWithDetails extends ComplaintRecord {
   ward?: WardRecord | null;
   reporter?: DemoUserRecord | null;
   images?: ComplaintImageRecord[];
+  /**
+   * Current active assignment ('in_progress' or 'assigned') or the most recent historical assignment.
+   * Null if the complaint has never been assigned.
+   */
+  current_or_latest_assignment?: (AssignmentRecord & { worker?: DemoUserRecord | null }) | null;
+  /**
+   * @deprecated Backward-compatible alias for `current_or_latest_assignment`.
+   */
   active_assignment?: (AssignmentRecord & { worker?: DemoUserRecord | null }) | null;
   ai_verification?: AiVerificationRecord | null;
   history?: ComplaintHistoryRecord[];

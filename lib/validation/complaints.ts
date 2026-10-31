@@ -95,3 +95,14 @@ export const reviewVerificationSchema = z.object({
 
 export type ReviewVerificationInput = z.infer<typeof reviewVerificationSchema>;
 
+/**
+ * Zod schema for Officer review actions on a complaint (approve / rework / reject)
+ */
+export const officerReviewComplaintSchema = z.object({
+  complaint_id: z.string().uuid('Invalid complaint ID format'),
+  action: z.enum(['approve', 'rework', 'reject']),
+  remarks: z.string().min(1, 'Review remarks are required').max(1000, 'Remarks cannot exceed 1000 characters'),
+});
+
+export type OfficerReviewComplaintInput = z.infer<typeof officerReviewComplaintSchema>;
+
