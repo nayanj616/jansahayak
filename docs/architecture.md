@@ -141,6 +141,23 @@ stateDiagram-v2
 
 ---
 
-## 6. Google Gemini AI Boundary
+## 6. Google Gemini AI Dual-Key Architecture Foundation
 
-The Google Gemini integration (`lib/gemini/service.ts`) is guarded with `'server-only'`. In the current phase, foundation methods (`analyzeCleanliness`, `answerCivicQuestion`) are scaffolded as safe placeholders. Live multimodal model calls are scheduled for **Phase 4B**, avoiding fabricated scores or simulated AI output in earlier phases.
+JanSahayak employs a **dual-key, server-only Google Gemini architecture** configured to isolate conversational citizen advisory workloads from municipal officer image verification pipelines:
+
+### 1. Dual Independent Clients
+- **Chatbot Client (`lib/gemini/client.ts: getChatbotClient`):** Reads exclusively from `GEMINI_CHATBOT_API_KEY`. Defaults to model `GEMINI_CHATBOT_MODEL` (`gemini-3.8-flash`). Dedicated to Phase 4B.1 Civic RAG queries.
+- **Vision Client (`lib/gemini/client.ts: getVisionClient`):** Reads exclusively from `GEMINI_VISION_API_KEY`. Defaults to model `GEMINI_VISION_MODEL` (`gemini-3.8-flash`). Dedicated to Phase 4B.2 multimodal cleanliness verification.
+
+### 2. Strict Key Isolation & Zero Fallback
+- The chatbot client **never** falls back to `GEMINI_VISION_API_KEY`.
+- The vision client **never** falls back to `GEMINI_CHATBOT_API_KEY`.
+- Missing configuration in either service throws an explicit, descriptive error identifying the exact missing variable without exposing any credential values.
+
+### 3. Server-Only Protection
+All modules in `lib/gemini/` (`client.ts`, `assistant.ts`, `vision.ts`, `service.ts`) are strictly guarded with `import 'server-only';`. Neither API key is prefixed with `NEXT_PUBLIC_`, preventing bundle inclusion or browser leakage.
+
+### 4. Module Boundaries & Backward Compatibility
+- **`lib/gemini/assistant.ts`:** Text-only civic advisory boundary (`answerCivicQuestion`). (Live conversational model execution is scheduled for Phase 4B.1).
+- **`lib/gemini/vision.ts`:** Multimodal before/after image verification boundary (`analyzeCleanliness`). (Live cleanliness verification is scheduled for Phase 4B.2).
+- **`lib/gemini/service.ts`:** Unified facade providing `getGeminiStatus()` diagnostics for both subsystems, and preserving the `@deprecated getGeminiClient()` alias mapped to the chatbot client for backward compatibility.

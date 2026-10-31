@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --conditions react-server --test tests/auth.test.ts tests/db.test.ts tests/validation.test.ts tests/storage.test.ts tests/api-guards.test.ts tests/citizen-workflow.test.ts tests/worker-workflow.test.ts tests/officer-workflow.test.ts"
+    "test": "tsx --conditions react-server --test tests/auth.test.ts tests/db.test.ts tests/validation.test.ts tests/storage.test.ts tests/api-guards.test.ts tests/citizen-workflow.test.ts tests/worker-workflow.test.ts tests/officer-workflow.test.ts tests/gemini-architecture.test.ts"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",

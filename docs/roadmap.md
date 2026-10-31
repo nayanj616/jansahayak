@@ -107,13 +107,31 @@ flowchart LR
 
 ---
 
-### Phase 4B: Google Gemini Multimodal AI Verification
+### Phase 4B Foundation: Dual-Key Gemini Architecture
+**Status:** **COMPLETED**
+- Dual independent server-only GoogleGenAI clients (`getChatbotClient`, `getVisionClient`) in `lib/gemini/client.ts`.
+- Strict key isolation between `GEMINI_CHATBOT_API_KEY` and `GEMINI_VISION_API_KEY` with zero cross-fallback.
+- Independent model configuration via `GEMINI_CHATBOT_MODEL` and `GEMINI_VISION_MODEL`.
+- Modular boundaries in `lib/gemini/assistant.ts` and `lib/gemini/vision.ts` with backward-compatible facade in `lib/gemini/service.ts`.
+- Comprehensive key isolation and client instantiation unit tests in `tests/gemini-architecture.test.ts`.
+
+---
+
+### Phase 4B.1: Gemini-Powered Civic RAG Assistant
 **Status:** **PENDING**
-- Activation of `@google/genai` server-only service in `lib/gemini/service.ts`.
-- Multimodal before-and-after image comparison analyzing cleanliness and residual debris.
+- In-memory structured knowledge base for Gwalior municipal services and Madhya Pradesh welfare schemes.
+- Grounded RAG query execution using `getChatbotClient()`.
+- Structured JSON output with official sources and disclaimers.
+- Citizen-facing interactive chat dialog on Scheme Exploration portal.
+
+---
+
+### Phase 4B.2: Gemini Vision Multimodal Cleanliness Verification
+**Status:** **PENDING**
+- Multimodal before-and-after image comparison analyzing cleanliness and residual debris using `getVisionClient()`.
 - Confidence scoring and qualitative cleanliness rating generation.
 - Persistence of analysis results in `ai_verifications` table.
-- Conversational civic assistant for Madhya Pradesh welfare scheme eligibility queries.
+- Officer review dashboard verification badges.
 
 ---
 
