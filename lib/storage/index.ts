@@ -7,6 +7,7 @@ import {
   MAX_FILE_SIZE_BYTES,
 } from '@/lib/validation/storage';
 import type {
+  AssignmentWithDetails,
   ComplaintImageRecord,
   ImageType,
   StorageBucket,
@@ -245,3 +246,26 @@ export async function attachSignedUrlsToComplaints<
 >(complaints: T[]): Promise<T[]> {
   return Promise.all(complaints.map(attachSignedUrlsToComplaint));
 }
+
+/**
+ * Attaches fresh private signed URLs to complaint images within an assignment.
+ */
+export async function attachSignedUrlsToAssignment(
+  assignment: AssignmentWithDetails
+): Promise<AssignmentWithDetails> {
+  if (assignment.complaint) {
+    const enrichedComplaint = await attachSignedUrlsToComplaint(assignment.complaint);
+    return { ...assignment, complaint: enrichedComplaint };
+  }
+  return assignment;
+}
+
+/**
+ * Attaches fresh private signed URLs to an array of assignments.
+ */
+export async function attachSignedUrlsToAssignments(
+  assignments: AssignmentWithDetails[]
+): Promise<AssignmentWithDetails[]> {
+  return Promise.all(assignments.map(attachSignedUrlsToAssignment));
+}
+

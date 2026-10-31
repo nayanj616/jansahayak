@@ -189,8 +189,24 @@ export async function POST(request: NextRequest) {
         uploadError
       );
       // Clean up orphaned complaint record on storage failure
-      const db = getDb();
-      await db.from('complaints').delete().eq('id', createdComplaint.id);
+      try {
+        const db = getDb();
+        const { error: rollbackErr } = await db
+          .from('complaints')
+          .delete()
+          .eq('id', createdComplaint.id);
+        if (rollbackErr) {
+          console.error(
+            `[CRITICAL_ROLLBACK_FAILURE] Failed to delete orphaned complaint ${createdComplaint.id}:`,
+            rollbackErr
+          );
+        }
+      } catch (rbErr) {
+        console.error(
+          `[CRITICAL_ROLLBACK_FAILURE] Exception deleting orphaned complaint ${createdComplaint.id}:`,
+          rbErr
+        );
+      }
 
       return NextResponse.json(
         {

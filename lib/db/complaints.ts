@@ -90,7 +90,15 @@ export async function createComplaint(
       remarks: 'Initial complaint filed by citizen',
     });
   } catch (histError) {
-    console.error('[JanSahayak DB] Non-fatal history logging error:', histError);
+    console.error(
+      `[CRITICAL_AUDIT_FAILURE] Failed to record initial history for complaint ${createdComplaint.id}:`,
+      histError
+    );
+    // Delete un-audited complaint row to maintain audit consistency
+    await db.from('complaints').delete().eq('id', createdComplaint.id);
+    throw new Error(
+      `Failed to record initial complaint audit history: ${histError instanceof Error ? histError.message : String(histError)}`
+    );
   }
 
   return createdComplaint;

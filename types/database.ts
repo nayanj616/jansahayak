@@ -201,3 +201,9 @@ export interface ComplaintWithDetails extends ComplaintRecord {
   history?: ComplaintHistoryRecord[];
 }
 
+export interface AssignmentWithDetails extends AssignmentRecord {
+  complaint?: ComplaintWithDetails | null;
+  worker?: DemoUserRecord | null;
+  assigned_by_user?: DemoUserRecord | null;
+}
+
