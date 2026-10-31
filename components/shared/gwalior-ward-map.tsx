@@ -176,8 +176,8 @@ export function GwaliorWardMap() {
               <Info className="h-3.5 w-3.5 shrink-0 text-amber-600 mt-0.5" />
               <span>
                 <strong>Academic Demarcation:</strong> Sector pins represent landmark approximations
-                for testing. Official GMC ward shapefiles and verified supervisor rosters will be
-                linked in Phase 2.
+                for evaluation. The live database contains 59 provisional Gwalior ward records pending
+                official municipal boundary and roster verification.
               </span>
             </p>
           </div>

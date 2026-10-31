@@ -1,6 +1,6 @@
 # JanSahayak (जनसहायक) — Integrated Civic Assistance Platform
 
-> **Gwalior, Madhya Pradesh, India**  
+> **Gwalior, Madhya Pradesh, India**
 > *Cleaner cities. Informed citizens. Stronger communities.*
 
 JanSahayak is an academic demonstration project for an integrated civic technology platform designed to bridge the gap between citizens, frontline sanitation workers, and municipal administrators in Gwalior, Madhya Pradesh.
@@ -9,73 +9,80 @@ JanSahayak is an academic demonstration project for an integrated civic technolo
 
 ## 1. Project Overview & Academic Demarcation
 
-JanSahayak serves as a clean-slate modern TypeScript architecture demonstrating two core civic modules:
+JanSahayak provides a modern TypeScript and Next.js architecture demonstrating two core civic modules:
 
-- **Module A: Swachh Gwalior** — Municipal sanitation grievance reporting, field worker dispatch, Gemini AI cleanliness comparison, and ward-level municipal officer oversight across Gwalior's 66 administrative wards.
-- **Module B: Scheme Exploration** — Welfare scheme discovery, eligibility guidance, AI civic assistant, and grievance redressal channels for Madhya Pradesh residents.
+- **Module A: Swachh Gwalior** — Municipal sanitation grievance reporting, field worker task dispatch and proof upload, and ward-level municipal oversight across Gwalior's municipal sectors.
+- **Module B: Scheme Exploration** — Welfare scheme discovery, eligibility guidance, and grievance redressal channels for Madhya Pradesh residents.
 
 > [!IMPORTANT]
-> **Academic Demonstration Limitation:**  
-> This platform is a demonstration prototype created for academic evaluation. It does not claim official government endorsement, verified real identity, or employment with the Gwalior Municipal Corporation or the Government of Madhya Pradesh.
+> **Academic Demonstration Notice:**
+> This platform is an independent academic demonstration prototype created for evaluation. It does not claim official government endorsement, verified real identity, or employment with the Gwalior Municipal Corporation (GMC) or the Government of Madhya Pradesh. Ward reference data covers 59 provisional wards pending official municipal verification.
 
 ---
 
-## 2. Technology Stack
+## 2. Currently Implemented Features
+
+### Module A: Swachh Gwalior (Phases 1, 2, 3, 3.1)
+- **Citizen Grievance Submission:** Geo-tagged sanitation complaint filing with original photo evidence, category selection, landmark description, and automatic device GPS acquisition.
+- **Private Storage Integration:** Original complaint photos and after-cleanup evidence stored in private Supabase Storage buckets, delivered to authorized clients via time-limited signed URLs.
+- **Citizen Dashboard:** Real-time personal complaint list with status indicators, signed image previews, and expandable lifecycle timeline audit modals (`complaint_history`).
+- **Worker Task Management:** Protected sanitation worker dashboard displaying assigned tasks scoped to the worker's account.
+- **Field Cleanup Execution:** Worker task start (`in_progress`) and completion (`under_review`) with mandatory after-cleanup photo evidence upload and remarks.
+- **State Machine & Reassignment Integrity:** Enforced status transitions with compensating rollbacks preventing orphaned storage objects or partial database rows.
+
+### Module B: Scheme Exploration & Public Portals
+- **Scheme Catalog Browser:** Searchable and category-filtered catalog of Madhya Pradesh welfare initiatives (Ladli Bahna, Sambal 2.0, Awas Yojana, etc.).
+- **Civic Services Directory:** Directory of municipal services, birth/death registration, property tax portals, and emergency helplines.
+- **State Grievance Channels:** Guidance for CM Helpline 181, National Consumer Helpline, and Swachhata App.
+- **Interactive Ward Map:** Client-side Leaflet and OpenStreetMap visualization of Gwalior sectors.
+
+### Authentication & Authorization
+- **Server-Side Signed Demo Sessions:** Cryptographic JWT cookies signed with `HS256` (`jose`), enabling evaluation of Citizen, Worker, and Officer personas without registration friction.
+- **API Guards:** Route-level authorization (`requireApiSession`, `requireApiRole`) enforcing strict role-based access control and data isolation.
+
+---
+
+## 3. Technology Stack
 
 - **Framework:** Next.js 16 (App Router with Server Components & Partial Prerendering)
 - **UI Library:** React 19
 - **Language:** TypeScript (Strict Mode enabled)
-- **Styling:** Tailwind CSS & shadcn/ui design patterns
+- **Styling:** Tailwind CSS v4 & shadcn/ui design patterns
 - **Icons:** Lucide React
-- **Authentication:** Server-side short-lived signed JWT session cookies (`jose`)
-- **Database & Storage:** Supabase PostgreSQL & Supabase Storage (Phase 1 prepared client scaffolding)
-- **Multimodal AI:** Google Gemini API (`@google/genai` server-only service stubs)
-- **Forms & Validation:** React Hook Form & Zod
+- **Authentication:** Server-side signed JWT demonstration session cookies (`jose`)
+- **Database & Storage:** Supabase PostgreSQL (8 tables) & Supabase Storage (4 private buckets)
+- **Multimodal AI:** Google Gemini API (`@google/genai` server-only service boundary, Phase 4B)
+- **Forms & Validation:** React controlled state & Zod schema validation
 - **Analytics & Visualizations:** Recharts
-- **GIS Maps:** Leaflet & OpenStreetMap (interactive Gwalior ward visualization)
-- **Testing:** Node.js native test runner via `tsx`
+- **GIS Maps:** Leaflet & OpenStreetMap (interactive Gwalior ward viewer)
+- **Testing:** Node.js native test runner via `tsx`, Python standard library `unittest`
 
 ---
 
-## 3. Demo Role Architecture & Security Model
+## 4. Architecture Overview
 
-To enable friction-free academic evaluation without requiring real-world citizen registrations, passwords, or OTPs, JanSahayak implements a **Server-Side Signed Demonstration Role Session**:
+JanSahayak enforces strict separation of concerns across presentation, routing, validation, data access, and storage:
 
-### Supported Roles
-1. **Citizen** (`/citizen`): Report sanitation grievances, view past complaints, explore schemes.
-2. **Sanitation Worker** (`/worker`): View assigned sector tasks, update progress, upload after-cleanup photos.
-3. **Municipal Officer** (`/officer`): City-wide complaint overview charts, ward-level filters, AI verification review.
+```text
+Browser Client (React Server/Client Components)
+       │
+       ▼ (Signed Session Cookie: jansahayak_demo_session)
+Route Handlers (app/api/*)
+       │
+       ▼ (Session & Role Verification)
+API Guards (lib/auth/api-guards.ts)
+       │
+       ▼ (Zod Validation)
+Data-Access & Storage Layer (lib/db/*, lib/storage/*)
+       │
+       ▼ (Administrative Service Role Key: 'server-only')
+Supabase PostgreSQL & Private Storage Buckets
+```
 
-### Security Implementation
-- **Library:** `jose` (standard cryptographic JWT signing with `HS256`).
-- **Cookie Name:** `jansahayak_demo_session`
-- **Security Attributes:**
-  - `HttpOnly: true` (inaccessible to browser JavaScript)
-  - `Secure: true` in production environments
-  - `SameSite: "lax"` protection
-  - `Max-Age: 7200` (2 hours short-lived expiration)
-- **Server Authorization Helpers (`lib/auth/demo-session.ts`):**
-  - `getDemoSession()` — Server-side signature verification of active cookie.
-  - `requireDemoRole(role)` — Guarantees the requester has the specified role; redirects to `/demo-role` otherwise.
-  - `requireAnyDemoRole()` — Protects multi-role server actions and routes.
-- **Role Switcher:** Integrated header dropdown allowing instant switching between roles during evaluation.
-
----
-
-## 4. Prepared Integrations (Phase 2 Scaffolding)
-
-### Supabase Preparation (`lib/supabase/`)
-- `lib/supabase/client.ts` — Browser client using `@supabase/ssr` `createBrowserClient`.
-- `lib/supabase/server.ts` — Server client using `@supabase/ssr` `createServerClient` reading server cookies.
-- `lib/supabase/admin.ts` — High-privilege administrative client guarded with `'server-only'` to prevent leaking `SUPABASE_SECRET_KEY` to the browser.
-- `supabase/migrations/001_initial_schema_placeholder.sql` & `supabase/seed.sql` — Schema scaffolding placeholders.
-
-### Gemini Multimodal AI Preparation (`lib/gemini/`)
-- `lib/gemini/service.ts` — Server-only AI service module guarded with `'server-only'`.
-- Prepared function placeholders:
-  - `analyzeCleanliness(beforeImage, afterImage)` — Multimodal before-and-after cleanliness comparison.
-  - `answerCivicQuestion(question, context)` — Conversational civic inquiry assistant.
-- In accordance with Phase 1 explicit exclusions, live API execution and simulated AI responses are disabled until Phase 2 database and API binding.
+For complete architectural details, see [docs/architecture.md](docs/architecture.md).
+For the database schema and storage bucket reference, see [docs/database.md](docs/database.md).
+For API endpoints and schemas, see [docs/api.md](docs/api.md).
+For implementation progress and upcoming phases, see [docs/roadmap.md](docs/roadmap.md).
 
 ---
 
@@ -84,47 +91,60 @@ To enable friction-free academic evaluation without requiring real-world citizen
 ```text
 jansahayak/
 ├── app/
-│   ├── (public)/
+│   ├── (public)/                        # Public informational routes
 │   │   ├── page.tsx                     # JanSahayak Landing Page
-│   │   ├── swachh-gwalior/page.tsx      # Module A: Swachh Gwalior Portal
-│   │   ├── scheme-exploration/page.tsx  # Module B: Scheme Exploration Portal
-│   │   ├── demo-role/page.tsx           # Demo Role Selection Hub
+│   │   ├── swachh-gwalior/page.tsx      # Swachh Gwalior Portal
+│   │   ├── scheme-exploration/page.tsx  # Scheme Exploration Portal
+│   │   ├── demo-role/page.tsx           # Demo Role Switcher Hub
 │   │   └── about/page.tsx               # Academic Project Information
-│   ├── (dashboard)/
+│   ├── (dashboard)/                     # Protected role dashboards
 │   │   ├── citizen/page.tsx             # Protected Citizen Dashboard
 │   │   ├── worker/page.tsx              # Protected Worker Dashboard
-│   │   └── officer/page.tsx             # Protected Officer Dashboard
-│   ├── api/
-│   │   └── demo-session/route.ts        # GET/POST/DELETE signed role session
+│   │   └── officer/page.tsx             # Municipal Officer Dashboard (Phase 4 Preview)
+│   ├── api/                             # Server API route handlers
+│   │   ├── demo-session/route.ts        # Session initialization, inspection, deletion
+│   │   ├── complaints/route.ts          # Grievance retrieval & citizen submission
+│   │   └── tasks/route.ts               # Worker task listing, start & completion
 │   ├── globals.css                      # Tailwind CSS v4 design tokens
-│   ├── layout.tsx                       # Root HTML & Metadata Layout
-│   ├── loading.tsx                      # App Loading Boundary
-│   ├── error.tsx                        # App Error Boundary
-│   └── not-found.tsx                    # Accessible 404 Handler
+│   └── layout.tsx                       # Root layout & metadata
 ├── components/
-│   ├── ui/                              # shadcn/ui components (button, card, badge, input, etc.)
+│   ├── ui/                              # shadcn/ui primitives (button, card, badge, input)
 │   ├── layout/                          # Headers, footers, dashboard sidebar & shell
-│   ├── shared/                          # Gwalior fort artwork, role badge, role switcher, map
-│   └── dashboards/                      # Citizen, worker, officer views & Recharts overview
-├── features/
-│   ├── swachh/                          # Swachh Gwalior constants & 66 wards metadata
-│   ├── schemes/                         # MP welfare schemes taxonomy
-│   ├── grievances/                      # State grievance redressal channels
+│   ├── shared/                          # Gwalior fort artwork, role badge, ward map
+│   └── dashboards/                      # Citizen, worker, officer views & charts
+├── docs/                                # Project documentation suite
+│   ├── architecture.md                  # System architecture & security model
+│   ├── database.md                      # 8 database tables & 4 private storage buckets
+│   ├── api.md                           # API endpoints, methods, and schemas
+│   └── roadmap.md                       # Implementation roadmap & status
+├── features/                            # Static domain constants
+│   ├── swachh/                          # Swachh Gwalior constants & categories
+│   ├── schemes/                         # MP welfare scheme taxonomy
+│   ├── grievances/                      # State grievance channels
 │   └── civic-services/                  # GMC municipal services directory
 ├── lib/
-│   ├── auth/                            # JWT signing & session verification (jose)
+│   ├── auth/                            # JWT session signing & API guards (jose)
+│   ├── db/                              # Server data-access layer (Supabase PostgreSQL)
+│   ├── storage/                         # Private bucket upload & signed URL helpers
 │   ├── supabase/                        # Browser, server & admin Supabase clients
-│   ├── gemini/                          # Server-only Gemini AI service placeholders
-│   ├── validation/                      # Zod validation schemas
-│   └── utils.ts                         # Style merge (clsx & twMerge)
-├── types/                               # Strict domain TypeScript definitions
-├── supabase/
-│   ├── migrations/                      # Initial schema placeholders
-│   └── seed.sql                         # Database seed placeholder
-├── tests/                               # Automated unit tests (auth & validation)
+│   ├── gemini/                          # Server-only Gemini AI service stub
+│   ├── validation/                      # Zod schemas for complaints, tasks, sessions
+│   └── utils.ts                         # Style merge utilities
+├── outputs/                             # Gwalior ward reference dataset (59 wards)
+│   ├── gwalior_wards_master.json        # Master ward reference dataset
+│   ├── gwalior_wards_import_preview.json# Importer preview input
+│   └── gwalior_wards_validation_report.md# Ward data audit report
+├── public/                              # Public static assets (favicon)
+├── scripts/
+│   ├── import_gwalior_wards.py          # Idempotent Gwalior ward reference importer
+│   ├── test_e2e_citizen.ts              # Live citizen workflow E2E test
+│   └── test_e2e_worker.ts               # Live worker workflow E2E test
+├── supabase/                            # Supabase migrations & seed scaffolding
+├── tests/                               # Automated unit test suite (63 TS + 21 Python)
+├── types/                               # TypeScript domain & database type definitions
 ├── .env.example                         # Environment configuration template
-├── package.json                         # Dependencies & scripts
-└── tsconfig.json                        # Strict TypeScript compiler options
+├── package.json                         # Dependencies & npm scripts
+└── tsconfig.json                        # TypeScript strict compiler options
 ```
 
 ---
@@ -132,17 +152,19 @@ jansahayak/
 ## 6. Local Setup & Execution Guide
 
 ### Prerequisites
-- **Node.js:** v18.18+ or v20+ (tested on Node v24.13.0)
-- **Package Manager:** `npm` (v10+ or v11+)
+- **Node.js:** v18.18+ or v20+ (tested on Node v20 & v24)
+- **Python:** 3.10+ (for ward importer and Python tests)
+- **Package Manager:** `npm` (v10+)
 
 ### Installation Steps
 
-1. **Clone or enter the project directory:**
+1. **Clone the repository:**
    ```bash
+   git clone https://github.com/nayanj616/jansahayak.git
    cd jansahayak
    ```
 
-2. **Install dependencies:**
+2. **Install Node dependencies:**
    ```bash
    npm install
    ```
@@ -151,11 +173,21 @@ jansahayak/
    ```bash
    cp .env.example .env.local
    ```
-   *(A secure default demonstration key is automatically configured for local development)*
+   Populate `.env.local` with your configuration:
+   - `NEXT_PUBLIC_APP_URL`: Base application URL (default: `http://localhost:3000`).
+   - `DEMO_SESSION_SECRET`: Cryptographically strong random string (32+ characters) for signing demo session JWT cookies.
+   - `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL (`https://<project-ref>.supabase.co`).
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: Supabase client-side publishable key.
+   - `SUPABASE_SECRET_KEY`: Supabase server-only administrative secret key (`sb_secret_...` or service-role key). **Never expose to the browser.**
+   - `GEMINI_API_KEY`: Google Gemini API key (required for Phase 4B AI features).
 
-4. **Run Automated Unit Tests:**
+4. **Run Automated Test Suites:**
    ```bash
+   # Run Node.js / TypeScript unit tests (63 tests)
    npm test
+
+   # Run Python ward importer unit tests (21 tests)
+   python -m unittest tests/test_ward_import.py
    ```
 
 5. **Run Linting:**
@@ -168,7 +200,7 @@ jansahayak/
    npm run build
    ```
 
-7. **Start the Development Server:**
+7. **Start Development Server:**
    ```bash
    npm run dev
    ```
@@ -176,16 +208,27 @@ jansahayak/
 
 ---
 
-## 7. Phase 1 Verification Checklist
+## 7. Supabase Configuration Requirements
 
-- [x] TypeScript Strict Mode with zero `any` leaks in core modules.
-- [x] Server-side signed short-lived session cookie via `jose`.
-- [x] `requireDemoRole()` guards protecting `/citizen`, `/worker`, and `/officer`.
-- [x] Reusable UI design system (buttons, cards, badges, empty states, alerts).
-- [x] Visual reference reproduction (Landing page, Choose Role, 3 Dashboards, Scheme Exploration).
-- [x] Supabase client separation (Browser, Server, Server-Only Admin).
-- [x] Gemini service preparation with `'server-only'` security boundary.
-- [x] Interactive Leaflet OpenStreetMap ward viewer for Gwalior.
-- [x] Recharts complaint trend bar chart in Municipal Officer Dashboard.
-- [x] Full production build (`npm run build`) passing with zero errors.
-- [x] Automated test suite passing 100% of test cases.
+To run the live database workflows locally:
+
+1. **Database Tables:** The PostgreSQL database requires the eight tables documented in [`docs/database.md`](docs/database.md): `wards`, `demo_users`, `complaints`, `complaint_images`, `assignments`, `complaint_history`, `ai_verifications`, `notifications`.
+2. **Deterministic Demo Users:** The `demo_users` table must contain the three demonstration profiles (`citizen`, `worker`, `officer`).
+3. **Private Storage Buckets:** Four private buckets must be created in Supabase Storage:
+   - `complaint-originals`
+   - `cleanup-evidence`
+   - `ai-annotated`
+   - `verification-comparisons`
+   *(All buckets must be set to **Private**; public read access must be disabled).*
+4. **Provisional Ward Data:** Imported via `python scripts/import_gwalior_wards.py --execute` using the master dataset in `outputs/`.
+
+---
+
+## 8. Current Limitations & Implementation Roadmap
+
+- **Academic Context:** Developed solely for academic demonstration and research.
+- **Provisional Wards:** 59 wards are currently represented in the database as provisional reference boundaries.
+- **Phase 4A (Pending):** Municipal Officer review queue, worker dispatch interface, and final ticket resolution.
+- **Phase 4B (Pending):** Google Gemini multimodal AI before/after cleanliness analysis and conversational civic assistant.
+
+Refer to [`docs/roadmap.md`](docs/roadmap.md) for the detailed implementation roadmap.

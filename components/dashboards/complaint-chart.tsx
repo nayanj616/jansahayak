@@ -61,9 +61,8 @@ export function ComplaintOverviewChart({ timeframe = 'Last 30 days' }: Complaint
           No Complaint Analytics Logged Yet
         </h4>
         <p className="max-w-md text-xs text-slate-500 mb-4 leading-relaxed">
-          Operational statistics are not fabricated. Once citizen grievances are submitted and stored
-          in Supabase PostgreSQL during Phase 2, real-time grievance time-series charts will render
-          here.
+          Operational statistics are not fabricated. Live time-series aggregation for municipal officers
+          is scheduled for Phase 4.
         </p>
         <Button
           variant="outline"

@@ -77,8 +77,10 @@ export default function AboutPage() {
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
               JanSahayak is an academic demonstration project and does NOT represent an official
               portal of Gwalior Municipal Corporation (GMC) or the Government of Madhya Pradesh.
-              No visitor identity or municipal employment is officially verified, and all grievance
-              records displayed in Phase 1 are demonstration placeholders.
+              No visitor identity or municipal employment is officially verified. Citizen grievance
+              reporting and field worker task execution are active demonstration workflows operating
+              on isolated demo user identities, with ward reference data covering 59 provisional wards
+              pending official municipal verification.
             </p>
             <div className="pt-2">
               <Link href="/demo-role">

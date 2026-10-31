@@ -31,8 +31,8 @@ export function PublicFooter() {
             </p>
             <div className="pt-2">
               <span className="inline-flex items-center gap-2 rounded-md bg-blue-950/70 border border-blue-800/60 px-3 py-1 text-xs text-blue-300">
-                <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-                Phase 1: Modern Application Foundation
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                Phase 3: Operational Grievance Workflows (Demo)
               </span>
             </div>
           </div>

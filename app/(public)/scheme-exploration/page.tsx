@@ -334,7 +334,7 @@ export default function SchemeExplorationPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-900">AI Civic Assistant</h3>
-                    <p className="text-[11px] text-slate-400">Phase 1 Integration Scaffolding</p>
+                    <p className="text-[11px] text-slate-400">Planned for Phase 4B (Gemini AI Integration)</p>
                   </div>
                 </div>
                 <button
@@ -348,14 +348,14 @@ export default function SchemeExplorationPage() {
 
               <div className="space-y-4 text-xs text-slate-600">
                 <div className="rounded-lg bg-blue-50 border border-blue-200 p-3 text-blue-900 space-y-1">
-                  <p className="font-semibold">Phase 1 Gemini Service Preparation:</p>
+                  <p className="font-semibold">Gemini AI Conversational Assistant (Phase 4B):</p>
                   <p>
-                    Per the Phase 1 specification exclusions, live Gemini conversational model calls
-                    and fake AI generation are not executed in this phase.
+                    Live Gemini conversational assistance is scheduled for Phase 4B. The platform avoids
+                    fabricated AI responses until the model is formally connected.
                   </p>
                   <p>
-                    The server-only service handler in <code>lib/gemini/service.ts</code> is ready to
-                    bind to the Google Gemini API in Phase 2.
+                    The server-only service handler in <code>lib/gemini/service.ts</code> is scaffolded
+                    and ready for Phase 4B integration.
                   </p>
                 </div>
 

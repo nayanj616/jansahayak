@@ -31,34 +31,33 @@ export function getGeminiClient(): GoogleGenAI {
 
 /**
  * Placeholder function for AI cleanliness verification.
- * In Phase 2, this will analyze before/after cleanup photos to compute
+ * In Phase 4B, this will analyze before/after cleanup photos to compute
  * cleanliness scores and recommend officer approval.
  */
 export async function analyzeCleanliness(
   beforeImage: string | Buffer,
   afterImage: string | Buffer
 ): Promise<CleanlinessAnalysisResult> {
-  // Use arguments to avoid unused variable warnings in Phase 1 placeholder
+  // Use arguments to avoid unused variable warnings in foundation placeholder
   void beforeImage;
   void afterImage;
 
-  // Phase 1 requirement: Do not implement fake AI responses or pretend that the API is connected.
   const isKeyConfigured = Boolean(GEMINI_API_KEY && !GEMINI_API_KEY.startsWith('placeholder'));
 
   if (!isKeyConfigured) {
     throw new Error(
-      '[JanSahayak Gemini] analyzeCleanliness is prepared as a Phase 1 foundation placeholder. Live multimodal image comparison will be activated in Phase 2.'
+      '[JanSahayak Gemini] analyzeCleanliness is prepared as a foundation placeholder. Live multimodal image comparison will be activated in Phase 4B.'
     );
   }
 
   throw new Error(
-    '[JanSahayak Gemini] Multimodal cleanliness verification model execution is scheduled for Phase 2 implementation.'
+    '[JanSahayak Gemini] Multimodal cleanliness verification model execution is scheduled for Phase 4B implementation.'
   );
 }
 
 /**
  * Placeholder function for AI Civic Assistant queries.
- * In Phase 2, this will interpret citizen questions about Madhya Pradesh & central
+ * In Phase 4B, this will interpret citizen questions about Madhya Pradesh & central
  * government schemes and grievance redressal procedures.
  */
 export async function answerCivicQuestion(
@@ -72,12 +71,12 @@ export async function answerCivicQuestion(
 
   if (!isKeyConfigured) {
     throw new Error(
-      '[JanSahayak Gemini] answerCivicQuestion is prepared as a Phase 1 foundation placeholder. Live civic conversational assistance will be activated in Phase 2.'
+      '[JanSahayak Gemini] answerCivicQuestion is prepared as a foundation placeholder. Live civic conversational assistance will be activated in Phase 4B.'
     );
   }
 
   throw new Error(
-    '[JanSahayak Gemini] Civic assistant conversational model execution is scheduled for Phase 2 implementation.'
+    '[JanSahayak Gemini] Civic assistant conversational model execution is scheduled for Phase 4B implementation.'
   );
 }
 
@@ -92,6 +91,6 @@ export function getGeminiStatus(): {
   return {
     isConfigured: Boolean(GEMINI_API_KEY && !GEMINI_API_KEY.startsWith('placeholder')),
     model: GEMINI_MODEL,
-    phase: 'Phase 1: Foundation prepared, live execution disabled',
+    phase: 'Phase 4B Preparation: Foundation prepared, live execution deferred',
   };
 }

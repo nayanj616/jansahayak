@@ -76,8 +76,8 @@ export default function HomePage() {
                       Swachh Gwalior
                     </h3>
                     <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                      Report issues, track progress, and build a cleaner, healthier city. Automated
-                      sanitation dispatch and AI cleanliness verification.
+                      Report sanitation issues, track field remediation, and coordinate field teams.
+                      Citizen grievance reporting and field worker workflows active.
                     </p>
                   </div>
 
@@ -240,11 +240,11 @@ export default function HomePage() {
                   <Bot className="h-5 w-5" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-base mb-1">
-                  Gemini AI Verification
+                  Gemini AI Verification (Phase 4B)
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Cleanup photos are analyzed by Gemini multimodal AI to compare before and after
-                  cleanliness before officer approval.
+                  Cleanup evidence photographs are planned to be evaluated with Gemini multimodal
+                  AI to assist municipal officers with before/after cleanliness verification.
                 </p>
               </div>
 
@@ -255,11 +255,11 @@ export default function HomePage() {
                   <Building className="h-5 w-5" />
                 </div>
                 <h3 className="font-bold text-slate-900 text-base mb-1">
-                  Scheme Redressal
+                  Scheme Redressal &amp; Oversight
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Citizens discover eligible welfare schemes, find civic services, and track state
-                  grievance channels in one place.
+                  Citizens discover eligible welfare schemes and civic services, while officers
+                  conduct administrative review and closure.
                 </p>
               </div>
             </div>
@@ -277,7 +277,8 @@ export default function HomePage() {
                 Demonstration Sanitation Sectors
               </h2>
               <p className="text-sm text-slate-600">
-                Interactive OpenStreetMap demonstration visualization of approximate Gwalior demonstration zones. Official ward boundaries and live dispatch will bind in Phase 2.
+                Interactive OpenStreetMap demonstration visualization of representative Gwalior zones.
+                Ward reference data covers 59 provisional wards pending official GMC boundary verification.
               </p>
             </div>
 

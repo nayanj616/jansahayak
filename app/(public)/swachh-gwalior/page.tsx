@@ -107,8 +107,8 @@ export default function SwachhGwaliorPage() {
                   </div>
                   <h3 className="text-xl font-bold text-slate-900">Municipal Officer Persona</h3>
                   <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                    Monitor 66 municipal wards, reallocate field staff, and evaluate Gemini AI
-                    before-and-after cleanliness comparison scores.
+                    Overview of city-wide grievances across demonstration sectors, with administrative
+                    review and Gemini AI verification preview planned for Phase 4.
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-purple-100">
@@ -167,10 +167,10 @@ export default function SwachhGwaliorPage() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-100 text-indigo-700 mb-2">
                     <Bot className="h-5 w-5" />
                   </div>
-                  <CardTitle className="text-sm font-bold">3. Gemini Cleanliness AI</CardTitle>
+                  <CardTitle className="text-sm font-bold">3. Gemini Cleanliness AI (Phase 4B)</CardTitle>
                   <CardDescription className="text-xs">
-                    Before and after cleanup photographs are evaluated with multimodal AI to detect
-                    residual waste and generate confidence scores.
+                    Before and after cleanup photographs will be evaluated with multimodal AI to detect
+                    residual waste and assist municipal verification.
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -180,10 +180,10 @@ export default function SwachhGwaliorPage() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-purple-700 mb-2">
                     <Building2 className="h-5 w-5" />
                   </div>
-                  <CardTitle className="text-sm font-bold">4. Officer Approval</CardTitle>
+                  <CardTitle className="text-sm font-bold">4. Officer Oversight (Phase 4A)</CardTitle>
                   <CardDescription className="text-xs">
-                    Municipal health officers review the AI assessment and field evidence before
-                    officially closing the civic ticket.
+                    Municipal officers will review cleanup evidence and AI assessment before officially
+                    resolving grievances.
                   </CardDescription>
                 </CardHeader>
               </Card>

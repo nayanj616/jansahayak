@@ -1,6 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# JanSahayak — Git Ignore Configuration
 
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.*
@@ -10,39 +10,71 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# Next.js Build & Outputs
 /.next/
 /out/
-
-# production
 /build
 
-# python
+# Python Bytecode & Virtual Environments
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
+*.pyd
 .pytest_cache/
+.venv/
+venv/
+env/
 
-# misc
-.DS_Store
-*.pem
+# Test & Coverage Outputs
+/coverage
+.nyc_output/
 
-# debug
+# Environment Configuration
+# Strictly exclude all local environment files containing real credentials
+.env*
+.env.local
+.env.*.local
+*.env
+# Explicitly keep the public template tracked with placeholders only
+!.env.example
+
+# Vercel Deployment
+.vercel
+
+# TypeScript & Cache
+*.tsbuildinfo
+next-env.d.ts
+
+# Debug & Local Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
+# Temporary Scripts, Scratch & Dumps
+tmp/
+temp/
+scratch/
+scripts/temp_*
+*.bak
+*.tmp
 
-# vercel
-.vercel
+# Editor & IDE Directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Operating System Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini

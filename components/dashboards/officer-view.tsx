@@ -34,7 +34,7 @@ export function OfficerView({ session }: OfficerViewProps) {
       color: 'text-blue-700',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-100',
-      description: '0 complaints logged (Phase 1 placeholder)',
+      description: '0 complaints logged (Phase 4 development placeholder)',
     },
     {
       label: 'In Progress',
@@ -43,7 +43,7 @@ export function OfficerView({ session }: OfficerViewProps) {
       color: 'text-amber-700',
       bgColor: 'bg-amber-50',
       borderColor: 'border-amber-100',
-      description: '0 in progress (Phase 1 placeholder)',
+      description: '0 in progress (Phase 4 development placeholder)',
     },
     {
       label: 'Completed',
@@ -52,7 +52,7 @@ export function OfficerView({ session }: OfficerViewProps) {
       color: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
       borderColor: 'border-emerald-100',
-      description: '0 completed (Phase 1 placeholder)',
+      description: '0 completed (Phase 4 development placeholder)',
     },
   ];
 
@@ -75,7 +75,7 @@ export function OfficerView({ session }: OfficerViewProps) {
             className="text-xs"
           >
             <Filter className="h-3.5 w-3.5 mr-1" />
-            Demonstration Sectors (1-66)
+            Demonstration Sectors (59 Wards)
           </Button>
           <Button
             size="sm"
@@ -83,7 +83,7 @@ export function OfficerView({ session }: OfficerViewProps) {
             className="bg-indigo-700 hover:bg-indigo-800 text-white text-xs gap-1.5"
           >
             <Bot className="h-3.5 w-3.5" />
-            AI Verifications (0 Pending &bull; Phase 1 Preview)
+            AI Verifications (0 Pending &bull; Phase 4 Preview)
           </Button>
         </div>
       </div>
@@ -98,7 +98,7 @@ export function OfficerView({ session }: OfficerViewProps) {
         </div>
         <div className="flex items-center gap-2 text-purple-700">
           <MapPin className="h-3.5 w-3.5" />
-          <span>Evaluation Scope: Demonstration Zones 1 to 66 (Unverified Boundaries)</span>
+          <span>Evaluation Scope: 59 Provisional Wards (Pending Official Verification)</span>
         </div>
       </div>
 
@@ -219,7 +219,7 @@ export function OfficerView({ session }: OfficerViewProps) {
               <div>
                 <CardTitle className="text-sm font-semibold">Analytics</CardTitle>
                 <CardDescription className="text-xs">
-                  City-wide insights (Phase 1 Baseline)
+                  City-wide insights (Phase 4 Baseline)
                 </CardDescription>
               </div>
             </div>
@@ -240,7 +240,7 @@ export function OfficerView({ session }: OfficerViewProps) {
                   <Sparkles className="h-4 w-4" />
                 </div>
                 <h3 className="font-semibold text-slate-900 text-sm capitalize">
-                  {activeModal.replace('-', ' ')} (Phase 2 Preview)
+                  {activeModal.replace('-', ' ')} (Phase 4 Preview)
                 </h3>
               </div>
               <button
@@ -253,14 +253,14 @@ export function OfficerView({ session }: OfficerViewProps) {
             </div>
             <div className="text-xs text-slate-600 space-y-2">
               <p>
-                This module interface is scaffolded for Phase 1. In Phase 2:
+                This officer module interface is pending implementation in Phase 4:
               </p>
               <ul className="list-disc pl-4 space-y-1">
                 <li>
                   <strong>AI Verification:</strong> Officers can review dual before/after photos with Gemini confidence scores and approve cleanup.
                 </li>
                 <li>
-                  <strong>Ward-wise View:</strong> Interactive choropleth map across all 66 Gwalior wards with worker dispatch controls.
+                  <strong>Ward-wise View:</strong> Interactive map across provisional Gwalior wards with worker dispatch controls.
                 </li>
                 <li>
                   <strong>Analytics:</strong> Real-time municipal KPIs computed directly from Supabase PostgreSQL queries.
