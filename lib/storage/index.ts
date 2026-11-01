@@ -120,6 +120,28 @@ export async function deleteStorageObject(
   await supabase.storage.from(bucket).remove([objectPath]);
 }
 
+/**
+ * Downloads a file buffer directly from a private Supabase Storage bucket.
+ * Server-only helper used for feeding image bytes to the Vision service
+ * without exposing public or signed URLs.
+ */
+export async function downloadStorageBuffer(
+  bucket: StorageBucket,
+  objectPath: string
+): Promise<Buffer> {
+  const supabase = getSupabaseAdminClient();
+  const { data, error } = await supabase.storage.from(bucket).download(objectPath);
+
+  if (error || !data) {
+    throw new Error(
+      `[JanSahayak Storage] Failed to download storage object '${bucket}/${objectPath}': ${error?.message || 'Unknown storage error'}`
+    );
+  }
+
+  const arrayBuffer = await data.arrayBuffer();
+  return Buffer.from(arrayBuffer);
+}
+
 export interface UploadAndLinkParams {
   complaintId: string;
   imageType: ImageType;

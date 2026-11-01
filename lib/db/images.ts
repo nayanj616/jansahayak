@@ -64,6 +64,27 @@ export async function getImagesByComplaintId(
 }
 
 /**
+ * Retrieves a single image record by UUID.
+ */
+export async function getImageById(
+  imageId: string
+): Promise<ComplaintImageRecord | null> {
+  const db = getDb();
+
+  const { data, error } = await db
+    .from('complaint_images')
+    .select('*')
+    .eq('id', imageId)
+    .single();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data as ComplaintImageRecord;
+}
+
+/**
  * Deletes a complaint image metadata row (used during rollback).
  */
 export async function deleteComplaintImageRecord(id: string): Promise<void> {

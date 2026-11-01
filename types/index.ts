@@ -50,7 +50,62 @@ export interface ComplaintSummary {
   aiConfidencePercent?: number;
 }
 
-// AI Service Types (Preparation)
+// AI Vision Verification Types (Phase 4B.2 - Observational Contract)
+export type VisionConfidenceLevel =
+  | 'high'
+  | 'medium'
+  | 'low'
+  | 'inconclusive';
+
+export interface VisionVerificationMetrics {
+  beforeObservations: {
+    wasteIdentified: string[];
+    approximateSpread: string;
+    obstructionsOrHazards: string[];
+  };
+
+  afterObservations: {
+    visibleSurfaces: string[];
+    remainingDebris: string[];
+    cleanlinessApparent: boolean | null;
+  };
+
+  comparativeFindings: {
+    primaryWasteRemoved: boolean | null;
+    siteConsistent: boolean | null;
+    changesObserved: string[];
+  };
+
+  comparisonLimitations: {
+    angleMismatched: boolean;
+    lightingMismatched: boolean;
+    occlusionPresent: boolean;
+    limitationNotes: string[];
+  };
+
+  evaluation: {
+    confidenceLevel: VisionConfidenceLevel;
+    isComparisonReliable: boolean;
+    wasteReductionEstimate: number | null;
+    estimateRationale: string | null;
+  };
+
+  officerSummary: string;
+  disclaimer: string;
+}
+
+export interface AnalyzeCleanlinessResult {
+  metrics: VisionVerificationMetrics;
+  modelVersion: string;
+  modelName: string;
+  processedAt: string;
+}
+
+/**
+ * @deprecated Legacy AI recommendation contract from Phase 4B foundation.
+ * Superseded in Phase 4B.2 by `VisionVerificationMetrics` (observational evidence only).
+ * AI must never make authoritative resolution recommendations.
+ */
 export interface CleanlinessAnalysisResult {
   isCleaned: boolean;
   confidenceScore: number; // 0 to 1

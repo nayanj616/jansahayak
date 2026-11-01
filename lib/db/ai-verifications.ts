@@ -126,3 +126,139 @@ export async function updateHumanReview(
   return data as AiVerificationRecord;
 }
 
+export interface CreatePendingAiVerificationParams {
+  complaint_id: string;
+  before_image_id: string;
+  after_image_id: string;
+  model_name: string;
+  model_version: string;
+}
+
+/**
+ * Creates a new pending AI verification record before invoking Gemini Vision.
+ * In a re-analysis scenario, this creates a new record while preserving prior records.
+ */
+export async function createPendingAiVerificationRecord(
+  params: CreatePendingAiVerificationParams
+): Promise<AiVerificationRecord> {
+  const db = getDb();
+
+  const { data, error } = await db
+    .from('ai_verifications')
+    .insert({
+      complaint_id: params.complaint_id,
+      before_image_id: params.before_image_id,
+      after_image_id: params.after_image_id,
+      processing_status: 'pending',
+      model_name: params.model_name,
+      model_version: params.model_version,
+      metrics: null,
+      waste_reduction_percentage: null,
+      processing_error: null,
+      processed_at: null,
+      human_review_status: 'pending',
+    })
+    .select('*')
+    .single();
+
+  if (error || !data) {
+    throw new Error(`[JanSahayak DB] Failed to create pending AI verification record: ${error?.message}`);
+  }
+
+  return data as AiVerificationRecord;
+}
+
+export interface CompleteAiVerificationParams {
+  id: string;
+  metrics: Record<string, unknown>;
+  waste_reduction_percentage?: number | null;
+}
+
+/**
+ * Transitions an AI verification record to 'completed' with validated metrics.
+ */
+export async function updateAiVerificationToCompleted(
+  params: CompleteAiVerificationParams
+): Promise<AiVerificationRecord> {
+  const db = getDb();
+
+  const { data, error } = await db
+    .from('ai_verifications')
+    .update({
+      processing_status: 'completed',
+      metrics: params.metrics,
+      waste_reduction_percentage: params.waste_reduction_percentage ?? null,
+      processing_error: null,
+      processed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', params.id)
+    .select('*')
+    .single();
+
+  if (error || !data) {
+    throw new Error(`[JanSahayak DB] Failed to update AI verification to completed: ${error?.message}`);
+  }
+
+  return data as AiVerificationRecord;
+}
+
+export interface FailAiVerificationParams {
+  id: string;
+  processing_error: string;
+}
+
+/**
+ * Transitions an AI verification record to 'failed' with a sanitized error message.
+ */
+export async function updateAiVerificationToFailed(
+  params: FailAiVerificationParams
+): Promise<AiVerificationRecord> {
+  const db = getDb();
+
+  const { data, error } = await db
+    .from('ai_verifications')
+    .update({
+      processing_status: 'failed',
+      processing_error: params.processing_error,
+      processed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', params.id)
+    .select('*')
+    .single();
+
+  if (error || !data) {
+    throw new Error(`[JanSahayak DB] Failed to update AI verification to failed: ${error?.message}`);
+  }
+
+  return data as AiVerificationRecord;
+}
+
+/**
+ * Retrieves the latest AI verification matching a specific before-and-after image pair.
+ * Used for conservative idempotency to avoid re-triggering analysis on identical photos.
+ */
+export async function getLatestVerificationForImagePair(
+  complaintId: string,
+  beforeImageId: string,
+  afterImageId: string
+): Promise<AiVerificationRecord | null> {
+  const db = getDb();
+
+  const { data, error } = await db
+    .from('ai_verifications')
+    .select('*')
+    .eq('complaint_id', complaintId)
+    .eq('before_image_id', beforeImageId)
+    .eq('after_image_id', afterImageId)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data as AiVerificationRecord;
+}

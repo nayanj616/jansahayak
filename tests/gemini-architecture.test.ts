@@ -260,19 +260,76 @@ test('Gemini Architecture: answerCivicQuestion executes source-grounded answerin
   restoreEnv();
 });
 
-test('Gemini Architecture: analyzeCleanliness boundary rejects live execution in foundation phase', async () => {
+test('Gemini Architecture: analyzeCleanliness rejects unconfigured vision key without falling back to chatbot key', async () => {
   restoreEnv();
-  process.env.GEMINI_VISION_API_KEY = 'valid-test-vision-key';
+  delete process.env.GEMINI_VISION_API_KEY;
+  process.env.GEMINI_CHATBOT_API_KEY = 'valid-test-chatbot-key';
 
   await assert.rejects(
     async () => {
-      await analyzeCleanliness('dummy_before', 'dummy_after');
+      await analyzeCleanliness(Buffer.from('fake-before'), Buffer.from('fake-after'));
     },
     (err: Error) => {
-      assert.ok(err.message.includes('scheduled for Phase 4B.2 implementation'));
+      assert.ok(err.message.includes('GEMINI_VISION_API_KEY is not configured'));
+      assert.ok(!err.message.includes('GEMINI_CHATBOT_API_KEY'));
       return true;
     }
   );
+  restoreEnv();
+});
+
+test('Gemini Architecture: analyzeCleanliness executes multimodal comparative analysis with mock client', async () => {
+  restoreEnv();
+  const mockValidJson = JSON.stringify({
+    beforeObservations: {
+      wasteIdentified: ['plastic bags', 'dry leaves'],
+      approximateSpread: 'along curb',
+      obstructionsOrHazards: [],
+    },
+    afterObservations: {
+      visibleSurfaces: ['swept concrete curb'],
+      remainingDebris: [],
+      cleanlinessApparent: true,
+    },
+    comparativeFindings: {
+      primaryWasteRemoved: true,
+      siteConsistent: true,
+      changesObserved: ['Pavement swept clear'],
+    },
+    comparisonLimitations: {
+      angleMismatched: false,
+      lightingMismatched: false,
+      occlusionPresent: false,
+      limitationNotes: [],
+    },
+    evaluation: {
+      confidenceLevel: 'high',
+      isComparisonReliable: true,
+      wasteReductionEstimate: 90,
+      estimateRationale: 'Primary surface accumulation cleared',
+    },
+    officerSummary: 'Cleanup appears complete with no residual waste observed.',
+    disclaimer: 'Advisory only. Officer evaluation remains authoritative.',
+  });
+
+  const mockClient = {
+    models: {
+      generateContent: async () => ({
+        text: mockValidJson,
+      }),
+    },
+  } as unknown as Parameters<typeof analyzeCleanliness>[2] extends { client?: infer C } ? C : never;
+
+  const result = await analyzeCleanliness(
+    Buffer.from('fake-before-bytes'),
+    Buffer.from('fake-after-bytes'),
+    { client: mockClient }
+  );
+
+  assert.strictEqual(result.metrics.evaluation.confidenceLevel, 'high');
+  assert.strictEqual(result.metrics.evaluation.wasteReductionEstimate, 90);
+  assert.ok(result.metrics.comparativeFindings.primaryWasteRemoved);
+  assert.ok(result.metrics.officerSummary.includes('Cleanup appears complete'));
   restoreEnv();
 });
 
