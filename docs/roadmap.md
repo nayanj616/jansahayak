@@ -19,8 +19,8 @@ flowchart TD
 
     subgraph GeminiTrack["Gemini AI Architecture"]
         P4B_Found["Phase 4B Foundation<br/>Dual-Key Client<br/>(Completed)"]
-        P4B_Found -.-> P4B1["Phase 4B.1<br/>Civic RAG Assistant<br/>(Pending)"]
-        P4B_Found -.-> P4B2["Phase 4B.2<br/>Vision Verification<br/>(Pending)"]
+        P4B_Found --> P4B1["Phase 4B.1<br/>Civic RAG Assistant<br/>(Completed)"]
+        P4B_Found --> P4B2["Phase 4B.2<br/>Vision Verification<br/>(Completed)"]
     end
 
     subgraph SchemeTrack["Module B: Scheme Exploration"]
@@ -142,29 +142,32 @@ flowchart TD
 ---
 
 ### Phase 4B.1: Gemini-Powered Civic RAG Assistant
-**Status:** **PENDING**
-- In-memory structured knowledge base for Gwalior municipal services and Madhya Pradesh welfare schemes.
-- Grounded RAG query execution using `getChatbotClient()`.
-- Structured JSON output with official sources and disclaimers.
-- Citizen-facing interactive chat dialog on Scheme Exploration portal.
+**Status:** **COMPLETED**
+- Structured knowledge retrieval engine over central and Madhya Pradesh welfare schemes.
+- Grounded conversational response formulation using `getChatbotClient()` (`gemini-3.8-flash`).
+- Stopword leakage prevention, Devanagari transliteration mapping, and 3-state evidence sufficiency evaluation (`sufficient`, `partial`, `insufficient`).
+- Bilingual citizen-facing interactive chat dialog (`components/scheme-exploration/civic-assistant.tsx`).
+- Protected endpoint `POST /api/assistant` with proxy-aware IP rate limiting (10 req/min).
 
 ---
 
 ### Phase 4B.2: Gemini Vision Multimodal Cleanliness Verification
-**Status:** **PENDING**
-- Multimodal before-and-after image comparison analyzing cleanliness and residual debris using `getVisionClient()`.
-- Confidence scoring and qualitative cleanliness rating generation.
-- Persistence of analysis results in `ai_verifications` table.
-- Officer review dashboard verification badges.
+**Status:** **COMPLETED**
+- Multimodal before-and-after photographic evidence comparison using `getVisionClient()` (`gemini-3.8-flash`).
+- Officer-triggered observational image comparison via protected endpoint `POST /api/complaints/[id]/verify`.
+- Independent Gemini Vision configuration via `GEMINI_VISION_API_KEY` and `GEMINI_VISION_MODEL`.
+- Private server-side image processing: binary buffer retrieval from private Supabase Storage buckets (`complaint-originals`, `cleanup-evidence`) and inline binary transmission to Gemini over encrypted HTTPS.
+- Human-in-the-loop governance: AI findings are strictly observational/advisory (`VisionVerificationMetrics`) persisted to `ai_verifications.metrics`; human municipal officers retain sole authority over approve, reject, and rework decisions.
+- Controlled synthetic-image live smoke test successfully executed using isolated test fixtures. *(Demonstration boundary: synthetic smoke-test success demonstrates pipeline integration and schema compliance; it does not establish real-world model accuracy or municipal production readiness).*
 
 ---
 
 ## 3. Verified Test Suite Summary
 
-- **Node/TS Automated Unit Tests:** 123/123 tests passing across 11 test suites (`npm test`).
+- **Node/TS Automated Unit Tests:** 172/172 tests passing across 13 test suites (`npm test`).
 - **Python Ward Reference Tests:** 21/21 tests passing (`python -m unittest tests/test_ward_import.py`).
-- **Total Automated Test Count:** 144 tests (0 failing).
-- **Static Analysis & Build:** 0 ESLint errors, clean Next.js Turbopack compilation across all 17 routes.
+- **Total Automated Test Count:** 193 tests (0 failing).
+- **Static Analysis & Build:** 0 ESLint errors, clean Next.js Turbopack compilation across all 18 routes.
 
 ---
 
@@ -173,4 +176,9 @@ flowchart TD
 1. **Academic Demonstration Scope:** JanSahayak is developed as an academic demonstration prototype. It does not possess official integration with the Gwalior Municipal Corporation (GMC) or the Government of Madhya Pradesh.
 2. **Provisional Ward Boundaries:** The 59 wards loaded in the database represent provisional reference boundaries pending official municipal verification.
 3. **Demo Session Model:** The authentication model utilizes cryptographic server-signed demonstration cookies rather than real citizen phone numbers or SMS OTP gateways.
-4. **Deferred Modules:** The Municipal Officer resolution dashboard (Phase 4A) is completed. Google Gemini live model execution workflows (Phase 4B.1 Civic Assistant RAG and Phase 4B.2 Multimodal Cleanliness Verification) have their service boundaries and dual-key clients completed, with live model execution scheduled for subsequent phases. In Scheme Exploration, the Civic Services and Grievances tabs remain informational placeholders pending dedicated data integration.
+4. **Vision Concurrency & Process Failure Boundaries:**
+   - *No DB-level concurrency lock:* No database-level uniqueness constraint or transactional mutex prevents simultaneous pending verification requests if triggered within milliseconds.
+   - *Stale pending risk:* An unhandled process crash between pending-record insertion and model completion could leave an orphaned `pending` row; the system currently lacks a background TTL reaper.
+   - *Chronological ordering:* Multi-attempt history is ordered strictly by `created_at DESC`; there is no dedicated `attempt_number` column.
+   - *Synthetic evaluation:* Synthetic smoke-test validation confirms end-to-end integration and schema adherence, but does not establish real-world computer vision accuracy across diverse outdoor lighting and camera perspectives.
+5. **Deferred Scheme Exploration Modules:** In Scheme Exploration, the Civic Services and Grievances tabs remain informational placeholders pending dedicated dataset integration.

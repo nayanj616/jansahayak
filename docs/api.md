@@ -105,6 +105,56 @@ Retrieves complaints with joined ward details, images, assignments, and lifecycl
   - `category` (string, optional): Filter by sanitation category (e.g. `overflowing_bin`, `garbage_dump`).
   - `reporter_id` (string, optional, Officer only): Filter by reporter UUID.
   - `with_signed_urls` (boolean, optional, default `false` for officer): When true, generates time-limited signed URLs for all complaints in batch.
+- **Success Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "count": 1,
+    "complaints": [
+      {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "complaint_code": "GWL-2026-0001",
+        "reporter_id": "00000000-0000-0000-0000-000000000001",
+        "ward_id": "GWL-W-024",
+        "category": "garbage_dump",
+        "priority": "normal",
+        "status": "submitted",
+        "description": "Overflowing bin on street corner",
+        "location_desc": "Near Post Office, Sarafa Bazaar",
+        "latitude": 26.2183,
+        "longitude": 78.1828,
+        "location_accuracy_m": 12.5,
+        "location_source": "gps",
+        "created_at": "2026-10-31T10:00:00.000Z",
+        "ward": {
+          "ward_id": "GWL-W-024",
+          "ward_no": 24,
+          "ward_name": "Maharaj Bada / Lashkar",
+          "sanitation_zone": "Zone 4 - Lashkar Central"
+        },
+        "images": [
+          {
+            "id": "i1111111-1111-1111-1111-111111111111",
+            "image_type": "original",
+            "bucket_id": "complaint-originals",
+            "storage_path": "c111.../173038..._photo.jpg",
+            "signed_url": "https://...supabase.co/storage/v1/object/sign/complaint-originals/..."
+          }
+        ],
+        "history": [
+          {
+            "id": "h1111111-1111-1111-1111-111111111111",
+            "action": "submitted",
+            "actor_role": "citizen",
+            "new_status": "submitted",
+            "remarks": "Initial citizen complaint filed",
+            "created_at": "2026-10-31T10:00:00.000Z"
+          }
+        ]
+      }
+    ]
+  }
+  ```
 
 ---
 
@@ -187,56 +237,114 @@ Executes Municipal Officer review decisions on complaints in `under_review` stat
     "notificationSent": true
   }
   ```
-- **Success Response (`200 OK`):**
+---
+
+#### `POST /api/complaints/[id]/verify`
+Triggers on-demand multimodal AI cleanliness verification on citizen before photos and worker after photos using Google Gemini Vision (`gemini-3.8-flash`).
+
+- **Authorization:** Requires `officer` role (`requireApiRole('officer')`).
+- **Path Parameters:**
+  - `id` (`UUID`): Complaint UUID to verify.
+- **Request Format:** `application/json` (optional request body)
+- **Request Fields:**
+  | Field | Type | Required | Default | Description |
+  | :--- | :--- | :--- | :--- | :--- |
+  | `force_recheck` | `boolean` | No | `false` | When `false`, returns cached verification findings if an analysis already exists for the identical image pair. When `true`, initiates a fresh Gemini Vision analysis and appends a new record to `ai_verifications`. |
+- **Preconditions & Validation:**
+  - Caller must possess an active `officer` session cookie (returns `401 Unauthorized` or `403 Forbidden`).
+  - `id` must be a valid UUID format (`400 Bad Request`).
+  - Complaint must exist (`404 Not Found`).
+  - Complaint status must be `under_review` (`400 Bad Request`). Verification is rejected for any other status.
+  - Complaint must have both a citizen initial photo (`image_type: 'before'` or `'original'`) and a worker evidence photo (`image_type: 'after'`) (`400 Bad Request`).
+  - Both photos must belong to the requested complaint (`400 Bad Request`).
+  - Both photos must have supported MIME types (`image/jpeg`, `image/png`, `image/webp`) and must not exceed 8 MB (`400 Bad Request`).
+- **Execution & Idempotency Flow:**
+  1. Inspects `ai_verifications` for the latest record matching `(complaint_id, before_image_id, after_image_id)`.
+  2. If an existing verification is in `processing_status: 'pending'`, returns `409 Conflict`.
+  3. If an existing verification is in `processing_status: 'completed'` and `force_recheck` is `false`, returns cached result immediately (`200 OK`, `cached: true`).
+  4. Otherwise, inserts a new pending row into `ai_verifications` (`processing_status: 'pending'`, `model_name: 'gemini-3.8-flash'`, `model_version: 'v1.0.0-20261101'`).
+  5. Downloads binary image buffers server-side from private Supabase Storage buckets (`complaint-originals`, `cleanup-evidence`).
+  6. Sends inline image buffers to Google Gemini Vision over HTTPS with structured observational schema (`VisionVerificationMetrics`).
+  7. On success, updates record to `processing_status: 'completed'`, stores structured findings in `metrics`, records `waste_reduction_percentage`, and returns `200 OK` (`cached: false`).
+  8. On storage retrieval failure or upstream Gemini failure, updates record to `processing_status: 'failed'` with sanitized error message in `processing_error` and returns `502 Bad Gateway`.
+- **Advisory Contract & Governance:**
+  AI findings are purely observational and advisory. Verification execution **never** updates `complaints.status` or `assignments.status`. The complaint remains in `under_review` until the municipal officer makes an authoritative review decision via `POST /api/complaints/review`.
+- **Success Response (`200 OK` — Fresh Analysis):**
   ```json
   {
     "success": true,
-    "count": 1,
-    "complaints": [
-      {
-        "id": "c1111111-1111-1111-1111-111111111111",
-        "complaint_code": "GWL-2026-0001",
-        "reporter_id": "00000000-0000-0000-0000-000000000001",
-        "ward_id": "GWL-W-024",
-        "category": "garbage_dump",
-        "priority": "normal",
-        "status": "submitted",
-        "description": "Overflowing bin on street corner",
-        "location_desc": "Near Post Office, Sarafa Bazaar",
-        "latitude": 26.2183,
-        "longitude": 78.1828,
-        "location_accuracy_m": 12.5,
-        "location_source": "gps",
-        "created_at": "2026-10-31T10:00:00.000Z",
-        "ward": {
-          "ward_id": "GWL-W-024",
-          "ward_no": 24,
-          "ward_name": "Maharaj Bada / Lashkar",
-          "sanitation_zone": "Zone 4 - Lashkar Central"
+    "verification": {
+      "id": "v1111111-1111-1111-1111-111111111111",
+      "complaint_id": "c1111111-1111-1111-1111-111111111111",
+      "before_image_id": "i1111111-1111-1111-1111-111111111111",
+      "after_image_id": "i2222222-2222-2222-2222-222222222222",
+      "processing_status": "completed",
+      "model_name": "gemini-3.8-flash",
+      "model_version": "v1.0.0-20261101",
+      "metrics": {
+        "beforeObservations": {
+          "wasteIdentified": ["municipal solid waste", "plastic debris"],
+          "approximateSpread": "heaped along roadside curb",
+          "obstructionsOrHazards": []
         },
-        "images": [
-          {
-            "id": "i1111111-1111-1111-1111-111111111111",
-            "image_type": "original",
-            "bucket_id": "complaint-originals",
-            "storage_path": "c111.../173038..._photo.jpg",
-            "signed_url": "https://...supabase.co/storage/v1/object/sign/complaint-originals/..."
-          }
-        ],
-        "history": [
-          {
-            "id": "h1111111-1111-1111-1111-111111111111",
-            "action": "submitted",
-            "actor_role": "citizen",
-            "new_status": "submitted",
-            "remarks": "Initial citizen complaint filed",
-            "created_at": "2026-10-31T10:00:00.000Z"
-          }
-        ]
-      }
-    ]
+        "afterObservations": {
+          "visibleSurfaces": ["asphalt road", "stone curb"],
+          "remainingDebris": [],
+          "cleanlinessApparent": true
+        },
+        "comparativeFindings": {
+          "primaryWasteRemoved": true,
+          "siteConsistent": true,
+          "changesObserved": ["waste mound removed", "surface cleared"]
+        },
+        "comparisonLimitations": {
+          "angleMismatched": false,
+          "lightingMismatched": false,
+          "occlusionPresent": false,
+          "limitationNotes": []
+        },
+        "evaluation": {
+          "confidenceLevel": "high",
+          "isComparisonReliable": true,
+          "wasteReductionEstimate": 95,
+          "estimateRationale": "Visual evidence shows near-complete clearance of previously identified waste."
+        },
+        "officerSummary": "Visual evidence indicates substantial waste removal from the reported location.",
+        "disclaimer": "This analysis is an advisory visual observation produced by automated AI and does not constitute an administrative decision."
+      },
+      "waste_reduction_percentage": 95,
+      "processing_error": null,
+      "processed_at": "2026-11-01T15:30:00.000Z",
+      "human_review_status": "pending",
+      "reviewed_by": null,
+      "review_remarks": null,
+      "reviewed_at": null,
+      "created_at": "2026-11-01T15:30:00.000Z",
+      "updated_at": "2026-11-01T15:30:03.000Z"
+    },
+    "cached": false,
+    "message": "Visual verification completed successfully."
   }
   ```
+- **Cached Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "verification": { ... },
+    "cached": true,
+    "message": "Returned existing cached verification findings for this image pair."
+  }
+  ```
+- **Error Responses:**
+  - `400 Bad Request`: Invalid UUID format, complaint not in `under_review`, missing before/after photo, unsupported MIME type, or file size exceeding 8 MB.
+  - `401 Unauthorized`: Missing demo session cookie.
+  - `403 Forbidden`: Non-officer role attempting verification.
+  - `404 Not Found`: Complaint UUID does not exist.
+  - `409 Conflict`: Verification currently in progress for this image pair (`{ "error": "Verification in progress", "pending": true }`).
+  - `502 Bad Gateway`: Storage retrieval failure or Gemini Vision API failure (`{ "error": "Vision verification failed", "message": "...", "verification": { "processing_status": "failed", ... } }`).
+  - `500 Internal Server Error`: Unexpected unhandled error.
+
+---
 
 #### `POST /api/complaints`
 Submits a new citizen sanitation grievance with original photograph.
@@ -420,3 +528,52 @@ Retrieves all active field sanitation workers available for task allocation.
     ]
   }
   ```
+
+---
+
+### 2.6. `/api/assistant`
+
+Handles citizen conversational queries regarding central and Madhya Pradesh government welfare schemes using server-side deterministic retrieval and source-grounded Google Gemini responses (`gemini-3.8-flash`).
+
+#### `POST /api/assistant`
+Submits a citizen inquiry to the Civic Assistant RAG engine.
+
+- **Authorization:** Public endpoint (protected by in-memory rate limiting).
+- **Request Format:** `application/json`
+- **Fields:**
+  | Field | Type | Required | Constraints |
+  | :--- | :--- | :--- | :--- |
+  | `question` | `string` | **Yes** | 2 to 500 characters (trimmed) |
+  | `context` | `string` | No | Max 1000 characters |
+- **Rate Limiting & Proxy Trust:**
+  - Sliding-window limit of 10 requests per minute per IP.
+  - Returns `429 Too Many Requests` when limit is exceeded, including `Retry-After`, `X-RateLimit-Limit`, and `X-RateLimit-Remaining` headers.
+  - Forwarded headers (`x-forwarded-for`, `x-real-ip`) are trusted only when `TRUSTED_PROXY='true'` is set in the deployment environment. In untrusted environments, requests fall back to a conservative shared bucket (`'untrusted-fallback'`) to prevent header spoofing attacks.
+- **Service Configuration Check:**
+  - If `GEMINI_CHATBOT_API_KEY` is unset or placeholder, returns `503 Service Unavailable` (`{ "error": "Civic Assistant is currently unconfigured...", "isConfigured": false }`).
+- **Success Response (`200 OK`):**
+  ```json
+  {
+    "success": true,
+    "data": {
+      "answer": "Mukhyamantri Ladli Behna Yojana provides financial assistance of ₹1,250 per month to eligible women in Madhya Pradesh...",
+      "language": "en",
+      "retrievedSchemes": ["ladli_behna"],
+      "evidenceSufficiency": "sufficient",
+      "sources": [
+        {
+          "sourceId": "mp-ladli-behna",
+          "title": "Mukhyamantri Ladli Behna Yojana Guidelines",
+          "issuingAuthority": "Women and Child Development Department, Government of Madhya Pradesh",
+          "url": "https://cmladlibehna.mp.gov.in"
+        }
+      ],
+      "disclaimer": "This information is derived from official government scheme guidelines and is provided for civic guidance only."
+    }
+  }
+  ```
+- **Error Responses:**
+  - `400 Bad Request`: Question shorter than 2 characters, longer than 500 characters, or invalid JSON payload.
+  - `429 Too Many Requests`: Exceeded 10 requests per minute (`{ "error": "Rate limit exceeded...", "retryAfterSeconds": 45 }`).
+  - `503 Service Unavailable`: Chatbot API key unconfigured.
+  - `500 Internal Server Error`: Upstream processing or provider error (internal credentials sanitized).
