@@ -111,7 +111,8 @@ jansahayak/
 │   ├── ui/                              # shadcn/ui primitives (button, card, badge, input)
 │   ├── layout/                          # Headers, footers, dashboard sidebar & shell
 │   ├── shared/                          # Gwalior fort artwork, role badge, ward map
-│   └── dashboards/                      # Citizen, worker, officer views & charts
+│   ├── dashboards/                      # Citizen, worker, officer views & charts
+│   └── scheme-exploration/              # Scheme Finder, Detail Modal, Support Shell
 ├── data/
 │   └── schemes/                         # 50 researched schemes runtime dataset (7 JSONs)
 ├── docs/                                # Project documentation suite
@@ -227,7 +228,7 @@ To run the live database workflows locally:
    - `ai-annotated`
    - `verification-comparisons`
    *(All buckets must be set to **Private**; public read access must be disabled).*
-4. **Provisional Ward Data:** Imported via `python scripts/import_gwalior_wards.py --execute` using the dataset in `research/wards/`.
+4. **Provisional Ward Data:** Imported via `python scripts/import_gwalior_wards.py --execute` using the master dataset in `research/wards/`.
 
 ---
 
