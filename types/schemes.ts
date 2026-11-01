@@ -214,3 +214,77 @@ export interface UserEligibilityProfile {
   socialCategory?: 'SC' | 'ST' | 'OBC' | 'General' | 'EWS' | null;
 }
 
+// ============================================================================
+// RAG RETRIEVAL & CIVIC ASSISTANT INTERFACES
+// ============================================================================
+
+export type RagChunkTopic =
+  | 'benefits'
+  | 'eligibility'
+  | 'application'
+  | 'overview'
+  | 'documents'
+  | 'selection'
+  | 'status'
+  | 'conditions'
+  | 'deadlines';
+
+export interface RagChunk {
+  chunk_id: string;
+  scheme_id: string;
+  topic: RagChunkTopic;
+  language: 'en';
+  content_origin: string;
+  text: string;
+  evidence_refs: EvidenceRef[];
+  source_ids: string[];
+  search_terms: string[];
+}
+
+export interface RagChunkDataset {
+  generated_date: string;
+  chunk_count: number;
+  chunks: RagChunk[];
+}
+
+export interface RetrievedChunk {
+  chunkId: string;
+  schemeId: string;
+  schemeOfficialName: string;
+  schemeShortName: string;
+  topic: RagChunkTopic;
+  text: string;
+  sourceIds: string[];
+  evidenceRefs: EvidenceRef[];
+}
+
+export interface CivicSourceMetadata {
+  sourceId: string;
+  title: string;
+  issuingAuthority: string;
+  url: string;
+  sourceType: string;
+  checkedDate?: string;
+  scopeNote?: string | null;
+  locators: string[];
+  evidenceSummaries: string[];
+}
+
+export type CivicSufficiencyStatus = 'sufficient' | 'partial' | 'insufficient';
+
+export interface CivicRetrievalResult {
+  query: string;
+  normalizedQuery: string;
+  detectedTopics: RagChunkTopic[];
+  matchedSchemeIds: string[];
+  chunks: RetrievedChunk[];
+  sources: CivicSourceMetadata[];
+  isSufficient: boolean;
+  sufficiencyStatus: CivicSufficiencyStatus;
+  supportedTopics?: RagChunkTopic[];
+  unsupportedTopics?: RagChunkTopic[];
+  unestablishedFields?: string[];
+  uncertaintyReason?: string;
+}
+
+

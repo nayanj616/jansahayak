@@ -220,19 +220,43 @@ test('Gemini Architecture: Legacy getGeminiClient maps directly to getChatbotCli
 // 6. MODULE BOUNDARY ENFORCEMENT (PLACEHOLDER PROTECTION)
 // ============================================================================
 
-test('Gemini Architecture: answerCivicQuestion boundary rejects live execution in foundation phase', async () => {
+test('Gemini Architecture: answerCivicQuestion rejects unconfigured chatbot key without falling back to vision key', async () => {
   restoreEnv();
-  process.env.GEMINI_CHATBOT_API_KEY = 'valid-test-chatbot-key';
+  delete process.env.GEMINI_CHATBOT_API_KEY;
+  process.env.GEMINI_VISION_API_KEY = 'valid-test-vision-key';
 
   await assert.rejects(
     async () => {
-      await answerCivicQuestion('How to apply for Ladli Bahna?');
+      await answerCivicQuestion('How to apply for Ladli Behna?');
     },
     (err: Error) => {
-      assert.ok(err.message.includes('scheduled for Phase 4B.1 implementation'));
+      assert.ok(err.message.includes('GEMINI_CHATBOT_API_KEY is not configured'));
+      assert.ok(!err.message.includes('GEMINI_VISION_API_KEY'));
       return true;
     }
   );
+  restoreEnv();
+});
+
+test('Gemini Architecture: answerCivicQuestion executes source-grounded answering with mock client', async () => {
+  restoreEnv();
+  const mockClient = {
+    models: {
+      generateContent: async () => ({
+        text: 'To apply for Ladli Behna, submit the prescribed form at the designated local camp or gram panchayat.',
+      }),
+    },
+  } as unknown as Parameters<typeof answerCivicQuestion>[2] extends { client?: infer C } ? C : never;
+
+  const result = await answerCivicQuestion('How to apply for Ladli Behna?', undefined, {
+    client: mockClient,
+  });
+
+  assert.ok(result.answer.includes('Ladli Behna'));
+  assert.ok(result.relevantSchemes.includes('mp_ladli_behna'));
+  assert.ok(result.sources.length > 0);
+  assert.ok(result.sourceReferences && result.sourceReferences.length > 0);
+  assert.strictEqual(typeof result.disclaimer, 'string');
   restoreEnv();
 });
 

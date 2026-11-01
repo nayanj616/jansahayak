@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 import { SchemeFinder } from './scheme-finder';
+import { CivicAssistant } from './civic-assistant';
 
 export type SchemeTabId = 'finder' | 'assistant' | 'grievances' | 'services' | 'verification';
 
@@ -188,78 +189,7 @@ export function SchemeSupportShell() {
             aria-labelledby="tab-assistant"
             className="space-y-6 animate-in fade-in-50 duration-200 max-w-full"
           >
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 lg:p-8 shadow-xs space-y-5 sm:space-y-6 max-w-full overflow-hidden">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                    <Badge variant="purple" className="text-xs shrink-0">
-                      {t('schemeExploration.placeholders.assistantBadge')}
-                    </Badge>
-                    <span className="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200 shrink-0">
-                      Dual-Key Gemini Foundation Ready
-                    </span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 break-words">
-                    {t('schemeExploration.placeholders.assistantTitle')}
-                  </h3>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-2xl break-words leading-relaxed">
-                    {t('schemeExploration.placeholders.assistantDescription')}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 sm:px-3 py-1 text-xs font-semibold text-amber-800 shrink-0">
-                    <Clock className="h-3.5 w-3.5 shrink-0" />
-                    Phase 6 Target
-                  </span>
-                </div>
-              </div>
-
-              {/* STRICT DEMARCATION & NO-SIMULATION NOTICE */}
-              <div className="rounded-xl border border-amber-200 bg-amber-50/80 p-3.5 sm:p-5 text-amber-950 space-y-2">
-                <div className="flex items-center gap-2 font-bold text-xs sm:text-sm text-amber-900">
-                  <AlertCircle className="h-4 w-4 text-amber-700 shrink-0" />
-                  <span className="break-words">
-                    {language === 'hi'
-                      ? 'परियोजना शुचिता एवं एआई सीमा सूचना'
-                      : 'Project Integrity & AI Boundary Notice'}
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-amber-900 leading-relaxed break-words">
-                  {t('schemeExploration.placeholders.assistantNotice')}
-                </p>
-                <p className="text-xs text-amber-800 font-medium pt-1 break-words">
-                  &bull; {t('schemeExploration.placeholders.assistantNoSimulationNotice')}
-                </p>
-              </div>
-
-              {/* Planned Capabilities */}
-              <div className="space-y-3 pt-1 sm:pt-2">
-                <h4 className="text-sm font-bold text-slate-900 break-words">
-                  {t('schemeExploration.placeholders.assistantPlannedCapabilitiesTitle')}
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="rounded-xl border border-slate-200 p-3.5 sm:p-4 bg-slate-50/70 space-y-1 min-w-0">
-                    <span className="font-semibold text-xs text-slate-900 block break-words">1. Bilingual Understanding</span>
-                    <p className="text-xs text-slate-600 break-words leading-relaxed">
-                      {t('schemeExploration.placeholders.assistantCap1')}
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200 p-3.5 sm:p-4 bg-slate-50/70 space-y-1 min-w-0">
-                    <span className="font-semibold text-xs text-slate-900 block break-words">2. Fact Grounding</span>
-                    <p className="text-xs text-slate-600 break-words leading-relaxed">
-                      {t('schemeExploration.placeholders.assistantCap2')}
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-slate-200 p-3.5 sm:p-4 bg-slate-50/70 space-y-1 min-w-0">
-                    <span className="font-semibold text-xs text-slate-900 block break-words">3. Zero-Hallucination Fallback</span>
-                    <p className="text-xs text-slate-600 break-words leading-relaxed">
-                      {t('schemeExploration.placeholders.assistantCap3')}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <CivicAssistant />
           </div>
         )}
 

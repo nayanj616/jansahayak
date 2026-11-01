@@ -65,6 +65,29 @@ test('i18n: All placeholder section content keys exist in both English and Hindi
   }
 });
 
+test('i18n: All Civic Assistant content keys exist with parity in both English and Hindi', () => {
+  const enKeys = Object.keys(enDictionary.schemeExploration.assistant);
+  const hiKeys = Object.keys(hiDictionary.schemeExploration.assistant);
+
+  assert.strictEqual(
+    hiKeys.length,
+    enKeys.length,
+    `Assistant keys mismatch: English has ${enKeys.length}, Hindi has ${hiKeys.length}`
+  );
+
+  for (const key of enKeys) {
+    assert.ok(
+      key in hiDictionary.schemeExploration.assistant,
+      `Hindi assistant missing key: ${key}`
+    );
+    const hiVal =
+      hiDictionary.schemeExploration.assistant[
+        key as keyof typeof hiDictionary.schemeExploration.assistant
+      ];
+    assert.ok(hiVal !== undefined && hiVal !== null, `Hindi assistant key '${key}' cannot be null`);
+  }
+});
+
 // ============================================================================
 // 2. HINDI FALLBACK DECISION BEHAVIOR TESTS
 // ============================================================================

@@ -150,6 +150,36 @@ export interface TranslationDictionary {
         explanatoryContentNotice: string;
       };
     };
+    assistant: {
+      title: string;
+      badge: string;
+      ragSubtitle: string;
+      description: string;
+      inputPlaceholder: string;
+      askButton: string;
+      askingButton: string;
+      clearButton: string;
+      suggestedQuestionsTitle: string;
+      suggestedQuestions: string[];
+      emptyTitle: string;
+      emptyDescription: string;
+      answerTitle: string;
+      relevantSchemesTitle: string;
+      sourcesTitle: string;
+      issuingAuthorityLabel: string;
+      locatorLabel: string;
+      officialLinkText: string;
+      uncertaintyTitle: string;
+      uncertaintyDefaultNotice: string;
+      partialEvidenceTitle: string;
+      partialEvidenceNotice: string;
+      noEvidenceTitle: string;
+      noEvidenceNotice: string;
+      academicDemarcation: string;
+      unconfiguredNotice: string;
+      errorNotice: string;
+      charCount: string;
+    };
     placeholders: {
       finderTitle: string;
       finderDescription: string;

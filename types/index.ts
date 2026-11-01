@@ -64,13 +64,29 @@ export interface CleanlinessAnalysisResult {
   errorMessage?: string;
 }
 
+export interface CivicSourceReference {
+  sourceId: string;
+  title: string;
+  issuingAuthority: string;
+  url?: string;
+  locator?: string;
+  sourceType?: string;
+  evidenceSummary?: string;
+}
+
 export interface CivicAnswerResult {
   answer: string;
   sources: string[];
+  sourceReferences?: CivicSourceReference[];
   relevantSchemes: string[];
   departmentContact?: string;
   disclaimer: string;
   modelUsed: string;
+  isUncertain?: boolean;
+  sufficiencyStatus?: 'sufficient' | 'partial' | 'insufficient';
+  supportedTopics?: string[];
+  unsupportedTopics?: string[];
+  unestablishedFields?: string[];
 }
 
 // Scheme Domain Types

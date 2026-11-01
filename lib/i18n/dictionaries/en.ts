@@ -153,6 +153,51 @@ export const enDictionary: TranslationDictionary = {
           'Citizen-facing summaries are explanatory and compiled from researched government records, not formal government proclamations.',
       },
     },
+    assistant: {
+      title: 'Civic Assistant (RAG)',
+      badge: 'Academic Demo Prototype',
+      ragSubtitle: 'Source-Grounded Gemini RAG',
+      description:
+        'Ask questions about 50 researched Madhya Pradesh & Central welfare schemes. Answers are formulated strictly using retrieved official source evidence.',
+      inputPlaceholder:
+        'Ask in English, Hindi, or Romanized Hindi (e.g., How to apply for Ladli Behna? KCC loan rules...)',
+      askButton: 'Ask Question',
+      askingButton: 'Retrieving & Generating...',
+      clearButton: 'Clear',
+      suggestedQuestionsTitle: 'Sample Questions to Try',
+      suggestedQuestions: [
+        'How to apply for Ladli Behna scheme?',
+        'KCC ka loan kitna hota hai?',
+        'मनरेगा में काम कैसे माँगूँ?',
+        'PM Surya Ghar ki subsidy kitni milegi?',
+        'What documents are needed for Pratibha Kiran?',
+      ],
+      emptyTitle: 'Ask Any Question About Welfare Schemes',
+      emptyDescription:
+        'Inquire about benefits, eligibility, required documents, application procedures, and deadlines for 50 researched central and Madhya Pradesh schemes.',
+      answerTitle: 'Grounded Answer',
+      relevantSchemesTitle: 'Matched Researched Schemes',
+      sourcesTitle: 'Retrieved Official Source Evidence',
+      issuingAuthorityLabel: 'Issuing Authority',
+      locatorLabel: 'Source Locator',
+      officialLinkText: 'Visit Official Portal',
+      uncertaintyTitle: 'Evidence Limitation & Uncertainty Notice',
+      uncertaintyDefaultNotice:
+        'The verified research dataset does not establish complete details for this specific inquiry. Please verify directly with official department portals or the MP CM Helpline (181).',
+      partialEvidenceTitle: 'Partial Evidence / Unanswered Topics Notice',
+      partialEvidenceNotice:
+        'Information for some requested topics is unestablished in the verified dataset. Only supported facts are shown.',
+      noEvidenceTitle: 'No Matching Scheme Records Found',
+      noEvidenceNotice:
+        'No matching government scheme records were retrieved from the verified 50-scheme dataset. Please check your spelling or search by scheme name.',
+      academicDemarcation:
+        'Academic Demonstration: Answers are synthesized from retrieved scheme records without external web access or hallucination. JanSahayak does not accept or approve applications.',
+      unconfiguredNotice:
+        'Civic Assistant service is currently unconfigured. Set GEMINI_CHATBOT_API_KEY in the environment to activate conversational completions.',
+      errorNotice:
+        'An unexpected error occurred while processing your question. Please try again shortly.',
+      charCount: '{count}/500 characters',
+    },
     placeholders: {
       finderTitle: 'Scheme Finder & Catalog',
       finderDescription:
