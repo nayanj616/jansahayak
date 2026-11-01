@@ -1,0 +1,142 @@
+{
+  "as_of": "2026-10-31",
+  "policy": "Candidates lacking sufficient current official identity, eligibility, benefit, document and application evidence are excluded from the final import set. Unknowns on included records remain null; excluded candidates are not silently treated as eligible.",
+  "excluded_or_unresolved_candidates": [
+    {
+      "candidate_id": "mp_bal_ashirwad",
+      "name": "Mukhyamantri Bal Ashirwad Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_jal_jeevan",
+      "name": "Jal Jeevan Mission (Madhya Pradesh implementation)",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_kaushal_vikas",
+      "name": "Madhya Pradesh Kaushal Vikas",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_vidyarthi_kalyan",
+      "name": "Vidyarthi Kalyan Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_sambal",
+      "name": "Mukhyamantri Jan Kalyan (Sambal) Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_bhavantar",
+      "name": "Bhavantar Bhugtan Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_labour_scholarship",
+      "name": "Educational Scholarship Scheme (MP Labour Welfare Board)",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_labour_marriage",
+      "name": "Marriage Assistance Scheme (MP Labour Welfare Board)",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_postmatric",
+      "name": "MP Post-Matric Scholarship",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_grih_jyoti",
+      "name": "Mukhyamantri Grih Jyoti Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mp_tirth_darshan",
+      "name": "Mukhyamantri Tirth Darshan Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "pmmsy",
+      "name": "Pradhan Mantri Matsya Sampada Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "mudra",
+      "name": "Pradhan Mantri Mudra Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "stand_up_india",
+      "name": "Stand-Up India",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "day_nulm",
+      "name": "Deendayal Antyodaya Yojana - National Urban Livelihoods Mission",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "day_nrlm",
+      "name": "Deendayal Antyodaya Yojana - National Rural Livelihoods Mission",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "pmfme",
+      "name": "PM Formalisation of Micro Food Processing Enterprises Scheme",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "jal_jeevan_mission",
+      "name": "Jal Jeevan Mission",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "sbm_g",
+      "name": "Swachh Bharat Mission-Grameen",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "pmgsy",
+      "name": "Pradhan Mantri Gram Sadak Yojana",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "soil_health",
+      "name": "Soil Health Card Scheme",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "pm_poshan",
+      "name": "PM POSHAN",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "samagra_shiksha",
+      "name": "Samagra Shiksha",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "sukanya_samriddhi",
+      "name": "Sukanya Samriddhi Account Scheme",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "abdm",
+      "name": "Ayushman Bharat Digital Mission",
+      "reason": "Not included in final dataset because the reviewed evidence did not establish the required current eligibility, benefit, documents and application route to the inclusion threshold."
+    },
+    {
+      "candidate_id": "imported_kb_1978_records",
+      "name": "Friend’s knowledge base source records",
+      "reason": "Treated as discovery input only. Dataset-wide imported eligibility flags are derived and marked imported_unverified; claims not independently validated against current official sources were not promoted."
+    },
+    {
+      "candidate_id": "minority_postmatric_mp",
+      "name": "MP post-matric scholarship for minority students",
+      "reason": "Current continuation/application status and current award rules unresolved; older source page may describe a superseded cycle."
+    }
+  ],
+  "review_note": "Existing candidate exclusions were preserved and duplicate candidate IDs removed. Six additional, sufficiently researched candidates were promoted into the final dataset; Mukhyamantri Jan Kalyan (Sambal), Bhavantar Bhugtan and PM Matsya Sampada remain unresolved/excluded pending current operative rules or continuation evidence."
+}

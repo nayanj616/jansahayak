@@ -1,0 +1,757 @@
+[
+  {
+    "source_id": "apy_dfs",
+    "title": "Atal Pension Yojana",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "url": "https://financialservices.gov.in/atal-pension-yojana",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, pension and enrollment Page opened directly and inspected on 2026-11-01; locators refer to the live FAQ/overview page headings and lines recorded in evidence_by_field."
+  },
+  {
+    "source_id": "cpgrams_official",
+    "title": "CPGRAMS",
+    "issuing_authority": "Department of Administrative Reforms and Public Grievances, Government of India",
+    "url": "https://pgportal.gov.in/",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "Central public grievance portal."
+  },
+  {
+    "source_id": "csss_detail",
+    "title": "Central Sector Scheme of Scholarship for College and University Students",
+    "issuing_authority": "Department of Higher Education / myScheme, Government of India",
+    "url": "https://www.myscheme.gov.in/schemes/csss-cus",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, benefit, renewal and application overview; myScheme summary, not an implementing-department guideline Direct page retrieval attempted on 2026-11-01 but only the shared myScheme shell was returned; scheme-specific content was not inspected in this pass and no new evidence was based on it."
+  },
+  {
+    "source_id": "csss_moe_faq_2025_26",
+    "title": "PM-USP CSSS FAQ 2025-26",
+    "url": "https://www.education.gov.in/sites/upload_files/mhrd/files/upload_document/FAQs_PM_USP2526.pdf",
+    "issuing_authority": "Department of Higher Education, Ministry of Education, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Primary source: 2025-26 eligibility, awards, documents, application and status.",
+    "published_or_updated_date": "2025-26 FAQ"
+  },
+  {
+    "source_id": "jan_dhan",
+    "title": "Pradhan Mantri Jan-Dhan Yojana",
+    "issuing_authority": "Department of Financial Services, Government of India",
+    "url": "https://pmjdy.gov.in/",
+    "source_type": "official_government",
+    "checked_date": null,
+    "scope_note": "Official scheme portal."
+  },
+  {
+    "source_id": "kcc_detail",
+    "title": "Kisan Credit Card scheme information",
+    "issuing_authority": "Department of Financial Services / myScheme, Government of India",
+    "url": "https://www.myscheme.gov.in/schemes/kcc",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-10-31",
+    "scope_note": "eligibility, benefit and application overview; myScheme summary, not an implementing-department guideline"
+  },
+  {
+    "source_id": "kcc_dfs_agriculture_credit",
+    "title": "Kisan Credit Card: Agriculture Credit",
+    "url": "https://financialservices.gov.in/agriculture-credit",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Primary source: KCC purpose, borrower categories and lender-based credit.",
+    "published_or_updated_date": "Page checked 2026-10-31"
+  },
+  {
+    "source_id": "mgnrega_mp_state",
+    "title": "MP MGNREGA scheme detail",
+    "issuing_authority": "Panchayat and Rural Development Department, Government of Madhya Pradesh",
+    "url": "https://www.cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=179&pointvalue=1&status=BySchemeFor",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "State department and application portal for MGNREGA. Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mgnrega_nic",
+    "title": "Mahatma Gandhi National Rural Employment Guarantee Scheme",
+    "issuing_authority": "Ministry of Rural Development, Government of India",
+    "url": "https://nrega.nic.in/index.html",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "programme identity and guarantee Access limitation: 2026-11-01: page redirects to nrega.dord.gov.in; redirected endpoint returned 401 to the research browser; source content not inspected in this pass."
+  },
+  {
+    "source_id": "mp_antyeshti_detail",
+    "title": "Antyeshti Sahayata Yojana",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=360",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "benefit, application and documents Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_cmhl_contact",
+    "title": "MP CM Helpline contact page",
+    "issuing_authority": "Government of Madhya Pradesh",
+    "url": "https://www.cmhelpline.mp.gov.in/ContactUs.aspx",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "Grievance contact channel."
+  },
+  {
+    "source_id": "mp_disability_grant",
+    "title": "Assistance Grant for Persons Over Six Years with Multiple or Intellectual Disabilities",
+    "url": "https://socialjustice.mp.gov.in/schemes/view/ZHhERTVzeUxLem1tSDVyNHp3UU4xQT09",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "Eligibility, benefit, documents and application process"
+  },
+  {
+    "source_id": "mp_disability_marriage",
+    "title": "Nishaktjan Vivah Protsahan Yojana",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=367&pointvalue=x&status=JanSeva",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "Eligibility, benefit, deadline and application procedure Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_disability_scholarship",
+    "title": "Divyang Scholarship",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=908",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "Eligibility, award rates, institution process and renewal Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_gaon_ki_beti_detail",
+    "title": "Gaon Ki Beti Scheme Detail",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=48&pointvalue=2&status=ByVibhag",
+    "issuing_authority": "Higher Education Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "State scheme identity, award rates, application, documents and route. Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline.",
+    "published_or_updated_date": "Dashboard updated 2022-11-02"
+  },
+  {
+    "source_id": "mp_higher_ed_scholarship_portal",
+    "title": "MP State Scholarship Portal",
+    "url": "https://hescholarship.mp.gov.in/",
+    "issuing_authority": "Higher Education Department, Government of Madhya Pradesh / NIC Bhopal",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Current portal and academic-year application notices.",
+    "published_or_updated_date": "2025-26 reopening notice dated Aug 2026; checked 2026-10-31"
+  },
+  {
+    "source_id": "mp_igndps_detail",
+    "title": "Indira Gandhi National Disability Pension Scheme (MP detail)",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=358&pointvalue=5&status=BySchemeFor",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh; Ministry of Rural Development, Government of India framework",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "criteria, amount, documents and state application Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_ignoaps_detail",
+    "title": "Indira Gandhi National Old Age Pension Scheme (MP detail)",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=356",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh; Ministry of Rural Development, Government of India framework",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "criteria, amount, documents and state application Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_ignwps_detail",
+    "title": "Indira Gandhi National Widow Pension Scheme (MP detail)",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=357",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh; Ministry of Rural Development, Government of India framework",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "criteria, amount, documents and state application Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_kalyani_detail",
+    "title": "Mukhyamantri Kalyani Sahayata Yojana scheme information",
+    "issuing_authority": "Madhya Pradesh Labour Welfare Board / myScheme, Government of India",
+    "url": "https://www.myscheme.gov.in/schemes/ksymplwb",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, benefit and application overview; myScheme summary, not an implementing-department guideline Direct page retrieval attempted on 2026-11-01 but only the shared myScheme shell was returned; scheme-specific content was not inspected in this pass and no new evidence was based on it."
+  },
+  {
+    "source_id": "mp_kalyani_eservice",
+    "title": "MP eService directory: Kalyani Sahayata",
+    "url": "https://www.services.mp.gov.in/eservice/eServices?srvs=22",
+    "issuing_authority": "Government of Madhya Pradesh",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Confirms Board scheme listed as a state eService; listing is not a detail guideline.",
+    "published_or_updated_date": "Service 2.35; checked 2026-10-31"
+  },
+  {
+    "source_id": "mp_kalyani_vivah_detail",
+    "title": "Mukhyamantri Kalyani Vivah Sahayata Yojana scheme detail",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "url": "https://www.cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=573&pointvalue=5&status=BySchemeBenifits",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "current criteria, one-year deadline, benefits, documents and process Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_kanya_abhibhavak_detail",
+    "title": "Mukhyamantri Kanya Abhibhavak Pension Yojana scheme detail",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=372",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, pension, application and documents Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_kanya_vivah_detail",
+    "title": "Mukhyamantri Kanya Vivah Yojana scheme detail",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=373&pointvalue=4&status=BySchemeFor",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, collective marriage, support, documents and process Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_kisan_kalyan_detail",
+    "title": "Mukhyamantri Kisan Kalyan Yojana scheme detail",
+    "issuing_authority": "Revenue Department, Government of Madhya Pradesh",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=606",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "PM-KISAN-linked criteria, benefits, exclusions and application Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_labour_education_scholarship",
+    "title": "Educational Scholarship Scheme (Madhya Pradesh Labour Welfare Board)",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=888",
+    "issuing_authority": "Labour Department / Madhya Pradesh Labour Welfare Board, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligible worker families, course-level awards, application mode and invitation period Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_ladli_behna",
+    "title": "Mukhyamantri Ladli Behna Yojana portal",
+    "issuing_authority": "Women and Child Development Department, Government of Madhya Pradesh",
+    "url": "https://cmladlibahna.mp.gov.in/",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "Official portal; selected details extracted."
+  },
+  {
+    "source_id": "mp_ladli_laxmi_detail",
+    "title": "Mukhyamantri Ladli Laxmi Yojana",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=246",
+    "issuing_authority": "Women and Child Development Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, benefit, documents and application Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_mptaasc",
+    "title": "MPTAASC beneficiary portal",
+    "url": "https://tribal.mp.gov.in/MPTAAS",
+    "issuing_authority": "Tribal Affairs and Scheduled Caste Welfare Department, Government of Madhya Pradesh",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Department profile registration, online modules and application status dashboard, not specific scheme rules.",
+    "published_or_updated_date": "Checked 2026-10-31"
+  },
+  {
+    "source_id": "mp_nfbs_detail",
+    "title": "National Family Assistance Scheme (MP implementation)",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=359",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh; Ministry of Rural Development, Government of India framework",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, benefit, application, documents and MP processing Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_nikah_detail",
+    "title": "Mukhyamantri Nikah Yojana scheme detail",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=706&pointvalue=2&status=ByVibhag",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, collective Nikah, support, documents and process Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_samagra_pension_detail",
+    "title": "Samagra Samajik Suraksha Pension Yojana scheme detail",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=355",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "category-specific criteria, pension, application and documents Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_student_welfare_detail",
+    "title": "Madhya Pradesh Student Welfare Scheme information",
+    "issuing_authority": "Tribal Affairs Department, Government of Madhya Pradesh / myScheme",
+    "url": "https://www.myscheme.gov.in/schemes/sws",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, benefit and application overview; myScheme summary, not an implementing-department guideline Direct page retrieval attempted on 2026-11-01 but only the shared myScheme shell was returned; scheme-specific content was not inspected in this pass and no new evidence was based on it."
+  },
+  {
+    "source_id": "mp_udyam_kranti_detail",
+    "title": "Mukhyamantri Udyam Kranti Yojana",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=915&pointvalue=0&status=BySchemeFor",
+    "issuing_authority": "Micro, Small and Medium Enterprises Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, interest subsidy, application and bank process Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "mp_unmarried_pension",
+    "title": "Mukhyamantri Avivahita Pension Yojana",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=572",
+    "issuing_authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, pension, documents, online/offline process and processing time Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "nha_pmjay_benefit",
+    "title": "PM-JAY beneficiary entitlement letter",
+    "url": "https://nha.gov.in/img/resources/Adhikar-Patra.pdf",
+    "issuing_authority": "National Health Authority, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "benefits, eligibility verification and empanelled hospitals"
+  },
+  {
+    "source_id": "nha_pmjay_categories",
+    "title": "PM-JAY beneficiary categories",
+    "url": "https://nha.gov.in/img/resources/1623-NHA-IEC-Guidelines-3-01-21.pdf",
+    "issuing_authority": "National Health Authority, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "SECC rural and urban beneficiary categories"
+  },
+  {
+    "source_id": "nha_senior_faq",
+    "title": "AB PM-JAY FAQ: Senior Citizens",
+    "url": "https://nha.gov.in/img/resources/English_FAQs_related_to_the_benefits_for_senior_citizens.pdf",
+    "issuing_authority": "National Health Authority, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "70+ eligibility irrespective of income, family cover, top-up and existing government scheme choice.",
+    "published_or_updated_date": "Checked 2026-10-31"
+  },
+  {
+    "source_id": "pm_kisan",
+    "title": "PM-KISAN official portal",
+    "issuing_authority": "Department of Agriculture and Farmers Welfare, Government of India",
+    "url": "https://pmkisan.gov.in/homenew.aspx",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official portal; central sector status and high-level beneficiary/benefit summary. Access limitation: 2026-11-01: official portal URL returned 502 during access attempt; source content not inspected in this pass."
+  },
+  {
+    "source_id": "pm_kisan_mandhan_detail",
+    "title": "PM-Kisan Maandhan official scheme page",
+    "issuing_authority": "Ministry of Agriculture and Farmers Welfare / myScheme, Government of India",
+    "url": "https://www.myscheme.gov.in/schemes/pmkmdy",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-10-31",
+    "scope_note": "scheme-specific official information; myScheme summary, not an implementing-department guideline"
+  },
+  {
+    "source_id": "pm_shram_yogi_detail",
+    "title": "PM Shram Yogi Maandhan official scheme information",
+    "issuing_authority": "Ministry of Labour and Employment, Government of India",
+    "url": "https://eshram.gov.in/Schemes",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "scheme-specific official information e-Shram Ministry scheme page opened and inspected directly on 2026-11-01; PM-SYM appears in a multi-scheme summary card. This is an official summary, not the operative pension rulebook."
+  },
+  {
+    "source_id": "pm_shram_yogi_maandhan",
+    "title": "Maandhan: PM Shram Yogi Maandhan",
+    "url": "https://maandhan.in/",
+    "issuing_authority": "Ministry of Labour and Employment, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Current portal: PM-SYM eligibility, pension, contribution design and matching contribution.",
+    "published_or_updated_date": "Portal last updated 2026-08-14"
+  },
+  {
+    "source_id": "pmay_u",
+    "title": "PMAY-U 2.0 FAQ",
+    "issuing_authority": "Ministry of Housing and Urban Affairs, Government of India",
+    "url": "https://pmaymis.gov.in/PMAYMIS2_2024/PmayFAQ.aspx",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official FAQ; overview and select eligibility. Page opened directly and inspected on 2026-11-01; locators refer to the live FAQ/overview page headings and lines recorded in evidence_by_field."
+  },
+  {
+    "source_id": "pmayg_2024_guidelines",
+    "title": "PMAY-G 2024–29 phase instructions",
+    "url": "https://pmayg.dord.gov.in/netiay/writereaddata/Circulars/Letter%20to%20all%20States%2014%20Aug%20%281%29.pdf",
+    "issuing_authority": "Ministry of Rural Development, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "continuation, beneficiary list and revised exclusion criteria"
+  },
+  {
+    "source_id": "pmegp_kvic",
+    "title": "Prime Minister’s Employment Generation Programme guidelines",
+    "issuing_authority": "Khadi and Village Industries Commission, Ministry of MSME, Government of India",
+    "url": "https://www.kviconline.gov.in/pmegpeportal/pmegpeportaltutorialdoc/PMEGP_Guidelines_Certified_2022_3.pdf",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "guidelines, eligibility and application Access limitation: 2026-11-01: official guideline PDF could not be retrieved by the research browser; source content not inspected in this pass."
+  },
+  {
+    "source_id": "pmfby",
+    "title": "PMFBY official FAQ",
+    "issuing_authority": "Department of Agriculture and Farmers Welfare, Government of India",
+    "url": "https://pmfby.gov.in/faq",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official FAQ and scheme summary. Access limitation: 2026-11-01: official FAQ URL timed out during access attempt; source content not inspected in this pass."
+  },
+  {
+    "source_id": "pmfby_mp_state",
+    "title": "MP scheme dashboard entry for PMFBY",
+    "issuing_authority": "Government of Madhya Pradesh, Department of Farmers Welfare and Agriculture Development",
+    "url": "https://www.cmhelpline.mp.gov.in/Schmegrid.aspx?pointvalue=1&status=BySchemeFor",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "State implementation department listing."
+  },
+  {
+    "source_id": "pmjdy_dfs",
+    "title": "Pradhan Mantri Jan-Dhan Yojana",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "url": "https://financialservices.gov.in/pradhan-mantri-jan-dhan-yojana-pmjdy",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "scope_note": "account benefits and access channels Page opened directly and inspected on 2026-11-01; locators refer to the live FAQ/overview page headings and lines recorded in evidence_by_field."
+  },
+  {
+    "source_id": "pmjjby_dfs",
+    "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "url": "https://financialservices.gov.in/pmjjby",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, coverage, premium and enrollment Page opened directly and inspected on 2026-11-01; locators refer to the live FAQ/overview page headings and lines recorded in evidence_by_field.",
+    "published_or_updated_date": "2026-01-05"
+  },
+  {
+    "source_id": "pmjjby_rules",
+    "title": "Revised PMJJBY rules",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "url": "https://jansuraksha.gov.in/Files/PMJJBY/ENGLISH/Rules.pdf",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "Eligibility, coverage period and enrollment rules."
+  },
+  {
+    "source_id": "pmksy_mp_micro_irrigation",
+    "title": "PMKSY Per Drop More Crop: Micro-Irrigation and Other Interventions (MP)",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=98",
+    "issuing_authority": "Department of Agriculture and Farmers Welfare, Government of India framework; Farmer Welfare and Agriculture Development Department, Government of Madhya Pradesh implementation",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, subsidy rates, online lottery/DBT process and MP portal Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "pmmvy_mp_state",
+    "title": "MP PMMVY scheme detail",
+    "issuing_authority": "Women and Child Development Department, Government of Madhya Pradesh",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=547&pointvalue=x&status=JanSeva",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "State implementation authority; centrally sponsored scope. Inspected directly in the 2026-11-01 remediation pass; this MP Scheme Dashboard / Scheme Detail is an official government summary, not the underlying order/guideline."
+  },
+  {
+    "source_id": "pmmvy_wcd",
+    "title": "Pradhan Mantri Matru Vandana Yojana",
+    "issuing_authority": "Ministry of Women and Child Development, Government of India",
+    "url": "https://www.wcd.gov.in/public/women/pradhan-mantri-matru-vandana-yojna",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "current eligibility, benefit, documents and application"
+  },
+  {
+    "source_id": "pmsby_faq",
+    "title": "PMSBY official FAQ",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "url": "https://www.jansuraksha.gov.in/Files/PMSBY/ENGLISH/FAQ.pdf",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Eligibility and benefit table in official FAQ. Access limitation: 2026-11-01: official FAQ PDF timed out during access attempt; source content not inspected in this pass."
+  },
+  {
+    "source_id": "pmsby_js",
+    "title": "Pradhan Mantri Suraksha Bima Yojana",
+    "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+    "url": "https://jansuraksha.gov.in/",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "official scheme information"
+  },
+  {
+    "source_id": "pmss_mha_page",
+    "title": "Prime Ministers Scholarship Scheme (PMSS) 2019-20",
+    "url": "https://www.mha.gov.in/scheme/prime-ministers-scholarship-scheme-pmss-2019-20",
+    "issuing_authority": "Ministry of Home Affairs, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "MHA page confirms scheme origin, State Police scope and annual quota.",
+    "published_or_updated_date": "MHA page checked 2026-10-31; page is titled 2019-20"
+  },
+  {
+    "source_id": "pmss_mha_state_police",
+    "title": "PMSS State Police revised guidelines",
+    "url": "https://www.mha.gov.in/sites/default/files/PMSSrevisedguidelines_23112020.pdf",
+    "issuing_authority": "Police Division-II, Ministry of Home Affairs, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Primary source for State Police scheme extension, rates and NSP verification route.",
+    "published_or_updated_date": "Guideline dated 2020; current academic year not confirmed"
+  },
+  {
+    "source_id": "pmss_police_detail",
+    "title": "PM Scholarship Scheme for wards of State/UT Police personnel",
+    "issuing_authority": "Ministry of Home Affairs / myScheme, Government of India",
+    "url": "https://www.myscheme.gov.in/schemes/pmsswsutpp",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "eligibility, benefit and application overview; myScheme summary, not an implementing-department guideline Direct page retrieval attempted on 2026-11-01 but only the shared myScheme shell was returned; scheme-specific content was not inspected in this pass and no new evidence was based on it."
+  },
+  {
+    "source_id": "pmuy",
+    "title": "PMUY About and FAQ",
+    "issuing_authority": "Ministry of Petroleum and Natural Gas, Government of India",
+    "url": "https://www.pmuy.gov.in/faq.html",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official FAQ supports target household and connection details; avoid amounts without checking current notices. PMUY FAQ page opened and inspected directly on 2026-11-01; locators identify actual FAQ questions and headings. Application links point to OMC application routes; general scheme information is not treated as the application portal."
+  },
+  {
+    "source_id": "pmuy_later_home",
+    "title": "PMUY 2.0 official portal home",
+    "issuing_authority": "Ministry of Petroleum and Natural Gas, Government of India",
+    "url": "https://pmuy.gov.in/index.aspx",
+    "source_type": "official_government",
+    "checked_date": "2026-10-31",
+    "scope_note": "Later official page displays a different connection assistance amount from FAQ."
+  },
+  {
+    "source_id": "rbi_kcc_master_circular_2017",
+    "title": "RBI Master Circular on Kisan Credit Card",
+    "url": "https://www.rbi.org.in/commonman/Upload/English/Notification/PDFs/04MCKCC03072017.pdf",
+    "issuing_authority": "Reserve Bank of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "scope_note": "Older primary KCC framework; para 13.3 states document checklist follows each bank internal rules. Master Circular PDF opened and inspected directly on 2026-11-01; relevant documentation note is in section 13.3 (PDF page 7). The circular is dated 2017 and does not establish current lending policy beyond its scope.",
+    "published_or_updated_date": "Master Circular 2017"
+  },
+  {
+    "source_id": "surya",
+    "title": "PM Surya Ghar",
+    "issuing_authority": "Ministry of New and Renewable Energy, Government of India",
+    "url": "https://pmsuryaghar.gov.in/",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official scheme portal. Access limitation: 2026-11-01: official portal URL returned 403 during access attempt; source content not inspected in this pass."
+  },
+  {
+    "source_id": "svanidhi_pib_faq_2026",
+    "title": "PM SVANidhi official FAQ",
+    "url": "https://www.pib.gov.in/FaqDetails.aspx?ModuleId=4&NoteId=158727&id=158727&lang=2&reg=48",
+    "issuing_authority": "Press Information Bureau, Ministry of Housing and Urban Affairs, Government of India",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-10-31",
+    "scope_note": "2025 restructuring, current loans, eligibility and application channel"
+  },
+  {
+    "source_id": "vishwakarma",
+    "title": "PM Vishwakarma scheme page",
+    "issuing_authority": "Ministry of MSME / myScheme, Government of India",
+    "url": "https://www.myscheme.gov.in/schemes/pmv",
+    "source_type": "official_government_summary",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official scheme page; overview/details.; myScheme summary, not an implementing-department guideline Direct page retrieval attempted on 2026-11-01 but only the shared myScheme shell was returned; scheme-specific content was not inspected in this pass and no new evidence was based on it."
+  },
+  {
+    "source_id": "vishwakarma_msme_booklet_2025",
+    "title": "MSME Scheme Booklet v2.0: PM Vishwakarma",
+    "url": "https://msme.gov.in/sites/default/files/assets/pdf/v2.0%20-2025-%20Scheme%20booklet%20Eng-14.02.2025.pdf",
+    "issuing_authority": "Ministry of Micro, Small and Medium Enterprises, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-10-31",
+    "scope_note": "Primary scheme booklet with benefit components and trade list.",
+    "published_or_updated_date": "Published 2025-02-14"
+  },
+  {
+    "source_id": "vishwakarma_msme_faq",
+    "title": "PM Vishwakarma Scheme FAQ",
+    "url": "https://ideas.msme.gov.in/Ministry-of-MSME/skills%2Cloan%2Ccredit_guarantee%2CPM-atmnirbhar-Economic-Package%2Celigibility_criteria%2Cguidelines_Schemes/query_questions_FAQs.htm",
+    "issuing_authority": "Ministry of Micro, Small and Medium Enterprises, Government of India",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "scope_note": "Primary FAQ: eligibility, trades, documents, verification, loan milestones and exclusions. Attempted direct page inspection on 2026-11-01; official endpoint returned 502. Search results exposed portions of the official FAQ, but the source page was not inspected; no new field-level evidence is based on the search excerpt.",
+    "published_or_updated_date": "Checked 2026-10-31"
+  },
+  {
+    "source_id": "mota_st_prepost",
+    "title": "Pre-Matric and Post-Matric Scholarships for ST Students",
+    "url": "https://tribal.nic.in/Scholarship.aspx",
+    "issuing_authority": "Ministry of Tribal Affairs, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official scheme features, benefit, eligibility and state implementation; portal page also reports 2025-26 funding activity. Attempted direct page inspection on 2026-11-01; the Ministry page returned 502. Exact guideline PDFs were inspected and registered separately."
+  },
+  {
+    "source_id": "mota_st_post_guidelines",
+    "title": "Post Matric Scholarship Scheme for ST Students – Guidelines",
+    "url": "https://tribal.nic.in/knowledgeHub.aspx",
+    "issuing_authority": "Ministry of Tribal Affairs, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official guidelines index. Direct PDF links can change; current scheme summary was checked on the official Scholarship page. Attempted direct inspection of the Knowledge Hub landing page on 2026-11-01; it timed out. Exact guideline PDFs were inspected and registered separately."
+  },
+  {
+    "source_id": "pm_vidyalaxmi_guidelines",
+    "title": "PM-Vidyalaxmi Scheme Guidelines",
+    "url": "https://www.education.gov.in/sites/upload_files/mhrd/files/document-reports/PM_Vidyalaxmi_Scheme_Guidelines.pdf",
+    "issuing_authority": "Department of Higher Education, Ministry of Education, Government of India",
+    "source_type": "official_government_guideline",
+    "checked_date": "2026-11-01",
+    "scope_note": "Guidelines dated 19 November 2024; loan product, quality HEI rules, interest subvention and application process. 2024 Ministry guidelines PDF opened and inspected directly on 2026-11-01; locators refer to the document sections and line headings captured in evidence. Annual portal windows can change."
+  },
+  {
+    "source_id": "mp_pratibha_kiran_cmhl",
+    "title": "Pratibha Kiran Scheme Dashboard",
+    "url": "https://cmhelpline.mp.gov.in/Schmedetail.aspx?Schemeid=50",
+    "issuing_authority": "Government of Madhya Pradesh, CM Helpline",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Scheme description, eligibility, amount, portal, application fee and documents. Page content last updated 2022-11-24. MP CM Helpline scheme detail opened and inspected directly on 2026-11-01. It is an official government summary last updated 24-11-2022, not a current operative order."
+  },
+  {
+    "source_id": "mp_pratibha_kiran_khargone",
+    "title": "Pratibha Kiran Scheme",
+    "url": "https://khargone.nic.in/en/scheme/pratibha-kiran-scheme/",
+    "issuing_authority": "District Administration Khargone, Government of Madhya Pradesh",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official district page, updated 2026-09-16; eligibility, ₹500 monthly/10 months and annual application route. Does not describe all special course rates. Khargone District official scheme page opened and inspected directly on 2026-11-01; page last updated 16-09-2026. It supports annual portal application guidance and the ₹500/month 10-month benefit but does not restate the CM Helpline engineering/medical differential."
+  },
+  {
+    "source_id": "mp_mmvy_cmhl",
+    "title": "Mukhyamantri Medhavi Vidyarthi Yojana – Scheme Detail",
+    "url": "https://cmhelpline.mp.gov.in/KnowYourEntitleDetail.aspx?Schemeid=878&pointvalue=0&status=BySchemeFor",
+    "issuing_authority": "Government of Madhya Pradesh, CM Helpline",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Scheme detail, criteria, course-specific fee support, application route, documents and update metadata; last scheme-detail update 2022-11-02. MP CM Helpline scheme detail opened and inspected directly on 2026-11-01. It is an official government summary last updated 02-11-2022; the linked 2025 corrigendum PDF was not accessible in this pass."
+  },
+  {
+    "source_id": "mp_mmvy_2025_order",
+    "title": "MMVY Scheme Government Order/Corrigendum 7, 14 June 2025",
+    "url": "https://medhavikalyan.mp.gov.in/MedhaviChhatra/Resources/Files/Government_Order_Corrigendum7_14062025.pdf",
+    "issuing_authority": "Directorate of Technical Education, Government of Madhya Pradesh",
+    "source_type": "official_government_notification",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official MP portal-linked corrigendum URL was discovered, but direct retrieval failed in this research pass; no substantive claim in the record is based on its unreviewed text. Attempted direct inspection on 2026-11-01; the PDF was inaccessible via the research browser. Its contents were not reviewed and are not used as evidence."
+  },
+  {
+    "source_id": "dfpd_pmgkay",
+    "title": "Pradhan Mantri Garib Kalyan Anna Yojana",
+    "url": "https://dfpd.gov.in/pradhan-mantri-garib-kalyan-anna-yojana/en",
+    "issuing_authority": "Department of Food and Public Distribution, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "Current scheme page: free foodgrains for NFSA AAY and Priority Household beneficiaries from 2024-01-01 for five years and monthly entitlement. Attempted direct page inspection on 2026-11-01; the page returned navigation-only content. The DFPD 2024–25 Annual Report was inspected as separate primary evidence instead."
+  },
+  {
+    "source_id": "dfpd_food_allocation",
+    "title": "Allocation of Food Grains",
+    "url": "https://dfpd.gov.in/allocation-of-food-grains/en",
+    "issuing_authority": "Department of Food and Public Distribution, Government of India",
+    "source_type": "official_government",
+    "checked_date": "2026-11-01",
+    "scope_note": "NFSA AAY/PHH entitlement and allocation process. Attempted direct page inspection on 2026-11-01; the page returned navigation-only content. No new claim depends on its inaccessible page text."
+  },
+  {
+    "source_id": "pmvidyalaxmi_portal",
+    "title": "PM-Vidyalaxmi Portal",
+    "url": "https://pmvidyalaxmi.co.in/",
+    "issuing_authority": "Department of Higher Education, Ministry of Education, Government of India",
+    "source_type": "official_application_portal",
+    "checked_date": "2026-10-31",
+    "scope_note": "Online application portal identified in the official scheme guidelines; portal accessibility/current cycle should be checked by applicant."
+  },
+  {
+    "source_id": "mp_highered_portal",
+    "title": "Madhya Pradesh Scholarship Portal",
+    "url": "https://scholarshipportal.mp.nic.in/Index.aspx",
+    "issuing_authority": "Higher Education Department, Government of Madhya Pradesh",
+    "source_type": "official_application_portal",
+    "checked_date": "2026-10-31",
+    "scope_note": "MP scholarship application destination; scheme-specific windows are announced separately."
+  },
+  {
+    "source_id": "pm_vidyalaxmi_portal_faq",
+    "title": "PM-Vidyalaxmi Portal FAQs",
+    "issuing_authority": "PM-Vidyalaxmi Portal, maintained by Canara Bank on behalf of Department of Higher Education, Ministry of Education",
+    "url": "https://pmvidyalaxmi.co.in/PublicFaq.aspx",
+    "source_type": "official_application_portal",
+    "checked_date": "2026-11-01",
+    "scope_note": "Current portal FAQ: documents, Aadhaar, application/status, online grievance, helpline and FY 2025-26 interest-subvention claim window 1 Sep–31 Dec 2026. Scheme benefit terms cross-checked against Ministry guideline; FAQ summary has a possible ambiguity about full subvention. Official portal FAQ opened and inspected directly on 2026-11-01; page displayed an FY 2025–26 claim-submission notice current at inspection. This is a bank claim window, not a general student loan application opening notice."
+  },
+  {
+    "source_id": "mota_st_pre_guidelines_2022",
+    "title": "Pre-Matric Scholarship for Scheduled Tribe Students Studying in Classes IX & X — Guidelines (2021–22 to 2025–26)",
+    "issuing_authority": "Ministry of Tribal Affairs, Government of India",
+    "url": "https://tribal.nic.in/downloads/guidelines/pre-matric/guidelines-Pre-matric-17-Oct-2022.pdf",
+    "source_type": "official_government_guideline",
+    "checked_date": "2026-11-01",
+    "published_or_updated_date": "2022-10-17",
+    "scope_note": "PDF opened and inspected directly on 2026-11-01. The stated guideline period is 2021–22 to 2025–26; it does not establish a 2026–27 extension or current MP cycle dates."
+  },
+  {
+    "source_id": "mota_st_post_guidelines_2023",
+    "title": "Post Matric Scholarship for ST Students — Regulations applicable from 01-04-2022",
+    "issuing_authority": "Ministry of Tribal Affairs, Government of India",
+    "url": "https://tribal.nic.in/downloads/guidelines/post-matric/Post-matric-guidelines-15032023.pdf",
+    "source_type": "official_government_guideline",
+    "checked_date": "2026-11-01",
+    "published_or_updated_date": "2023-03-15",
+    "scope_note": "PDF opened and inspected directly on 2026-11-01. Regulations are stated to apply from 01-04-2022; current MP portal checklist and 2026–27 cycle dates were not independently checked."
+  },
+  {
+    "source_id": "dfpd_pmgkay_annual_report_2024_25",
+    "title": "Annual Report 2024–25, Chapters II and IV: PMGKAY and Public Distribution System",
+    "issuing_authority": "Department of Food and Public Distribution, Government of India",
+    "url": "https://dfpd.gov.in/WriteReadData/AnnualRecordUploadDocuments/b9c640b8-5889-4ffd-a62d-5b56c5d4f029_Food%20AR%202024-25%20English%20small%20size.pdf",
+    "source_type": "official_government_primary",
+    "checked_date": "2026-11-01",
+    "published_or_updated_date": "2025",
+    "scope_note": "Official DFPD annual report opened and inspected directly on 2026-11-01. Sections describe free foodgrain distribution under PMGKAY to NFSA AAY/PHH beneficiaries and state TPDS responsibilities. Report is FY 2024–25; current MP documentation/beneficiary enrollment rules are not established here."
+  },
+  {
+    "source_id": "pm_sym_labour_guideline",
+    "title": "Pradhan Mantri Shram Yogi Maan-dhan (PM-SYM) official scheme guideline",
+    "issuing_authority": "Ministry of Labour and Employment, Government of India",
+    "url": "https://labour.gov.in/sites/default/files/pmsym.pdf",
+    "source_type": "official_government_guideline",
+    "checked_date": "2026-11-01",
+    "scope_note": "Official Ministry guideline PDF directly inspected 2026-11-01; supports eligibility, pension, spouse family pension, contributions, enrollment documents and channel. Source is an older guideline and does not itself confirm every current operational detail."
+  }
+]

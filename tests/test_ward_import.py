@@ -31,7 +31,7 @@ from scripts.import_gwalior_wards import (
 class TestGwaliorWardImport(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.preview_file = ROOT / "outputs" / "gwalior_wards_import_preview.json"
+        cls.preview_file = ROOT / "research" / "wards" / "gwalior_wards_import_preview.json"
         cls.raw_records = load_raw_records(cls.preview_file)
 
     def test_preview_record_count(self):

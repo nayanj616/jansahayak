@@ -112,6 +112,8 @@ jansahayak/
 │   ├── layout/                          # Headers, footers, dashboard sidebar & shell
 │   ├── shared/                          # Gwalior fort artwork, role badge, ward map
 │   └── dashboards/                      # Citizen, worker, officer views & charts
+├── data/
+│   └── schemes/                         # 50 researched schemes runtime dataset (7 JSONs)
 ├── docs/                                # Project documentation suite
 │   ├── architecture.md                  # System architecture & security model
 │   ├── database.md                      # 8 database tables & 4 private storage buckets
@@ -125,22 +127,27 @@ jansahayak/
 ├── lib/
 │   ├── auth/                            # JWT session signing & API guards (jose)
 │   ├── db/                              # Server data-access layer (Supabase PostgreSQL)
+│   ├── gemini/                          # Dual-key Gemini AI service (assistant & vision)
+│   ├── i18n/                            # Bilingual localization system (en, hi)
+│   ├── schemes/                         # Scheme data access, search & eligibility engine
 │   ├── storage/                         # Private bucket upload & signed URL helpers
 │   ├── supabase/                        # Browser, server & admin Supabase clients
-│   ├── gemini/                          # Server-only Gemini AI service stub
 │   ├── validation/                      # Zod schemas for complaints, tasks, sessions
 │   └── utils.ts                         # Style merge utilities
-├── outputs/                             # Gwalior ward reference dataset (59 wards)
-│   ├── gwalior_wards_master.json        # Master ward reference dataset
-│   ├── gwalior_wards_import_preview.json# Importer preview input
-│   └── gwalior_wards_validation_report.md# Ward data audit report
 ├── public/                              # Public static assets (favicon)
+├── research/                            # Research & reference datasets
+│   ├── schemes/                         # Codex scheme research output, reports & schemas
+│   └── wards/                           # Gwalior ward reference dataset (59 wards)
+│       ├── gwalior_wards_master.json        # Master ward reference dataset
+│       ├── gwalior_wards_import_preview.json# Importer preview input
+│       └── gwalior_wards_validation_report.md# Ward data audit report
 ├── scripts/
 │   ├── import_gwalior_wards.py          # Idempotent Gwalior ward reference importer
 │   ├── test_e2e_citizen.ts              # Live citizen workflow E2E test
+│   ├── test_e2e_officer.ts              # Live officer workflow E2E test
 │   └── test_e2e_worker.ts               # Live worker workflow E2E test
 ├── supabase/                            # Supabase migrations & seed scaffolding
-├── tests/                               # Automated unit test suite (63 TS + 21 Python)
+├── tests/                               # Automated unit test suite (123 TS + 21 Python)
 ├── types/                               # TypeScript domain & database type definitions
 ├── .env.example                         # Environment configuration template
 ├── package.json                         # Dependencies & npm scripts
@@ -220,7 +227,7 @@ To run the live database workflows locally:
    - `ai-annotated`
    - `verification-comparisons`
    *(All buckets must be set to **Private**; public read access must be disabled).*
-4. **Provisional Ward Data:** Imported via `python scripts/import_gwalior_wards.py --execute` using the master dataset in `outputs/`.
+4. **Provisional Ward Data:** Imported via `python scripts/import_gwalior_wards.py --execute` using the dataset in `research/wards/`.
 
 ---
 

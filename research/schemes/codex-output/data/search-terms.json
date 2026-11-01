@@ -1,0 +1,1078 @@
+{
+  "generated_date": "2026-11-01",
+  "scheme_count": 50,
+  "search_terms": [
+    {
+      "scheme_id": "atal_pension",
+      "official_name": "Atal Pension Yojana",
+      "aliases": [
+        "APY",
+        "Atal Pension"
+      ],
+      "search_terms": [
+        "APY",
+        "Atal Pension",
+        "Atal Pension Yojana",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "csss_cus",
+      "official_name": "Pradhan Mantri Uchchatar Shiksha Protsahan (PM-USP) Central Sector Scheme of Scholarship for College and University Students",
+      "aliases": [
+        "CSSS",
+        "Central Sector Scholarship Scheme"
+      ],
+      "search_terms": [
+        "CSSS",
+        "Central Sector Scholarship Scheme",
+        "Central Sector Scholarship",
+        "college scholarship",
+        "university scholarship",
+        "Class 12 merit",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "kisan_credit_card",
+      "official_name": "Kisan Credit Card Scheme",
+      "aliases": [
+        "KCC",
+        "Kisan Credit Card"
+      ],
+      "search_terms": [
+        "KCC",
+        "Kisan Credit Card",
+        "farm loan",
+        "crop credit",
+        "farmer support",
+        "crop loan",
+        "किसान सहायता",
+        "फसल बीमा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mgnrega",
+      "official_name": "Mahatma Gandhi National Rural Employment Guarantee Scheme",
+      "aliases": [
+        "MGNREGA",
+        "MGNREGS",
+        "NREGA"
+      ],
+      "search_terms": [
+        "MGNREGA",
+        "MGNREGS",
+        "NREGA",
+        "Mahatma Gandhi National Rural Employment Guarantee Scheme",
+        "work and livelihood",
+        "self-employment",
+        "रोजगार",
+        "स्वरोजगार"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_gaon_ki_beti",
+      "official_name": "Gaon Ki Beti",
+      "aliases": [
+        "गाँव की बेटी योजना",
+        "MP Gaon Ki Beti Scholarship"
+      ],
+      "search_terms": [
+        "गाँव की बेटी योजना",
+        "MP Gaon Ki Beti Scholarship",
+        "Gaon Ki Beti",
+        "rural girl scholarship",
+        "MP girl college scholarship",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_kalyani_sahayata",
+      "official_name": "Mukhyamantri Kalyani Sahayata Yojana (MP Labour Welfare Board)",
+      "aliases": [
+        "Kalyani Sahayata Yojana"
+      ],
+      "search_terms": [
+        "Kalyani Sahayata Yojana",
+        "widow assistance",
+        "Kalyani Sahayata",
+        "labour welfare widow benefit",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_ladli_behna",
+      "official_name": "Mukhyamantri Ladli Behna Yojana",
+      "aliases": [
+        "Ladli Behna",
+        "Mukhyamantri Ladli Behna"
+      ],
+      "search_terms": [
+        "Ladli Behna",
+        "Mukhyamantri Ladli Behna",
+        "Mukhyamantri Ladli Behna Yojana",
+        "women support",
+        "mother and child benefit",
+        "महिला सहायता",
+        "मातृत्व लाभ"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_student_welfare_st",
+      "official_name": "Student Welfare Scheme for Scheduled Tribe Students (Madhya Pradesh)",
+      "aliases": [
+        "MP ST Student Welfare Scheme",
+        "Vidyarthi Kalyan Yojana"
+      ],
+      "search_terms": [
+        "MP ST Student Welfare Scheme",
+        "Vidyarthi Kalyan Yojana",
+        "ST student help",
+        "Madhya Pradesh tribal student assistance",
+        "student welfare",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_jan_dhan",
+      "official_name": "Pradhan Mantri Jan-Dhan Yojana",
+      "aliases": [
+        "PMJDY",
+        "Jan Dhan Yojana"
+      ],
+      "search_terms": [
+        "PMJDY",
+        "Jan Dhan Yojana",
+        "Pradhan Mantri Jan-Dhan Yojana",
+        "banking",
+        "credit support",
+        "बैंकिंग",
+        "ऋण सहायता"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_kisan",
+      "official_name": "Pradhan Mantri Kisan Samman Nidhi",
+      "aliases": [
+        "PM-KISAN",
+        "PM Kisan Samman Nidhi"
+      ],
+      "search_terms": [
+        "PM-KISAN",
+        "PM Kisan Samman Nidhi",
+        "Pradhan Mantri Kisan Samman Nidhi",
+        "farmer support",
+        "crop loan",
+        "किसान सहायता",
+        "फसल बीमा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_kisan_mandhan",
+      "official_name": "Pradhan Mantri Kisan Maandhan Yojana",
+      "aliases": [
+        "PM-KMY",
+        "Kisan Maandhan"
+      ],
+      "search_terms": [
+        "PM-KMY",
+        "Kisan Maandhan",
+        "Pradhan Mantri Kisan Maandhan Yojana",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_shram_yogi",
+      "official_name": "Pradhan Mantri Shram Yogi Maandhan",
+      "aliases": [
+        "PM-SYM",
+        "Shram Yogi Maandhan"
+      ],
+      "search_terms": [
+        "PM-SYM",
+        "Shram Yogi Maandhan",
+        "Pradhan Mantri Shram Yogi Maandhan",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_surya_ghar",
+      "official_name": "PM Surya Ghar: Muft Bijli Yojana",
+      "aliases": [
+        "PM Surya Ghar",
+        "Muft Bijli Yojana"
+      ],
+      "search_terms": [
+        "PM Surya Ghar",
+        "Muft Bijli Yojana",
+        "PM Surya Ghar: Muft Bijli Yojana",
+        "government support",
+        "welfare assistance",
+        "सरकारी सहायता",
+        "कल्याण सहायता"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_vishwakarma",
+      "official_name": "PM Vishwakarma",
+      "aliases": [
+        "PM Vishwakarma"
+      ],
+      "search_terms": [
+        "PM Vishwakarma",
+        "banking",
+        "credit support",
+        "बैंकिंग",
+        "ऋण सहायता"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmay_u2",
+      "official_name": "Pradhan Mantri Awas Yojana-Urban 2.0",
+      "aliases": [
+        "PMAY-U 2.0",
+        "PMAY Urban 2.0"
+      ],
+      "search_terms": [
+        "PMAY-U 2.0",
+        "PMAY Urban 2.0",
+        "Pradhan Mantri Awas Yojana-Urban 2.0",
+        "housing help",
+        "urban housing",
+        "आवास सहायता",
+        "शहरी आवास"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmegp",
+      "official_name": "Prime Minister’s Employment Generation Programme",
+      "aliases": [
+        "PMEGP"
+      ],
+      "search_terms": [
+        "PMEGP",
+        "Prime Minister’s Employment Generation Programme",
+        "work and livelihood",
+        "self-employment",
+        "रोजगार",
+        "स्वरोजगार"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmfby",
+      "official_name": "Pradhan Mantri Fasal Bima Yojana",
+      "aliases": [
+        "PMFBY"
+      ],
+      "search_terms": [
+        "PMFBY",
+        "Pradhan Mantri Fasal Bima Yojana",
+        "farmer support",
+        "crop loan",
+        "किसान सहायता",
+        "फसल बीमा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmjjby",
+      "official_name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+      "aliases": [
+        "PMJJBY"
+      ],
+      "search_terms": [
+        "PMJJBY",
+        "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmmvy",
+      "official_name": "Pradhan Mantri Matru Vandana Yojana",
+      "aliases": [
+        "PMMVY"
+      ],
+      "search_terms": [
+        "PMMVY",
+        "Pradhan Mantri Matru Vandana Yojana",
+        "women support",
+        "mother and child benefit",
+        "महिला सहायता",
+        "मातृत्व लाभ"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmsby",
+      "official_name": "Pradhan Mantri Suraksha Bima Yojana",
+      "aliases": [
+        "PMSBY"
+      ],
+      "search_terms": [
+        "PMSBY",
+        "Pradhan Mantri Suraksha Bima Yojana",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmss_state_police",
+      "official_name": "Prime Minister’s Scholarship Scheme for Wards of State/UT Police Personnel Martyred in Terror/Naxal Attacks",
+      "aliases": [
+        "PMSS for State/UT Police Wards"
+      ],
+      "search_terms": [
+        "PMSS for State/UT Police Wards",
+        "police martyr scholarship",
+        "PMSS police wards",
+        "terror attack police family scholarship",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmuy",
+      "official_name": "Pradhan Mantri Ujjwala Yojana 2.0",
+      "aliases": [
+        "PMUY",
+        "Ujjwala Yojana 2.0"
+      ],
+      "search_terms": [
+        "PMUY",
+        "Ujjwala Yojana 2.0",
+        "Pradhan Mantri Ujjwala Yojana",
+        "government support",
+        "welfare assistance",
+        "सरकारी सहायता",
+        "कल्याण सहायता"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_kanya_vivah",
+      "official_name": "Mukhyamantri Kanya Vivah Yojana",
+      "aliases": [
+        "Mukhyamantri Kanya Vivah"
+      ],
+      "search_terms": [
+        "Mukhyamantri Kanya Vivah",
+        "Kanya Vivah",
+        "group marriage support",
+        "MP marriage assistance",
+        "women support",
+        "mother and child benefit",
+        "महिला सहायता",
+        "मातृत्व लाभ"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_nikah",
+      "official_name": "Mukhyamantri Nikah Yojana",
+      "aliases": [
+        "MP Nikah Yojana"
+      ],
+      "search_terms": [
+        "MP Nikah Yojana",
+        "Mukhyamantri Nikah Yojana",
+        "Nikah assistance",
+        "collective marriage",
+        "women support",
+        "mother and child benefit",
+        "महिला सहायता",
+        "मातृत्व लाभ"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_kalyani_vivah",
+      "official_name": "Mukhyamantri Kalyani Vivah Sahayata Yojana",
+      "aliases": [
+        "Kalyani Vivah Assistance"
+      ],
+      "search_terms": [
+        "Kalyani Vivah Assistance",
+        "Kalyani Vivah",
+        "widow remarriage assistance",
+        "widow marriage grant",
+        "women support",
+        "mother and child benefit",
+        "महिला सहायता",
+        "मातृत्व लाभ"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_kanya_abhibhavak",
+      "official_name": "Mukhyamantri Kanya Abhibhavak Pension Yojana",
+      "aliases": [
+        "MP Parents of Only Daughters Pension"
+      ],
+      "search_terms": [
+        "MP Parents of Only Daughters Pension",
+        "Kanya Abhibhavak Pension",
+        "parents with only daughters pension",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_samagra_pension",
+      "official_name": "Samagra Samajik Suraksha Pension Yojana",
+      "aliases": [
+        "Samagra Social Security Pension"
+      ],
+      "search_terms": [
+        "Samagra Social Security Pension",
+        "MP widow pension",
+        "MP disability pension",
+        "old age pension",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_kisan_kalyan",
+      "official_name": "Mukhyamantri Kisan Kalyan Yojana",
+      "aliases": [
+        "MP Kisan Kalyan"
+      ],
+      "search_terms": [
+        "MP Kisan Kalyan",
+        "Mukhyamantri Kisan Kalyan",
+        "MP farmer income support",
+        "farmer support",
+        "crop loan",
+        "किसान सहायता",
+        "फसल बीमा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_ladli_laxmi",
+      "official_name": "Mukhyamantri Ladli Laxmi Yojana",
+      "aliases": [],
+      "search_terms": [
+        "women support",
+        "mother and child benefit",
+        "महिला सहायता",
+        "मातृत्व लाभ"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_nfbs",
+      "official_name": "National Family Assistance Scheme",
+      "aliases": [],
+      "search_terms": [
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_antyeshti",
+      "official_name": "Antyeshti Sahayata Yojana",
+      "aliases": [],
+      "search_terms": [
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_udyam_kranti",
+      "official_name": "Mukhyamantri Udyam Kranti Yojana",
+      "aliases": [],
+      "search_terms": [
+        "work and livelihood",
+        "self-employment",
+        "रोजगार",
+        "स्वरोजगार"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmay_g",
+      "official_name": "Pradhan Mantri Awaas Yojana-Gramin",
+      "aliases": [],
+      "search_terms": [
+        "PMAY-G",
+        "rural housing",
+        "pucca house assistance",
+        "Awaas Plus survey",
+        "housing help",
+        "urban housing",
+        "आवास सहायता",
+        "शहरी आवास"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_jay",
+      "official_name": "Ayushman Bharat Pradhan Mantri Jan Arogya Yojana",
+      "aliases": [],
+      "search_terms": [
+        "Ayushman Bharat",
+        "PM-JAY",
+        "Ayushman card",
+        "cashless hospital treatment",
+        "health cover",
+        "hospital treatment",
+        "स्वास्थ्य सहायता",
+        "अस्पताल उपचार"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_svanidhi",
+      "official_name": "PM Street Vendor’s AtmaNirbhar Nidhi",
+      "aliases": [],
+      "search_terms": [
+        "PM SVANidhi",
+        "street vendor loan",
+        "vendor working capital",
+        "street hawker credit",
+        "banking",
+        "credit support",
+        "बैंकिंग",
+        "ऋण सहायता"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_ignoaps",
+      "official_name": "Indira Gandhi National Old Age Pension Scheme (Madhya Pradesh implementation)",
+      "aliases": [],
+      "search_terms": [
+        "IGNOAPS",
+        "old age pension",
+        "NSAP pension",
+        "MP senior pension",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_ignwps",
+      "official_name": "Indira Gandhi National Widow Pension Scheme (Madhya Pradesh implementation)",
+      "aliases": [],
+      "search_terms": [
+        "IGNWPS",
+        "widow pension",
+        "NSAP pension",
+        "MP widow pension",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_igndps",
+      "official_name": "Indira Gandhi National Disability Pension Scheme (Madhya Pradesh implementation)",
+      "aliases": [],
+      "search_terms": [
+        "IGNDPS",
+        "disability pension",
+        "NSAP pension",
+        "MP disability pension",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_disability_marriage",
+      "official_name": "Nishaktjan Vivah Protsahan Yojana",
+      "aliases": [
+        "दिव्यांगजन विवाह प्रोत्साहन योजना"
+      ],
+      "search_terms": [
+        "दिव्यांगजन विवाह प्रोत्साहन योजना",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_disability_scholarship",
+      "official_name": "Divyang Scholarship",
+      "aliases": [
+        "दिव्यांग छात्रवृत्ति"
+      ],
+      "search_terms": [
+        "दिव्यांग छात्रवृत्ति",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_disability_support_grant",
+      "official_name": "Assistance Grant for Persons Over Six Years with Multiple or Intellectual Disabilities",
+      "aliases": [
+        "छः वर्ष से अधिक आयु के बहुदिव्यांग/बौद्धिक दिव्यांग के लिए सहायता अनुदान योजना"
+      ],
+      "search_terms": [
+        "छः वर्ष से अधिक आयु के बहुदिव्यांग/बौद्धिक दिव्यांग के लिए सहायता अनुदान योजना",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_unmarried_pension",
+      "official_name": "Mukhyamantri Avivahita Pension Yojana",
+      "aliases": [
+        "मुख्यमंत्री अविवाहिता पेंशन योजना"
+      ],
+      "search_terms": [
+        "मुख्यमंत्री अविवाहिता पेंशन योजना",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_labour_education_scholarship",
+      "official_name": "Educational Scholarship Scheme (Madhya Pradesh Labour Welfare Board)",
+      "aliases": [
+        "शैक्षणिक छात्रवृत्ति योजना (मध्यप्रदेश श्रम कल्याण मंडल)"
+      ],
+      "search_terms": [
+        "शैक्षणिक छात्रवृत्ति योजना (मध्यप्रदेश श्रम कल्याण मंडल)",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmksy_mp_micro_irrigation",
+      "official_name": "Pradhan Mantri Krishi Sinchai Yojana: Per Drop More Crop Micro-Irrigation (MP)",
+      "aliases": [
+        "PMKSY Per Drop More Crop",
+        "प्रधानमंत्री कृषि सिंचाई योजना पर ड्रॉप मोर क्रॉप"
+      ],
+      "search_terms": [
+        "PMKSY Per Drop More Crop",
+        "प्रधानमंत्री कृषि सिंचाई योजना पर ड्रॉप मोर क्रॉप",
+        "farmer support",
+        "crop loan",
+        "किसान सहायता",
+        "फसल बीमा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_st_post_matric",
+      "official_name": "Post-Matric Scholarship Scheme for Scheduled Tribe Students",
+      "aliases": [
+        "Post Matric Scholarship for ST Students",
+        "PMS-ST"
+      ],
+      "search_terms": [
+        "Post Matric Scholarship for ST Students",
+        "PMS-ST",
+        "ST scholarship",
+        "post matric",
+        "college fees",
+        "tribal student",
+        "scholarship MP",
+        "class 11",
+        "college",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_st_pre_matric",
+      "official_name": "Pre-Matric Scholarship Scheme for Scheduled Tribe Students (Classes IX–X)",
+      "aliases": [
+        "Pre-Matric Scholarship for ST Students",
+        "Pre-Matric Scholarship for ST Students Class IX to X"
+      ],
+      "search_terms": [
+        "Pre-Matric Scholarship for ST Students",
+        "Pre-Matric Scholarship for ST Students Class IX to X",
+        "ST scholarship",
+        "class 9",
+        "class 10",
+        "pre matric",
+        "tribal education",
+        "school scholarship",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pm_vidyalaxmi",
+      "official_name": "Pradhan Mantri Vidyalaxmi (PM-Vidyalaxmi)",
+      "aliases": [
+        "PM Vidyalaxmi Scheme",
+        "PM-Vidyalaxmi Education Loan"
+      ],
+      "search_terms": [
+        "PM Vidyalaxmi Scheme",
+        "PM-Vidyalaxmi Education Loan",
+        "education loan",
+        "higher education",
+        "interest subvention",
+        "PM Vidyalaxmi",
+        "college loan",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_pratibha_kiran",
+      "official_name": "Pratibha Kiran Yojana",
+      "aliases": [
+        "Pratibha Kiran Scholarship"
+      ],
+      "search_terms": [
+        "Pratibha Kiran Scholarship",
+        "urban girl scholarship",
+        "BPL student",
+        "Pratibha Kiran",
+        "Class 12",
+        "MP scholarship",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "mp_mmvy",
+      "official_name": "Mukhyamantri Medhavi Vidyarthi Yojana",
+      "aliases": [
+        "Mukhyamantri Medhavi Vidyarthi Scholarship",
+        "Medhavi Chhatra Yojana"
+      ],
+      "search_terms": [
+        "Mukhyamantri Medhavi Vidyarthi Scholarship",
+        "Medhavi Chhatra Yojana",
+        "MMVY",
+        "college fees",
+        "merit scholarship",
+        "MP domicile",
+        "JEE",
+        "NEET",
+        "CLAT",
+        "student support",
+        "scholarship",
+        "विद्यार्थी सहायता",
+        "छात्रवृत्ति"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "scheme_id": "pmgkay",
+      "official_name": "Pradhan Mantri Garib Kalyan Anna Yojana",
+      "aliases": [
+        "Pradhan Mantri Garib Kalyan Ann Yojana",
+        "Free foodgrains under NFSA"
+      ],
+      "search_terms": [
+        "Pradhan Mantri Garib Kalyan Ann Yojana",
+        "Free foodgrains under NFSA",
+        "free ration",
+        "food grains",
+        "ration card",
+        "NFSA",
+        "AAY",
+        "Priority Household",
+        "PMGKAY",
+        "pension",
+        "social support",
+        "पेंशन",
+        "सामाजिक सुरक्षा"
+      ],
+      "term_role": "retrieval_only_not_eligibility_evidence",
+      "languages": [
+        "en",
+        "hi"
+      ]
+    }
+  ]
+}

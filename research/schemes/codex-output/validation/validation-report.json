@@ -1,0 +1,598 @@
+{
+  "generated_date": "2026-11-01",
+  "validation_method": "Custom structural, type, cross-reference, evidence-reference, URL-shape, duplicate ID, and content-evidence checks. Full JSON Schema validation unavailable: jsonschema package is not installed; schema required keys and declared primitive types were checked manually.",
+  "json_files_parsed": 16,
+  "json_parse_errors": [],
+  "counts": {
+    "schemes": 50,
+    "sources": 82,
+    "evidence_entries": 1215,
+    "generated_summaries_with_english_short_summary": 50,
+    "schemes_with_hindi_short_summary": 50,
+    "schemes_with_hindi_audience_summary": 50,
+    "faqs": 379,
+    "answered_faqs": 379,
+    "unknown_faqs": 0,
+    "Hindi_faq_answers": 50,
+    "rag_chunks": 282,
+    "retrieval_test_questions": 42,
+    "retrieval_tests_expected_unknown": 6,
+    "retrieval_tests_hindi": 21,
+    "retrieval_tests_english": 21,
+    "faq_duplicate_questions": 0,
+    "duplicate_chunk_sentences": 0,
+    "search_term_records": 50,
+    "primary_source_evidence_scheme_count": 17,
+    "schemes_with_any_source_cited": 50,
+    "populated_material_fields_without_field_evidence": 5,
+    "evidence_missing_locator": 463,
+    "evidence_generic_summary_heuristic": 115,
+    "service_relationships": 12,
+    "schemes_with_service_relationships": 12,
+    "service_catalog_records": 9,
+    "grievance_relationships": 24,
+    "schemes_with_grievance_relationships": 24,
+    "grievance_channel_records": 5,
+    "generated_factual_statements": 1079,
+    "generated_statements_without_evidence_refs": 0,
+    "generated_unknown_information_notes": 553,
+    "answered_faqs_without_evidence_refs": 0,
+    "retrieval_unknown_requested_field_occurrences": 37,
+    "verification_labels_in_public_data": 0
+  },
+  "structural_and_reference_errors": [],
+  "quality_warnings": [],
+  "duplicate_chunk_sentences": [],
+  "populated_material_fields_without_field_evidence": [
+    {
+      "scheme_id": "pm_vishwakarma",
+      "field": "document_notes",
+      "value_preview": "MSME FAQ says no documents need to be uploaded at portal registration; applicants provide Aadhaar number and bank account details at CSC. Identity/trade are checked through biometric and multi-stage verification."
+    },
+    {
+      "scheme_id": "pm_vidyalaxmi",
+      "field": "renewal_process",
+      "value_preview": "Loan repayment follows lender agreement; interest subvention only during moratorium and once for UG/PG/integrated course."
+    },
+    {
+      "scheme_id": "mp_mmvy",
+      "field": "renewal_process",
+      "value_preview": "Exact continuation/renewal conditions depend on current MMVY order and course; not fully established in detail here."
+    },
+    {
+      "scheme_id": "pmgkay",
+      "field": "document_notes",
+      "value_preview": "No universal separate document list for PMGKAY; new NFSA inclusion/document checklist is state-specific and not asserted here."
+    },
+    {
+      "scheme_id": "pmgkay",
+      "field": "renewal_process",
+      "value_preview": "No separate renewal; NFSA ration-card status and category are administered under state procedures."
+    }
+  ],
+  "alias_or_official_name_collisions": [],
+  "public_verification_badge_fields_on_records": [],
+  "evidence_quality": {
+    "missing_locator_examples": [
+      {
+        "scheme_id": "csss_cus",
+        "field": "official_name",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "benefits",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "benefit_amount",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "beneficiary_groups",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "income_limit",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "education_criteria",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "mandatory_documents",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "application_mode",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "application_steps",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "application_portal",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "renewal_process",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "selection_process",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "how_to_check_status",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "aliases",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "coverage",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "ministry",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "department",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "conditional_documents",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "residency_requirement",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "objectives",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "gender_eligibility",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "category",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "other_eligibility_conditions",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "short_name",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "exclusions",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "duration",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "implementing_agency",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "scheme_level",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "document_notes",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "terms_and_conditions",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "benefit_type",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "jurisdiction",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "registration_process",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "description",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "application_period",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "social_categories",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "csss_cus",
+        "field": "benefit_frequency",
+        "source_id": "csss_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "official_name",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "beneficiary_groups",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "benefits",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "mandatory_documents",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "application_mode",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "application_steps",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "aliases",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "ministry",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "department",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "conditional_documents",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "residency_requirement",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "objectives",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "category",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "other_eligibility_conditions",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "short_name",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "implementing_agency",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "scheme_level",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "selection_process",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "terms_and_conditions",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "benefit_type",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "renewal_process",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "jurisdiction",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "description",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "how_to_check_status",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "kisan_credit_card",
+        "field": "occupation_or_profession",
+        "source_id": "kcc_detail"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "benefits",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "beneficiary_groups",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "application_mode",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "aliases",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "official_name",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "category",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "short_name",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "scheme_level",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "jurisdiction",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mgnrega",
+        "field": "description",
+        "source_id": "mgnrega_nic"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "official_name",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "department",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "benefits",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "benefit_amount",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "beneficiary_groups",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "gender_eligibility",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "occupation_or_profession",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "other_eligibility_conditions",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "mandatory_documents",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "application_mode",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "application_steps",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "application_period",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "deadlines",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "processing_time",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "aliases",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "residency_requirement",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "objectives",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "category",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "short_name",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "exclusions",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "implementing_agency",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "scheme_level",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "document_notes",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "selection_process",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "terms_and_conditions",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "benefit_type",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "jurisdiction",
+        "source_id": "mp_kalyani_detail"
+      },
+      {
+        "scheme_id": "mp_kalyani_sahayata",
+        "field": "registration_process",
+        "source_id": "mp_kalyani_detail"
+      }
+    ],
+    "missing_locator_total": 463,
+    "generic_summary_heuristic_total": 115,
+    "note": "Source references and locators were preserved where previously established; this pass added locators to directly inspected sources. Missing/inaccessible source locators remain unknown."
+  },
+  "limitations": [
+    "Formal JSON Schema execution was unavailable because jsonschema is not installed; manual required-field/type validation was performed.",
+    "Custom checks cannot prove semantic entailment of prose from evidence; a manual category sample is documented separately.",
+    "URLs were shape-checked, not all network-rechecked. Source checks are only claimed for the pages inspected during this pass; inherited citations remain identified as inherited in the evidence report."
+  ],
+  "preservation_checks": {
+    "scheme_ids_preserved": true,
+    "all_original_source_ids_preserved": true,
+    "source_count_at_start": 78,
+    "source_count_final": 82,
+    "scheme_schema_unchanged": true,
+    "enums_unchanged": true,
+    "service_relationship_file_unchanged": true,
+    "grievance_relationship_file_unchanged": true,
+    "backup_path": "work/backups/final-qa-2026-11-01/outputs/"
+  }
+}

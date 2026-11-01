@@ -1,0 +1,72 @@
+{
+  "generated_date": "2026-11-01",
+  "scheme_count": 50,
+  "duplicate_scheme_ids": [],
+  "exact_normalized_official_name_or_alias_collisions": [],
+  "possible_near_duplicates_or_related_pairs": [
+    {
+      "scheme_ids": [
+        "pm_st_pre_matric",
+        "pm_st_post_matric"
+      ],
+      "reason": "Same MoTA scholarship family, but distinct class ranges and benefits; intentionally retained as separate filters and application pathways."
+    },
+    {
+      "scheme_ids": [
+        "mp_pratibha_kiran",
+        "mp_gaon_ki_beti"
+      ],
+      "reason": "Both MP girl-student scholarships, but urban BPL versus rural school pathway; distinct schemes."
+    },
+    {
+      "scheme_ids": [
+        "pm_vidyalaxmi",
+        "csss_cus"
+      ],
+      "reason": "Higher education support overlap, but education loan/subvention versus merit scholarship; distinct."
+    },
+    {
+      "scheme_ids": [
+        "pm_kisan",
+        "pm_kisan_mandhan"
+      ],
+      "reason": "Both target farmers, but one is direct income support and the other is contributory pension; retain as distinct and cross-link if useful."
+    },
+    {
+      "scheme_ids": [
+        "atal_pension",
+        "pm_shram_yogi"
+      ],
+      "reason": "Both are contributory pension schemes, but they target different worker groups and use separate enrollment/contribution rules."
+    }
+  ],
+  "assessment": "No exact normalized official-name/alias collisions found. Related pairs are retained because eligibility pathways or benefit mechanisms are materially distinct.",
+  "final_content_qa": {
+    "generated_date": "2026-11-01",
+    "scheme_ids_preserved": true,
+    "original_source_ids_preserved": true,
+    "faq_duplicate_questions": 0,
+    "exact_duplicate_sentences_across_chunks_for_same_scheme": 0,
+    "faq_changes_vs_backup": {
+      "removed": 54,
+      "revised": 196,
+      "added": 183
+    },
+    "rag_chunk_count": 282,
+    "rag_chunks_at_start": 264,
+    "rag_chunks_final": 282,
+    "chunk_change_net": 18,
+    "starting_chunks_with_internal_duplicate_sentences": 44,
+    "starting_cross_topic_duplicate_sentence_groups": 66,
+    "final_internal_duplicate_sentences": 0,
+    "final_cross_topic_duplicate_sentence_groups": 0,
+    "rag_chunk_id_changes": {
+      "starting": 264,
+      "removed_or_replaced": 70,
+      "added": 88,
+      "retained_ids": 194,
+      "text_revised_for_retained_ids": 184,
+      "final": 282
+    }
+  }
+}

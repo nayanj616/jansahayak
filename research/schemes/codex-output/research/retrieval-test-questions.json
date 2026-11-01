@@ -1,0 +1,1579 @@
+{
+  "generated_date": "2026-11-01",
+  "purpose": "Offline expected-answer test cases for future retrieval evaluation. This is not a test of any deployed model or retrieval implementation.",
+  "test_count": 42,
+  "tests": [
+    {
+      "test_id": "RT-001",
+      "query": "एपीवाई में रिटायरमेंट के बाद क्या मिलता है?",
+      "language": "hi",
+      "query_characteristics": [
+        "benefit",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "atal_pension"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "atal_pension",
+          "field": "benefits",
+          "source_id": "apy_dfs",
+          "locator": "FAQ → benefits lines 50–53; contribution frequency lines 88–104; pension at age 60 lines 114 and 211–214"
+        },
+        {
+          "scheme_id": "atal_pension",
+          "field": "benefit_amount",
+          "source_id": "apy_dfs",
+          "locator": "FAQ → benefits lines 50–53; contribution frequency lines 88–104; pension at age 60 lines 114 and 211–214"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "atal_pension.benefits: ['Guaranteed minimum monthly pension slab selected at enrollment after age 60, subject to contribution/payment rules.']; atal_pension.benefit_amount: ₹1,000 to ₹5,000 monthly pension slabs",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Pension amount depends on the selected slab and contribution conditions.",
+      "requested_fields": [
+        "benefits",
+        "benefit_amount"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-002",
+      "query": "पीएम-यूएसपी सीएसएसएस में कितनी छात्रवृत्ति मिलती है?",
+      "language": "hi",
+      "query_characteristics": [
+        "benefit",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "csss_cus"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "csss_cus",
+          "field": "benefit_amount",
+          "source_id": "csss_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "csss_cus",
+          "field": "benefits",
+          "source_id": "csss_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "csss_cus",
+          "field": "benefits",
+          "source_id": "csss_moe_faq_2025_26",
+          "locator": "FAQ Q3, Rate of Scholarship"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "csss_cus.benefit_amount: ₹12,000/year (first three UG years); ₹20,000/year (PG and specified professional-course years); csss_cus.benefits: ['₹12,000 per annum for the first three undergraduate years; ₹20,000 per annum for postgraduate study and specified fourth/fifth-year technical study, subject to course-specific rules.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-003",
+      "query": "KCC ka loan kitna hota hai?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "kisan_credit_card"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "kisan_credit_card",
+          "field": "benefits",
+          "source_id": "kcc_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "kisan_credit_card",
+          "field": "benefits",
+          "source_id": "kcc_dfs_agriculture_credit",
+          "locator": "DFS Agriculture Credit → What is KCC?"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "kisan_credit_card.benefits: ['Single-window credit support for cultivation inputs and eligible crop production, post-harvest, produce marketing, household consumption, farm-asset working capital and agriculture/allied investment needs.', 'Loan amount, sanction, interest and applicable subsidy are governed by current government/bank rules and the issuing institution’s appraisal.']; unknown/unestablished requested fields: kisan_credit_card.benefit_amount",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Credit limit is lender/case dependent if no single fixed amount is recorded. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": [
+        "kisan_credit_card.benefit_amount"
+      ]
+    },
+    {
+      "test_id": "RT-004",
+      "query": "मनरेगा में काम कैसे माँगूँ?",
+      "language": "hi",
+      "query_characteristics": [
+        "application",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "mgnrega"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mgnrega",
+          "field": "benefits",
+          "source_id": "mgnrega_nic",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mgnrega.benefits: ['Legal guarantee of up to 100 days of wage employment per rural household in a financial year, subject to statutory conditions.']; unknown/unestablished requested fields: mgnrega.application_steps",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The response should describe only the recorded route and guarantee nothing beyond the scheme rules. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "application_steps",
+        "benefits"
+      ],
+      "requested_fields_unestablished": [
+        "mgnrega.application_steps"
+      ]
+    },
+    {
+      "test_id": "RT-005",
+      "query": "गाँव की बेटी योजना का लाभ किसे मिल सकता है?",
+      "language": "hi",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "mp_gaon_ki_beti"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_gaon_ki_beti",
+          "field": "beneficiary_groups",
+          "source_id": "mp_gaon_ki_beti_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        },
+        {
+          "scheme_id": "mp_gaon_ki_beti",
+          "field": "beneficiary_groups",
+          "source_id": "mp_gaon_ki_beti_detail",
+          "locator": "Scheme detail: eligibility"
+        },
+        {
+          "scheme_id": "mp_gaon_ki_beti",
+          "field": "education_criteria",
+          "source_id": "mp_gaon_ki_beti_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_gaon_ki_beti.beneficiary_groups: ['Girl students who reside in rural Madhya Pradesh and completed Class XII at a village school.']; mp_gaon_ki_beti.education_criteria: At least 60% marks in Class XII and enrollment in a recognized higher education institution; village-daughter certificate required.",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "beneficiary_groups",
+        "education_criteria"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-006",
+      "query": "कल्याणी सहायता के लिए उम्र की शर्त क्या है?",
+      "language": "hi",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "mp_kalyani_sahayata"
+      ],
+      "relevant_evidence_refs": [],
+      "dataset_can_answer": false,
+      "expected_response": null,
+      "expected_unknown_response": "The dataset does not establish this information.",
+      "ambiguity_or_limitation": "Unknown age limits must stay unknown.",
+      "requested_fields": [
+        "age_min",
+        "age_max"
+      ],
+      "requested_fields_unestablished": [
+        "mp_kalyani_sahayata.age_min",
+        "mp_kalyani_sahayata.age_max"
+      ]
+    },
+    {
+      "test_id": "RT-007",
+      "query": "लाड़ली बहना योजना में कितनी सहायता मिलती है?",
+      "language": "hi",
+      "query_characteristics": [
+        "benefit",
+        "informal_terminology"
+      ],
+      "expected_scheme_ids": [
+        "mp_ladli_behna"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_ladli_behna",
+          "field": "benefit_amount",
+          "source_id": "mp_ladli_behna",
+          "locator": null
+        },
+        {
+          "scheme_id": "mp_ladli_behna",
+          "field": "benefits",
+          "source_id": "mp_ladli_behna",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_ladli_behna.benefit_amount: ₹1,500 per month; mp_ladli_behna.benefits: ['₹1,500 monthly DBT assistance for an eligible woman during her eligibility period.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-008",
+      "query": "एसटी पोस्ट मैट्रिक छात्रवृत्ति के लिए कौन से दस्तावेज़ चाहिए?",
+      "language": "hi",
+      "query_characteristics": [
+        "documents"
+      ],
+      "expected_scheme_ids": [
+        "pm_st_post_matric"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_st_post_matric",
+          "field": "document_notes",
+          "source_id": "mota_st_post_guidelines_2023",
+          "locator": "PDF p. 12, section 6 Documents Required."
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_st_post_matric.document_notes: The 2023 Ministry guidelines list Aadhaar, domicile certificate, examination certificates/marks, ST certificate, family income certificate, disability certificate and passport-size photo. They direct applicants to State/NSP instructions for actual uploads; current MP cycle requirements were not checked.; unknown/unestablished requested fields: pm_st_post_matric.mandatory_documents, pm_st_post_matric.conditional_documents",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Guideline-year and current checklist limits must be stated. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "mandatory_documents",
+        "conditional_documents",
+        "document_notes"
+      ],
+      "requested_fields_unestablished": [
+        "pm_st_post_matric.mandatory_documents",
+        "pm_st_post_matric.conditional_documents"
+      ]
+    },
+    {
+      "test_id": "RT-009",
+      "query": "जन धन खाता कैसे खोलें?",
+      "language": "hi",
+      "query_characteristics": [
+        "application"
+      ],
+      "expected_scheme_ids": [
+        "pm_jan_dhan"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_jan_dhan",
+          "field": "application_mode",
+          "source_id": "pmjdy_dfs",
+          "locator": "PMJDY page → scheme overview / “The Scheme offers”, lines 29–38"
+        },
+        {
+          "scheme_id": "pm_jan_dhan",
+          "field": "application_steps",
+          "source_id": "pmjdy_dfs",
+          "locator": "PMJDY page → scheme overview / “The Scheme offers”, lines 29–38"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_jan_dhan.application_mode: ['Bank branch', 'Bank Mitra/Business Correspondent']; pm_jan_dhan.application_steps: ['Approach a bank branch or Bank Mitra/Business Correspondent to open a basic savings bank deposit account.']; unknown/unestablished requested fields: pm_jan_dhan.application_portal",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "application_mode",
+        "application_steps",
+        "application_portal"
+      ],
+      "requested_fields_unestablished": [
+        "pm_jan_dhan.application_portal"
+      ]
+    },
+    {
+      "test_id": "RT-010",
+      "query": "पीएम किसान के लिए ज़मीन की पात्रता क्या है?",
+      "language": "hi",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "pm_kisan"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_kisan",
+          "field": "exclusions",
+          "source_id": "pm_kisan",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_kisan.exclusions: ['Institutional landholders; specified constitutional office holders, elected representatives, government employees (with stated class exceptions), pensioners receiving at least ₹10,000 monthly (with stated exceptions), income-tax payers, and specified registered professionals.']; unknown/unestablished requested fields: pm_kisan.eligibility_summary, pm_kisan.other_eligibility_conditions",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "eligibility_summary",
+        "other_eligibility_conditions",
+        "exclusions"
+      ],
+      "requested_fields_unestablished": [
+        "pm_kisan.eligibility_summary",
+        "pm_kisan.other_eligibility_conditions"
+      ]
+    },
+    {
+      "test_id": "RT-011",
+      "query": "PM-KMY aur PM-SYM me kya difference hai?",
+      "language": "en",
+      "query_characteristics": [
+        "similar_schemes",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "pm_kisan_mandhan",
+        "pm_shram_yogi"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_kisan_mandhan",
+          "field": "description",
+          "source_id": "pm_kisan_mandhan_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "pm_kisan_mandhan",
+          "field": "benefits",
+          "source_id": "pm_kisan_mandhan_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "pm_kisan_mandhan",
+          "field": "beneficiary_groups",
+          "source_id": "pm_kisan_mandhan_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "description",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, title and §1, page 1, lines 0–18."
+        },
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "benefits",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §2, page 1, lines 38–49."
+        },
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "beneficiary_groups",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §1, page 1, lines 19–36."
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_kisan_mandhan.description: Pension scheme for eligible farmers.; pm_kisan_mandhan.benefits: ['Assured ₹3,000 monthly pension after age 60; spouse is eligible for family pension equal to 50% of subscriber pension on subscriber death, subject to scheme rules.']; pm_kisan_mandhan.beneficiary_groups: ['Small and marginal farmer pension subscribers']; pm_shram_yogi.description: Pension scheme for eligible unorganised workers.; pm_shram_yogi.benefits: ['Assured ₹3,000 monthly pension after age 60; spouse may receive 50% family pension on subscriber death, subject to rules.']; pm_shram_yogi.beneficiary_groups: ['Unorganised workers in the 18–40 entry age group whose monthly income is ₹15,000 or less, subject to exclusions.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Do not merge farmer pension and unorganised worker pension rules.",
+      "requested_fields": [
+        "description",
+        "benefits",
+        "beneficiary_groups"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-012",
+      "query": "पीएम-एसवाईएम में उम्र कितनी होनी चाहिए?",
+      "language": "hi",
+      "query_characteristics": [
+        "eligibility",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "pm_shram_yogi"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "age_min",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §1, page 1, lines 30–33."
+        },
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "age_max",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §1, page 1, lines 30–33."
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_shram_yogi.age_min: 18; pm_shram_yogi.age_max: 40",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "age_min",
+        "age_max"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-013",
+      "query": "PM Surya Ghar ki subsidy kitni milegi?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "pm_surya_ghar"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_surya_ghar",
+          "field": "benefits",
+          "source_id": "surya",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_surya_ghar.benefits: ['Central financial assistance for grid-connected residential rooftop solar systems, subject to current scheme guidelines and installation/claim conditions.']; unknown/unestablished requested fields: pm_surya_ghar.benefit_amount",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Use only the recorded amount and capacity conditions. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": [
+        "pm_surya_ghar.benefit_amount"
+      ]
+    },
+    {
+      "test_id": "RT-014",
+      "query": "PM Vishvakarma yojna mein kaun se documents chahiye? (Vishvakarma informal spelling)",
+      "language": "hi-Latn",
+      "query_characteristics": [
+        "documents",
+        "common_misspelling",
+        "informal_terminology"
+      ],
+      "expected_scheme_ids": [
+        "pm_vishwakarma"
+      ],
+      "relevant_evidence_refs": [],
+      "dataset_can_answer": false,
+      "expected_response": null,
+      "expected_unknown_response": "The dataset does not establish this information.",
+      "ambiguity_or_limitation": "A document note is unresolved if the FAQ source was inaccessible.",
+      "requested_fields": [
+        "mandatory_documents",
+        "conditional_documents",
+        "document_notes"
+      ],
+      "requested_fields_unestablished": [
+        "pm_vishwakarma.mandatory_documents",
+        "pm_vishwakarma.conditional_documents",
+        "pm_vishwakarma.document_notes"
+      ]
+    },
+    {
+      "test_id": "RT-015",
+      "query": "शहरी घर के लिए पीएमएवाई अर्बन 2.0 में कहाँ आवेदन करें?",
+      "language": "hi",
+      "query_characteristics": [
+        "application",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "pmay_u2"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmay_u2",
+          "field": "application_mode",
+          "source_id": "pmay_u",
+          "locator": "FAQ → choosing a vertical and application routes, lines 59–67"
+        },
+        {
+          "scheme_id": "pmay_u2",
+          "field": "application_steps",
+          "source_id": "pmay_u",
+          "locator": "FAQ → choosing a vertical and application routes, lines 59–67"
+        },
+        {
+          "scheme_id": "pmay_u2",
+          "field": "application_portal",
+          "source_id": "pmay_u",
+          "locator": "FAQ → choosing a vertical and application routes, lines 59–67"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmay_u2.application_mode: ['Online portal', 'Common Service Centre', 'Urban Local Body/Municipality']; pmay_u2.application_steps: ['Submit application through PMAY-U 2.0 Unified Web Portal, CSC or ULB/Municipality.', 'Select the applicable vertical and provide supporting documents required for that vertical.']; pmay_u2.application_portal: https://pmaymis.gov.in/PMAYMIS2_2024/",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "application_mode",
+        "application_steps",
+        "application_portal"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-016",
+      "query": "PMEGP loan aur subsidy kaise milti hai?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit_application"
+      ],
+      "expected_scheme_ids": [
+        "pmegp"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmegp",
+          "field": "benefits",
+          "source_id": "pmegp_kvic",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmegp.benefits: ['Bank-linked credit with margin-money subsidy for eligible new micro-enterprises, subject to the applicable guidelines and bank appraisal.']; unknown/unestablished requested fields: pmegp.eligibility_summary, pmegp.application_steps",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefits",
+        "eligibility_summary",
+        "application_steps"
+      ],
+      "requested_fields_unestablished": [
+        "pmegp.eligibility_summary",
+        "pmegp.application_steps"
+      ]
+    },
+    {
+      "test_id": "RT-017",
+      "query": "Fasal bima kab bharna hai?",
+      "language": "en",
+      "query_characteristics": [
+        "timing"
+      ],
+      "expected_scheme_ids": [
+        "pmfby"
+      ],
+      "relevant_evidence_refs": [],
+      "dataset_can_answer": false,
+      "expected_response": null,
+      "expected_unknown_response": "The dataset does not establish this information.",
+      "ambiguity_or_limitation": "The current season deadline cannot be inferred from a general scheme record.",
+      "requested_fields": [
+        "application_period",
+        "deadlines"
+      ],
+      "requested_fields_unestablished": [
+        "pmfby.application_period",
+        "pmfby.deadlines"
+      ]
+    },
+    {
+      "test_id": "RT-018",
+      "query": "PMJJBY ke liye kaun eligible hai?",
+      "language": "en",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "pmjjby"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmjjby",
+          "field": "age_min",
+          "source_id": "pmjjby_dfs",
+          "locator": "FAQ → eligibility, renewal and termination questions, lines 59–79; account eligibility lines 97–105"
+        },
+        {
+          "scheme_id": "pmjjby",
+          "field": "age_min",
+          "source_id": "pmjjby_rules",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmjjby",
+          "field": "age_max",
+          "source_id": "pmjjby_dfs",
+          "locator": "FAQ → eligibility, renewal and termination questions, lines 59–79; account eligibility lines 97–105"
+        },
+        {
+          "scheme_id": "pmjjby",
+          "field": "age_max",
+          "source_id": "pmjjby_rules",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmjjby",
+          "field": "beneficiary_groups",
+          "source_id": "pmjjby_dfs",
+          "locator": "FAQ → eligibility, renewal and termination questions, lines 59–79; account eligibility lines 97–105"
+        },
+        {
+          "scheme_id": "pmjjby",
+          "field": "beneficiary_groups",
+          "source_id": "pmjjby_rules",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmjjby.age_min: 18; pmjjby.age_max: 50; pmjjby.beneficiary_groups: ['Eligible savings bank or post office account holders']; unknown/unestablished requested fields: pmjjby.other_eligibility_conditions",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "age_min",
+        "age_max",
+        "beneficiary_groups",
+        "other_eligibility_conditions"
+      ],
+      "requested_fields_unestablished": [
+        "pmjjby.other_eligibility_conditions"
+      ]
+    },
+    {
+      "test_id": "RT-019",
+      "query": "प्रधानमंत्री मातृ वंदना योजना में क्या लाभ मिलता है?",
+      "language": "hi",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "pmmvy"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmmvy",
+          "field": "benefits",
+          "source_id": "pmmvy_wcd",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmmvy.benefits: ['₹5,000 in two installments for an eligible first child; ₹6,000 in one installment for an eligible second child if the child is a girl, subject to conditions.']; unknown/unestablished requested fields: pmmvy.benefit_amount, pmmvy.benefit_frequency",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefits",
+        "benefit_amount",
+        "benefit_frequency"
+      ],
+      "requested_fields_unestablished": [
+        "pmmvy.benefit_amount",
+        "pmmvy.benefit_frequency"
+      ]
+    },
+    {
+      "test_id": "RT-020",
+      "query": "PMSBY accident cover amount kya hai?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "pmsby"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmsby",
+          "field": "benefits",
+          "source_id": "pmsby_js",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmsby",
+          "field": "benefits",
+          "source_id": "pmsby_faq",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmsby.benefits: ['Accident insurance for death and specified permanent disability, subject to policy terms.']; unknown/unestablished requested fields: pmsby.benefit_amount",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": [
+        "pmsby.benefit_amount"
+      ]
+    },
+    {
+      "test_id": "RT-021",
+      "query": "PMSS police ward scholarship ke liye documents?",
+      "language": "en",
+      "query_characteristics": [
+        "documents"
+      ],
+      "expected_scheme_ids": [
+        "pmss_state_police"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmss_state_police",
+          "field": "mandatory_documents",
+          "source_id": "pmss_police_detail",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmss_state_police",
+          "field": "mandatory_documents",
+          "source_id": "pmss_mha_state_police",
+          "locator": "Guideline → online application/document checklist"
+        },
+        {
+          "scheme_id": "pmss_state_police",
+          "field": "conditional_documents",
+          "source_id": "pmss_police_detail",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmss_state_police.mandatory_documents: ['State Government certificate confirming the police personnel was killed in terror/Naxal violence', 'Qualifying examination marksheet', 'Bank account details seeded with Aadhaar', 'Identity details required by NSP']; pmss_state_police.conditional_documents: ['Institution admission/course records and other applicable verification documents; current-year checklist not established.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "mandatory_documents",
+        "conditional_documents"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-022",
+      "query": "Ujjwala 2.0 mein gas connection ke saath kya milta hai?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "pmuy"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmuy",
+          "field": "benefits",
+          "source_id": "pmuy",
+          "locator": "FAQ Q3 and “PMUY Benefits” (lines 24–35, 213–222)."
+        },
+        {
+          "scheme_id": "pmuy",
+          "field": "benefits",
+          "source_id": "pmuy_later_home",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmuy.benefits: ['Deposit-free LPG connection assistance; current portal also states first refill and stove assistance.']; unknown/unestablished requested fields: pmuy.benefit_amount",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Any unresolved benefit amount must be answered as unknown. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefits",
+        "benefit_amount"
+      ],
+      "requested_fields_unestablished": [
+        "pmuy.benefit_amount"
+      ]
+    },
+    {
+      "test_id": "RT-023",
+      "query": "मुख्यमंत्री कन्या विवाह योजना में आवेदन कैसे करें?",
+      "language": "hi",
+      "query_characteristics": [
+        "application"
+      ],
+      "expected_scheme_ids": [
+        "mp_kanya_vivah"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_kanya_vivah",
+          "field": "application_mode",
+          "source_id": "mp_kanya_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → आवेदन प्रक्रिया, ऑनलाइन आवेदन लिंक, आवेदन शुल्क, समय सीमा and designated officer rows (where shown)"
+        },
+        {
+          "scheme_id": "mp_kanya_vivah",
+          "field": "application_steps",
+          "source_id": "mp_kanya_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → आवेदन प्रक्रिया, ऑनलाइन आवेदन लिंक, आवेदन शुल्क, समय सीमा and designated officer rows (where shown)"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_kanya_vivah.application_mode: ['Through the scheduled local-authority collective marriage process']; mp_kanya_vivah.application_steps: ['Apply through the designated local authority for a scheduled collective marriage event.', 'Local committee verifies eligibility and selects couples.']; unknown/unestablished requested fields: mp_kanya_vivah.application_period",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "application_mode",
+        "application_steps",
+        "application_period"
+      ],
+      "requested_fields_unestablished": [
+        "mp_kanya_vivah.application_period"
+      ]
+    },
+    {
+      "test_id": "RT-024",
+      "query": "निकाह योजना की आवेदन तारीख क्या है?",
+      "language": "hi",
+      "query_characteristics": [
+        "timing"
+      ],
+      "expected_scheme_ids": [
+        "mp_nikah"
+      ],
+      "relevant_evidence_refs": [],
+      "dataset_can_answer": false,
+      "expected_response": null,
+      "expected_unknown_response": "The dataset does not establish this information.",
+      "ambiguity_or_limitation": "Current dates require a current official notice.",
+      "requested_fields": [
+        "application_period",
+        "deadlines"
+      ],
+      "requested_fields_unestablished": [
+        "mp_nikah.application_period",
+        "mp_nikah.deadlines"
+      ]
+    },
+    {
+      "test_id": "RT-025",
+      "query": "MP Kalyani Vivah Sahayata aur Kanya Vivah ek hi scheme hai?",
+      "language": "en",
+      "query_characteristics": [
+        "similar_schemes"
+      ],
+      "expected_scheme_ids": [
+        "mp_kalyani_vivah",
+        "mp_kanya_vivah"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_kalyani_vivah",
+          "field": "description",
+          "source_id": "mp_kalyani_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → योजना का उद्देश्य"
+        },
+        {
+          "scheme_id": "mp_kalyani_vivah",
+          "field": "benefits",
+          "source_id": "mp_kalyani_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        },
+        {
+          "scheme_id": "mp_kalyani_vivah",
+          "field": "beneficiary_groups",
+          "source_id": "mp_kalyani_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        },
+        {
+          "scheme_id": "mp_kanya_vivah",
+          "field": "description",
+          "source_id": "mp_kanya_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → योजना का उद्देश्य"
+        },
+        {
+          "scheme_id": "mp_kanya_vivah",
+          "field": "benefits",
+          "source_id": "mp_kanya_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        },
+        {
+          "scheme_id": "mp_kanya_vivah",
+          "field": "beneficiary_groups",
+          "source_id": "mp_kanya_vivah_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_kalyani_vivah.description: One-time financial assistance to an eligible widow upon remarriage.; mp_kalyani_vivah.benefits: ['₹2 lakh paid to the applicant’s bank account.']; mp_kalyani_vivah.beneficiary_groups: ['Eligible widow (Kalyani) applicant remarrying.']; mp_kanya_vivah.description: Financial assistance for eligible Madhya Pradesh brides participating in an officially scheduled collective marriage event.; mp_kanya_vivah.benefits: ['₹49,000 account-payee cheque to the bride and ₹6,000 per bride to the event organizer.']; mp_kanya_vivah.beneficiary_groups: ['Bride or her guardian must be a Madhya Pradesh resident; includes an eligible widow or legally divorced woman.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Treat as separate records; compare only fields supported for both.",
+      "requested_fields": [
+        "description",
+        "benefits",
+        "beneficiary_groups"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-026",
+      "query": "Kanya Abhibhavak pension kaun le sakta hai?",
+      "language": "en",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "mp_kanya_abhibhavak"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_kanya_abhibhavak",
+          "field": "beneficiary_groups",
+          "source_id": "mp_kanya_abhibhavak_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_kanya_abhibhavak.beneficiary_groups: ['Madhya Pradesh resident couples whose only children are daughters and whose daughters are married.']; unknown/unestablished requested fields: mp_kanya_abhibhavak.eligibility_summary",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "beneficiary_groups",
+        "eligibility_summary"
+      ],
+      "requested_fields_unestablished": [
+        "mp_kanya_abhibhavak.eligibility_summary"
+      ]
+    },
+    {
+      "test_id": "RT-027",
+      "query": "Samagra pension status kaise check karu?",
+      "language": "en",
+      "query_characteristics": [
+        "status"
+      ],
+      "expected_scheme_ids": [
+        "mp_samagra_pension"
+      ],
+      "relevant_evidence_refs": [],
+      "dataset_can_answer": false,
+      "expected_response": null,
+      "expected_unknown_response": "The dataset does not establish this information.",
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "how_to_check_status"
+      ],
+      "requested_fields_unestablished": [
+        "mp_samagra_pension.how_to_check_status"
+      ]
+    },
+    {
+      "test_id": "RT-028",
+      "query": "मुख्यमंत्री किसान कल्याण योजना में सालाना कितनी राशि मिलती है?",
+      "language": "hi",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "mp_kisan_kalyan"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_kisan_kalyan",
+          "field": "benefit_amount",
+          "source_id": "mp_kisan_kalyan_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        },
+        {
+          "scheme_id": "mp_kisan_kalyan",
+          "field": "benefit_frequency",
+          "source_id": "mp_kisan_kalyan_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_kisan_kalyan.benefit_amount: ₹6,000 per year; mp_kisan_kalyan.benefit_frequency: Three installments per year",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "benefit_amount",
+        "benefit_frequency"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-029",
+      "query": "Ladli Laxmi scheme scholarship stages kya hain?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "mp_ladli_laxmi"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_ladli_laxmi",
+          "field": "benefits",
+          "source_id": "mp_ladli_laxmi_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        },
+        {
+          "scheme_id": "mp_ladli_laxmi",
+          "field": "benefit_amount",
+          "source_id": "mp_ladli_laxmi_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_ladli_laxmi.benefits: ['Certificate stated at ₹1,43,000 value; scholarships of ₹2,000 at Class 6, ₹4,000 at Class 9, ₹6,000 at Class 11 and 12; ₹25,000 in two installments for eligible higher education; ₹1,00,000 at age 21 subject to conditions.']; mp_ladli_laxmi.benefit_amount: Stage-wise; amounts listed in benefits; unknown/unestablished requested fields: mp_ladli_laxmi.education_criteria",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefits",
+        "benefit_amount",
+        "education_criteria"
+      ],
+      "requested_fields_unestablished": [
+        "mp_ladli_laxmi.education_criteria"
+      ]
+    },
+    {
+      "test_id": "RT-030",
+      "query": "NFBS me kitna one-time assistance milta hai?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "mp_nfbs"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_nfbs",
+          "field": "benefit_amount",
+          "source_id": "mp_nfbs_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        },
+        {
+          "scheme_id": "mp_nfbs",
+          "field": "benefits",
+          "source_id": "mp_nfbs_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_nfbs.benefit_amount: ₹20,000 one-time; mp_nfbs.benefits: ['₹20,000 one-time assistance.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-031",
+      "query": "Antyeshti sahayata kisliye hai?",
+      "language": "en",
+      "query_characteristics": [
+        "overview"
+      ],
+      "expected_scheme_ids": [
+        "mp_antyeshti"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_antyeshti",
+          "field": "description",
+          "source_id": "mp_antyeshti_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → योजना का उद्देश्य"
+        },
+        {
+          "scheme_id": "mp_antyeshti",
+          "field": "benefits",
+          "source_id": "mp_antyeshti_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभ की श्रेणी; अनुदान/लाभ राशि and payment-process rows (where shown)"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_antyeshti.description: Last-rites assistance in a narrow case involving an extremely poor, destitute or unclaimed/unidentified deceased person.; mp_antyeshti.benefits: ['₹3,000 assistance for funeral/last rites.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "description",
+        "benefits"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-032",
+      "query": "Udyam Kranti scheme ke liye income limit?",
+      "language": "en",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "mp_udyam_kranti"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_udyam_kranti",
+          "field": "income_limit",
+          "source_id": "mp_udyam_kranti_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_udyam_kranti.income_limit: Annual family income up to ₹12 lakh.; unknown/unestablished requested fields: mp_udyam_kranti.eligibility_summary",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "If no income threshold is evidenced, return unknown. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "income_limit",
+        "eligibility_summary"
+      ],
+      "requested_fields_unestablished": [
+        "mp_udyam_kranti.eligibility_summary"
+      ]
+    },
+    {
+      "test_id": "RT-033",
+      "query": "PMAY-G ko city house ke liye apply kar sakte hain?",
+      "language": "en",
+      "query_characteristics": [
+        "similar_schemes",
+        "alias_or_abbreviation"
+      ],
+      "expected_scheme_ids": [
+        "pmay_g",
+        "pmay_u2"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pmay_g",
+          "field": "description",
+          "source_id": "pmayg_2024_guidelines",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmay_g",
+          "field": "jurisdiction",
+          "source_id": "pmayg_2024_guidelines",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmay_g",
+          "field": "beneficiary_groups",
+          "source_id": "pmayg_2024_guidelines",
+          "locator": null
+        },
+        {
+          "scheme_id": "pmay_u2",
+          "field": "description",
+          "source_id": "pmay_u",
+          "locator": "FAQ → PMAY-U 2.0 overview, lines 0–9"
+        },
+        {
+          "scheme_id": "pmay_u2",
+          "field": "jurisdiction",
+          "source_id": "pmay_u",
+          "locator": "FAQ → PMAY-U 2.0 overview, lines 0–9"
+        },
+        {
+          "scheme_id": "pmay_u2",
+          "field": "beneficiary_groups",
+          "source_id": "pmay_u",
+          "locator": "FAQ → eligibility, family/income definitions, exclusions and preference-group questions, lines 10–50"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pmay_g.description: Rural housing assistance for eligible rural households identified through approved beneficiary lists and surveys.; pmay_g.jurisdiction: ['Madhya Pradesh']; pmay_g.beneficiary_groups: ['Eligible rural households in the SECC 2011 Permanent Wait List or updated Awaas+ list, subject to target allocation and verification.']; pmay_u2.description: Central assistance for eligible urban households.; pmay_u2.jurisdiction: ['India', 'Madhya Pradesh']; pmay_u2.beneficiary_groups: ['Eligible urban EWS/LIG/MIG households; eligibility and benefits vary by vertical.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Disambiguate rural PMAY-G from urban PMAY-U 2.0; do not infer location eligibility beyond evidence.",
+      "requested_fields": [
+        "description",
+        "jurisdiction",
+        "beneficiary_groups"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-034",
+      "query": "आयुष्मान भारत पीएम-जेएवाई में अस्पताल का कौन सा इलाज कवर होता है?",
+      "language": "hi",
+      "query_characteristics": [
+        "health"
+      ],
+      "expected_scheme_ids": [
+        "pm_jay"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_jay",
+          "field": "benefits",
+          "source_id": "nha_pmjay_benefit",
+          "locator": null
+        },
+        {
+          "scheme_id": "pm_jay",
+          "field": "benefits",
+          "source_id": "nha_senior_faq",
+          "locator": "NHA senior FAQ Q12–14"
+        },
+        {
+          "scheme_id": "pm_jay",
+          "field": "beneficiary_groups",
+          "source_id": "nha_pmjay_benefit",
+          "locator": null
+        },
+        {
+          "scheme_id": "pm_jay",
+          "field": "beneficiary_groups",
+          "source_id": "nha_senior_faq",
+          "locator": "NHA senior FAQ Q11"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_jay.benefits: ['Up to ₹5 lakh per eligible family per year for secondary and tertiary hospitalization at empanelled hospitals.', 'For 70+ citizens in an already eligible PM-JAY family, additional top-up up to ₹5 lakh/year for 70+ members; other 70+ families receive up to ₹5 lakh/family/year.']; pm_jay.beneficiary_groups: ['Families identified through notified SECC deprivation/occupational criteria and other nationally/state-authorized beneficiary categories.', 'Any Indian citizen aged 70 or above, irrespective of income, under senior-citizen expansion.']; unknown/unestablished requested fields: pm_jay.coverage",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "benefits",
+        "coverage",
+        "beneficiary_groups"
+      ],
+      "requested_fields_unestablished": [
+        "pm_jay.coverage"
+      ]
+    },
+    {
+      "test_id": "RT-035",
+      "query": "PM SVANidhi ka first loan kitna hai?",
+      "language": "en",
+      "query_characteristics": [
+        "benefit"
+      ],
+      "expected_scheme_ids": [
+        "pm_svanidhi"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_svanidhi",
+          "field": "benefit_amount",
+          "source_id": "svanidhi_pib_faq_2026",
+          "locator": null
+        },
+        {
+          "scheme_id": "pm_svanidhi",
+          "field": "benefits",
+          "source_id": "svanidhi_pib_faq_2026",
+          "locator": null
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_svanidhi.benefit_amount: Loan tranches up to ₹15,000 / ₹25,000 / ₹50,000; eligible UPI-linked credit card up to ₹30,000; pm_svanidhi.benefits: ['Progressive collateral-free working capital loans up to ₹15,000, ₹25,000 and ₹50,000; 7% annual interest subsidy for timely repayment; eligible vendors repaying second tranche may receive a UPI-linked RuPay credit card up to ₹30,000; digital transaction incentives are subject to scheme conditions.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "benefit_amount",
+        "benefits"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-036",
+      "query": "IGNOAPS ke liye minimum age kitni hai?",
+      "language": "en",
+      "query_characteristics": [
+        "eligibility"
+      ],
+      "expected_scheme_ids": [
+        "mp_ignoaps"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_ignoaps",
+          "field": "age_min",
+          "source_id": "mp_ignoaps_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_ignoaps.age_min: 60; unknown/unestablished requested fields: mp_ignoaps.social_categories, mp_ignoaps.income_limit",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "age_min",
+        "social_categories",
+        "income_limit"
+      ],
+      "requested_fields_unestablished": [
+        "mp_ignoaps.social_categories",
+        "mp_ignoaps.income_limit"
+      ]
+    },
+    {
+      "test_id": "RT-037",
+      "query": "IGNWPS aur IGNDPS mein disability/widow eligibility ka antar?",
+      "language": "en",
+      "query_characteristics": [
+        "similar_schemes"
+      ],
+      "expected_scheme_ids": [
+        "mp_ignwps",
+        "mp_igndps"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_ignwps",
+          "field": "beneficiary_groups",
+          "source_id": "mp_ignwps_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        },
+        {
+          "scheme_id": "mp_ignwps",
+          "field": "gender_eligibility",
+          "source_id": "mp_ignwps_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        },
+        {
+          "scheme_id": "mp_igndps",
+          "field": "beneficiary_groups",
+          "source_id": "mp_igndps_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        },
+        {
+          "scheme_id": "mp_igndps",
+          "field": "disability_eligibility",
+          "source_id": "mp_igndps_detail",
+          "locator": "Scheme Dashboard / Scheme Detail → लाभार्थी के लिए आवश्यक शर्ते / लाभार्थी चयन प्रक्रिया; लाभार्थी वर्ग"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_ignwps.beneficiary_groups: ['Widow women aged 40–79 in a BPL household.']; mp_ignwps.gender_eligibility: Widow women; mp_igndps.beneficiary_groups: ['Persons aged 18–79 in a BPL household with at least 80% disability/severe disability under the source guideline.']; mp_igndps.disability_eligibility: At least 80% disability/severe disability under source legislation and scheme criteria.; unknown/unestablished requested fields: mp_ignwps.disability_eligibility, mp_igndps.gender_eligibility",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Compare scheme-specific groups only; no broader assumptions. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "beneficiary_groups",
+        "disability_eligibility",
+        "gender_eligibility"
+      ],
+      "requested_fields_unestablished": [
+        "mp_ignwps.disability_eligibility",
+        "mp_igndps.gender_eligibility"
+      ]
+    },
+    {
+      "test_id": "RT-038",
+      "query": "पीएम-विद्यालक्ष्मी के लिए क्या मैं अभी आवेदन कर सकता हूँ?",
+      "language": "hi",
+      "query_characteristics": [
+        "current_period"
+      ],
+      "expected_scheme_ids": [
+        "pm_vidyalaxmi"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_vidyalaxmi",
+          "field": "application_period",
+          "source_id": "pm_vidyalaxmi_portal_faq",
+          "locator": "FAQ banner lines 3–4; claim process lines 109–111"
+        },
+        {
+          "scheme_id": "pm_vidyalaxmi",
+          "field": "application_period",
+          "source_id": "pm_vidyalaxmi_portal_faq",
+          "locator": "Portal FAQ page notice at top (lines 3–4), displayed on 2026-11-01."
+        },
+        {
+          "scheme_id": "pm_vidyalaxmi",
+          "field": "application_portal",
+          "source_id": "pm_vidyalaxmi_portal_faq",
+          "locator": "Portal FAQ → application and sign-up, lines 58–71"
+        },
+        {
+          "scheme_id": "pm_vidyalaxmi",
+          "field": "application_steps",
+          "source_id": "pm_vidyalaxmi_guidelines",
+          "locator": "Guidelines §§10.1–10.2, 25.1–25.4"
+        },
+        {
+          "scheme_id": "pm_vidyalaxmi",
+          "field": "application_steps",
+          "source_id": "pm_vidyalaxmi_portal_faq",
+          "locator": "FAQ → “How to apply for education loan” lines 58–68"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_vidyalaxmi.application_period: For FY 2025–26 interest-subvention claims, the portal notice displayed a bank claim-submission window from 01-09-2026 to 31-12-2026. This is a financing-bank claim window for eligible opted-in applicants, not a general education-loan application opening.; pm_vidyalaxmi.application_portal: https://pmvidyalaxmi.co.in/; pm_vidyalaxmi.application_steps: ['Register on PM-Vidyalaxmi portal using mobile number and email.', 'Complete the common education-loan application, upload documents and select up to three banks.', 'Review and submit; bank performs due diligence and sanctions/disburses independently.', 'For interest subvention, opt in on the portal; for eligible FY 2025-26 claims, ensure financing bank submits during 1 Sep–31 Dec 2026 claim window.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "A bank claim-submission window for interest-subvention is not a general student loan application period.",
+      "requested_fields": [
+        "application_period",
+        "application_portal",
+        "application_steps"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-039",
+      "query": "What documents are needed for Pratibha Kiran? eligibility kya hai?",
+      "language": "en",
+      "query_characteristics": [
+        "eligibility_documents"
+      ],
+      "expected_scheme_ids": [
+        "mp_pratibha_kiran"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "mp_pratibha_kiran",
+          "field": "mandatory_documents",
+          "source_id": "mp_pratibha_kiran_cmhl",
+          "locator": "CM Helpline scheme detail → Documents"
+        },
+        {
+          "scheme_id": "mp_pratibha_kiran",
+          "field": "beneficiary_groups",
+          "source_id": "mp_pratibha_kiran_cmhl",
+          "locator": "Scheme Dashboard → lines 15–21; last updated 2022-11-24"
+        },
+        {
+          "scheme_id": "mp_pratibha_kiran",
+          "field": "education_criteria",
+          "source_id": "mp_pratibha_kiran_cmhl",
+          "locator": "Scheme Dashboard → conditions; District page → Plan details"
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "mp_pratibha_kiran.mandatory_documents: ['Samagra ID; current college code; branch code; photograph; other relevant documents requested in portal.']; mp_pratibha_kiran.beneficiary_groups: ['Girl students from urban BPL households who passed Class XII with at least 60% and enroll in graduation.']; mp_pratibha_kiran.education_criteria: Passed Class XII with 60% or more; enrolled in graduation class at government/non-government college or university.",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "mandatory_documents",
+        "beneficiary_groups",
+        "education_criteria"
+      ],
+      "requested_fields_unestablished": []
+    },
+    {
+      "test_id": "RT-040",
+      "query": "प्रतिभा किरण योजना के दस्तावेज़ और पात्रता क्या हैं?",
+      "language": "hi",
+      "query_characteristics": [
+        "current_period"
+      ],
+      "expected_scheme_ids": [
+        "mp_mmvy"
+      ],
+      "relevant_evidence_refs": [],
+      "dataset_can_answer": false,
+      "expected_response": null,
+      "expected_unknown_response": "The dataset does not establish this information.",
+      "ambiguity_or_limitation": "No current opening can be stated unless the record has a current notice.",
+      "requested_fields": [
+        "application_period",
+        "deadlines"
+      ],
+      "requested_fields_unestablished": [
+        "mp_mmvy.application_period",
+        "mp_mmvy.deadlines"
+      ]
+    },
+    {
+      "test_id": "RT-041",
+      "query": "मुख्यमंत्री मेधावी विद्यार्थी योजना का 2026-27 आवेदन खुला है क्या?",
+      "language": "hi",
+      "query_characteristics": [
+        "documents"
+      ],
+      "expected_scheme_ids": [
+        "kisan_credit_card"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "kisan_credit_card",
+          "field": "document_notes",
+          "source_id": "rbi_kcc_master_circular_2017",
+          "locator": "PDF p. 7, section 13.3 (documentation)."
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "kisan_credit_card.document_notes: RBI’s master circular states documents required are as per banks’ internal guidelines. The final checklist must be obtained from the selected lender; do not treat generic identity/land/crop items as universally mandatory.; unknown/unestablished requested fields: kisan_credit_card.mandatory_documents",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": "Bank-specific documentation should not be converted into a universal checklist. The listed requested fields remain unknown in the dataset.",
+      "requested_fields": [
+        "document_notes",
+        "mandatory_documents"
+      ],
+      "requested_fields_unestablished": [
+        "kisan_credit_card.mandatory_documents"
+      ]
+    },
+    {
+      "test_id": "RT-042",
+      "query": "पीएम-एसवाईएम (पीएम सिम) में नामांकन के लिए क्या चाहिए?",
+      "language": "hi",
+      "query_characteristics": [
+        "documents_application",
+        "alias_or_abbreviation",
+        "abbreviation",
+        "informal_terminology"
+      ],
+      "expected_scheme_ids": [
+        "pm_shram_yogi"
+      ],
+      "relevant_evidence_refs": [
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "mandatory_documents",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §5–6, page 3, lines 112–129."
+        },
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "application_mode",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §5, page 3, lines 112–122."
+        },
+        {
+          "scheme_id": "pm_shram_yogi",
+          "field": "application_steps",
+          "source_id": "pm_sym_labour_guideline",
+          "locator": "Guideline PDF, §5–6, page 3, lines 112–129."
+        }
+      ],
+      "dataset_can_answer": true,
+      "expected_response": "pm_shram_yogi.mandatory_documents: ['Aadhaar', 'Savings bank or Jan Dhan account details']; pm_shram_yogi.application_mode: ['Online portal or assisted registration through Common Service Centre']; pm_shram_yogi.application_steps: ['Use the PM-SYM process flow or visit a Common Service Centre.', 'Complete enrollment using Aadhaar and savings/Jan Dhan bank details and set up the prescribed contribution mandate.', 'Monthly contribution depends on entry age; Government of India makes a matching contribution.']",
+      "expected_unknown_response": null,
+      "ambiguity_or_limitation": null,
+      "requested_fields": [
+        "mandatory_documents",
+        "application_mode",
+        "application_steps"
+      ],
+      "requested_fields_unestablished": []
+    }
+  ],
+  "bilingual_question_count": 21,
+  "answerable_question_count": 36,
+  "expected_unknown_question_count": 6,
+  "english_question_count": 21,
+  "hindi_question_count": 20,
+  "romanized_hindi_question_count": 1,
+  "alias_abbreviation_cases": 9,
+  "misspelling_cases": 1,
+  "informal_terminology_cases": 3
+}

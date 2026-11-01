@@ -1,0 +1,140 @@
+{
+  "services": [
+    {
+      "service_id": "mp_income_certificate",
+      "name": "Madhya Pradesh income certificate",
+      "authority": "Government of Madhya Pradesh",
+      "scope_note": "Related civic service; scheme-specific need depends on eligibility rules."
+    },
+    {
+      "service_id": "mp_residence_certificate",
+      "name": "Madhya Pradesh local resident certificate",
+      "authority": "Government of Madhya Pradesh",
+      "scope_note": "Related civic service; scheme-specific need depends on eligibility rules."
+    },
+    {
+      "service_id": "mp_land_record_copy",
+      "name": "Madhya Pradesh land record copy",
+      "authority": "Government of Madhya Pradesh",
+      "scope_note": "May support agricultural/housing applications where required by current rules."
+    },
+    {
+      "service_id": "mp_samagra_ekyc",
+      "name": "Samagra Aadhaar e-KYC",
+      "authority": "Government of Madhya Pradesh",
+      "scope_note": "Identity reconciliation used in multiple MP scheme workflows."
+    },
+    {
+      "service_id": "mp_social_justice_scheme_application",
+      "name": "MP Social Justice scheme application and district office channel",
+      "authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+      "url": "https://socialjustice.mp.gov.in/",
+      "source_id": "mp_kanya_vivah_detail",
+      "scope_note": "Official application destination or district/collective-event route for relevant marriage assistance schemes."
+    },
+    {
+      "service_id": "mp_social_security_pension_application",
+      "name": "MP Social Security Pension application channel",
+      "authority": "Social Justice and Disabled Persons Empowerment Department, Government of Madhya Pradesh",
+      "url": "https://socialjustice.mp.gov.in/",
+      "source_id": "mp_samagra_pension_detail",
+      "scope_note": "Online pension portal and offline designated officer, Gram Panchayat or Lok Seva Kendra application route."
+    },
+    {
+      "service_id": "mp_scholarship_portal",
+      "name": "Madhya Pradesh Scholarship Portal application route",
+      "authority": "Government of Madhya Pradesh; Higher Education / Tribal Affairs scholarship workflows",
+      "url": "https://hescholarship.mp.gov.in/",
+      "source_id": "mp_highered_portal",
+      "scope_note": "Official scholarship application portal. Scheme-specific workflows and current cycle windows may differ; current 2026-27 opening was not confirmed."
+    },
+    {
+      "service_id": "pm_vidyalaxmi_portal",
+      "name": "PM-Vidyalaxmi education-loan application portal",
+      "authority": "Department of Higher Education, Ministry of Education, Government of India",
+      "url": "https://pmvidyalaxmi.co.in/",
+      "source_id": "pm_vidyalaxmi_portal_faq",
+      "scope_note": "Official unified education-loan application/status and interest-subvention portal; lender sanctions are independent."
+    },
+    {
+      "service_id": "mp_tribal_scholarship_portal",
+      "name": "MPTAAS Tribal scholarship profile and application portal",
+      "authority": "Tribal Affairs and Scheduled Caste Welfare Department, Government of Madhya Pradesh",
+      "url": "https://tribal.mp.gov.in/MPTAAS",
+      "source_id": "mp_mptaasc",
+      "scope_note": "Official portal for tribal student profiles and scheme application/status when the scheme workflow is enabled. Current cycle notices remain scheme-specific."
+    }
+  ],
+  "links": [
+    {
+      "scheme_id": "mp_ladli_behna",
+      "civic_service_id": "mp_samagra_ekyc"
+    },
+    {
+      "scheme_id": "pmfby",
+      "civic_service_id": "mp_land_record_copy",
+      "source_id": "pmfby",
+      "relationship_note": "Land/cultivation record may be required under current application conditions."
+    },
+    {
+      "scheme_id": "mp_kanya_vivah",
+      "civic_service_id": "mp_social_justice_scheme_application",
+      "source_id": "mp_kanya_vivah_detail",
+      "relationship_note": "Official MP scheme detail identifies this application route."
+    },
+    {
+      "scheme_id": "mp_nikah",
+      "civic_service_id": "mp_social_justice_scheme_application",
+      "source_id": "mp_nikah_detail",
+      "relationship_note": "Official MP scheme detail identifies this application route."
+    },
+    {
+      "scheme_id": "mp_kalyani_vivah",
+      "civic_service_id": "mp_social_justice_scheme_application",
+      "source_id": "mp_kalyani_vivah_detail",
+      "relationship_note": "Official MP scheme detail identifies this application route."
+    },
+    {
+      "scheme_id": "mp_kanya_abhibhavak",
+      "civic_service_id": "mp_social_security_pension_application",
+      "source_id": "mp_kanya_abhibhavak_detail",
+      "relationship_note": "Official MP scheme detail identifies this application route."
+    },
+    {
+      "scheme_id": "mp_samagra_pension",
+      "civic_service_id": "mp_social_security_pension_application",
+      "source_id": "mp_samagra_pension_detail",
+      "relationship_note": "Official MP scheme detail identifies this application route."
+    },
+    {
+      "scheme_id": "pm_vidyalaxmi",
+      "civic_service_id": "pm_vidyalaxmi_portal",
+      "source_id": "pm_vidyalaxmi_portal_faq",
+      "relationship_note": "Current official portal supports loan application, status tracking and separate interest-subvention claim steps."
+    },
+    {
+      "scheme_id": "mp_pratibha_kiran",
+      "civic_service_id": "mp_scholarship_portal",
+      "source_id": "mp_highered_portal",
+      "relationship_note": "Official MP scholarship application portal; check scheme-specific cycle, criteria and portal availability."
+    },
+    {
+      "scheme_id": "mp_mmvy",
+      "civic_service_id": "mp_scholarship_portal",
+      "source_id": "mp_highered_portal",
+      "relationship_note": "Official MP scholarship application portal; check scheme-specific cycle, criteria and portal availability."
+    },
+    {
+      "scheme_id": "pm_st_post_matric",
+      "civic_service_id": "mp_tribal_scholarship_portal",
+      "source_id": "mp_mptaasc",
+      "relationship_note": "MP Tribal Affairs portal provides profile/application and status functions when the relevant scheme workflow is enabled."
+    },
+    {
+      "scheme_id": "pm_st_pre_matric",
+      "civic_service_id": "mp_tribal_scholarship_portal",
+      "source_id": "mp_mptaasc",
+      "relationship_note": "MP Tribal Affairs portal provides profile/application and status functions when the relevant scheme workflow is enabled."
+    }
+  ]
+}

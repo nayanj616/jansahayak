@@ -545,8 +545,8 @@ Examples:
     parser.add_argument(
         "--file",
         type=Path,
-        default=Path("outputs/gwalior_wards_import_preview.json"),
-        help="Path to the JSON preview input file (default: outputs/gwalior_wards_import_preview.json)",
+        default=Path("research/wards/gwalior_wards_import_preview.json"),
+        help="Path to the JSON preview input file (default: research/wards/gwalior_wards_import_preview.json)",
     )
     parser.add_argument(
         "--dry-run",
