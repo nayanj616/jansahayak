@@ -1,0 +1,81 @@
+{
+  "scheme_level": [
+    "central",
+    "state",
+    "central_state"
+  ],
+  "categories": [
+    "agriculture_farmers",
+    "women_child_welfare",
+    "education_scholarships",
+    "health_medical_assistance",
+    "housing_urban_development",
+    "employment_skill_development",
+    "social_security_pensions",
+    "financial_inclusion_livelihoods",
+    "other"
+  ],
+  "states_uts": [
+    "Madhya Pradesh"
+  ],
+  "benefit_types": [
+    "cash_transfer",
+    "cash_assistance",
+    "scholarship",
+    "insurance",
+    "pension",
+    "credit_access",
+    "housing_assistance",
+    "subsidy",
+    "education_assistance",
+    "emergency_assistance",
+    "in_kind",
+    "service_access",
+    "health_cover",
+    "interest_subsidy",
+    "digital_incentive"
+  ],
+  "application_modes": [
+    "online",
+    "offline",
+    "assisted",
+    "bank",
+    "common_service_centre",
+    "school_or_institution",
+    "local_body",
+    "notified_channel"
+  ],
+  "gender_filter": [
+    "women",
+    "men",
+    "all_genders",
+    "other"
+  ],
+  "social_categories": [
+    "SC",
+    "ST",
+    "OBC",
+    "EWS",
+    "minority",
+    "general",
+    "other"
+  ],
+  "unknown_and_filter_semantics": {
+    "unknown_scalar": "null; do not interpret as zero, false, ineligible or not-applicable",
+    "unknown_list": "[] only where no applicable items were established; for an eligibility filter, absence from a list does not prove ineligibility",
+    "eligibility_filter_result": [
+      "eligible",
+      "ineligible",
+      "unknown",
+      "needs_more_information"
+    ],
+    "bpl_required": {
+      "true": "BPL requirement established",
+      "false": "BPL requirement explicitly absent",
+      "null": "not established"
+    },
+    "age_and_income": "Only evaluate against a known bound or limit. Unknown bounds must return unknown.",
+    "state": "Records apply across India unless scheme-specific jurisdiction narrows it; MP state records use Madhya Pradesh."
+  },
+  "public_verification_badges": "Not part of the application dataset. Evidence and completeness are internal audit metadata."
+}

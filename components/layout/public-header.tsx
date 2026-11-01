@@ -6,30 +6,33 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Users2, ArrowRight } from 'lucide-react';
 import { GwaliorMonumentLogo } from '@/components/shared/gwalior-fort-art';
 import { Button } from '@/components/ui/button';
+import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { useLanguage } from '@/lib/i18n';
 import { cn } from '@/lib/utils';
 
 export function PublicHeader() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Swachh Gwalior', href: '/swachh-gwalior' },
-    { label: 'Scheme Exploration', href: '/scheme-exploration' },
-    { label: 'About', href: '/about' },
+    { label: t('nav.home'), href: '/' },
+    { label: t('nav.swachhGwalior'), href: '/swachh-gwalior' },
+    { label: t('nav.schemeExploration'), href: '/scheme-exploration' },
+    { label: t('nav.about'), href: '/about' },
   ];
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/90 bg-white/95 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8">
         {/* Brand / Logo */}
-        <NextLink href="/" className="flex items-center gap-3 group">
-          <GwaliorMonumentLogo className="h-9 w-9 text-amber-700 transition-transform group-hover:scale-105" />
-          <div className="flex flex-col">
-            <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-800 transition-colors">
+        <NextLink href="/" className="flex items-center gap-2 sm:gap-3 group shrink min-w-0">
+          <GwaliorMonumentLogo className="h-8 w-8 sm:h-9 sm:w-9 text-amber-700 transition-transform group-hover:scale-105 shrink-0" />
+          <div className="flex flex-col min-w-0">
+            <span className="text-base sm:text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-800 transition-colors truncate">
               JanSahayak
             </span>
-            <span className="text-[11px] font-medium text-slate-500 tracking-wide uppercase">
+            <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 tracking-wide uppercase truncate">
               Gwalior, Madhya Pradesh
             </span>
           </div>
@@ -60,8 +63,9 @@ export function PublicHeader() {
           })}
         </nav>
 
-        {/* Right Action: Demo Role Selector */}
+        {/* Right Actions: Language Switcher & Demo Role Selector */}
         <div className="hidden md:flex items-center gap-3">
+          <LanguageSwitcher />
           <NextLink href="/demo-role">
             <Button
               variant="default"
@@ -69,21 +73,26 @@ export function PublicHeader() {
               className="bg-blue-700 hover:bg-blue-800 text-white font-medium shadow-xs"
             >
               <Users2 className="h-4 w-4 mr-1" />
-              Demo Roles
+              {t('nav.demoRoles')}
               <ArrowRight className="h-3.5 w-3.5 ml-1" />
             </Button>
           </NextLink>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex md:hidden">
+        {/* Mobile menu button and switcher */}
+        <div className="flex md:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+          <LanguageSwitcher showIcon={false} />
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 focus:outline-none"
+            className="rounded-lg p-1.5 sm:p-2 text-slate-600 hover:bg-slate-100 focus:outline-none shrink-0"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5 sm:h-6 sm:w-6" />
+            ) : (
+              <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+            )}
           </button>
         </div>
       </div>
@@ -113,7 +122,7 @@ export function PublicHeader() {
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white shadow-xs"
             >
               <Users2 className="h-4 w-4" />
-              Select Demo Role
+              {t('nav.selectDemoRole')}
             </NextLink>
           </div>
         </div>

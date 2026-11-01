@@ -1,0 +1,194 @@
+{
+  "channels": [
+    {
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "name": "MP CM Helpline 181",
+      "authority": "Government of Madhya Pradesh",
+      "url": "https://www.cmhelpline.mp.gov.in/",
+      "mode": "phone and portal",
+      "checked_date": "2026-10-31",
+      "source_id": "mp_cmhl_contact"
+    },
+    {
+      "grievance_channel_id": "pmfby_14447",
+      "name": "Krishi Rakshak Portal and Helpline",
+      "authority": "Ministry of Agriculture and Farmers Welfare, Government of India",
+      "url": "https://pmfby.gov.in/",
+      "phone": "14447",
+      "mode": "phone and portal",
+      "checked_date": "2026-10-31",
+      "source_id": "pmfby"
+    },
+    {
+      "grievance_channel_id": "cpgrams",
+      "name": "Centralized Public Grievance Redress and Monitoring System",
+      "authority": "Department of Administrative Reforms and Public Grievances, Government of India",
+      "url": "https://pgportal.gov.in/",
+      "mode": "portal",
+      "checked_date": "2026-10-31",
+      "source_id": "cpgrams_official"
+    },
+    {
+      "grievance_channel_id": "pmjay_14555",
+      "name": "Ayushman Bharat PM-JAY helpline",
+      "authority": "National Health Authority, Government of India",
+      "url": "https://pmjay.gov.in/",
+      "phone": "14555 / 1800-111-565",
+      "mode": "phone",
+      "checked_date": "2026-10-31",
+      "source_id": "nha_pmjay_benefit"
+    },
+    {
+      "grievance_channel_id": "pm_vidyalaxmi_portal_grievance",
+      "name": "PM-Vidyalaxmi portal online grievance mechanism",
+      "authority": "PM-Vidyalaxmi Portal / Department of Higher Education, Ministry of Education",
+      "url": "https://pmvidyalaxmi.co.in/",
+      "mode": "portal",
+      "checked_date": "2026-10-31",
+      "source_id": "pm_vidyalaxmi_portal_faq",
+      "scope_note": "Portal FAQ confirms online grievance mechanism; the portal is an application/status channel with grievances handled through portal workflow. It does not guarantee loan sanction or eligibility."
+    }
+  ],
+  "links": [
+    {
+      "scheme_id": "mp_gaon_ki_beti",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_kalyani_sahayata",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_ladli_behna",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_student_welfare_st",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "pmfby",
+      "grievance_channel_id": "pmfby_14447"
+    },
+    {
+      "scheme_id": "mp_kanya_vivah",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_nikah",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_kalyani_vivah",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_kanya_abhibhavak",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_samagra_pension",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_kisan_kalyan",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_ladli_laxmi",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_nfbs",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_antyeshti",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_udyam_kranti",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "pm_jay",
+      "grievance_channel_id": "pmjay_14555"
+    },
+    {
+      "scheme_id": "mp_disability_marriage",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_disability_scholarship",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_disability_support_grant",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_unmarried_pension",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_labour_education_scholarship",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_pratibha_kiran",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "mp_mmvy",
+      "grievance_channel_id": "mp_cm_helpline_181",
+      "source_id": "mp_cmhl_contact",
+      "relationship_note": "General MP public grievance route; it does not decide scheme eligibility or guarantee resolution."
+    },
+    {
+      "scheme_id": "pm_vidyalaxmi",
+      "grievance_channel_id": "pm_vidyalaxmi_portal_grievance",
+      "source_id": "pm_vidyalaxmi_portal_faq",
+      "relationship_note": "Portal FAQ confirms an online grievance mechanism for portal issues; bank decisions remain with the selected lender."
+    }
+  ]
+}

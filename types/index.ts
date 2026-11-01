@@ -102,3 +102,6 @@ export interface CivicService {
   estimatedDays: string;
   portalUrl?: string;
 }
+
+// Researched 50-Scheme Domain Types
+export * from './schemes';

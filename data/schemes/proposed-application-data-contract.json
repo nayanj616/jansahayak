@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JanSahayak Scheme Finder and Civic Assistant Data Contract (proposal)",
+  "version": "1.0.0-proposal",
+  "status": "proposed_not_implemented",
+  "description": "Read-only application integration contract over the current official scheme records and additive generated explanation, FAQ, search, and RAG datasets. Generated explanations are never government statements. No application code or existing schema is changed.",
+  "source_files": {
+    "official_scheme_record": "data/schemes.json",
+    "source_registry": "data/sources.json",
+    "citizen_content": "data/citizen-content.json",
+    "faqs": "data/scheme-faqs.json",
+    "retrieval_chunks": "data/rag-chunks.json",
+    "search_terms": "data/search-terms.json",
+    "civic_service_relationships": "data/scheme-service-links.json",
+    "grievance_relationships": "data/scheme-grievance-links.json"
+  },
+  "join_keys": {
+    "scheme": "scheme_id",
+    "source": "source_id",
+    "relationship": "scheme_id"
+  },
+  "rules": {
+    "official_facts": "Render factual eligibility, benefit, document, and application values from scheme records only when populated; retain null/empty distinctions.",
+    "generated_explanations": "Render content_origin=generated_explanation_not_official as explanatory text; keep evidence_refs available for auditing and assistant citations.",
+    "unknowns": "Do not convert null, empty arrays, or unknown_information entries into negative eligibility, zero amounts, or absence of a benefit.",
+    "eligibility_filters": "Treat a filter match as unknown if the relevant source field is null/unestablished; do not infer from beneficiary-group description.",
+    "application": "Treat only application_portal/application_steps as researched routes; do not assume informational URLs accept applications.",
+    "assistant": "Retrieve chunks by scheme_id/topic; return source authority, URL, locator, evidence summary, and scheme context with factual answers. When no supported answer exists, return unknown or request current official confirmation."
+  },
+  "records": {
+    "scheme_record": {
+      "ref": "schema/scheme.schema.json",
+      "key": "scheme_id"
+    },
+    "generated_statement": {
+      "required": [
+        "text",
+        "language",
+        "content_origin",
+        "fact_fields",
+        "evidence_refs"
+      ],
+      "content_origin": "generated_explanation_not_official",
+      "evidence_ref_fields": [
+        "scheme_id",
+        "field",
+        "source_id",
+        "evidence_summary",
+        "locator",
+        "source_authority",
+        "source_type",
+        "url"
+      ]
+    },
+    "faq": {
+      "key": "faq_id",
+      "unknown_answer": "answer=null, answer_status=unknown",
+      "evidence": "evidence_refs required for non-null answers"
+    },
+    "rag_chunk": {
+      "key": "chunk_id",
+      "required": [
+        "scheme_id",
+        "topic",
+        "language",
+        "text",
+        "evidence_refs",
+        "source_ids"
+      ]
+    },
+    "search_terms": {
+      "key": "scheme_id",
+      "role": "retrieval_only_not_eligibility_evidence"
+    }
+  },
+  "compatibility_note": "The proposal keeps the existing scheme schema unchanged and stores generated content in separate files. Integration may normalize these files into app DTOs later without migrating the curated scheme facts.",
+  "acceptance_checks": [
+    "Every join target exists.",
+    "Every generated factual statement and non-null FAQ answer carries field/source references.",
+    "Unknown remains distinct from ineligible.",
+    "No public verified/unverified badge is derived from internal research metadata."
+  ]
+}

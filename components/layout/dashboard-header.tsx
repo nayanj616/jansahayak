@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { Menu } from 'lucide-react';
 import { RoleSwitcher } from '@/components/shared/role-switcher';
+import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { useLanguage } from '@/lib/i18n';
 import type { DemoRole } from '@/types';
 
 interface DashboardHeaderProps {
@@ -16,12 +18,14 @@ export function DashboardHeader({
   userName,
   onOpenSidebar,
 }: DashboardHeaderProps) {
+  const { t } = useLanguage();
+
   const greeting =
     role === 'citizen'
-      ? 'Welcome, Citizen'
+      ? t('nav.welcomeCitizen')
       : role === 'worker'
-        ? 'Welcome, Worker'
-        : 'Welcome, Officer';
+        ? t('nav.welcomeWorker')
+        : t('nav.welcomeOfficer');
 
   return (
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur-md sm:px-6 lg:px-8">
@@ -45,7 +49,8 @@ export function DashboardHeader({
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <LanguageSwitcher className="hidden sm:inline-flex" />
         <RoleSwitcher currentRole={role} userName={userName} />
       </div>
     </header>
