@@ -161,3 +161,21 @@ All modules in `lib/gemini/` (`client.ts`, `assistant.ts`, `vision.ts`, `service
 - **`lib/gemini/assistant.ts`:** Text-only civic advisory boundary (`answerCivicQuestion`). (Live conversational model execution is scheduled for Phase 4B.1).
 - **`lib/gemini/vision.ts`:** Multimodal before/after image verification boundary (`analyzeCleanliness`). (Live cleanliness verification is scheduled for Phase 4B.2).
 - **`lib/gemini/service.ts`:** Unified facade providing `getGeminiStatus()` diagnostics for both subsystems, and preserving the `@deprecated getGeminiClient()` alias mapped to the chatbot client for backward compatibility.
+
+---
+
+## 7. Scheme Exploration & Researched Catalogue Architecture
+
+JanSahayak provides a standalone, bilingual Scheme Exploration module backed by a researched dataset of 50 central and state welfare initiatives:
+
+### 1. Researched Scheme Catalogue vs. Runtime Separation
+- **Runtime Application Dataset (`data/schemes/`):** Contains exactly 7 active JSON files loaded by the application (`schemes.json`, `citizen-content.json`, `sources.json`, `scheme-faqs.json`, `search-terms.json`, `scheme-service-links.json`, `scheme-grievance-links.json`). All content represents evidence-supported researched information from official portals and notifications.
+- **Master Research Repository (`research/schemes/codex-output/`):** Preserves original Codex research output, RAG chunks (`rag-chunks.json`), 16 research methodology reports, validation reports, and canonical JSON schemas (`enums.json`, `proposed-application-data-contract.json`, `scheme.schema.json`). Completely isolated from runtime bundling.
+- **Provisional Ward Data (`research/wards/`):** Covers 59 imported Gwalior municipal ward records pending official municipal verification.
+
+### 2. Implemented Functionality vs. Planned Integration
+- **Implemented:** Bilingual Scheme Finder and 7-tab Scheme Detail modal (`overview`, `eligibility`, `benefits`, `documents`, `steps`, `sources`, `faqs`).
+- **Eligibility Engine (`lib/schemes/eligibility.ts`):** 3-state deterministic rule evaluator returning `meets`, `does_not_meet`, or `cannot_determine` (preserving epistemic integrity when scheme data is unestablished).
+- **Portal Link Verification (`lib/schemes/data.ts`):** Direct application links are only surfaced for verified scheme-specific digital portals. Offline programs provide local administrative guidance.
+- **Planned Work (Informational Placeholders):** The Civic Services (Tab 4) and Grievances (Tab 3) tabs currently present bilingual informational placeholders outlining upcoming workflows, pending dedicated dataset integration.
+- **Gemini AI Service Boundaries:** `lib/gemini/assistant.ts` and `lib/gemini/vision.ts` establish configuration verification and type-safe boundaries; live model execution is deferred to Phase 4B.1 and 4B.2.

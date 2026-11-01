@@ -22,18 +22,19 @@ JanSahayak provides a modern TypeScript and Next.js architecture demonstrating t
 
 ## 2. Currently Implemented Features
 
-### Module A: Swachh Gwalior (Phases 1, 2, 3, 3.1)
+### Module A: Swachh Gwalior (Phases 1, 2, 3, 3.1, 4A)
 - **Citizen Grievance Submission:** Geo-tagged sanitation complaint filing with original photo evidence, category selection, landmark description, and automatic device GPS acquisition.
 - **Private Storage Integration:** Original complaint photos and after-cleanup evidence stored in private Supabase Storage buckets, delivered to authorized clients via time-limited signed URLs.
 - **Citizen Dashboard:** Real-time personal complaint list with status indicators, signed image previews, and expandable lifecycle timeline audit modals (`complaint_history`).
 - **Worker Task Management:** Protected sanitation worker dashboard displaying assigned tasks scoped to the worker's account.
 - **Field Cleanup Execution:** Worker task start (`in_progress`) and completion (`under_review`) with mandatory after-cleanup photo evidence upload and remarks.
+- **Municipal Officer Oversight (Phase 4A):** Protected officer dashboard with multi-criteria filtering across 59 provisional GMC wards and categories, worker task dispatch/reassignment, and quality review actions (`approve` -> `resolved`, `rework` -> `rework_required`, `reject` -> `rejected`).
 - **State Machine & Reassignment Integrity:** Enforced status transitions with compensating rollbacks preventing orphaned storage objects or partial database rows.
 
 ### Module B: Scheme Exploration & Public Portals
-- **Scheme Catalog Browser:** Searchable and category-filtered catalog of Madhya Pradesh welfare initiatives (Ladli Bahna, Sambal 2.0, Awas Yojana, etc.).
-- **Civic Services Directory:** Directory of municipal services, birth/death registration, property tax portals, and emergency helplines.
-- **State Grievance Channels:** Guidance for CM Helpline 181, National Consumer Helpline, and Swachhata App.
+- **Researched Scheme Finder:** Bilingual (English/Hindi) search, level/category filtering, and 3-state rule-based eligibility evaluation across 50 researched central and state welfare initiatives.
+- **Comprehensive Scheme Details:** 7-tab modal providing citizen summaries, eligibility rules, benefit breakdowns, required documents, application steps, verified official sources, and bilingual FAQs.
+- **Informational Placeholders:** Bilingual informational guidance for upcoming Civic Services, Grievance Redressal channels, and Civic Assistant features.
 - **Interactive Ward Map:** Client-side Leaflet and OpenStreetMap visualization of Gwalior sectors.
 
 ### Authentication & Authorization
@@ -235,8 +236,11 @@ To run the live database workflows locally:
 ## 8. Current Limitations & Implementation Roadmap
 
 - **Academic Context:** Developed solely for academic demonstration and research.
-- **Provisional Wards:** 59 wards are currently represented in the database as provisional reference boundaries.
-- **Phase 4A (Pending):** Municipal Officer review queue, worker dispatch interface, and final ticket resolution.
-- **Phase 4B (Pending):** Google Gemini multimodal AI before/after cleanliness analysis and conversational civic assistant.
+- **Provisional Wards:** 59 wards are currently represented in the database as provisional reference boundaries pending official municipal verification.
+- **Phase 4A (Completed):** Municipal Officer review queue, worker dispatch interface, multi-criteria filtering, and final complaint resolution.
+- **Phase 4B Foundation (Completed):** Dual-key server-only Gemini architecture initialized for independent chatbot and vision operations.
+- **Phase 4B.1 (Pending):** Conversational Civic Assistant RAG grounded on researched government schemes and municipal services.
+- **Phase 4B.2 (Pending):** Gemini Vision multimodal before/after cleanliness analysis and qualitative rating persisted to `ai_verifications`.
+- **Scheme Exploration (Completed):** Bilingual Scheme Finder and 7-tab Scheme Detail modal covering 50 researched schemes; Civic Services and Grievances tabs remain informational placeholders pending future integration.
 
 Refer to [`docs/roadmap.md`](docs/roadmap.md) for the detailed implementation roadmap.

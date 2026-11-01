@@ -8,13 +8,25 @@
 ## 1. Implementation Phase Breakdown
 
 ```mermaid
-flowchart LR
-    P1["Phase 1<br/>Foundation & UI"] --> P1AB["Phase 1A & 1B<br/>DB & Storage"]
-    P1AB --> P2["Phase 2<br/>Citizen Workflow"]
-    P2 --> P3["Phase 3 & 3.1<br/>Worker Workflow"]
-    P3 --> P32["Phase 3.2<br/>Hygiene & Docs"]
-    P32 --> P4A["Phase 4A<br/>Officer Workflow<br/>(Completed)"]
-    P4A -.-> P4B["Phase 4B<br/>Gemini AI<br/>(Pending)"]
+flowchart TD
+    subgraph SwachhTrack["Module A: Swachh Gwalior"]
+        P1["Phase 1<br/>Foundation & UI"] --> P1AB["Phase 1A & 1B<br/>DB & Storage"]
+        P1AB --> P2["Phase 2<br/>Citizen Workflow"]
+        P2 --> P3["Phase 3 & 3.1<br/>Worker Workflow"]
+        P3 --> P32["Phase 3.2<br/>Hygiene & Docs"]
+        P32 --> P4A["Phase 4A<br/>Officer Workflow<br/>(Completed)"]
+    end
+
+    subgraph GeminiTrack["Gemini AI Architecture"]
+        P4B_Found["Phase 4B Foundation<br/>Dual-Key Client<br/>(Completed)"]
+        P4B_Found -.-> P4B1["Phase 4B.1<br/>Civic RAG Assistant<br/>(Pending)"]
+        P4B_Found -.-> P4B2["Phase 4B.2<br/>Vision Verification<br/>(Pending)"]
+    end
+
+    subgraph SchemeTrack["Module B: Scheme Exploration"]
+        SE_P1["Phase 1<br/>Bilingual Shell & Nav<br/>(Completed)"] --> SE_P2["Phase 2<br/>Scheme Finder & Detail<br/>(Completed)"]
+        SE_P2 -.-> SE_P3["Phase 3+<br/>Civic Services & Grievances<br/>(Pending Integration)"]
+    end
 ```
 
 ---
@@ -92,7 +104,7 @@ flowchart LR
 ---
 
 ### Phase 4A: Municipal Officer Workflow
-**Status:** **COMPLETED (Current Phase)**
+**Status:** **COMPLETED**
 - Live Municipal Officer dashboard (`components/dashboards/officer-view.tsx`) backed by real Supabase data.
 - Server-side prefetching of wards, workers, and complaints with on-demand signed URL generation for evidence photos.
 - Filter toolbar supporting multi-criteria filtering across 59 GMC wards, 12 sanitation categories, and complaint lifecycle statuses.
@@ -103,7 +115,19 @@ flowchart LR
   - `POST /api/complaints/review`: officer quality review actions (`approve` -> `resolved`, `rework` -> `rework_required`, `reject` -> `rejected`).
 - State machine enforcement, immutable `complaint_history` audit logging, and in-app alerts in `notifications`.
 - PostgREST 1-to-many joined assignment normalization (`normalizeActiveAssignment`).
-- Verified test suite: 79/79 Node/TS tests passed, 21/21 Python tests passed, isolated officer E2E script verified (100% pass, zero demo record mutation), 0 ESLint errors, clean production build.
+- Verified test suite: isolated officer E2E script verified (100% pass, zero demo record mutation), 0 ESLint errors, clean production build.
+
+---
+
+### Scheme Exploration Phase 1 & 2: Bilingual Scheme Finder & Detail Modal
+**Status:** **COMPLETED**
+- Standalone runtime dataset of 50 researched government welfare schemes in `data/schemes/` (schemes, citizen content, sources, FAQs, search terms, service links, grievance links).
+- Bilingual React Context (`lib/i18n/`) with English and Hindi dictionary parity and language switcher in public/dashboard headers.
+- Five-tab Scheme Exploration shell (`components/scheme-exploration/scheme-support-shell.tsx`): Scheme Finder, Civic Assistant, Grievances, Civic Services, Verification & Sources.
+- Scheme Finder (`components/scheme-exploration/scheme-finder.tsx`) with search across official names, aliases, and Hindi keywords, level and category filtering, and 3-state eligibility rule evaluation (`meets`, `does_not_meet`, `cannot_determine`).
+- 7-tab Scheme Detail modal (`components/scheme-exploration/scheme-detail-modal.tsx`) covering overview, eligibility, benefits, documents, steps, verified sources, and bilingual FAQs with strict field-level Hindi fallback indicators.
+- Verified application portal validation distinguishing scheme-specific direct digital portals from general department homepages or local physical submission channels.
+- Civic Services and Grievances tabs maintained as clean bilingual informational placeholders pending future data integration.
 
 ---
 
@@ -135,9 +159,18 @@ flowchart LR
 
 ---
 
-## 3. Known Limitations & Academic Demarcation
+## 3. Verified Test Suite Summary
+
+- **Node/TS Automated Unit Tests:** 123/123 tests passing across 11 test suites (`npm test`).
+- **Python Ward Reference Tests:** 21/21 tests passing (`python -m unittest tests/test_ward_import.py`).
+- **Total Automated Test Count:** 144 tests (0 failing).
+- **Static Analysis & Build:** 0 ESLint errors, clean Next.js Turbopack compilation across all 17 routes.
+
+---
+
+## 4. Known Limitations & Academic Demarcation
 
 1. **Academic Demonstration Scope:** JanSahayak is developed as an academic demonstration prototype. It does not possess official integration with the Gwalior Municipal Corporation (GMC) or the Government of Madhya Pradesh.
-2. **Provisional Ward Boundaries:** The 59 wards loaded in the database represent provisional reference boundaries. Official municipal GIS shapefiles and verified supervisor rosters will require official municipal coordination.
+2. **Provisional Ward Boundaries:** The 59 wards loaded in the database represent provisional reference boundaries pending official municipal verification.
 3. **Demo Session Model:** The authentication model utilizes cryptographic server-signed demonstration cookies rather than real citizen phone numbers or SMS OTP gateways.
-4. **Deferred Modules:** The Municipal Officer resolution dashboard and Google Gemini AI verification workflows are staged as design placeholders and will be implemented in Phase 4.
+4. **Deferred Modules:** The Municipal Officer resolution dashboard (Phase 4A) is completed. Google Gemini live model execution workflows (Phase 4B.1 Civic Assistant RAG and Phase 4B.2 Multimodal Cleanliness Verification) have their service boundaries and dual-key clients completed, with live model execution scheduled for subsequent phases. In Scheme Exploration, the Civic Services and Grievances tabs remain informational placeholders pending dedicated data integration.
