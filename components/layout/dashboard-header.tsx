@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Menu } from 'lucide-react';
 import { RoleSwitcher } from '@/components/shared/role-switcher';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { NotificationBell } from '@/components/shared/notification-bell';
 import { useLanguage } from '@/lib/i18n';
 import type { DemoRole } from '@/types';
 
@@ -57,6 +58,9 @@ export function DashboardHeader({
         <div className="sm:hidden">
           <LanguageSwitcher showIcon={false} />
         </div>
+
+        {/* In-App Notification Center */}
+        <NotificationBell />
 
         {/* Active Demo Role Switcher */}
         <RoleSwitcher currentRole={role} userName={userName} />

@@ -10,6 +10,7 @@ import { DashboardHeader } from '../components/layout/dashboard-header';
 import { DashboardSidebar } from '../components/layout/dashboard-sidebar';
 import { DashboardShell } from '../components/layout/dashboard-shell';
 import { RoleSwitcher } from '../components/shared/role-switcher';
+import { NotificationBell } from '../components/shared/notification-bell';
 import { LanguageProvider } from '../lib/i18n';
 
 // Helper to wrap components with LanguageProvider
@@ -181,6 +182,15 @@ test('DashboardHeader: renders role greeting and mobile-visible language switche
   // Language switcher is rendered in both desktop and mobile containers
   assert.ok(html.includes('role="group"'), 'Language switcher must be present in header');
   assert.ok(html.includes('aria-label="Language selector / भाषा चयन"'));
+  // Notification bell is present in header
+  assert.ok(html.includes('aria-label="Notifications"'), 'Notification bell must be present in header');
+});
+
+test('NotificationBell: renders accessible trigger button in isolation', () => {
+  const html = renderToStaticMarkup(React.createElement(NotificationBell));
+  assert.ok(html.includes('aria-label="Notifications"'), 'Must have aria-label="Notifications"');
+  assert.ok(html.includes('aria-haspopup="true"'), 'Must have aria-haspopup="true"');
+  assert.ok(html.includes('aria-expanded="false"'), 'Must have aria-expanded="false"');
 });
 
 test('RoleSwitcher: renders accessible trigger and persona initial', () => {

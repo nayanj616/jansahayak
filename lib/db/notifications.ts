@@ -33,10 +33,12 @@ export async function createNotification(
 
 /**
  * Retrieves notifications for a specific user.
+ * Bounded by limit (default 50) and stably ordered descending by creation date.
  */
 export async function getUserNotifications(
   recipientId: string,
-  unreadOnly: boolean = false
+  unreadOnly: boolean = false,
+  limit: number = 50
 ): Promise<NotificationRecord[]> {
   const db = getDb();
 
@@ -44,7 +46,8 @@ export async function getUserNotifications(
     .from('notifications')
     .select('*')
     .eq('recipient_id', recipientId)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(limit);
 
   if (unreadOnly) {
     query = query.is('read_at', null);
@@ -57,6 +60,27 @@ export async function getUserNotifications(
   }
 
   return (data || []) as NotificationRecord[];
+}
+
+/**
+ * Retrieves a single notification by ID.
+ */
+export async function getNotificationById(
+  id: string
+): Promise<NotificationRecord | null> {
+  const db = getDb();
+
+  const { data, error } = await db
+    .from('notifications')
+    .select('*')
+    .eq('id', id)
+    .maybeSingle();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data as NotificationRecord;
 }
 
 /**
@@ -80,4 +104,3 @@ export async function markNotificationAsRead(
 
   return data as NotificationRecord;
 }
-
