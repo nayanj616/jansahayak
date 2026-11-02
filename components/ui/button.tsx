@@ -1,21 +1,25 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-civic-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer',
   {
     variants: {
       variant: {
-        default: 'bg-blue-700 text-white shadow hover:bg-blue-800 active:bg-blue-900',
-        destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800',
+        primary: 'bg-civic-700 text-white shadow-sm hover:bg-civic-800 active:bg-civic-900',
+        default: 'bg-civic-700 text-white shadow-sm hover:bg-civic-800 active:bg-civic-900',
+        sanitation: 'bg-sanitation-700 text-white shadow-sm hover:bg-sanitation-800 active:bg-sanitation-900',
         outline:
           'border border-slate-300 bg-white text-slate-800 shadow-sm hover:bg-slate-50 hover:text-slate-900',
+        ghost: 'text-slate-700 hover:bg-slate-100 hover:text-slate-900',
+        destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800',
+        link: 'text-civic-700 underline-offset-4 hover:underline p-0 h-auto',
+        // Preserved legacy variants for backward compatibility
         secondary: 'bg-slate-100 text-slate-900 shadow-sm hover:bg-slate-200',
-        ghost: 'hover:bg-slate-100 hover:text-slate-900 text-slate-700',
-        link: 'text-blue-700 underline-offset-4 hover:underline p-0 h-auto',
-        civic: 'bg-blue-800 text-white shadow hover:bg-blue-900',
-        'civic-green': 'bg-emerald-700 text-white shadow hover:bg-emerald-800',
+        civic: 'bg-civic-800 text-white shadow hover:bg-civic-900',
+        'civic-green': 'bg-sanitation-700 text-white shadow hover:bg-sanitation-800',
         'civic-purple': 'bg-indigo-800 text-white shadow hover:bg-indigo-900',
       },
       size: {
@@ -36,18 +40,25 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  isLoading?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, isLoading = false, disabled, children, ...props }, ref) => {
     return (
       <button
-        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        className={cn(buttonVariants({ variant, size, className }))}
+        disabled={disabled || isLoading}
+        aria-busy={isLoading ? true : undefined}
         {...props}
-      />
+      >
+        {isLoading && (
+          <Loader2 className="h-4 w-4 animate-spin shrink-0" aria-hidden="true" />
+        )}
+        {children}
+      </button>
     );
   }
 );
 Button.displayName = 'Button';
-

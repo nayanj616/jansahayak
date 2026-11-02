@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), var(--font-noto-devanagari), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-devanagari: var(--font-noto-devanagari), var(--font-inter), system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Brand: Municipal Deep Blue */
+  --color-civic-50: #eff6ff;
+  --color-civic-100: #dbeafe;
+  --color-civic-200: #bfdbfe;
+  --color-civic-300: #93c5fd;
+  --color-civic-400: #60a5fa;
+  --color-civic-500: #3b82f6;
+  --color-civic-600: #2563eb;
+  --color-civic-700: #1d4ed8;
+  --color-civic-800: #1e40af;
+  --color-civic-900: #1e3a8a;
+  --color-civic-950: #172554;
+
+  /* Supporting: Sanitation Green */
+  --color-sanitation-50: #ecfdf5;
+  --color-sanitation-100: #d1fae5;
+  --color-sanitation-200: #a7f3d0;
+  --color-sanitation-300: #6ee7b7;
+  --color-sanitation-400: #34d399;
+  --color-sanitation-500: #10b981;
+  --color-sanitation-600: #059669;
+  --color-sanitation-700: #047857;
+  --color-sanitation-800: #065f46;
+  --color-sanitation-900: #064e3b;
+  --color-sanitation-950: #022c22;
+
+  /* Accent: Gwalior Heritage Gold */
+  --color-heritage-50: #fffbeb;
+  --color-heritage-100: #fef3c7;
+  --color-heritage-200: #fde68a;
+  --color-heritage-300: #fcd34d;
+  --color-heritage-400: #fbbf24;
+  --color-heritage-500: #f59e0b;
+  --color-heritage-600: #d97706;
+  --color-heritage-700: #b45309;
+  --color-heritage-800: #92400e;
+  --color-heritage-900: #78350f;
+  --color-heritage-950: #451a03;
+
+  /* Semantic Complaint Lifecycle Tokens */
+  --color-status-submitted: #0284c7;
+  --color-status-assigned: #4f46e5;
+  --color-status-progress: #d97706;
+  --color-status-review: #7c3aed;
+  --color-status-resolved: #059669;
+  --color-status-rework: #e11d48;
+  --color-status-rejected: #475569;
+
+  /* Surface & Canvas Tokens */
+  --color-surface-canvas: #f8fafc;
+  --color-surface-card: #ffffff;
+  --color-surface-subtle: #f1f5f9;
+  --color-surface-muted: #e2e8f0;
+
+  /* Border Tokens */
+  --color-border-subtle: #e2e8f0;
+  --color-border-default: #cbd5e1;
+  --color-border-strong: #94a3b8;
+
+  /* Accessible Interactive Focus Tokens */
+  --color-civic-focus: #1d4ed8;
+
+  /* Consistent Radii Tokens */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+:lang(hi) {
+  font-family: var(--font-devanagari);
 }

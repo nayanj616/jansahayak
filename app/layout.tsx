@@ -1,16 +1,19 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, Noto_Sans_Devanagari } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/lib/i18n';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const notoDevanagari = Noto_Sans_Devanagari({
+  variable: '--font-noto-devanagari',
+  subsets: ['devanagari'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -36,9 +39,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${inter.variable} ${notoDevanagari.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-white text-slate-900">
+      <body className="min-h-full flex flex-col font-sans bg-slate-50/50 text-slate-900">
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
