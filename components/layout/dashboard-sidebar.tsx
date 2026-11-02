@@ -13,10 +13,10 @@ import {
   Sparkles,
   FileText,
   BookOpen,
-  MapPin,
   X,
   LucideIcon,
   ShieldAlert,
+  BarChart3,
 } from 'lucide-react';
 import { GwaliorMonumentLogo, GwaliorFortSilhouette } from '@/components/shared/gwalior-fort-art';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
@@ -49,10 +49,10 @@ const WORKER_NAV: NavItem[] = [
 
 const OFFICER_NAV: NavItem[] = [
   { label: 'Command Center', href: '/officer', icon: LayoutDashboard },
-  { label: 'Swachh Gwalior Data', href: '/swachh-gwalior', icon: MapPin },
-  { label: 'Welfare Schemes', href: '/scheme-exploration#finder', icon: Search },
-  { label: 'Grievance Architecture', href: '/scheme-exploration#grievances', icon: FileText },
-  { label: 'Civic Services Portal', href: '/scheme-exploration#services', icon: Building },
+  { label: 'City Grievance Analytics', href: '/officer#analytics', icon: BarChart3 },
+  { label: 'Complaint Queue', href: '/officer#queue', icon: ClipboardList },
+  { label: 'Welfare Schemes Directory', href: '/scheme-exploration', icon: Search },
+  { label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: Sparkles },
   { label: 'Platform Architecture', href: '/about', icon: BookOpen },
 ];
 

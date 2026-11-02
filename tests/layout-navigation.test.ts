@@ -150,18 +150,17 @@ test('DashboardSidebar: Officer navigation items point only to functional destin
 
   assert.ok(html.includes('Officer Command'), 'Role badge for officer');
   assert.ok(html.includes('href="/officer"'), 'Must link to officer dashboard');
-  assert.ok(html.includes('href="/swachh-gwalior"'), 'Must link to sanitation data');
-  assert.ok(html.includes('href="/scheme-exploration#finder"'), 'Must link to scheme finder');
-  assert.ok(html.includes('href="/scheme-exploration#grievances"'), 'Must link to grievances architecture');
-  assert.ok(html.includes('href="/scheme-exploration#services"'), 'Must link to services portal');
-  assert.ok(html.includes('href="/about"'), 'Must link to about architecture');
+  assert.ok(html.includes('href="/officer#analytics"'), 'Must link to officer analytics chart');
+  assert.ok(html.includes('href="/officer#queue"'), 'Must link to officer complaint queue');
+  assert.ok(html.includes('href="/scheme-exploration"'), 'Must link to scheme directory');
+  assert.ok(html.includes('href="/swachh-gwalior"'), 'Must link to sanitation guidelines');
+  assert.ok(html.includes('href="/about"'), 'Must link to platform architecture');
 
   // Verify broken anchors are NOT present
   assert.ok(!html.includes('href="/officer#complaints"'), 'Must NOT have broken #complaints');
   assert.ok(!html.includes('href="/officer#assignments"'), 'Must NOT have broken #assignments');
   assert.ok(!html.includes('href="/officer#ai-verification"'), 'Must NOT have broken #ai-verification');
   assert.ok(!html.includes('href="/officer#ward-view"'), 'Must NOT have broken #ward-view');
-  assert.ok(!html.includes('href="/officer#analytics"'), 'Must NOT have broken #analytics');
 });
 
 // ============================================================================
