@@ -9,7 +9,7 @@ import type { DemoRole } from '@/types';
 interface DashboardShellProps {
   role: DemoRole;
   userName?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export function DashboardShell({ role, userName, children }: DashboardShellProps) {
@@ -17,12 +17,14 @@ export function DashboardShell({ role, userName, children }: DashboardShellProps
 
   return (
     <div className="flex min-h-screen bg-slate-50/70 text-slate-900">
+      {/* Role-specific Sidebar Navigation */}
       <DashboardSidebar
         role={role}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
+      {/* Main Content Area */}
       <div className="flex flex-1 flex-col overflow-x-hidden min-w-0">
         <DashboardHeader
           role={role}
@@ -30,16 +32,19 @@ export function DashboardShell({ role, userName, children }: DashboardShellProps
           onOpenSidebar={() => setSidebarOpen(true)}
         />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
-          {/* Demonstration Notice Banner */}
+        <main
+          id="main-content"
+          className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6"
+        >
+          {/* Demonstration Mode Disclosure Banner */}
           <AlertBanner
             type="info"
             title="Demonstration Mode — Academic Platform"
             className="mb-2"
           >
             This portal is operating in demonstration role access mode for <strong>{role}</strong>.
-            This is an academic evaluation prototype. No real municipal employment, identity
-            verification, or official government authority is implied or recorded.
+            This is an academic evaluation prototype for Gwalior, MP. No real municipal employment, identity
+            verification, or official administrative authority is implied or recorded.
           </AlertBanner>
 
           {children}
@@ -48,4 +53,3 @@ export function DashboardShell({ role, userName, children }: DashboardShellProps
     </div>
   );
 }
-
