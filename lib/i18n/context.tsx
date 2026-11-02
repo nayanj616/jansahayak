@@ -6,6 +6,7 @@ import { enDictionary } from './dictionaries/en';
 import { hiDictionary } from './dictionaries/hi';
 
 const STORAGE_KEY = 'jansahayak_language';
+const EXPLICIT_KEY = 'jansahayak_explicit_choice';
 const COOKIE_NAME = 'jansahayak_lang';
 
 interface LanguageContextValue {
@@ -48,11 +49,13 @@ function subscribe(listener: () => void) {
   listeners = [...listeners, listener];
   if (typeof window !== 'undefined') {
     window.addEventListener('storage', listener);
+    window.addEventListener('popstate', listener);
   }
   return () => {
     listeners = listeners.filter((l) => l !== listener);
     if (typeof window !== 'undefined') {
       window.removeEventListener('storage', listener);
+      window.removeEventListener('popstate', listener);
     }
   };
 }
@@ -62,12 +65,30 @@ function getSnapshot(): Language {
   try {
     const urlParam = new URLSearchParams(window.location.search).get('lang');
     if (urlParam === 'hi' || urlParam === 'en') return urlParam;
-    const cookieMatch = document.cookie.match(/(?:^|; )jansahayak_lang=([^;]+)/);
-    if (cookieMatch && (cookieMatch[1] === 'hi' || cookieMatch[1] === 'en')) {
-      return cookieMatch[1] as Language;
-    }
+
+    const isExplicit = localStorage.getItem(EXPLICIT_KEY) === 'true';
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === 'hi' || stored === 'en') return stored;
+    const cookieMatch = document.cookie.match(/(?:^|; )jansahayak_lang=([^;]+)/);
+    const savedLang =
+      stored === 'hi' || stored === 'en'
+        ? (stored as Language)
+        : cookieMatch && (cookieMatch[1] === 'hi' || cookieMatch[1] === 'en')
+          ? (cookieMatch[1] as Language)
+          : null;
+
+    if (isExplicit && savedLang) {
+      return savedLang;
+    }
+
+    // Role default based on route if no explicit user choice has been made
+    const pathname = window.location.pathname || '';
+    if (pathname.startsWith('/worker')) {
+      return 'hi';
+    }
+
+    if (savedLang) {
+      return savedLang;
+    }
   } catch {
     // Fall back to default
   }
@@ -78,17 +99,45 @@ function getServerSnapshot(): Language {
   return 'en';
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  // SSR-safe external store synchronization without cascading effect renders
-  const language = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+export function LanguageProvider({
+  children,
+  defaultLanguage,
+}: {
+  children?: React.ReactNode;
+  defaultLanguage?: Language;
+}) {
+  const storeLang = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [overrideLang, setOverrideLang] = React.useState<Language | null>(null);
+
+  const language: Language = React.useMemo(() => {
+    if (overrideLang) return overrideLang;
+    if (defaultLanguage) {
+      if (typeof window !== 'undefined') {
+        const isExplicit = localStorage.getItem(EXPLICIT_KEY) === 'true';
+        if (!isExplicit) return defaultLanguage;
+      } else {
+        return defaultLanguage;
+      }
+    }
+    return storeLang;
+  }, [overrideLang, defaultLanguage, storeLang]);
+
+  // Dynamically synchronize document element lang attribute
+  React.useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = language;
+    }
+  }, [language]);
 
   const setLanguage = React.useCallback((newLang: Language) => {
     try {
+      localStorage.setItem(EXPLICIT_KEY, 'true');
       localStorage.setItem(STORAGE_KEY, newLang);
       document.cookie = `${COOKIE_NAME}=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
     } catch {
       // Ignore storage errors
     }
+    setOverrideLang(newLang);
     emitChange();
   }, []);
 
@@ -162,8 +211,25 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 export function useLanguage(): LanguageContextValue {
   const context = React.useContext(LanguageContext);
   if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    // Graceful fallback for isolated component testing or rendering outside LanguageProvider
+    return {
+      language: 'en',
+      setLanguage: () => {},
+      t: (key: string, params?: Record<string, string | number>) => {
+        const val = resolvePath(dictionaries.en as unknown as Record<string, unknown>, key);
+        if (typeof val !== 'string') return key;
+        if (params) {
+          let str = val;
+          for (const [k, v] of Object.entries(params)) {
+            str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
+          }
+          return str;
+        }
+        return val;
+      },
+      fallbackText: (hindiText?: string | null, englishText?: string | null) => englishText || '',
+      isReady: true,
+    };
   }
   return context;
 }
-

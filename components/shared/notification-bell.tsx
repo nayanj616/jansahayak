@@ -13,6 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatDate, cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 import type { NotificationRecord } from '@/types';
 
 interface NotificationBellProps {
@@ -20,6 +21,7 @@ interface NotificationBellProps {
 }
 
 export function NotificationBell({ className }: NotificationBellProps) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = React.useState(false);
   const [notifications, setNotifications] = React.useState<NotificationRecord[]>([]);
   const [unreadCount, setUnreadCount] = React.useState<number>(0);
@@ -153,8 +155,8 @@ export function NotificationBell({ className }: NotificationBellProps) {
         )}
         aria-label={
           unreadCount > 0
-            ? `${unreadCount} unread notification${unreadCount === 1 ? '' : 's'}. Click to view.`
-            : 'Notifications'
+            ? t('notifications.unreadCount', { count: unreadCount })
+            : t('notifications.title')
         }
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -171,13 +173,13 @@ export function NotificationBell({ className }: NotificationBellProps) {
       {isOpen && (
         <div
           role="region"
-          aria-label="Notifications panel"
+          aria-label={t('notifications.title')}
           className="absolute right-0 z-50 mt-2 w-80 sm:w-96 max-w-[calc(100vw-1.5rem)] origin-top-right rounded-2xl border border-slate-200 bg-white shadow-2xl ring-1 ring-black/5 animate-in fade-in-0 zoom-in-95 overflow-hidden"
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-4 py-3">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-semibold text-slate-900">Notifications</h3>
+              <h3 className="text-sm font-semibold text-slate-900">{t('notifications.title')}</h3>
               {unreadCount > 0 && (
                 <Badge variant="submitted" className="text-[10px] py-0 px-1.5">
                   {unreadCount} new
@@ -189,7 +191,7 @@ export function NotificationBell({ className }: NotificationBellProps) {
               onClick={() => fetchNotifications(true)}
               disabled={isLoading}
               className="rounded-md p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-civic-600"
-              aria-label="Refresh notifications"
+              aria-label={t('notifications.bellAria')}
             >
               <RotateCw
                 className={cn('h-3.5 w-3.5', isLoading && 'animate-spin text-civic-600')}
@@ -233,9 +235,9 @@ export function NotificationBell({ className }: NotificationBellProps) {
                 <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-400">
                   <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="text-xs font-semibold text-slate-700">All caught up!</p>
+                <p className="text-xs font-semibold text-slate-700">{t('notifications.emptyTitle')}</p>
                 <p className="text-[11px] text-slate-500 max-w-[220px] mx-auto">
-                  No notifications found for this session. Action updates will appear here.
+                  {t('notifications.emptyDesc')}
                 </p>
               </div>
             )}

@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, RotateCcw, XCircle, Loader2, Sparkles } from 'lucide-react';
 import type { ComplaintWithDetails, VisionVerificationMetrics } from '@/types';
 import { CATEGORY_LABELS } from './officer-types';
+import { useLanguage } from '@/lib/i18n/context';
 
 interface OfficerReviewDialogProps {
   complaint: ComplaintWithDetails | null;
@@ -30,9 +31,11 @@ export function OfficerReviewDialog({
   onSubmit,
   onClose,
 }: OfficerReviewDialogProps) {
+  const { t } = useLanguage();
   if (!complaint) return null;
 
   const metrics = complaint.ai_verification?.metrics as unknown as VisionVerificationMetrics | undefined;
+  const categoryLabel = t(`complaints.categories.${complaint.category}`) || CATEGORY_LABELS[complaint.category] || complaint.category;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs">
@@ -40,16 +43,17 @@ export function OfficerReviewDialog({
         <div className="flex items-start justify-between border-b border-slate-100 pb-3 mb-4">
           <div>
             <h3 className="font-bold text-slate-900 text-sm">
-              Review &amp; Verify Cleanup Operations
+              {t('officer.reviewDialog.title')}
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
-              Complaint {complaint.complaint_code} &bull;{' '}
-              {CATEGORY_LABELS[complaint.category] || complaint.category}
+              {t('officer.reviewDialog.complaintPrefix')} {complaint.complaint_code} &bull;{' '}
+              {categoryLabel}
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
+            aria-label={t('officer.reviewDialog.cancel')}
             className="text-slate-400 hover:text-slate-600 p-1 text-base"
           >
             &times;
@@ -69,17 +73,17 @@ export function OfficerReviewDialog({
               <div className="flex items-center justify-between gap-1 mb-1">
                 <div className="flex items-center gap-1.5 font-bold text-indigo-900 text-[11px]">
                   <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
-                  AI Observational Advisory:
+                  {t('officer.reviewDialog.aiAdvisoryLabel')}
                 </div>
                 <Badge variant="outline" className="text-[10px] bg-white border-indigo-200 text-indigo-700 py-0 capitalize">
-                  {metrics.evaluation.confidenceLevel} confidence
+                  {metrics.evaluation.confidenceLevel} {t('officer.verification.confidence')}
                 </Badge>
               </div>
               <p className="text-[11px] text-slate-800 leading-relaxed">
                 {metrics.officerSummary}
               </p>
               <p className="text-[10px] text-indigo-600/90 mt-1.5 italic">
-                Advisory evidence only. Municipal officer judgment remains 100% authoritative.
+                {t('officer.reviewDialog.aiAdvisoryDisclaimer')}
               </p>
             </div>
           )}
@@ -87,7 +91,7 @@ export function OfficerReviewDialog({
           {/* Review Action Options (Requirement 6) */}
           <div>
             <label className="font-semibold text-slate-700 block mb-2">
-              Select Officer Evaluation Decision *
+              {t('officer.reviewDialog.decisionLabel')}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {/* Approve */}
@@ -108,10 +112,10 @@ export function OfficerReviewDialog({
                 />
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                  Approve
+                  {t('officer.reviewDialog.approve')}
                 </div>
                 <span className="text-[11px] text-slate-500">
-                  Target: <strong>resolved</strong>
+                  {t('officer.reviewDialog.approveTarget')}
                 </span>
               </label>
 
@@ -133,10 +137,10 @@ export function OfficerReviewDialog({
                 />
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <RotateCcw className="h-4 w-4 text-amber-600" />
-                  Rework
+                  {t('officer.reviewDialog.rework')}
                 </div>
                 <span className="text-[11px] text-slate-500">
-                  Target: <strong>rework_req</strong>
+                  {t('officer.reviewDialog.reworkTarget')}
                 </span>
               </label>
 
@@ -158,10 +162,10 @@ export function OfficerReviewDialog({
                 />
                 <div className="flex items-center gap-1.5 font-bold mb-1">
                   <XCircle className="h-4 w-4 text-red-600" />
-                  Reject
+                  {t('officer.reviewDialog.reject')}
                 </div>
                 <span className="text-[11px] text-slate-500">
-                  Target: <strong>rejected</strong>
+                  {t('officer.reviewDialog.rejectTarget')}
                 </span>
               </label>
             </div>
@@ -170,7 +174,7 @@ export function OfficerReviewDialog({
           {/* Remarks Field (Requirement 7) */}
           <div>
             <label className="font-semibold text-slate-700 block mb-1">
-              Evaluation Remarks &amp; Feedback *
+              {t('officer.reviewDialog.remarksLabel')}
             </label>
             <textarea
               rows={4}
@@ -178,17 +182,17 @@ export function OfficerReviewDialog({
               onChange={(e) => onChangeReviewRemarks(e.target.value)}
               placeholder={
                 reviewAction === 'approve'
-                  ? 'e.g. Field cleanup verified against citizen photograph. Waste cleared and lime sanitized.'
+                  ? t('officer.reviewDialog.remarksPlaceholderApprove')
                   : reviewAction === 'rework'
-                  ? 'e.g. Residual debris remains along road curb. Re-sweep and remove roadside rubble.'
-                  : 'e.g. Grievance out of scope for municipal sanitation division.'
+                  ? t('officer.reviewDialog.remarksPlaceholderRework')
+                  : t('officer.reviewDialog.remarksPlaceholderReject')
               }
               className="w-full rounded-lg border border-slate-200 p-2.5 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
               maxLength={1000}
               required
             />
             <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
-              <span>Mandatory audit remarks stored in complaint_history</span>
+              <span>{t('officer.reviewDialog.remarksAuditHelp')}</span>
               <span>{reviewRemarks.length}/1000</span>
             </div>
           </div>
@@ -202,7 +206,7 @@ export function OfficerReviewDialog({
               disabled={isReviewing}
               className="text-xs"
             >
-              Cancel
+              {t('officer.reviewDialog.cancel')}
             </Button>
             <Button
               type="submit"
@@ -219,12 +223,12 @@ export function OfficerReviewDialog({
               {isReviewing ? (
                 <>
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  Saving Decision...
+                  {t('officer.reviewDialog.submitting')}
                 </>
               ) : (
                 <>
                   <CheckCircle2 className="h-3.5 w-3.5" />
-                  Submit Review Decision
+                  {t('officer.reviewDialog.submitDecision')}
                 </>
               )}
             </Button>

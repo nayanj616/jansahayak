@@ -24,6 +24,7 @@ import {
   PhotoPreviewState,
 } from './officer-types';
 import type { ComplaintWithDetails } from '@/types';
+import { useLanguage } from '@/lib/i18n/context';
 
 interface OfficerDetailModalProps {
   complaint: ComplaintWithDetails | null;
@@ -48,6 +49,8 @@ export function OfficerDetailModal({
   onPreviewPhoto,
   onTriggerVerification,
 }: OfficerDetailModalProps) {
+  const { t } = useLanguage();
+
   // Close on Escape key
   React.useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -65,8 +68,10 @@ export function OfficerDetailModal({
     label: complaint.status,
     variant: 'secondary' as const,
   };
+  const localizedStatus = t(`complaints.statuses.${complaint.status}`) || statusInfo.label;
+  const localizedPriority = t(`complaints.priorities.${complaint.priority}`) || complaint.priority;
   const priorityVariant = PRIORITY_BADGES[complaint.priority] || 'default';
-  const categoryLabel = CATEGORY_LABELS[complaint.category] || complaint.category;
+  const categoryLabel = t(`complaints.categories.${complaint.category}`) || CATEGORY_LABELS[complaint.category] || complaint.category;
 
   const citizenImage = complaint.images?.find((img) => img.image_type === 'before' || img.image_type === 'original') || complaint.images?.[0];
   const workerImage = complaint.images?.find((img) => img.image_type === 'after') || complaint.images?.[1];
@@ -99,9 +104,9 @@ export function OfficerDetailModal({
               <h3 id="detail-modal-title" className="text-lg font-bold text-slate-900 font-mono">
                 {complaint.complaint_code}
               </h3>
-              <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
+              <Badge variant={statusInfo.variant}>{localizedStatus}</Badge>
               <Badge variant={priorityVariant} className="capitalize">
-                {complaint.priority} priority
+                {localizedPriority}
               </Badge>
             </div>
             <p className="text-xs text-slate-500 mt-1">
@@ -176,7 +181,7 @@ export function OfficerDetailModal({
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-semibold text-slate-900 text-xs flex items-center gap-1.5">
                 <Layers className="h-3.5 w-3.5 text-civic-700" aria-hidden="true" />
-                Photographic Cleanup Proof & Evidence
+                {t('officer.detailModal.evidenceTitle')}
               </h4>
               {isDetailLoading && (
                 <span className="text-[11px] text-civic-700 flex items-center gap-1">
@@ -192,7 +197,7 @@ export function OfficerDetailModal({
                 <div className="p-2.5 bg-slate-100/70 border-b border-slate-200 flex items-center justify-between">
                   <span className="font-semibold text-xs text-slate-800 flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-red-500" aria-hidden="true" />
-                    Before: Grievance Photo
+                    {t('officer.detailModal.citizenBeforePhoto')}
                   </span>
                   <span className="text-[10px] text-slate-500">Citizen Submission</span>
                 </div>
@@ -203,7 +208,7 @@ export function OfficerDetailModal({
                       onClick={() =>
                         onPreviewPhoto({
                           url: citizenImage.signed_url!,
-                          title: 'Before: Grievance Photo',
+                          title: t('officer.detailModal.citizenBeforePhoto'),
                           subtitle: `Reported on ${formatDate(complaint.created_at)} • ${complaint.complaint_code}`,
                         })
                       }
@@ -223,7 +228,7 @@ export function OfficerDetailModal({
                   ) : (
                     <div className="flex h-full flex-col items-center justify-center text-slate-400 p-4 text-center">
                       <Camera className="h-8 w-8 stroke-[1.2] mb-1" aria-hidden="true" />
-                      <span>No initial photo uploaded</span>
+                      <span>{t('officer.detailModal.noPhotoUploaded')}</span>
                     </div>
                   )}
                 </div>
@@ -234,7 +239,7 @@ export function OfficerDetailModal({
                 <div className="p-2.5 bg-slate-100/70 border-b border-slate-200 flex items-center justify-between">
                   <span className="font-semibold text-xs text-slate-800 flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-                    After: Work Evidence
+                    {t('officer.detailModal.workerAfterPhoto')}
                   </span>
                   <span className="text-[10px] text-slate-500">Field Resolution</span>
                 </div>
@@ -245,7 +250,7 @@ export function OfficerDetailModal({
                       onClick={() =>
                         onPreviewPhoto({
                           url: workerImage.signed_url!,
-                          title: 'After: Cleanup Evidence Photo',
+                          title: t('officer.detailModal.workerAfterPhoto'),
                           subtitle: `Submitted by field staff • ${complaint.complaint_code}`,
                         })
                       }
@@ -289,7 +294,7 @@ export function OfficerDetailModal({
             <div className="flex items-center justify-between mb-2">
               <span className="font-semibold text-slate-900 text-xs flex items-center gap-1.5">
                 <HardHat className="h-3.5 w-3.5 text-amber-600" aria-hidden="true" />
-                Sanitation Worker Assignment
+                {t('officer.detailModal.workerAllocated')}
               </span>
               {activeAssignment && (
                 <Badge variant="secondary" className="capitalize text-[10px]">
@@ -319,7 +324,7 @@ export function OfficerDetailModal({
               </div>
             ) : (
               <p className="text-slate-400 text-xs italic">
-                No active sanitation worker currently dispatched to this complaint.
+                {t('officer.detailModal.noWorkerAssigned')}
               </p>
             )}
           </div>
@@ -328,7 +333,7 @@ export function OfficerDetailModal({
           <div>
             <h4 className="font-semibold text-slate-900 text-xs flex items-center gap-1.5 mb-2">
               <History className="h-3.5 w-3.5 text-civic-700" aria-hidden="true" />
-              Chronological Lifecycle History
+              {t('officer.detailModal.historyTimeline')}
             </h4>
 
             <div className="rounded-xl border border-slate-200 divide-y divide-slate-100 max-h-48 overflow-y-auto bg-white">
@@ -365,7 +370,7 @@ export function OfficerDetailModal({
         {/* Modal Actions Footer */}
         <div className="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
           <Button variant="outline" size="sm" onClick={onClose} className="text-xs">
-            Close View
+            {t('officer.detailModal.closeView')}
           </Button>
 
           <div className="flex items-center gap-2">
@@ -380,7 +385,7 @@ export function OfficerDetailModal({
                 className="text-xs gap-1.5 font-semibold"
               >
                 <ShieldAlert className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Review Cleanup Evidence</span>
+                <span>{t('officer.detailModal.reviewAction')}</span>
               </Button>
             )}
 
@@ -395,7 +400,7 @@ export function OfficerDetailModal({
                 className="text-xs gap-1.5 border-blue-300 text-blue-700 hover:bg-blue-50"
               >
                 <UserCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>{complaint.status === 'rework_required' ? 'Reassign Staff' : 'Assign Staff'}</span>
+                <span>{complaint.status === 'rework_required' ? t('officer.detailModal.reassignAction') : t('officer.detailModal.assignAction')}</span>
               </Button>
             )}
           </div>

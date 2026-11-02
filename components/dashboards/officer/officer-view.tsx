@@ -4,6 +4,7 @@ import * as React from 'react';
 import { RefreshCw, ShieldAlert, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/i18n';
 import { OfficerMetricsBar } from './officer-metrics-bar';
 import { OfficerChartPanel } from './officer-chart-panel';
 import { OfficerFilterToolbar } from './officer-filter-toolbar';
@@ -33,6 +34,7 @@ export function OfficerView({
   wards = [],
   workers = [],
 }: OfficerViewProps) {
+  const { t } = useLanguage();
   const [complaints, setComplaints] = React.useState<ComplaintWithDetails[]>(initialComplaints);
   const [isRefreshing, setIsRefreshing] = React.useState(false);
   const [timeframe, setTimeframe] = React.useState('Last 30 days');
@@ -342,10 +344,10 @@ export function OfficerView({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 font-heading">
-            Municipal Officer Operations
+            {t('officer.dashboardTitle')}
           </h1>
           <p className="text-sm text-slate-500">
-            GMC Sector Grievance Administration &bull; Dispatch &bull; Quality Verification
+            {t('officer.dashboardSubtitle')}
           </p>
         </div>
 
@@ -357,7 +359,7 @@ export function OfficerView({
               className="bg-purple-700 hover:bg-purple-800 text-white text-xs gap-1.5 shadow-xs"
             >
               <ShieldAlert className="h-3.5 w-3.5" />
-              {underReviewCount} Under Review
+              {underReviewCount} {t('officer.underReviewBadge')}
             </Button>
           )}
 
@@ -369,7 +371,7 @@ export function OfficerView({
             className="text-xs gap-1.5"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
-            Refresh Queue
+            {isRefreshing ? t('officer.refreshing') : t('officer.refreshQueue')}
           </Button>
         </div>
       </div>

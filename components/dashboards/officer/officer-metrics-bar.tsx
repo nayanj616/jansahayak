@@ -10,6 +10,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { useLanguage } from '@/lib/i18n';
 
 interface OfficerMetricsBarProps {
   designation: string;
@@ -30,47 +31,50 @@ export function OfficerMetricsBar({
   onFilterByStatus,
   activeStatusFilter,
 }: OfficerMetricsBarProps) {
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
+
   const stats = [
     {
       id: 'all',
-      label: 'Total Grievances',
+      label: t('officer.stats.total'),
       value: totalCount,
       icon: ClipboardList,
       color: 'text-civic-700',
       bgColor: 'bg-civic-50',
       borderColor: 'border-civic-200',
-      description: 'Logged across Gwalior municipal jurisdiction',
+      description: t('officer.stats.totalDesc'),
     },
     {
       id: 'under_review',
-      label: 'Needs Review',
+      label: t('officer.stats.needsReview'),
       value: underReviewCount,
       icon: AlertTriangle,
       color: 'text-purple-700',
       bgColor: 'bg-purple-50',
       borderColor: 'border-purple-200',
       highlight: underReviewCount > 0,
-      description: `${underReviewCount} completed task${underReviewCount === 1 ? '' : 's'} awaiting officer verification`,
+      description: t('officer.stats.needsReviewDesc', { count: underReviewCount }),
     },
     {
       id: 'in_progress',
-      label: 'Active In Progress',
+      label: t('officer.stats.activeInProgress'),
       value: inProgressCount,
       icon: Clock,
       color: 'text-amber-700',
       bgColor: 'bg-amber-50',
       borderColor: 'border-amber-200',
-      description: `${inProgressCount} complaint${inProgressCount === 1 ? '' : 's'} assigned or undergoing field work`,
+      description: t('officer.stats.activeInProgressDesc', { count: inProgressCount }),
     },
     {
       id: 'resolved',
-      label: 'Resolved',
+      label: t('officer.stats.resolved'),
       value: resolvedCount,
       icon: CheckCircle2,
       color: 'text-emerald-700',
       bgColor: 'bg-emerald-50',
       borderColor: 'border-emerald-200',
-      description: `${resolvedCount} verified and resolved grievance${resolvedCount === 1 ? '' : 's'}`,
+      description: t('officer.stats.resolvedDesc', { count: resolvedCount }),
     },
   ];
 
@@ -81,12 +85,17 @@ export function OfficerMetricsBar({
         <div className="flex items-center gap-2">
           <Building2 className="h-4 w-4 text-purple-700 shrink-0" aria-hidden="true" />
           <span>
-            Designation: <strong>{designation}</strong> &bull; Municipal Officer Session
+            {isHi ? 'पदनाम:' : 'Designation:'} <strong>{designation}</strong> &bull;{' '}
+            {isHi ? 'नगर निगम अधिकारी सत्र' : 'Municipal Officer Session'}
           </span>
         </div>
         <div className="flex items-center gap-2 text-purple-700">
           <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-          <span>GMC Evaluation Scope: 59 Provisional Wards Across Gwalior</span>
+          <span>
+            {isHi
+              ? 'जीएमसी मूल्यांकन क्षेत्र: ग्वालियर के 59 नगर निगम वार्ड'
+              : 'GMC Evaluation Scope: 59 Provisional Wards Across Gwalior'}
+          </span>
         </div>
       </div>
 

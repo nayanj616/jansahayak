@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import type { PhotoPreviewState } from './officer-types';
+import { useLanguage } from '@/lib/i18n/context';
 
 interface OfficerPhotoModalProps {
   previewPhoto: PhotoPreviewState | null;
@@ -11,6 +12,7 @@ interface OfficerPhotoModalProps {
 }
 
 export function OfficerPhotoModal({ previewPhoto, onClose }: OfficerPhotoModalProps) {
+  const { t, language } = useLanguage();
   if (!previewPhoto) return null;
 
   return (
@@ -32,6 +34,7 @@ export function OfficerPhotoModal({ previewPhoto, onClose }: OfficerPhotoModalPr
           <button
             type="button"
             onClick={onClose}
+            aria-label={t('common.close')}
             className="text-slate-400 hover:text-slate-600 text-lg p-1"
           >
             &times;
@@ -47,7 +50,7 @@ export function OfficerPhotoModal({ previewPhoto, onClose }: OfficerPhotoModalPr
         </div>
         <div className="flex justify-end pt-2">
           <Button size="sm" variant="outline" onClick={onClose} className="text-xs">
-            Close Inspector
+            {language === 'hi' ? 'निरीक्षण बंद करें' : 'Close Inspector'}
           </Button>
         </div>
       </div>

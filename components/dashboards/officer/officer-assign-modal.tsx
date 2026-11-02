@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader2, UserCheck } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
 import type { ComplaintWithDetails } from '@/types';
 import { CATEGORY_LABELS, type Worker } from './officer-types';
 
@@ -31,7 +32,10 @@ export function OfficerAssignModal({
   onSubmit,
   onClose,
 }: OfficerAssignModalProps) {
+  const { t } = useLanguage();
   if (!complaint) return null;
+
+  const categoryLabel = t(`complaints.categories.${complaint.category}.label`) || CATEGORY_LABELS[complaint.category] || complaint.category;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs">
@@ -40,12 +44,12 @@ export function OfficerAssignModal({
           <div>
             <h3 className="font-bold text-slate-900 text-sm">
               {complaint.status === 'assigned'
-                ? 'Reassign Sanitation Worker'
-                : 'Dispatch Sanitation Field Worker'}
+                ? t('officer.assignModal.titleReassign')
+                : t('officer.assignModal.titleNew')}
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
-              Complaint {complaint.complaint_code} &bull;{' '}
-              {CATEGORY_LABELS[complaint.category] || complaint.category}
+              {t('officer.assignModal.complaintPrefix')} {complaint.complaint_code} &bull;{' '}
+              {categoryLabel}
             </p>
           </div>
           <button
@@ -66,7 +70,7 @@ export function OfficerAssignModal({
 
           <div>
             <label className="font-semibold text-slate-700 block mb-1">
-              Select Sanitation Field Worker *
+              {t('officer.assignModal.selectWorkerLabel')}
             </label>
             <select
               value={selectedWorkerId}
@@ -75,7 +79,7 @@ export function OfficerAssignModal({
               required
             >
               {workers.length === 0 ? (
-                <option value="">No active workers found</option>
+                <option value="">{t('officer.assignModal.noWorkers')}</option>
               ) : (
                 workers.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -85,24 +89,24 @@ export function OfficerAssignModal({
               )}
             </select>
             <p className="text-[11px] text-slate-400 mt-1">
-              Field staff allocated to Sector GWL-W-012 / Morar Central.
+              {t('officer.assignModal.workerSectorHelp')}
             </p>
           </div>
 
           <div>
             <label className="font-semibold text-slate-700 block mb-1">
-              Operational Dispatch Instructions / Remarks
+              {t('officer.assignModal.remarksLabel')}
             </label>
             <textarea
               rows={3}
               value={assignmentNotes}
               onChange={(e) => onChangeAssignmentNotes(e.target.value)}
-              placeholder="e.g. Inspect drainage block near post office corner and clear with hydraulic jetting..."
+              placeholder={t('officer.assignModal.remarksPlaceholder')}
               className="w-full rounded-lg border border-slate-200 p-2.5 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
               maxLength={1000}
             />
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Audited into complaint history remarks upon task dispatch.
+              {t('officer.assignModal.remarksAuditHelp')}
             </p>
           </div>
 
@@ -115,7 +119,7 @@ export function OfficerAssignModal({
               disabled={isAssigning}
               className="text-xs"
             >
-              Cancel
+              {t('officer.assignModal.cancel')}
             </Button>
             <Button
               type="submit"
@@ -126,12 +130,12 @@ export function OfficerAssignModal({
               {isAssigning ? (
                 <>
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  Dispatching...
+                  {t('officer.assignModal.dispatching')}
                 </>
               ) : (
                 <>
                   <UserCheck className="h-3.5 w-3.5" />
-                  Confirm Task Allocation
+                  {t('officer.assignModal.confirmDispatch')}
                 </>
               )}
             </Button>

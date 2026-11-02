@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { ComplaintWithDetails, VisionVerificationMetrics } from '@/types';
+import { useLanguage } from '@/lib/i18n/context';
 
 interface OfficerVerificationCardProps {
   complaint: ComplaintWithDetails;
@@ -26,6 +27,7 @@ export function OfficerVerificationCard({
   verifyError,
   onTriggerVerification,
 }: OfficerVerificationCardProps) {
+  const { t } = useLanguage();
   const [showReverifyConfirm, setShowReverifyConfirm] = React.useState(false);
 
   const verification = complaint.ai_verification;
@@ -45,17 +47,17 @@ export function OfficerVerificationCard({
           <div>
             <div className="flex items-center gap-2">
               <span className="font-bold text-slate-900 text-xs">
-                AI Cleanliness Verification Analysis
+                {t('officer.verification.title')}
               </span>
               <Badge
                 variant="outline"
                 className="text-[10px] bg-indigo-50 border-indigo-200 text-indigo-700 font-medium"
               >
-                {verification?.model_name || 'gemini-3.8-flash'}
+                {verification?.model_name || t('officer.verification.model')}
               </Badge>
             </div>
             <span className="text-[11px] text-slate-500 block">
-              Multimodal comparative observation assisting municipal review.
+              {t('officer.verification.subtitle')}
             </span>
           </div>
         </div>
@@ -65,7 +67,7 @@ export function OfficerVerificationCard({
           {isVerifying ? (
             <div className="flex items-center gap-1.5 text-xs text-indigo-600 font-medium px-2 py-1 bg-indigo-50 rounded-lg">
               <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" />
-              <span>Analyzing with Gemini Vision...</span>
+              <span>{t('officer.verification.analyzing')}</span>
             </div>
           ) : !verification ? (
             <Button
@@ -74,7 +76,7 @@ export function OfficerVerificationCard({
               className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs gap-1.5"
             >
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Run AI Verification</span>
+              <span>{t('officer.verification.runVerification')}</span>
             </Button>
           ) : isFailed ? (
             <Button
@@ -84,7 +86,7 @@ export function OfficerVerificationCard({
               className="text-xs text-red-600 border-red-200 hover:bg-red-50 gap-1.5"
             >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Retry Verification</span>
+              <span>{t('officer.verification.runVerification')}</span>
             </Button>
           ) : (
             <div className="flex items-center gap-1.5">
@@ -96,12 +98,12 @@ export function OfficerVerificationCard({
                 title="Check cached findings"
               >
                 <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Refresh</span>
+                <span>{t('common.filter')}</span>
               </Button>
 
               {showReverifyConfirm ? (
                 <div className="flex items-center gap-1 bg-amber-50 p-1 rounded-lg border border-amber-200 text-[11px]">
-                  <span className="text-amber-800 font-medium">Re-analyze?</span>
+                  <span className="text-amber-800 font-medium">{t('officer.verification.recheckConfirmTitle')}</span>
                   <Button
                     size="sm"
                     onClick={() => {
@@ -110,7 +112,7 @@ export function OfficerVerificationCard({
                     }}
                     className="h-6 px-2 text-[10px] bg-amber-600 hover:bg-amber-700 text-white"
                   >
-                    Confirm
+                    {t('officer.verification.recheckButton')}
                   </Button>
                   <Button
                     size="sm"
@@ -118,7 +120,7 @@ export function OfficerVerificationCard({
                     onClick={() => setShowReverifyConfirm(false)}
                     className="h-6 px-1.5 text-[10px] text-slate-500"
                   >
-                    Cancel
+                    {t('officer.verification.cancelRecheck')}
                   </Button>
                 </div>
               ) : (
@@ -129,7 +131,7 @@ export function OfficerVerificationCard({
                   className="text-xs text-indigo-700 border-indigo-200 hover:bg-indigo-50 gap-1"
                 >
                   <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  <span>Re-run</span>
+                  <span>{t('officer.verification.recheckConfirmTitle')}</span>
                 </Button>
               )}
             </div>
@@ -142,16 +144,16 @@ export function OfficerVerificationCard({
         <div className="p-6 text-center text-xs text-slate-500 flex flex-col items-center justify-center gap-2">
           <Loader2 className="h-6 w-6 animate-spin text-indigo-600" aria-hidden="true" />
           <span className="font-medium text-slate-700">
-            Performing visual comparison with Gemini Vision...
+            {t('officer.verification.analyzing')}
           </span>
           <span className="text-[11px] text-slate-400">
-            Comparing citizen grievance photo against worker cleanup evidence.
+            {t('officer.verification.subtitle')}
           </span>
         </div>
       ) : !verification ? (
         <div className="p-4 rounded-lg bg-indigo-50/40 border border-dashed border-indigo-200 text-center">
           <p className="text-xs text-slate-600 mb-2">
-            Visual evidence analysis has not yet been triggered for this complaint.
+            {t('officer.verification.subtitle')}
           </p>
           <Button
             size="sm"
@@ -159,7 +161,7 @@ export function OfficerVerificationCard({
             className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs gap-1.5"
           >
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>Analyze Evidence Photos</span>
+            <span>{t('officer.verification.runVerification')}</span>
           </Button>
         </div>
       ) : isFailed ? (
@@ -168,7 +170,7 @@ export function OfficerVerificationCard({
             <AlertCircle className="h-4 w-4 text-red-600 shrink-0 mt-0.5" aria-hidden="true" />
             <div className="flex-1">
               <span className="font-semibold text-red-900 text-xs block">
-                Visual Verification Incomplete
+                {t('officer.verification.title')} - {t('errors.generic')}
               </span>
               <span className="text-[11px] text-red-700 mt-0.5 block">
                 {verification.processing_error ||
@@ -176,7 +178,7 @@ export function OfficerVerificationCard({
                   'The vision service encountered a provider timeout or processing error.'}
               </span>
               <p className="text-[11px] text-slate-500 mt-2">
-                Note: Municipal officers retain full authority to review photos manually and approve or request rework below.
+                {t('officer.verification.advisoryDisclaimer')}
               </p>
             </div>
           </div>
@@ -198,7 +200,7 @@ export function OfficerVerificationCard({
                       : 'bg-purple-50 text-purple-700 border-purple-300'
               }`}
             >
-              Confidence: {metrics.evaluation.confidenceLevel}
+              {t('officer.verification.confidence')}: {metrics.evaluation.confidenceLevel}
             </Badge>
 
             {/* Reliability */}
@@ -221,7 +223,7 @@ export function OfficerVerificationCard({
                 variant="outline"
                 className="bg-blue-50 text-blue-700 border-blue-200 text-[11px] font-semibold"
               >
-                ~{metrics.evaluation.wasteReductionEstimate}% Estimated Cleared
+                ~{metrics.evaluation.wasteReductionEstimate}% {t('officer.verification.wasteReduction')}
               </Badge>
             ) : (
               <Badge
@@ -236,7 +238,7 @@ export function OfficerVerificationCard({
           {/* Officer Summary Callout */}
           <div className="rounded-lg bg-indigo-50/70 border border-indigo-100 p-2.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 block mb-0.5">
-              AI Observational Summary
+              {t('officer.verification.observationalSummary')}
             </span>
             <p className="text-slate-800 text-[11px] leading-relaxed">
               {metrics.officerSummary}
@@ -253,7 +255,7 @@ export function OfficerVerificationCard({
             {/* Before Observations */}
             <div className="rounded-lg border border-slate-200 p-2.5 bg-slate-50/50">
               <span className="font-semibold text-slate-700 text-[11px] block mb-1.5">
-                Before Photo Observations:
+                {t('officer.verification.beforeObservations')}
               </span>
               {(metrics.beforeObservations?.wasteIdentified?.length ?? 0) > 0 ? (
                 <div className="flex flex-wrap gap-1 mb-1.5">
@@ -282,7 +284,7 @@ export function OfficerVerificationCard({
             {/* After Observations */}
             <div className="rounded-lg border border-slate-200 p-2.5 bg-slate-50/50">
               <span className="font-semibold text-slate-700 text-[11px] block mb-1.5">
-                After Photo Observations:
+                {t('officer.verification.afterObservations')}
               </span>
               {(metrics.afterObservations?.visibleSurfaces?.length ?? 0) > 0 && (
                 <div className="flex flex-wrap gap-1 mb-1.5">
@@ -298,7 +300,7 @@ export function OfficerVerificationCard({
               )}
               <div>
                 <span className="text-[11px] text-slate-500 font-medium">
-                  Remaining Debris:{' '}
+                  {t('officer.verification.remainingDebris')}{' '}
                 </span>
                 {(metrics.afterObservations?.remainingDebris?.length ?? 0) > 0 ? (
                   <span className="text-amber-700 text-[11px]">
@@ -306,7 +308,7 @@ export function OfficerVerificationCard({
                   </span>
                 ) : (
                   <span className="text-slate-600 text-[11px]">
-                    No significant residual debris visible
+                    {t('officer.verification.noneRemaining')}
                   </span>
                 )}
               </div>
@@ -317,7 +319,7 @@ export function OfficerVerificationCard({
           {(metrics.comparativeFindings?.changesObserved?.length ?? 0) > 0 && (
             <div className="rounded-lg border border-slate-100 bg-slate-50/30 p-2 text-[11px] text-slate-600">
               <span className="font-semibold text-slate-700 block mb-1">
-                Visual Deltas Observed:
+                {t('officer.verification.deltasObserved')}
               </span>
               <ul className="list-disc pl-4 space-y-0.5">
                 {metrics.comparativeFindings.changesObserved.map((change, i) => (
@@ -335,7 +337,7 @@ export function OfficerVerificationCard({
             <div className="rounded-lg bg-amber-50/60 border border-amber-200/80 p-2.5">
               <span className="font-semibold text-amber-900 text-[11px] flex items-center gap-1 mb-1">
                 <AlertTriangle className="h-3.5 w-3.5 text-amber-600" aria-hidden="true" />
-                Comparison Limitations Noted
+                {t('officer.verification.limitationsTitle')}
               </span>
               <div className="flex flex-wrap gap-1.5 mb-1 text-[10px]">
                 {metrics.comparisonLimitations.angleMismatched && (
@@ -364,7 +366,7 @@ export function OfficerVerificationCard({
 
           {/* Advisory Disclaimer Notice */}
           <div className="pt-1 text-[10px] text-slate-400 italic">
-            Advisory Notice: Multimodal observational findings assist the human officer. Municipal officers retain full authority to approve, request rework, or reject complaints.
+            {t('officer.verification.advisoryDisclaimer')}
           </div>
         </div>
       ) : null}

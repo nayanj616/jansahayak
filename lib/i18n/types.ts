@@ -5,6 +5,11 @@
 
 export type Language = 'en' | 'hi';
 
+export interface CategoryTranslation {
+  label: string;
+  desc: string;
+}
+
 export interface TranslationDictionary {
   common: {
     language: string;
@@ -28,6 +33,7 @@ export interface TranslationDictionary {
     allCategories: string;
     noTranslationIndicator: string;
   };
+
   nav: {
     home: string;
     swachhGwalior: string;
@@ -38,7 +44,345 @@ export interface TranslationDictionary {
     welcomeCitizen: string;
     welcomeWorker: string;
     welcomeOfficer: string;
+    commandCenter: string;
+    cityAnalytics: string;
+    complaintQueue: string;
+    welfareDirectory: string;
+    sanitationGuidelines: string;
+    platformArchitecture: string;
+    fieldTasksQueue: string;
+    workerWelfareSchemes: string;
+    civicAssistant: string;
+    grievanceGuidance: string;
+    civicServicesPortal: string;
+    citizenDashboard: string;
   };
+
+  public: {
+    header: {
+      portalTitle: string;
+      portalSubtitle: string;
+      monumentBadge: string;
+    };
+    footer: {
+      rightsReserved: string;
+      academicNotice: string;
+      disclaimer: string;
+      madeWith: string;
+      forGwalior: string;
+    };
+    home: {
+      heroTitle: string;
+      heroSubtitle: string;
+      fileGrievanceCta: string;
+      exploreSchemesCta: string;
+      swachhGwaliorCta: string;
+    };
+  };
+
+  citizen: {
+    dashboardTitle: string;
+    dashboardSubtitle: string;
+    reportComplaint: string;
+    scopeArea: string;
+    activeSession: string;
+    recentComplaints: string;
+    complaintsLogged: string;
+    noComplaintsTitle: string;
+    noComplaintsDesc: string;
+    fileFirstComplaint: string;
+    timeline: string;
+    browseSchemes: string;
+    askAssistant: string;
+    exploreSchemesTitle: string;
+    exploreSchemesDesc: string;
+    civicAssistantTitle: string;
+    civicAssistantDesc: string;
+    reportModal: {
+      title: string;
+      subtitle: string;
+      categoryLabel: string;
+      wardLabel: string;
+      landmarkLabel: string;
+      landmarkPlaceholder: string;
+      descLabel: string;
+      descPlaceholder: string;
+      gpsTitle: string;
+      detecting: string;
+      detectLocation: string;
+      redetectLocation: string;
+      gpsNotSupported: string;
+      gpsAcquiring: string;
+      photoLabel: string;
+      photoUploadPrompt: string;
+      photoUploadHelp: string;
+      removePhoto: string;
+      cancel: string;
+      submit: string;
+      submitting: string;
+      successMessage: string;
+    };
+    historyModal: {
+      title: string;
+      subtitle: string;
+      emptyTitle: string;
+      emptyDesc: string;
+      close: string;
+      statusLabel: string;
+    };
+  };
+
+  worker: {
+    dashboardTitle: string;
+    dashboardSubtitle: string;
+    refreshTasks: string;
+    refreshing: string;
+    personaBadge: string;
+    beatSector: string;
+    division: string;
+    stats: {
+      assigned: string;
+      assignedDesc: string;
+      inProgress: string;
+      inProgressDesc: string;
+      completed: string;
+      completedDesc: string;
+    };
+    tasksTitle: string;
+    tasksSubtitle: string;
+    tabs: {
+      all: string;
+      assigned: string;
+      inProgress: string;
+      completed: string;
+    };
+    empty: {
+      title: string;
+      desc: string;
+    };
+    card: {
+      assignedOn: string;
+      landmark: string;
+      workStarted: string;
+      cleanupCompleted: string;
+      beforeCleanup: string;
+      afterProof: string;
+      noBeforePhoto: string;
+      uploadProof: string;
+      queuedDesc: string;
+      inProgressDesc: string;
+      completedDesc: string;
+      startTask: string;
+      starting: string;
+      completeTaskProof: string;
+      completedBadge: string;
+    };
+    completeModal: {
+      title: string;
+      subtitle: string;
+      afterPhotoLabel: string;
+      takePhotoPrompt: string;
+      photoFormatHelp: string;
+      removePhoto: string;
+      remarksLabel: string;
+      remarksPlaceholder: string;
+      charCount: string;
+      cancel: string;
+      submitProof: string;
+      submittingProof: string;
+      photoRequiredError: string;
+    };
+    photoModal: {
+      closeAria: string;
+      beforeTitle: string;
+      beforeSubtitle: string;
+      afterTitle: string;
+      afterSubtitle: string;
+    };
+  };
+
+  officer: {
+    dashboardTitle: string;
+    dashboardSubtitle: string;
+    refreshQueue: string;
+    refreshing: string;
+    underReviewBadge: string;
+    designationLabel: string;
+    scopeSector: string;
+    stats: {
+      total: string;
+      totalDesc: string;
+      needsReview: string;
+      needsReviewDesc: string;
+      activeInProgress: string;
+      activeInProgressDesc: string;
+      resolved: string;
+      resolvedDesc: string;
+    };
+    analytics: {
+      title: string;
+      subtitle: string;
+      timeframeLabel: string;
+      last7Days: string;
+      last30Days: string;
+      thisQuarter: string;
+    };
+    queue: {
+      title: string;
+      subtitle: string;
+      countOfTotal: string;
+      tabs: {
+        all: string;
+        underReview: string;
+        unassigned: string;
+        inProgress: string;
+        resolved: string;
+      };
+      searchPlaceholder: string;
+      allStatuses: string;
+      allWards: string;
+      allCategories: string;
+      noMatchTitle: string;
+      noMatchDesc: string;
+      resetFilters: string;
+      inspect: string;
+      assign: string;
+      reassign: string;
+      reviewVerify: string;
+    };
+    verification: {
+      title: string;
+      model: string;
+      subtitle: string;
+      runVerification: string;
+      analyzing: string;
+      observationalSummary: string;
+      wasteReduction: string;
+      confidence: string;
+      beforeObservations: string;
+      afterObservations: string;
+      visibleSurfaces: string;
+      remainingDebris: string;
+      noneRemaining: string;
+      deltasObserved: string;
+      limitationsTitle: string;
+      advisoryTitle: string;
+      advisoryDisclaimer: string;
+      recheckConfirmTitle: string;
+      recheckConfirmDesc: string;
+      recheckButton: string;
+      cancelRecheck: string;
+    };
+    assignModal: {
+      titleNew: string;
+      titleReassign: string;
+      complaintPrefix: string;
+      selectWorkerLabel: string;
+      noWorkers: string;
+      workerSectorHelp: string;
+      remarksLabel: string;
+      remarksPlaceholder: string;
+      remarksAuditHelp: string;
+      cancel: string;
+      dispatching: string;
+      confirmDispatch: string;
+    };
+    reviewDialog: {
+      title: string;
+      complaintPrefix: string;
+      aiAdvisoryLabel: string;
+      aiAdvisoryDisclaimer: string;
+      decisionLabel: string;
+      approve: string;
+      approveTarget: string;
+      rework: string;
+      reworkTarget: string;
+      reject: string;
+      rejectTarget: string;
+      remarksLabel: string;
+      remarksPlaceholderApprove: string;
+      remarksPlaceholderRework: string;
+      remarksPlaceholderReject: string;
+      remarksAuditHelp: string;
+      cancel: string;
+      submitting: string;
+      submitDecision: string;
+      mandatoryError: string;
+    };
+    detailModal: {
+      closeView: string;
+      reviewAction: string;
+      assignAction: string;
+      reassignAction: string;
+      inspectionTitle: string;
+      inspectionSubtitle: string;
+      evidenceTitle: string;
+      citizenBeforePhoto: string;
+      workerAfterPhoto: string;
+      noPhotoUploaded: string;
+      workerAllocated: string;
+      noWorkerAssigned: string;
+      historyTimeline: string;
+    };
+  };
+
+  complaints: {
+    categories: {
+      garbage_dump: CategoryTranslation;
+      overflowing_bin: CategoryTranslation;
+      drain_blockage: CategoryTranslation;
+      dead_animal: CategoryTranslation;
+      construction_debris: CategoryTranslation;
+      open_defecation: CategoryTranslation;
+      sweeping_needed: CategoryTranslation;
+      street_cleaning: CategoryTranslation;
+      water_logging: CategoryTranslation;
+      sewage_overflow: CategoryTranslation;
+      solid_waste: CategoryTranslation;
+      other: CategoryTranslation;
+    };
+    statuses: {
+      submitted: string;
+      assigned: string;
+      in_progress: string;
+      under_review: string;
+      rework_required: string;
+      resolved: string;
+      rejected: string;
+    };
+    priorities: {
+      urgent: string;
+      high: string;
+      normal: string;
+      low: string;
+    };
+  };
+
+  notifications: {
+    title: string;
+    emptyTitle: string;
+    emptyDesc: string;
+    markAllRead: string;
+    unreadCount: string;
+    bellAria: string;
+    closeAria: string;
+  };
+
+  validation: {
+    photoRequired: string;
+    wardRequired: string;
+    invalidFileType: string;
+    fileTooLarge: string;
+    remarksRequired: string;
+  };
+
+  errors: {
+    refreshFailed: string;
+    submissionFailed: string;
+    taskStartFailed: string;
+    unexpectedError: string;
+  };
+
   schemeExploration: {
     pageTitle: string;
     pageSubtitle: string;
@@ -237,4 +581,3 @@ export interface TranslationDictionary {
     };
   };
 }
-

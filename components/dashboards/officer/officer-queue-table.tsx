@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { EmptyState } from '@/components/ui/empty-state';
 import { formatDate } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 import { CATEGORY_LABELS, STATUS_CONFIG, PRIORITY_BADGES } from './officer-types';
 import type { ComplaintWithDetails } from '@/types';
 
@@ -38,14 +39,16 @@ export function OfficerQueueTable({
   onResetFilters,
   onPreviewPhoto,
 }: OfficerQueueTableProps) {
+  const { t } = useLanguage();
+
   if (complaints.length === 0) {
     return (
       <CardContent className="p-0">
         <div className="py-12">
           <EmptyState
             icon={ClipboardList}
-            title="No complaints match active filters"
-            description="Try clearing the status, ward, or category filters to view other city complaints."
+            title={t('officer.queue.noMatchTitle')}
+            description={t('officer.queue.noMatchDesc')}
             action={
               <Button
                 variant="outline"
@@ -53,7 +56,7 @@ export function OfficerQueueTable({
                 onClick={onResetFilters}
                 className="text-xs"
               >
-                Reset All Filters
+                {t('officer.queue.resetFilters')}
               </Button>
             }
           />
@@ -66,12 +69,22 @@ export function OfficerQueueTable({
     <CardContent className="p-0">
       <div className="divide-y divide-slate-100">
         {complaints.map((c) => {
-          const statusInfo = STATUS_CONFIG[c.status] || {
-            label: c.status,
-            variant: 'secondary' as const,
+          const localizedStatus = t(`complaints.statuses.${c.status}`);
+          const statusInfo = {
+            label: (localizedStatus && localizedStatus !== `complaints.statuses.${c.status}`)
+              ? localizedStatus
+              : STATUS_CONFIG[c.status]?.label || c.status,
+            variant: (STATUS_CONFIG[c.status]?.variant || 'secondary') as React.ComponentProps<typeof Badge>['variant'],
           };
+          const localizedPriority = t(`complaints.priorities.${c.priority}`);
+          const priorityLabel = (localizedPriority && localizedPriority !== `complaints.priorities.${c.priority}`)
+            ? localizedPriority
+            : c.priority;
           const priorityVariant = PRIORITY_BADGES[c.priority] || 'default';
-          const categoryLabel = CATEGORY_LABELS[c.category] || c.category;
+          const localizedCategory = t(`complaints.categories.${c.category}.label`);
+          const categoryLabel = (localizedCategory && localizedCategory !== `complaints.categories.${c.category}.label`)
+            ? localizedCategory
+            : CATEGORY_LABELS[c.category] || c.category;
           const activeAssignment =
             (c.current_or_latest_assignment && !Array.isArray(c.current_or_latest_assignment)
               ? c.current_or_latest_assignment
@@ -130,7 +143,7 @@ export function OfficerQueueTable({
                     </span>
                     <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
                     <Badge variant={priorityVariant} className="capitalize">
-                      {c.priority}
+                      {priorityLabel}
                     </Badge>
                     <span className="text-[11px] text-slate-400 flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
@@ -184,7 +197,7 @@ export function OfficerQueueTable({
                   className="text-xs h-8 gap-1.5"
                 >
                   <Eye className="h-3.5 w-3.5 text-slate-500" />
-                  <span>Inspect</span>
+                  <span>{t('officer.queue.inspect')}</span>
                 </Button>
 
                 {/* 2. Worker Assignment Button */}
@@ -196,7 +209,7 @@ export function OfficerQueueTable({
                     className="text-xs h-8 gap-1.5 border-blue-300 text-blue-700 hover:bg-blue-50"
                   >
                     <UserCheck className="h-3.5 w-3.5" />
-                    <span>{c.status === 'rework_required' ? 'Reassign' : 'Assign'}</span>
+                    <span>{c.status === 'rework_required' ? t('officer.queue.reassign') : t('officer.queue.assign')}</span>
                   </Button>
                 )}
 
@@ -209,7 +222,7 @@ export function OfficerQueueTable({
                     className="text-xs h-8 gap-1.5 font-semibold shadow-xs"
                   >
                     <CheckCircle2 className="h-3.5 w-3.5" />
-                    <span>Review & Verify</span>
+                    <span>{t('officer.queue.reviewVerify')}</span>
                   </Button>
                 )}
               </div>

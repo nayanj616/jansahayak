@@ -20,10 +20,12 @@ import {
 } from 'lucide-react';
 import { GwaliorMonumentLogo, GwaliorFortSilhouette } from '@/components/shared/gwalior-fort-art';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { useLanguage } from '@/lib/i18n';
 import type { DemoRole } from '@/types';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
+  key?: string;
   label: string;
   href: string;
   icon: LucideIcon;
@@ -31,29 +33,29 @@ interface NavItem {
 }
 
 const CITIZEN_NAV: NavItem[] = [
-  { label: 'Citizen Dashboard', href: '/citizen', icon: LayoutDashboard },
-  { label: 'Swachh Gwalior Portal', href: '/swachh-gwalior', icon: Sparkles },
-  { label: 'Welfare Schemes', href: '/scheme-exploration#finder', icon: Search },
-  { label: 'Civic AI Assistant', href: '/scheme-exploration#assistant', icon: Bot },
-  { label: 'Grievance Guidance', href: '/scheme-exploration#grievances', icon: HelpCircle },
-  { label: 'Civic Services Portal', href: '/scheme-exploration#services', icon: Building },
+  { key: 'nav.citizenDashboard', label: 'Citizen Dashboard', href: '/citizen', icon: LayoutDashboard },
+  { key: 'nav.swachhGwalior', label: 'Swachh Gwalior Portal', href: '/swachh-gwalior', icon: Sparkles },
+  { key: 'nav.welfareDirectory', label: 'Welfare Schemes', href: '/scheme-exploration#finder', icon: Search },
+  { key: 'nav.civicAssistant', label: 'Civic AI Assistant', href: '/scheme-exploration#assistant', icon: Bot },
+  { key: 'nav.grievanceGuidance', label: 'Grievance Guidance', href: '/scheme-exploration#grievances', icon: HelpCircle },
+  { key: 'nav.civicServicesPortal', label: 'Civic Services Portal', href: '/scheme-exploration#services', icon: Building },
 ];
 
 const WORKER_NAV: NavItem[] = [
-  { label: 'Field Tasks Queue', href: '/worker', icon: ClipboardList },
-  { label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: FileText },
-  { label: 'Worker Welfare Schemes', href: '/scheme-exploration#finder', icon: Search },
-  { label: 'Civic AI Assistant', href: '/scheme-exploration#assistant', icon: Bot },
-  { label: 'Grievance Guidance', href: '/scheme-exploration#grievances', icon: HelpCircle },
+  { key: 'nav.fieldTasksQueue', label: 'Field Tasks Queue', href: '/worker', icon: ClipboardList },
+  { key: 'nav.sanitationGuidelines', label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: FileText },
+  { key: 'nav.workerWelfareSchemes', label: 'Worker Welfare Schemes', href: '/scheme-exploration#finder', icon: Search },
+  { key: 'nav.civicAssistant', label: 'Civic AI Assistant', href: '/scheme-exploration#assistant', icon: Bot },
+  { key: 'nav.grievanceGuidance', label: 'Grievance Guidance', href: '/scheme-exploration#grievances', icon: HelpCircle },
 ];
 
 const OFFICER_NAV: NavItem[] = [
-  { label: 'Command Center', href: '/officer', icon: LayoutDashboard },
-  { label: 'City Grievance Analytics', href: '/officer#analytics', icon: BarChart3 },
-  { label: 'Complaint Queue', href: '/officer#queue', icon: ClipboardList },
-  { label: 'Welfare Schemes Directory', href: '/scheme-exploration', icon: Search },
-  { label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: Sparkles },
-  { label: 'Platform Architecture', href: '/about', icon: BookOpen },
+  { key: 'nav.commandCenter', label: 'Command Center', href: '/officer', icon: LayoutDashboard },
+  { key: 'nav.cityAnalytics', label: 'City Grievance Analytics', href: '/officer#analytics', icon: BarChart3 },
+  { key: 'nav.complaintQueue', label: 'Complaint Queue', href: '/officer#queue', icon: ClipboardList },
+  { key: 'nav.welfareDirectory', label: 'Welfare Schemes Directory', href: '/scheme-exploration', icon: Search },
+  { key: 'nav.sanitationGuidelines', label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: Sparkles },
+  { key: 'nav.platformArchitecture', label: 'Platform Architecture', href: '/about', icon: BookOpen },
 ];
 
 interface DashboardSidebarProps {
@@ -64,6 +66,8 @@ interface DashboardSidebarProps {
 
 export function DashboardSidebar({ role, isOpen, onClose }: DashboardSidebarProps) {
   const pathname = usePathname();
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
 
   // Escape key handler to close mobile drawer
   React.useEffect(() => {
@@ -85,15 +89,15 @@ export function DashboardSidebar({ role, isOpen, onClose }: DashboardSidebarProp
 
   const roleConfig = {
     citizen: {
-      portalTitle: 'Citizen Portal',
+      portalTitle: isHi ? 'नागरिक पोर्टल' : 'Citizen Portal',
       badgeClass: 'bg-emerald-50 text-emerald-800 border-emerald-200',
     },
     worker: {
-      portalTitle: 'Field Worker Portal',
+      portalTitle: isHi ? 'सफाई मित्र पोर्टल' : 'Field Worker Portal',
       badgeClass: 'bg-civic-50 text-civic-800 border-civic-200',
     },
     officer: {
-      portalTitle: 'Officer Command',
+      portalTitle: isHi ? 'अधिकारी नियंत्रण' : 'Officer Command',
       badgeClass: 'bg-purple-50 text-purple-800 border-purple-200',
     },
   }[role];
@@ -180,7 +184,7 @@ export function DashboardSidebar({ role, isOpen, onClose }: DashboardSidebarProp
                   )}
                   aria-hidden="true"
                 />
-                <span className="flex-1 truncate">{item.label}</span>
+                <span className="flex-1 truncate">{item.key ? t(item.key) : item.label}</span>
               </Link>
             );
           })}

@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { useLanguage } from '@/lib/i18n';
 import { CATEGORY_LABELS } from './officer-types';
 import type { WardRecord } from '@/types';
 
@@ -41,12 +42,14 @@ export function OfficerFilterToolbar({
   setSearchQuery,
   wards,
 }: OfficerFilterToolbarProps) {
+  const { t } = useLanguage();
+
   const tabs = [
-    { id: 'all', label: 'All' },
-    { id: 'under_review', label: 'Under Review', count: underReviewCount },
-    { id: 'submitted', label: 'Unassigned', count: unassignedCount },
-    { id: 'in_progress', label: 'In Progress', count: inProgressCount },
-    { id: 'resolved', label: 'Resolved' },
+    { id: 'all', label: t('officer.queue.tabs.all') },
+    { id: 'under_review', label: t('officer.queue.tabs.underReview'), count: underReviewCount },
+    { id: 'submitted', label: t('officer.queue.tabs.unassigned'), count: unassignedCount },
+    { id: 'in_progress', label: t('officer.queue.tabs.inProgress'), count: inProgressCount },
+    { id: 'resolved', label: t('officer.queue.tabs.resolved') },
   ];
 
   return (
@@ -55,14 +58,14 @@ export function OfficerFilterToolbar({
         <div>
           <div className="flex items-center gap-2">
             <CardTitle className="text-base font-semibold text-slate-900">
-              Officer Complaint Queue
+              {t('officer.queue.title')}
             </CardTitle>
             <Badge variant="secondary" className="text-[11px]">
-              {filteredCount} of {totalCount} complaints
+              {t('officer.queue.countOfTotal', { filtered: filteredCount, total: totalCount })}
             </Badge>
           </div>
           <CardDescription className="text-xs mt-0.5">
-            Review citizen complaints, allocate field sanitation staff, and verify cleanup evidence
+            {t('officer.queue.subtitle')}
           </CardDescription>
         </div>
 
@@ -105,7 +108,7 @@ export function OfficerFilterToolbar({
         <div className="relative">
           <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-400 pointer-events-none" aria-hidden="true" />
           <Input
-            placeholder="Search code, landmark..."
+            placeholder={t('officer.queue.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-8 text-xs h-9"
@@ -121,14 +124,14 @@ export function OfficerFilterToolbar({
             aria-label="Filter by complaint status"
             className="w-full h-9 rounded-lg border border-slate-300 bg-white px-2.5 text-xs text-slate-700 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-civic-600 cursor-pointer"
           >
-            <option value="all">All Statuses</option>
-            <option value="under_review">Under Review (Needs Approval)</option>
-            <option value="submitted">Submitted (New / Unassigned)</option>
-            <option value="assigned">Assigned (Worker Allocated)</option>
-            <option value="in_progress">In Progress (Work Underway)</option>
-            <option value="rework_required">Rework Required</option>
-            <option value="resolved">Resolved (Approved)</option>
-            <option value="rejected">Rejected</option>
+            <option value="all">{t('officer.queue.allStatuses')}</option>
+            <option value="under_review">{t('complaints.statuses.under_review')}</option>
+            <option value="submitted">{t('complaints.statuses.submitted')}</option>
+            <option value="assigned">{t('complaints.statuses.assigned')}</option>
+            <option value="in_progress">{t('complaints.statuses.in_progress')}</option>
+            <option value="rework_required">{t('complaints.statuses.rework_required')}</option>
+            <option value="resolved">{t('complaints.statuses.resolved')}</option>
+            <option value="rejected">{t('complaints.statuses.rejected')}</option>
           </select>
         </div>
 
@@ -140,7 +143,7 @@ export function OfficerFilterToolbar({
             aria-label="Filter by municipal ward"
             className="w-full h-9 rounded-lg border border-slate-300 bg-white px-2.5 text-xs text-slate-700 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-civic-600 cursor-pointer"
           >
-            <option value="all">All Wards (59 GMC Wards)</option>
+            <option value="all">{t('officer.queue.allWards')}</option>
             {wards.map((w) => {
               const id = w.ward_id || (w as unknown as { id?: string }).id || '';
               const num = w.ward_no ?? (w as unknown as { ward_number?: number }).ward_number ?? 0;
@@ -161,10 +164,10 @@ export function OfficerFilterToolbar({
             aria-label="Filter by sanitation category"
             className="w-full h-9 rounded-lg border border-slate-300 bg-white px-2.5 text-xs text-slate-700 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-civic-600 cursor-pointer"
           >
-            <option value="all">All Categories</option>
-            {Object.entries(CATEGORY_LABELS).map(([catKey, catLabel]) => (
+            <option value="all">{t('officer.queue.allCategories')}</option>
+            {Object.entries(CATEGORY_LABELS).map(([catKey, defaultLabel]) => (
               <option key={catKey} value={catKey}>
-                {catLabel}
+                {t(`complaints.categories.${catKey}.label`) || defaultLabel}
               </option>
             ))}
           </select>

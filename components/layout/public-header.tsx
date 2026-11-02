@@ -47,7 +47,7 @@ export function PublicHeader() {
               JanSahayak
             </span>
             <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 tracking-wide uppercase truncate">
-              Gwalior, Madhya Pradesh
+              {t('common.gwaliorMadhyaPradesh')}
             </span>
           </div>
         </NextLink>
