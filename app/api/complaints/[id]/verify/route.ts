@@ -14,6 +14,7 @@ import {
   analyzeCleanliness,
   VISION_PROMPT_VERSION,
   SUPPORTED_VISION_MIME_TYPES,
+  VisionProviderError,
   type SupportedVisionMimeType,
 } from '@/lib/gemini/vision';
 import { MAX_FILE_SIZE_BYTES } from '@/lib/validation/storage';
@@ -236,6 +237,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     }
 
     // 8. Invoke Gemini Vision Analysis
+    const startTime = Date.now();
     try {
       const analysis = await analyzeCleanliness(
         { buffer: beforeBuffer, mimeType: beforeMime },
@@ -256,24 +258,60 @@ export async function POST(request: NextRequest, context: RouteContext) {
         message: 'Visual verification completed successfully.',
       });
     } catch (visionError) {
-      console.error('[API /api/complaints/[id]/verify] Vision model error:', visionError);
-      const sanitized =
-        visionError instanceof Error
-          ? visionError.message
-          : 'Visual verification model processing failed.';
+      const durationMs = Date.now() - startTime;
+
+      let userMessage: string;
+      let responseStatus = 502;
+      let errorClassification = 'UNKNOWN_ERROR';
+      let attempts = 1;
+      let httpStatus = 502;
+
+      if (visionError instanceof VisionProviderError) {
+        userMessage = visionError.userMessage;
+        errorClassification = visionError.classification;
+        attempts = visionError.attempts;
+        httpStatus = visionError.httpStatus;
+        if (visionError.httpStatus === 503) {
+          responseStatus = 503;
+        } else if (visionError.httpStatus === 429) {
+          responseStatus = 429;
+        } else {
+          responseStatus = 502;
+        }
+      } else if (visionError instanceof Error) {
+        userMessage = visionError.message.startsWith('[JanSahayak Gemini Vision Error]')
+          ? visionError.message.replace(/^\[JanSahayak Gemini Vision Error\]\s*/, '')
+          : visionError.message;
+        responseStatus = 502;
+      } else {
+        userMessage = 'Visual verification model processing failed.';
+        responseStatus = 502;
+      }
+
+      // Safe structured server-side diagnostic logging (strictly no secrets/keys)
+      console.error('[JanSahayak Vision Verification Failure]', {
+        complaintId: id,
+        verificationId: pendingRecord.id,
+        model,
+        errorClassification,
+        httpStatus,
+        attempts,
+        durationMs,
+        downloadSuccess: true,
+      });
 
       const failedRecord = await updateAiVerificationToFailed({
         id: pendingRecord.id,
-        processing_error: sanitized,
+        processing_error: userMessage,
       });
 
       return NextResponse.json(
         {
           error: 'Vision verification failed',
-          message: sanitized,
+          message: userMessage,
           verification: failedRecord,
         },
-        { status: 502 }
+        { status: responseStatus }
       );
     }
   } catch (error) {
