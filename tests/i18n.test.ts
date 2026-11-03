@@ -12,6 +12,7 @@ import {
 } from '@/lib/errors';
 import { getLatestAiVerification } from '@/lib/verifications';
 import type { AiVerificationRecord } from '@/types';
+import { translate, translateArray, formatSafeFallback } from '@/lib/i18n/translate';
 
 // ============================================================================
 // 1. DICTIONARY STRUCTURE & KEY PARITY TESTS
@@ -394,6 +395,156 @@ test('Verification History: getLatestAiVerification selects latest record by tim
   // Null / empty array
   assert.strictEqual(getLatestAiVerification(null), null);
   assert.strictEqual(getLatestAiVerification([]), null);
+});
+
+// ============================================================================
+// 8. FOCUSED TRANSLATION FALLBACK & ARRAY TESTS
+// ============================================================================
+
+test('i18n Fallback: 1. Valid English translation returns exact dictionary string', () => {
+  const enApp = translate('en', 'common.appName');
+  const enStatus = translate('en', 'common.status');
+  assert.strictEqual(enApp, 'JanSahayak');
+  assert.strictEqual(enStatus, 'Status');
+});
+
+test('i18n Fallback: 2. Valid Hindi translation returns exact dictionary string', () => {
+  const hiApp = translate('hi', 'common.appName');
+  const hiStatus = translate('hi', 'common.status');
+  assert.strictEqual(hiApp, 'जनसहायक');
+  assert.strictEqual(hiStatus, 'स्थिति');
+});
+
+test('i18n Fallback: 3. Unknown translation key returns localized generic fallback, never humanized internal key', () => {
+  const enUnknown = translate('en', 'some.completely.unknown.key');
+  const hiUnknown = translate('hi', 'some.completely.unknown.key');
+
+  assert.strictEqual(enUnknown, 'Not available');
+  assert.strictEqual(hiUnknown, 'उपलब्ध नहीं');
+
+  // Must NEVER return raw key or humanized identifier
+  assert.notStrictEqual(enUnknown, 'some.completely.unknown.key');
+  assert.notStrictEqual(enUnknown, 'Key');
+  assert.notStrictEqual(hiUnknown, 'some.completely.unknown.key');
+});
+
+test('i18n Fallback: 4. Unknown error key (e.g. errors.unknownSomething) returns localized generic error', () => {
+  const enErr = translate('en', 'errors.unknownSomething');
+  const hiErr = translate('hi', 'errors.unknownSomething');
+
+  assert.strictEqual(enErr, 'An unexpected error occurred. Please try again.');
+  assert.strictEqual(hiErr, 'एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।');
+  assert.notStrictEqual(enErr, 'errors.unknownSomething');
+  assert.notStrictEqual(enErr, 'Unknown Something');
+});
+
+test('i18n Fallback: 5. Category object with .label returns label string', () => {
+  const enCat = translate('en', 'complaints.categories.garbage_dump');
+  const hiCat = translate('hi', 'complaints.categories.garbage_dump');
+
+  assert.strictEqual(enCat, enDictionary.complaints.categories.garbage_dump.label);
+  assert.strictEqual(hiCat, hiDictionary.complaints.categories.garbage_dump.label);
+  assert.strictEqual(enCat, 'Open Garbage Dump');
+  assert.strictEqual(hiCat, 'खुला कचरा डंप');
+});
+
+test('i18n Fallback: 6. Category object without .label returns safe localized fallback', () => {
+  // A section object without a .label (e.g. validation dictionary)
+  const enNoLabel = translate('en', 'validation');
+  const hiNoLabel = translate('hi', 'validation');
+
+  assert.strictEqual(enNoLabel, 'Not available');
+  assert.strictEqual(hiNoLabel, 'उपलब्ध नहीं');
+  assert.ok(!enNoLabel.includes('[object Object]'));
+  assert.ok(!hiNoLabel.includes('[object Object]'));
+});
+
+test('i18n Fallback: 7. Object passed to t() returns safe localized fallback', () => {
+  const objKey = { foo: 'bar' } as unknown as string;
+  const enResult = translate('en', objKey);
+  const hiResult = translate('hi', objKey);
+
+  assert.strictEqual(enResult, 'Not available');
+  assert.strictEqual(hiResult, 'उपलब्ध नहीं');
+  assert.ok(!enResult.includes('[object Object]'));
+  assert.ok(!hiResult.includes('[object Object]'));
+});
+
+test('i18n Fallback: 8. Array passed to t() is not returned or stringified into UI', () => {
+  const arrKey = 'schemeExploration.assistant.suggestedQuestions';
+  const enResult = translate('en', arrKey);
+  const hiResult = translate('hi', arrKey);
+
+  // t() must return a valid string, never an array and never comma-separated array strings
+  assert.strictEqual(typeof enResult, 'string');
+  assert.strictEqual(typeof hiResult, 'string');
+  assert.strictEqual(enResult, 'Not available');
+  assert.strictEqual(hiResult, 'उपलब्ध नहीं');
+  assert.ok(!enResult.includes(','));
+});
+
+test('i18n Fallback: 9. Valid array through tArray() returns translated string array', () => {
+  const enQuestions = translateArray('en', 'schemeExploration.assistant.suggestedQuestions');
+  const hiQuestions = translateArray('hi', 'schemeExploration.assistant.suggestedQuestions');
+
+  assert.ok(Array.isArray(enQuestions));
+  assert.ok(Array.isArray(hiQuestions));
+  assert.ok(enQuestions.length > 0);
+  assert.ok(hiQuestions.length > 0);
+  assert.strictEqual(typeof enQuestions[0], 'string');
+  assert.strictEqual(typeof hiQuestions[0], 'string');
+  assert.strictEqual(enQuestions[0], enDictionary.schemeExploration.assistant.suggestedQuestions[0]);
+  assert.strictEqual(hiQuestions[0], hiDictionary.schemeExploration.assistant.suggestedQuestions[0]);
+});
+
+test('i18n Fallback: 10. Missing array through tArray() returns empty array safely', () => {
+  const missing = translateArray('en', 'schemeExploration.assistant.nonexistentArray');
+  const notAnArray = translateArray('en', 'common.appName'); // points to string
+  const invalidKey = translateArray('en', '' as unknown as string);
+
+  assert.deepStrictEqual(missing, []);
+  assert.deepStrictEqual(notAnArray, []);
+  assert.deepStrictEqual(invalidKey, []);
+});
+
+test('i18n Fallback: 11. Malformed translation values return safe localized fallback', () => {
+  assert.strictEqual(translate('en', null as unknown as string), 'Not available');
+  assert.strictEqual(translate('hi', undefined as unknown as string), 'उपलब्ध नहीं');
+  assert.strictEqual(translate('en', 12345 as unknown as string), 'Not available');
+  assert.strictEqual(translate('en', ''), 'Not available');
+  assert.strictEqual(translate('hi', '   '), 'उपलब्ध नहीं');
+  assert.deepStrictEqual(translateArray('en', null as unknown as string), []);
+  assert.deepStrictEqual(translateArray('hi', undefined as unknown as string), []);
+});
+
+test('i18n Fallback: 12. Confirmation that no raw dotted key or [object Object] is returned', () => {
+  const sampleKeys = [
+    'officer.verification.failedTitle', // the example cited in problem statement
+    'errors.generic',
+    'complaints.statuses.completed',
+    'nonexistent.section.nested.field',
+    'common.roles',
+  ];
+
+  for (const k of sampleKeys) {
+    const en = translate('en', k);
+    const hi = translate('hi', k);
+
+    assert.ok(!en.includes('[object Object]'), `Failed for ${k} in EN: contains [object Object]`);
+    assert.ok(!hi.includes('[object Object]'), `Failed for ${k} in HI: contains [object Object]`);
+
+    // Verify missing keys never return humanized internal identifiers like 'Failed Title'
+    const missingKey = 'officer.verification.completelyNonExistentField';
+    assert.strictEqual(translate('en', missingKey), 'Not available');
+    assert.strictEqual(translate('hi', missingKey), 'उपलब्ध नहीं');
+    assert.notStrictEqual(translate('en', missingKey), 'Completely Non Existent Field');
+  }
+
+  // formatSafeFallback direct test
+  assert.strictEqual(formatSafeFallback('officer.verification.failedTitle', 'en'), 'Not available');
+  assert.strictEqual(formatSafeFallback('officer.verification.failedTitle', 'hi'), 'उपलब्ध नहीं');
+  assert.strictEqual(formatSafeFallback('errors.unknown', 'en'), 'An unexpected error occurred. Please try again.');
+  assert.strictEqual(formatSafeFallback('errors.unknown', 'hi'), 'एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।');
 });
 
 

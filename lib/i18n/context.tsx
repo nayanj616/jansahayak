@@ -1,9 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import type { Language, TranslationDictionary } from './types';
-import { enDictionary } from './dictionaries/en';
-import { hiDictionary } from './dictionaries/hi';
+import type { Language } from './types';
+import {
+  resolvePath,
+  formatSafeFallback,
+  translate,
+  translateArray,
+} from './translate';
+
+export { resolvePath, formatSafeFallback, translate, translateArray };
 
 const STORAGE_KEY = 'jansahayak_language';
 const EXPLICIT_KEY = 'jansahayak_explicit_choice';
@@ -18,56 +24,7 @@ export interface LanguageContextValue {
   isReady: boolean;
 }
 
-const dictionaries: Record<Language, TranslationDictionary> = {
-  en: enDictionary,
-  hi: hiDictionary,
-};
-
 const LanguageContext = React.createContext<LanguageContextValue | null>(null);
-
-function resolvePath(obj: Record<string, unknown>, path: string): unknown {
-  const segments = path.split('.');
-  let current: unknown = obj;
-  for (const seg of segments) {
-    if (current && typeof current === 'object' && seg in (current as Record<string, unknown>)) {
-      current = (current as Record<string, unknown>)[seg];
-    } else {
-      return undefined;
-    }
-  }
-  return current;
-}
-
-/**
- * Derives a safe human-readable fallback when a translation key cannot be resolved.
- * Strictly prevents internal translation keys (e.g. 'errors.generic') from reaching the UI.
- */
-function formatSafeFallback(key: string, language: Language): string {
-  if (key.startsWith('errors.')) {
-    return language === 'hi'
-      ? 'एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।'
-      : 'An unexpected error occurred. Please try again.';
-  }
-
-  if (key.startsWith('complaints.statuses.') || key.startsWith('assignments.statuses.')) {
-    const rawStatus = key.split('.').pop() || '';
-    const formatted = rawStatus.replace(/_/g, ' ');
-    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
-  }
-
-  if (key.startsWith('complaints.priorities.')) {
-    const rawPriority = key.split('.').pop() || '';
-    return rawPriority.charAt(0).toUpperCase() + rawPriority.slice(1);
-  }
-
-  if (!key.includes('.')) {
-    return key;
-  }
-
-  const lastSegment = key.split('.').pop() || '';
-  const humanized = lastSegment.replace(/([A-Z])/g, ' $1').replace(/_/g, ' ').trim();
-  return humanized.charAt(0).toUpperCase() + humanized.slice(1);
-}
 
 let listeners: Array<() => void> = [];
 
@@ -175,51 +132,14 @@ export function LanguageProvider({
 
   const t = React.useCallback(
     (key: string, params?: Record<string, string | number>): string => {
-      const dict = dictionaries[language] as unknown as Record<string, unknown>;
-      const fallbackDict = dictionaries.en as unknown as Record<string, unknown>;
-
-      let val = resolvePath(dict, key);
-
-      // Handle category/label objects gracefully
-      if (val && typeof val === 'object' && 'label' in (val as Record<string, unknown>)) {
-        val = (val as Record<string, unknown>).label;
-      }
-
-      if (typeof val !== 'string') {
-        val = resolvePath(fallbackDict, key);
-        if (val && typeof val === 'object' && 'label' in (val as Record<string, unknown>)) {
-          val = (val as Record<string, unknown>).label;
-        }
-      }
-
-      if (typeof val !== 'string') {
-        return formatSafeFallback(key, language);
-      }
-
-      if (params) {
-        let str = val;
-        for (const [k, v] of Object.entries(params)) {
-          str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
-        }
-        return str;
-      }
-
-      return val;
+      return translate(language, key, params);
     },
     [language]
   );
 
   const tArray = React.useCallback(
     (key: string): string[] => {
-      const dict = dictionaries[language] as unknown as Record<string, unknown>;
-      const fallbackDict = dictionaries.en as unknown as Record<string, unknown>;
-
-      let val = resolvePath(dict, key);
-      if (!Array.isArray(val)) {
-        val = resolvePath(fallbackDict, key);
-      }
-
-      return Array.isArray(val) ? (val as string[]) : [];
+      return translateArray(language, key);
     },
     [language]
   );
@@ -273,23 +193,10 @@ export function useLanguage(): LanguageContextValue {
       language: 'en',
       setLanguage: () => {},
       t: (key: string, params?: Record<string, string | number>) => {
-        let val = resolvePath(dictionaries.en as unknown as Record<string, unknown>, key);
-        if (val && typeof val === 'object' && 'label' in (val as Record<string, unknown>)) {
-          val = (val as Record<string, unknown>).label;
-        }
-        if (typeof val !== 'string') return formatSafeFallback(key, 'en');
-        if (params) {
-          let str = val;
-          for (const [k, v] of Object.entries(params)) {
-            str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
-          }
-          return str;
-        }
-        return val;
+        return translate('en', key, params);
       },
       tArray: (key: string) => {
-        const val = resolvePath(dictionaries.en as unknown as Record<string, unknown>, key);
-        return Array.isArray(val) ? (val as string[]) : [];
+        return translateArray('en', key);
       },
       fallbackText: (hindiText?: string | null, englishText?: string | null) => englishText || '',
       isReady: true,
