@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   MapPin,
   Layers,
@@ -12,6 +13,7 @@ import {
   Camera,
   Eye,
   UserCheck,
+  ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -202,8 +204,13 @@ export function OfficerDetailModal({
                   <span className="text-[10px] text-slate-500">Citizen Submission</span>
                 </div>
 
-                <div className="relative aspect-4/3 w-full bg-slate-200">
-                  {citizenImage?.signed_url ? (
+                <div className="relative aspect-4/3 w-full bg-slate-100">
+                  {isDetailLoading ? (
+                    <div className="flex h-full flex-col items-center justify-center text-slate-400 p-4 text-center bg-slate-50 animate-pulse">
+                      <Loader2 className="h-6 w-6 animate-spin text-civic-600 mb-1" aria-hidden="true" />
+                      <span className="text-[11px] text-slate-500">Loading evidence...</span>
+                    </div>
+                  ) : citizenImage?.signed_url ? (
                     <div
                       onClick={() =>
                         onPreviewPhoto({
@@ -218,6 +225,7 @@ export function OfficerDetailModal({
                         src={citizenImage.signed_url}
                         alt="Before cleanup initial complaint evidence"
                         fill
+                        unoptimized
                         className="object-cover group-hover:scale-102 transition-transform duration-200"
                       />
                       <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
@@ -244,8 +252,13 @@ export function OfficerDetailModal({
                   <span className="text-[10px] text-slate-500">Field Resolution</span>
                 </div>
 
-                <div className="relative aspect-4/3 w-full bg-slate-200">
-                  {workerImage?.signed_url ? (
+                <div className="relative aspect-4/3 w-full bg-slate-100">
+                  {isDetailLoading ? (
+                    <div className="flex h-full flex-col items-center justify-center text-slate-400 p-4 text-center bg-slate-50 animate-pulse">
+                      <Loader2 className="h-6 w-6 animate-spin text-civic-600 mb-1" aria-hidden="true" />
+                      <span className="text-[11px] text-slate-500">Loading evidence...</span>
+                    </div>
+                  ) : workerImage?.signed_url ? (
                     <div
                       onClick={() =>
                         onPreviewPhoto({
@@ -260,6 +273,7 @@ export function OfficerDetailModal({
                         src={workerImage.signed_url}
                         alt="After cleanup completed work evidence"
                         fill
+                        unoptimized
                         className="object-cover group-hover:scale-102 transition-transform duration-200"
                       />
                       <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium gap-1">
@@ -369,9 +383,18 @@ export function OfficerDetailModal({
 
         {/* Modal Actions Footer */}
         <div className="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-          <Button variant="outline" size="sm" onClick={onClose} className="text-xs">
-            {t('officer.detailModal.closeView')}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={onClose} className="text-xs">
+              {t('officer.detailModal.closeView')}
+            </Button>
+            <Link
+              href={`/complaints/${complaint.id}`}
+              className="inline-flex items-center gap-1.5 text-xs text-civic-700 hover:text-civic-800 font-medium px-2.5 py-1.5 rounded-lg border border-civic-200 bg-civic-50 hover:bg-civic-100 transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>{t('common.viewTracking')}</span>
+            </Link>
+          </div>
 
           <div className="flex items-center gap-2">
             {isUnderReview && (

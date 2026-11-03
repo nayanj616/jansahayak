@@ -3,6 +3,7 @@ import { requireApiSession } from '@/lib/auth/api-guards';
 import { resolveDemoUserId } from '@/lib/db/users';
 import { getComplaintById } from '@/lib/db/complaints';
 import { attachSignedUrlsToComplaint } from '@/lib/storage';
+import { getDb } from '@/lib/db/client';
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -48,10 +49,29 @@ export async function GET(request: NextRequest, context: RouteContext) {
         );
       }
     } else if (session.user.role === 'worker') {
-      return NextResponse.json(
-        { error: 'Forbidden', message: 'Workers should access tasks via /api/tasks' },
-        { status: 403 }
-      );
+      const workerId = session.user.dbUserId || (await resolveDemoUserId('worker'));
+      const assignedWorkerId =
+        complaint.current_or_latest_assignment?.worker_id ||
+        complaint.active_assignment?.worker_id;
+
+      if (assignedWorkerId !== workerId) {
+        // Fallback check if any assignment record links this worker to this complaint
+        const db = getDb();
+        const { data: workerAssignment } = await db
+          .from('assignments')
+          .select('id')
+          .eq('complaint_id', id)
+          .eq('worker_id', workerId)
+          .limit(1)
+          .maybeSingle();
+
+        if (!workerAssignment) {
+          return NextResponse.json(
+            { error: 'Forbidden', message: 'Workers can only view complaints assigned to them.' },
+            { status: 403 }
+          );
+        }
+      }
     }
 
     // Attach fresh signed URLs for complaint photos on-demand (Requirement D)

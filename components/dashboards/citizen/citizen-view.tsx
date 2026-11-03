@@ -114,6 +114,7 @@ export function CitizenView({
               src={previewPhotoUrl}
               alt="Full size complaint evidence"
               fill
+              unoptimized
               className="object-contain"
             />
           </div>

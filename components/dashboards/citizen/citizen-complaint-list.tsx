@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   FileText,
   Plus,
@@ -10,6 +11,7 @@ import {
   Calendar,
   MapPin,
   History,
+  ExternalLink,
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -110,6 +112,7 @@ export function CitizenComplaintList({
                           src={primaryImage.signed_url}
                           alt="Complaint evidence"
                           fill
+                          unoptimized
                           className="object-cover group-hover:scale-105 transition-transform"
                         />
                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
@@ -156,6 +159,13 @@ export function CitizenComplaintList({
 
                   {/* Right: Actions */}
                   <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                    <Link
+                      href={`/complaints/${item.id}`}
+                      className="inline-flex items-center gap-1.5 text-xs text-civic-700 hover:text-civic-800 font-medium px-2.5 py-1.5 rounded-lg border border-civic-200 bg-civic-50 hover:bg-civic-100 transition-colors"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5 text-civic-600" />
+                      <span>{t('common.trackComplaint')}</span>
+                    </Link>
                     <Button
                       variant="outline"
                       size="sm"

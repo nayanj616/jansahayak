@@ -30,7 +30,10 @@ export function OfficerVerificationCard({
   const { t } = useLanguage();
   const [showReverifyConfirm, setShowReverifyConfirm] = React.useState(false);
 
-  const verification = complaint.ai_verification;
+  const rawVerif = complaint.ai_verification;
+  const verification = Array.isArray(rawVerif)
+    ? (rawVerif.length > 0 ? rawVerif[rawVerif.length - 1] : null)
+    : rawVerif;
   const metrics = verification?.metrics as unknown as VisionVerificationMetrics | undefined;
   const status = verification?.processing_status;
   const isFailed = status === 'failed';
@@ -98,7 +101,7 @@ export function OfficerVerificationCard({
                 title="Check cached findings"
               >
                 <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>{t('common.filter')}</span>
+                <span>{t('common.refresh')}</span>
               </Button>
 
               {showReverifyConfirm ? (

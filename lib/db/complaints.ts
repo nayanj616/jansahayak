@@ -120,12 +120,16 @@ export function normalizeActiveAssignment<
   T extends {
     current_or_latest_assignment?: unknown;
     active_assignment?: unknown;
+    ai_verification?: unknown;
+    history?: unknown;
   }
 >(
   complaint: T
 ): T & {
   current_or_latest_assignment: unknown;
   active_assignment: unknown;
+  ai_verification: unknown;
+  history: unknown;
 } {
   if (!complaint) return complaint;
 
@@ -158,10 +162,33 @@ export function normalizeActiveAssignment<
     resolved = complaint.active_assignment;
   }
 
+  // Normalize ai_verification (PostgREST returns 1-to-many joins as array)
+  let resolvedVerif: unknown = null;
+  if (Array.isArray(complaint.ai_verification)) {
+    if (complaint.ai_verification.length > 0) {
+      const sorted = [...(complaint.ai_verification as Array<{ created_at?: string }>)].sort(
+        (a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime()
+      );
+      resolvedVerif = sorted[0];
+    }
+  } else if (complaint.ai_verification) {
+    resolvedVerif = complaint.ai_verification;
+  }
+
+  // Ensure chronological audit history
+  let resolvedHistory = complaint.history;
+  if (Array.isArray(complaint.history)) {
+    resolvedHistory = [...(complaint.history as Array<{ created_at?: string }>)].sort(
+      (a, b) => new Date(a.created_at || 0).getTime() - new Date(b.created_at || 0).getTime()
+    );
+  }
+
   return {
     ...complaint,
     current_or_latest_assignment: resolved,
     active_assignment: resolved,
+    ai_verification: resolvedVerif,
+    history: resolvedHistory,
   };
 }
 

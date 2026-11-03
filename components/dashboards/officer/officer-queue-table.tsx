@@ -123,6 +123,7 @@ export function OfficerQueueTable({
                       src={primaryImage.signed_url}
                       alt="Complaint initial evidence"
                       fill
+                      unoptimized
                       className="object-cover group-hover:scale-105 transition-transform"
                     />
                     <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">

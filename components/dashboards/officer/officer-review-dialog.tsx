@@ -34,7 +34,11 @@ export function OfficerReviewDialog({
   const { t } = useLanguage();
   if (!complaint) return null;
 
-  const metrics = complaint.ai_verification?.metrics as unknown as VisionVerificationMetrics | undefined;
+  const rawVerif = complaint.ai_verification;
+  const verification = Array.isArray(rawVerif)
+    ? (rawVerif.length > 0 ? rawVerif[rawVerif.length - 1] : null)
+    : rawVerif;
+  const metrics = verification?.metrics as unknown as VisionVerificationMetrics | undefined;
   const categoryLabel = t(`complaints.categories.${complaint.category}`) || CATEGORY_LABELS[complaint.category] || complaint.category;
 
   return (

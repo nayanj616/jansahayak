@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Calendar,
   MapPin,
@@ -12,6 +13,7 @@ import {
   Camera,
   Eye,
   Loader2,
+  ExternalLink,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -180,6 +182,7 @@ export function WorkerTaskCard({
                   src={beforeImg.signed_url}
                   alt="Before Cleanup"
                   fill
+                  unoptimized
                   className="object-cover group-hover:scale-105 transition-transform"
                 />
                 <div className="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
@@ -215,6 +218,7 @@ export function WorkerTaskCard({
                   src={afterImg.signed_url}
                   alt="After Cleanup"
                   fill
+                  unoptimized
                   className="object-cover group-hover:scale-105 transition-transform"
                 />
                 <div className="absolute inset-0 bg-emerald-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
@@ -261,6 +265,16 @@ export function WorkerTaskCard({
         </div>
 
         <div className="flex items-center gap-2">
+          {task.complaint_id && (
+            <Link
+              href={`/complaints/${task.complaint_id}`}
+              className="inline-flex items-center gap-1.5 text-xs text-civic-700 hover:text-civic-800 font-medium px-2.5 py-1.5 rounded-lg border border-civic-200 bg-civic-50 hover:bg-civic-100 transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span>{t('common.viewTracking')}</span>
+            </Link>
+          )}
+
           {task.status === 'assigned' && (
             <Button
               size="sm"

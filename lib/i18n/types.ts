@@ -32,6 +32,13 @@ export interface TranslationDictionary {
     searchPlaceholder: string;
     allCategories: string;
     noTranslationIndicator: string;
+    filter: string;
+    refresh: string;
+    viewTracking: string;
+    trackComplaint: string;
+    auditTrail: string;
+    enlargePhoto: string;
+    imageUnavailable: string;
   };
 
   nav: {
@@ -349,6 +356,8 @@ export interface TranslationDictionary {
       rework_required: string;
       resolved: string;
       rejected: string;
+      completed: string;
+      cancelled: string;
     };
     priorities: {
       urgent: string;
@@ -579,5 +588,64 @@ export interface TranslationDictionary {
       noBadgeNotice: string;
       demarcationNotice: string;
     };
+  };
+
+  tracking: {
+    title: string;
+    subtitle: string;
+    backToDashboard: string;
+    backToSwachh: string;
+    citizenScope: string;
+    workerScope: string;
+    officerScope: string;
+    unauthorizedTitle: string;
+    unauthorizedDesc: string;
+    forbiddenTitle: string;
+    forbiddenDesc: string;
+    selectRole: string;
+    overviewTitle: string;
+    reportedOn: string;
+    complaintNumber: string;
+    wardAndLocation: string;
+    evidenceTitle: string;
+    citizenBeforePhoto: string;
+    workerAfterPhoto: string;
+    awaitingCleanup: string;
+    fieldSanitationTitle: string;
+    assignedWorker: string;
+    workerContactBeat: string;
+    assignedOn: string;
+    workStartedOn: string;
+    cleanupCompletedOn: string;
+    unassignedWorker: string;
+    unassignedWorkerDesc: string;
+    aiVerificationTitle: string;
+    aiVerificationSubtitle: string;
+    notTriggeredTitle: string;
+    notTriggeredDesc: string;
+    wasteReduction: string;
+    confidence: string;
+    beforeObservations: string;
+    afterObservations: string;
+    visibleChanges: string;
+    limitations: string;
+    advisoryNotice: string;
+    humanReviewTitle: string;
+    humanAuthorityNote: string;
+    humanAuthorityDesc: string;
+    decisionPending: string;
+    decisionApproved: string;
+    decisionRework: string;
+    decisionRejected: string;
+    officerRemarks: string;
+    auditTimelineTitle: string;
+    nextStepsTitle: string;
+    nextStepsSubmitted: string;
+    nextStepsAssigned: string;
+    nextStepsInProgress: string;
+    nextStepsUnderReview: string;
+    nextStepsRework: string;
+    nextStepsResolved: string;
+    nextStepsRejected: string;
   };
 }
