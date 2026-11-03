@@ -31,6 +31,18 @@ export const hiDictionary: TranslationDictionary = {
     auditTrail: 'ऑडिट ट्रेल',
     enlargePhoto: 'फ़ोटो बड़ा करें',
     imageUnavailable: 'फ़ोटो पूर्वावलोकन अनुपलब्ध',
+    tryAgain: 'पुनः प्रयास करें',
+    loading: 'लोड हो रहा है...',
+    statusTransition: 'स्थिति परिवर्तन:',
+    initial: 'प्रारंभिक',
+    wardLabel: 'वार्ड',
+    allocatedLabel: 'आवंटित:',
+    workerLabel: 'सफाई मित्र',
+    roles: {
+      citizen: 'नागरिक',
+      worker: 'सफाई मित्र',
+      officer: 'नगर निगम अधिकारी',
+    },
   },
 
   nav: {
@@ -278,6 +290,13 @@ export const hiDictionary: TranslationDictionary = {
         'यह नई छवियां जेमिनी विजन को भेजेगा और मौजूदा अवलोकनात्मक आंकड़ों को प्रतिस्थापित करेगा।',
       recheckButton: 'पुनः सत्यापन की पुष्टि करें',
       cancelRecheck: 'रद्द करें',
+      failedTitle: 'सत्यापन विश्लेषण असफल',
+      confidenceLevels: {
+        high: 'उच्च',
+        medium: 'मध्यम',
+        low: 'निम्न',
+        inconclusive: 'अनिर्णायक',
+      },
     },
     assignModal: {
       titleNew: 'क्षेत्रीय सफाई मित्र आवंटित करें',
@@ -415,6 +434,15 @@ export const hiDictionary: TranslationDictionary = {
     closeAria: 'सूचनाएं बंद करें',
   },
 
+  assignments: {
+    statuses: {
+      assigned: 'सौंपा गया',
+      in_progress: 'प्रगति पर',
+      completed: 'पूर्ण (समीक्षाधीन)',
+      cancelled: 'रद्द',
+    },
+  },
+
   validation: {
     photoRequired: 'कृपया स्वच्छता शिकायत की मूल तस्वीर संलग्न करें।',
     wardRequired: 'कृपया नगर निगम वार्ड का चयन करें।',
@@ -424,10 +452,23 @@ export const hiDictionary: TranslationDictionary = {
   },
 
   errors: {
+    generic: 'एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।',
     refreshFailed: 'सर्वर से डेटा ताज़ा करने में विफल।',
     submissionFailed: 'जमा करते समय एक अप्रत्याशित त्रुटि हुई।',
     taskStartFailed: 'क्षेत्रीय कार्य प्रारंभ करने में विफल।',
     unexpectedError: 'एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।',
+    networkError: 'सर्वर से कनेक्ट करने में असमर्थ। कृपया अपना इंटरनेट कनेक्शन जांचें।',
+    unauthorized: 'आपका सत्र समाप्त हो गया है। जारी रखने के लिए कृपया एक डेमो भूमिका चुनें।',
+    forbidden: 'आपके पास इस क्रिया को करने की अनुमति नहीं है।',
+    notFound: 'अनुरोधित संसाधन नहीं मिला।',
+    serverError: 'सर्वर में समस्या उत्पन्न हुई। कृपया कुछ समय बाद पुनः प्रयास करें।',
+    visionUnavailable: 'एआई सत्यापन अस्थायी रूप से अनुपलब्ध है। कृपया बाद में पुनः प्रयास करें।',
+    visionRateLimit: 'एआई सेवा अस्थायी रूप से व्यस्त है। कृपया पुनः प्रयास करने से पहले प्रतीक्षा करें।',
+    visionQuotaExceeded: 'एआई सत्यापन अस्थायी रूप से अनुपलब्ध है। परियोजना प्रशासक से संपर्क करें।',
+    visionAuthFailed: 'एआई सत्यापन पूर्ण नहीं हो सका। परियोजना प्रशासक से संपर्क करें।',
+    visionInvalidRequest: 'सेवा कॉन्फ़िगरेशन समस्या के कारण एआई सत्यापन पूर्ण नहीं हो सका।',
+    visionFailed: 'एआई सत्यापन विफल रहा। कृपया बाद में पुनः प्रयास करें।',
+    notificationLoadFailed: 'सूचनाएं लोड करने में विफल।',
   },
 
   schemeExploration: {

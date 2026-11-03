@@ -51,7 +51,8 @@ export function OfficerDetailModal({
   onPreviewPhoto,
   onTriggerVerification,
 }: OfficerDetailModalProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
 
   // Close on Escape key
   React.useEffect(() => {
@@ -73,7 +74,7 @@ export function OfficerDetailModal({
   const localizedStatus = t(`complaints.statuses.${complaint.status}`) || statusInfo.label;
   const localizedPriority = t(`complaints.priorities.${complaint.priority}`) || complaint.priority;
   const priorityVariant = PRIORITY_BADGES[complaint.priority] || 'default';
-  const categoryLabel = t(`complaints.categories.${complaint.category}`) || CATEGORY_LABELS[complaint.category] || complaint.category;
+  const categoryLabel = t(`complaints.categories.${complaint.category}.label`) || CATEGORY_LABELS[complaint.category] || complaint.category;
 
   const citizenImage = complaint.images?.find((img) => img.image_type === 'before' || img.image_type === 'original') || complaint.images?.[0];
   const workerImage = complaint.images?.find((img) => img.image_type === 'after') || complaint.images?.[1];
@@ -143,8 +144,8 @@ export function OfficerDetailModal({
               </span>
               <p className="font-semibold text-slate-900">
                 {complaint.ward
-                  ? `Ward ${complaint.ward.ward_no}: ${complaint.ward.ward_name}`
-                  : 'Ward GWL-W-024 (Lashkar Central)'}
+                  ? `${isHi ? 'वार्ड' : 'Ward'} ${complaint.ward.ward_no}: ${complaint.ward.ward_name}`
+                  : (isHi ? 'वार्ड क्षेत्र' : 'Ward Area')}
               </p>
               {complaint.ward?.sanitation_zone && (
                 <p className="text-slate-500 text-[11px]">{complaint.ward.sanitation_zone}</p>
@@ -312,7 +313,7 @@ export function OfficerDetailModal({
               </span>
               {activeAssignment && (
                 <Badge variant="secondary" className="capitalize text-[10px]">
-                  Task: {activeAssignment.status}
+                  {t('common.status')}: {t(`assignments.statuses.${activeAssignment.status}`) || activeAssignment.status}
                 </Badge>
               )}
             </div>
@@ -320,19 +321,21 @@ export function OfficerDetailModal({
             {activeAssignment && worker ? (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-slate-600 pt-1">
                 <div>
-                  <span className="text-slate-400 block">Worker</span>
-                  <span className="font-medium text-slate-900">{worker.display_name}</span>
+                  <span className="text-slate-400 block">{t('common.workerLabel')}</span>
+                  <span className="font-medium text-slate-900">{worker.display_name || t('common.roles.worker')}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">Dispatched</span>
+                  <span className="text-slate-400 block">{t('worker.card.assignedOn')}</span>
                   <span>{formatDate(activeAssignment.assigned_at)}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block">Completed</span>
+                  <span className="text-slate-400 block">{t('common.status')}</span>
                   <span>
                     {activeAssignment.completed_at
                       ? formatDate(activeAssignment.completed_at)
-                      : 'Pending field completion'}
+                      : isHi
+                        ? 'कार्य समापन लंबित'
+                        : 'Pending field completion'}
                   </span>
                 </div>
               </div>

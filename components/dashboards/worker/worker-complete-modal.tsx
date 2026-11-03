@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Camera, X, AlertCircle, Loader2, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
+import { formatFrontendError } from '@/lib/errors';
 import type { AssignmentWithDetails } from '@/types';
 
 interface WorkerCompleteModalProps {
@@ -77,7 +78,7 @@ export function WorkerCompleteModal({
     try {
       await onSubmit(uploadFile, uploadRemarks);
     } catch (err) {
-      setUploadError(err instanceof Error ? err.message : t('errors.submissionFailed'));
+      setUploadError(formatFrontendError(err, language || currentLang, 'errors.submissionFailed'));
     }
   };
 

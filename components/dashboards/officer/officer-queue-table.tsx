@@ -39,7 +39,8 @@ export function OfficerQueueTable({
   onResetFilters,
   onPreviewPhoto,
 }: OfficerQueueTableProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
 
   if (complaints.length === 0) {
     return (
@@ -159,7 +160,7 @@ export function OfficerQueueTable({
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                     <span className="flex items-center gap-1 truncate">
                       <MapPin className="h-3.5 w-3.5 text-civic-700 shrink-0" />
-                      {c.ward ? `Ward ${c.ward.ward_no}: ${c.ward.ward_name}` : 'Ward Area'}
+                      {c.ward ? `${isHi ? 'वार्ड' : 'Ward'} ${c.ward.ward_no}: ${c.ward.ward_name}` : (isHi ? 'वार्ड क्षेत्र' : 'Ward Area')}
                       {c.location_description ? ` • ${c.location_description}` : ''}
                     </span>
                   </div>
@@ -169,12 +170,12 @@ export function OfficerQueueTable({
                     {assignedWorker ? (
                       <span className="inline-flex items-center gap-1 rounded-md bg-blue-50 border border-blue-200/60 px-2 py-0.5 text-[11px] font-medium text-blue-800">
                         <HardHat className="h-3 w-3 text-blue-600 shrink-0" />
-                        <span>Allocated: {assignedWorker.display_name}</span>
+                        <span>{t('common.allocatedLabel')} {assignedWorker.display_name || t('common.roles.worker')}</span>
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-500">
                         <HardHat className="h-3 w-3 shrink-0" />
-                        <span>Unallocated</span>
+                        <span>{isHi ? 'अनआवंटित' : 'Unallocated'}</span>
                       </span>
                     )}
 

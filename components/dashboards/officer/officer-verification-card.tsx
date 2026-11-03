@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { ComplaintWithDetails, VisionVerificationMetrics } from '@/types';
 import { useLanguage } from '@/lib/i18n/context';
+import { formatFrontendError } from '@/lib/errors';
+import { getLatestAiVerification } from '@/lib/verifications';
 
 interface OfficerVerificationCardProps {
   complaint: ComplaintWithDetails;
@@ -27,13 +29,10 @@ export function OfficerVerificationCard({
   verifyError,
   onTriggerVerification,
 }: OfficerVerificationCardProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showReverifyConfirm, setShowReverifyConfirm] = React.useState(false);
 
-  const rawVerif = complaint.ai_verification;
-  const verification = Array.isArray(rawVerif)
-    ? (rawVerif.length > 0 ? rawVerif[rawVerif.length - 1] : null)
-    : rawVerif;
+  const verification = getLatestAiVerification(complaint.ai_verification);
   const metrics = verification?.metrics as unknown as VisionVerificationMetrics | undefined;
   const status = verification?.processing_status;
   const isFailed = status === 'failed';
@@ -173,12 +172,10 @@ export function OfficerVerificationCard({
             <AlertCircle className="h-4 w-4 text-red-600 shrink-0 mt-0.5" aria-hidden="true" />
             <div className="flex-1">
               <span className="font-semibold text-red-900 text-xs block">
-                {t('officer.verification.title')} - {t('errors.generic')}
+                {t('officer.verification.title')} — {t('officer.verification.failedTitle')}
               </span>
               <span className="text-[11px] text-red-700 mt-0.5 block">
-                {verification.processing_error ||
-                  verifyError ||
-                  'The vision service encountered a provider timeout or processing error.'}
+                {formatFrontendError(verification?.processing_error || verifyError, language)}
               </span>
               <p className="text-[11px] text-slate-500 mt-2">
                 {t('officer.verification.advisoryDisclaimer')}
@@ -203,7 +200,7 @@ export function OfficerVerificationCard({
                       : 'bg-purple-50 text-purple-700 border-purple-300'
               }`}
             >
-              {t('officer.verification.confidence')}: {metrics.evaluation.confidenceLevel}
+              {t('officer.verification.confidence')}: {t(`officer.verification.confidenceLevels.${metrics.evaluation.confidenceLevel}`) || metrics.evaluation.confidenceLevel}
             </Badge>
 
             {/* Reliability */}

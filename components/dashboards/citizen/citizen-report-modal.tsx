@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/lib/i18n';
+import { formatFrontendError } from '@/lib/errors';
 import type { ComplaintWithDetails, WardRecord } from '@/types';
 import { CATEGORY_OPTIONS } from './citizen-types';
 
@@ -201,13 +202,7 @@ export function CitizenReportModal({
       handleClose();
     } catch (err) {
       console.error('[CitizenReportModal] Submission error:', err);
-      setSubmitError(
-        err instanceof Error
-          ? err.message
-          : isHi
-          ? 'शिकायत दर्ज करने में अप्रत्याशित त्रुटि हुई।'
-          : 'An unexpected error occurred during submission.'
-      );
+      setSubmitError(formatFrontendError(err, language || currentLang, 'errors.submissionFailed'));
     } finally {
       setSubmitting(false);
     }

@@ -15,6 +15,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Button } from '@/components/ui/button';
 import { EmptyState } from '@/components/ui/empty-state';
 import { useLanguage } from '@/lib/i18n/context';
+import { formatFrontendError } from '@/lib/errors';
 import type { AssignmentWithDetails, DemoSessionPayload } from '@/types';
 import { WorkerTaskCard } from './worker-task-card';
 import { WorkerCompleteModal } from './worker-complete-modal';
@@ -117,12 +118,7 @@ export function WorkerView({ session, initialTasks = [] }: WorkerViewProps) {
       console.error('[Worker Dashboard] Refresh error:', err);
       setNotification({
         type: 'error',
-        message:
-          err instanceof Error
-            ? err.message
-            : isHi
-            ? 'सर्वर से कार्य सूची रीफ़्रेश करने में विफल'
-            : 'Failed to refresh tasks from server',
+        message: formatFrontendError(err, language, 'errors.refreshFailed'),
       });
     } finally {
       setIsRefreshing(false);
@@ -164,12 +160,7 @@ export function WorkerView({ session, initialTasks = [] }: WorkerViewProps) {
       console.error('[Worker Dashboard] Start task error:', err);
       setNotification({
         type: 'error',
-        message:
-          err instanceof Error
-            ? err.message
-            : isHi
-            ? 'कार्य शुरू करने में विफल'
-            : 'Failed to start task',
+        message: formatFrontendError(err, language, 'errors.taskStartFailed'),
       });
     } finally {
       setStartingTaskId(null);
@@ -342,12 +333,10 @@ export function WorkerView({ session, initialTasks = [] }: WorkerViewProps) {
         <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0 pb-4 border-b border-slate-100">
           <div>
             <CardTitle className="text-base font-semibold">
-              {isHi ? 'सौंपे गए स्वच्छता कार्य' : 'Allocated Sanitation Tasks'}
+              {t('worker.tasksTitle')}
             </CardTitle>
             <CardDescription>
-              {isHi
-                ? 'पर्यवेक्षक द्वारा आपकी बीट को सौंपे गए सफाई कार्य'
-                : 'Sanitation tasks assigned to your beat by the municipal supervisor'}
+              {t('worker.tasksSubtitle')}
             </CardDescription>
           </div>
 
@@ -364,20 +353,12 @@ export function WorkerView({ session, initialTasks = [] }: WorkerViewProps) {
                 }`}
               >
                 {tab === 'all'
-                  ? isHi
-                    ? `सभी (${tasks.length})`
-                    : `All (${tasks.length})`
+                  ? `${t('worker.tabs.all')} (${tasks.length})`
                   : tab === 'assigned'
-                  ? isHi
-                    ? `सौंपे गए (${assignedCount})`
-                    : `Assigned (${assignedCount})`
+                  ? `${t('worker.tabs.assigned')} (${assignedCount})`
                   : tab === 'in_progress'
-                  ? isHi
-                    ? `प्रगति पर (${inProgressCount})`
-                    : `In Progress (${inProgressCount})`
-                  : isHi
-                  ? `पूर्ण (${completedCount})`
-                  : `Completed (${completedCount})`}
+                  ? `${t('worker.tabs.inProgress')} (${inProgressCount})`
+                  : `${t('worker.tabs.completed')} (${completedCount})`}
               </button>
             ))}
           </div>
@@ -387,16 +368,8 @@ export function WorkerView({ session, initialTasks = [] }: WorkerViewProps) {
           {filteredTasks.length === 0 ? (
             <EmptyState
               icon={ClipboardList}
-              title={
-                isHi
-                  ? `कोई ${filter === 'all' ? '' : filter === 'assigned' ? 'सौंपा गया' : filter === 'in_progress' ? 'प्रगतिरत' : 'पूर्ण'} कार्य नहीं मिला`
-                  : `No ${filter === 'all' ? '' : filter.replace('_', ' ')} tasks found`
-              }
-              description={
-                isHi
-                  ? 'वर्तमान में आपकी बीट को कोई कार्य आवंटित नहीं है।'
-                  : 'No sanitation tasks are currently assigned to your demonstration beat.'
-              }
+              title={t('worker.empty.title')}
+              description={t('worker.empty.desc')}
             />
           ) : (
             <div className="space-y-4">

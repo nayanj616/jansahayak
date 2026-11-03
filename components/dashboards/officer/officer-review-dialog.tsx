@@ -7,6 +7,7 @@ import { CheckCircle2, RotateCcw, XCircle, Loader2, Sparkles } from 'lucide-reac
 import type { ComplaintWithDetails, VisionVerificationMetrics } from '@/types';
 import { CATEGORY_LABELS } from './officer-types';
 import { useLanguage } from '@/lib/i18n/context';
+import { getLatestAiVerification } from '@/lib/verifications';
 
 interface OfficerReviewDialogProps {
   complaint: ComplaintWithDetails | null;
@@ -34,12 +35,9 @@ export function OfficerReviewDialog({
   const { t } = useLanguage();
   if (!complaint) return null;
 
-  const rawVerif = complaint.ai_verification;
-  const verification = Array.isArray(rawVerif)
-    ? (rawVerif.length > 0 ? rawVerif[rawVerif.length - 1] : null)
-    : rawVerif;
+  const verification = getLatestAiVerification(complaint.ai_verification);
   const metrics = verification?.metrics as unknown as VisionVerificationMetrics | undefined;
-  const categoryLabel = t(`complaints.categories.${complaint.category}`) || CATEGORY_LABELS[complaint.category] || complaint.category;
+  const categoryLabel = t(`complaints.categories.${complaint.category}.label`) || CATEGORY_LABELS[complaint.category] || complaint.category;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs">
@@ -80,7 +78,7 @@ export function OfficerReviewDialog({
                   {t('officer.reviewDialog.aiAdvisoryLabel')}
                 </div>
                 <Badge variant="outline" className="text-[10px] bg-white border-indigo-200 text-indigo-700 py-0 capitalize">
-                  {metrics.evaluation.confidenceLevel} {t('officer.verification.confidence')}
+                  {t(`officer.verification.confidenceLevels.${metrics.evaluation.confidenceLevel}`) || metrics.evaluation.confidenceLevel} {t('officer.verification.confidence')}
                 </Badge>
               </div>
               <p className="text-[11px] text-slate-800 leading-relaxed">

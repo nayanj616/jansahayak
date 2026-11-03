@@ -39,6 +39,18 @@ export interface TranslationDictionary {
     auditTrail: string;
     enlargePhoto: string;
     imageUnavailable: string;
+    tryAgain: string;
+    loading: string;
+    statusTransition: string;
+    initial: string;
+    wardLabel: string;
+    allocatedLabel: string;
+    workerLabel: string;
+    roles: {
+      citizen: string;
+      worker: string;
+      officer: string;
+    };
   };
 
   nav: {
@@ -279,6 +291,13 @@ export interface TranslationDictionary {
       recheckConfirmDesc: string;
       recheckButton: string;
       cancelRecheck: string;
+      failedTitle: string;
+      confidenceLevels: {
+        high: string;
+        medium: string;
+        low: string;
+        inconclusive: string;
+      };
     };
     assignModal: {
       titleNew: string;
@@ -377,6 +396,15 @@ export interface TranslationDictionary {
     closeAria: string;
   };
 
+  assignments: {
+    statuses: {
+      assigned: string;
+      in_progress: string;
+      completed: string;
+      cancelled: string;
+    };
+  };
+
   validation: {
     photoRequired: string;
     wardRequired: string;
@@ -386,10 +414,23 @@ export interface TranslationDictionary {
   };
 
   errors: {
+    generic: string;
     refreshFailed: string;
     submissionFailed: string;
     taskStartFailed: string;
     unexpectedError: string;
+    networkError: string;
+    unauthorized: string;
+    forbidden: string;
+    notFound: string;
+    serverError: string;
+    visionUnavailable: string;
+    visionRateLimit: string;
+    visionQuotaExceeded: string;
+    visionAuthFailed: string;
+    visionInvalidRequest: string;
+    visionFailed: string;
+    notificationLoadFailed: string;
   };
 
   schemeExploration: {

@@ -31,6 +31,18 @@ export const enDictionary: TranslationDictionary = {
     auditTrail: 'Audit Trail',
     enlargePhoto: 'Enlarge Photo',
     imageUnavailable: 'Image preview unavailable',
+    tryAgain: 'Try Again',
+    loading: 'Loading...',
+    statusTransition: 'Status Transition:',
+    initial: 'Initial',
+    wardLabel: 'Ward',
+    allocatedLabel: 'Allocated:',
+    workerLabel: 'Sanitation Worker',
+    roles: {
+      citizen: 'Citizen',
+      worker: 'Sanitation Worker',
+      officer: 'Municipal Officer',
+    },
   },
 
   nav: {
@@ -283,6 +295,13 @@ export const enDictionary: TranslationDictionary = {
         'This will send fresh image buffers to Gemini Vision and replace existing observational metrics.',
       recheckButton: 'Confirm Re-verification',
       cancelRecheck: 'Cancel',
+      failedTitle: 'Verification Analysis Unsuccessful',
+      confidenceLevels: {
+        high: 'High',
+        medium: 'Medium',
+        low: 'Low',
+        inconclusive: 'Inconclusive',
+      },
     },
     assignModal: {
       titleNew: 'Dispatch Sanitation Field Worker',
@@ -421,6 +440,15 @@ export const enDictionary: TranslationDictionary = {
     closeAria: 'Close notifications',
   },
 
+  assignments: {
+    statuses: {
+      assigned: 'Assigned',
+      in_progress: 'In Progress',
+      completed: 'Completed (Under Review)',
+      cancelled: 'Cancelled',
+    },
+  },
+
   validation: {
     photoRequired: 'Please attach an original photograph of the sanitation grievance.',
     wardRequired: 'Please select a municipal ward.',
@@ -430,10 +458,23 @@ export const enDictionary: TranslationDictionary = {
   },
 
   errors: {
+    generic: 'An unexpected error occurred. Please try again.',
     refreshFailed: 'Failed to refresh data from server.',
     submissionFailed: 'An unexpected error occurred during submission.',
     taskStartFailed: 'Failed to start field task.',
     unexpectedError: 'An unexpected error occurred. Please try again.',
+    networkError: 'Unable to connect to the server. Please check your internet connection.',
+    unauthorized: 'Your session has expired. Please select a demo role to continue.',
+    forbidden: 'You do not have permission to perform this action.',
+    notFound: 'The requested resource was not found.',
+    serverError: 'The server encountered an issue. Please try again in a few moments.',
+    visionUnavailable: 'AI verification is temporarily unavailable. Please try again later.',
+    visionRateLimit: 'The AI service is temporarily busy. Please wait before retrying.',
+    visionQuotaExceeded: 'AI verification is temporarily unavailable. Contact the project administrator.',
+    visionAuthFailed: 'AI verification could not be completed. Contact the project administrator.',
+    visionInvalidRequest: 'AI verification could not be completed due to a service configuration issue.',
+    visionFailed: 'AI verification failed. Please try again later.',
+    notificationLoadFailed: 'Failed to load notifications.',
   },
 
   schemeExploration: {

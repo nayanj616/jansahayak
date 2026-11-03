@@ -19,6 +19,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
+import { formatFrontendError } from '@/lib/errors';
 import type { CivicAnswerResult, CivicSourceReference } from '@/types';
 
 const TOPIC_LABELS: Record<string, { en: string; hi: string }> = {
@@ -34,21 +35,23 @@ const TOPIC_LABELS: Record<string, { en: string; hi: string }> = {
 };
 
 export function CivicAssistant() {
-  const { t, language } = useLanguage();
+  const { t, tArray, language } = useLanguage();
   const [question, setQuestion] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [isUnconfigured, setIsUnconfigured] = React.useState(false);
   const [result, setResult] = React.useState<CivicAnswerResult | null>(null);
 
-  const suggestedQuestions: string[] =
-    (t('schemeExploration.assistant.suggestedQuestions') as unknown as string[]) || [
-      'How to apply for Ladli Behna scheme?',
-      'KCC ka loan kitna hota hai?',
-      'मनरेगा में काम कैसे माँगूँ?',
-      'PM Surya Ghar ki subsidy kitni milegi?',
-      'What documents are needed for Pratibha Kiran?',
-    ];
+  const defaultQuestions = [
+    'How to apply for Ladli Behna scheme?',
+    'KCC ka loan kitna hota hai?',
+    'मनरेगा में काम कैसे माँगूँ?',
+    'PM Surya Ghar ki subsidy kitni milegi?',
+    'What documents are needed for Pratibha Kiran?',
+  ];
+
+  const loadedQuestions = typeof tArray === 'function' ? tArray('schemeExploration.assistant.suggestedQuestions') : [];
+  const suggestedQuestions: string[] = loadedQuestions.length > 0 ? loadedQuestions : defaultQuestions;
 
   const handleAsk = async (queryToAsk?: string) => {
     const q = (queryToAsk ?? question).trim();
@@ -76,15 +79,18 @@ export function CivicAssistant() {
         if (response.status === 503 && data.isConfigured === false) {
           setIsUnconfigured(true);
           setError(
-            data.error ||
-              t('schemeExploration.assistant.unconfiguredNotice') ||
-              'Civic Assistant service is currently unconfigured. Set GEMINI_CHATBOT_API_KEY in the environment.'
+            t('schemeExploration.assistant.unconfiguredNotice') ||
+              (language === 'hi'
+                ? 'नागरिक सहायक सेवा वर्तमान में अनुपलब्ध है। कृपया बाद में प्रयास करें।'
+                : 'Civic Assistant service is currently unavailable. Please try again later.')
           );
         } else {
           setError(
-            data.error ||
-              t('schemeExploration.assistant.errorNotice') ||
-              'Unable to process your question at this time. Please try again.'
+            formatFrontendError(
+              data.error || 'Unable to process your question at this time. Please try again.',
+              language,
+              'schemeExploration.assistant.errorNotice'
+            )
           );
         }
         return;
@@ -95,14 +101,15 @@ export function CivicAssistant() {
       } else {
         setError(
           t('schemeExploration.assistant.errorNotice') ||
-            'Unable to process your question at this time. Please try again.'
+            (language === 'hi'
+              ? 'वर्तमान में आपके प्रश्न को संसाधित करने में असमर्थ। कृपया पुनः प्रयास करें।'
+              : 'Unable to process your question at this time. Please try again.')
         );
       }
     } catch (err) {
       console.error('[CivicAssistant Client Error]', err);
       setError(
-        t('schemeExploration.assistant.errorNotice') ||
-          'A network error occurred. Please check your connection and try again.'
+        formatFrontendError(err, language, 'schemeExploration.assistant.errorNotice')
       );
     } finally {
       setIsLoading(false);

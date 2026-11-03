@@ -63,9 +63,10 @@ export function WorkerTaskCard({
 
   // Status config
   const statusConfig = WORKER_STATUS_CONFIG[task.status];
-  const statusLabel = isHi
-    ? (statusConfig?.hi || t(`complaints.statuses.${task.status}`))
-    : (t(`complaints.statuses.${task.status}`) || statusConfig?.en || task.status);
+  const localizedStatus = t(`assignments.statuses.${task.status}`);
+  const statusLabel = localizedStatus && localizedStatus !== `assignments.statuses.${task.status}`
+    ? localizedStatus
+    : (isHi ? statusConfig?.hi : statusConfig?.en) || task.status;
   const statusVariant: WorkerBadgeVariant = statusConfig?.variant || 'outline';
 
   // Priority config
@@ -119,7 +120,7 @@ export function WorkerTaskCard({
             <div>
               <span className="font-medium text-slate-900">
                 {complaint?.ward
-                  ? `Ward ${complaint.ward.ward_no}: ${complaint.ward.ward_name}`
+                  ? `${isHi ? 'वार्ड' : 'Ward'} ${complaint.ward.ward_no}: ${complaint.ward.ward_name}`
                   : isHi
                   ? 'मुरार वार्ड बीट'
                   : 'Morar Ward Beat'}

@@ -11,7 +11,6 @@ import {
   HelpCircle,
   Building,
   Sparkles,
-  FileText,
   BookOpen,
   X,
   LucideIcon,
@@ -43,7 +42,7 @@ const CITIZEN_NAV: NavItem[] = [
 
 const WORKER_NAV: NavItem[] = [
   { key: 'nav.fieldTasksQueue', label: 'Field Tasks Queue', href: '/worker', icon: ClipboardList },
-  { key: 'nav.sanitationGuidelines', label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: FileText },
+  { key: 'nav.swachhGwalior', label: 'Swachh Gwalior Portal', href: '/swachh-gwalior', icon: Sparkles },
   { key: 'nav.workerWelfareSchemes', label: 'Worker Welfare Schemes', href: '/scheme-exploration#finder', icon: Search },
   { key: 'nav.civicAssistant', label: 'Civic AI Assistant', href: '/scheme-exploration#assistant', icon: Bot },
   { key: 'nav.grievanceGuidance', label: 'Grievance Guidance', href: '/scheme-exploration#grievances', icon: HelpCircle },
@@ -54,7 +53,7 @@ const OFFICER_NAV: NavItem[] = [
   { key: 'nav.cityAnalytics', label: 'City Grievance Analytics', href: '/officer#analytics', icon: BarChart3 },
   { key: 'nav.complaintQueue', label: 'Complaint Queue', href: '/officer#queue', icon: ClipboardList },
   { key: 'nav.welfareDirectory', label: 'Welfare Schemes Directory', href: '/scheme-exploration', icon: Search },
-  { key: 'nav.sanitationGuidelines', label: 'Swachh Gwalior Guidelines', href: '/swachh-gwalior', icon: Sparkles },
+  { key: 'nav.swachhGwalior', label: 'Swachh Gwalior Portal', href: '/swachh-gwalior', icon: Sparkles },
   { key: 'nav.platformArchitecture', label: 'Platform Architecture', href: '/about', icon: BookOpen },
 ];
 

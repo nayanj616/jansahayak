@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatDate, cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n';
+import { formatFrontendError } from '@/lib/errors';
 import type { NotificationRecord } from '@/types';
 
 interface NotificationBellProps {
@@ -21,7 +22,8 @@ interface NotificationBellProps {
 }
 
 export function NotificationBell({ className }: NotificationBellProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
   const [isOpen, setIsOpen] = React.useState(false);
   const [notifications, setNotifications] = React.useState<NotificationRecord[]>([]);
   const [unreadCount, setUnreadCount] = React.useState<number>(0);
@@ -66,19 +68,18 @@ export function NotificationBell({ className }: NotificationBellProps) {
     try {
       const res = await fetch('/api/notifications');
       if (!res.ok) {
-        throw new Error(`Failed to load notifications (HTTP ${res.status})`);
+        throw new Error('Notification fetch failed');
       }
       const data = await res.json();
       setNotifications(data.notifications || []);
       setUnreadCount(typeof data.unreadCount === 'number' ? data.unreadCount : 0);
       setHasLoadedOnce(true);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Unable to connect to notification service';
-      setError(msg);
+      setError(formatFrontendError(err, language, 'errors.notificationLoadFailed'));
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [language]);
 
   // When dropdown opens, refresh notification data
   const handleToggle = () => {
@@ -224,7 +225,7 @@ export function NotificationBell({ className }: NotificationBellProps) {
                   onClick={() => fetchNotifications(true)}
                   className="text-xs h-7 px-2.5 mt-1"
                 >
-                  Retry
+                  {t('common.tryAgain')}
                 </Button>
               </div>
             )}
@@ -305,12 +306,12 @@ export function NotificationBell({ className }: NotificationBellProps) {
                             {isMarking ? (
                               <>
                                 <Loader2 className="h-3 w-3 animate-spin" aria-hidden="true" />
-                                <span>Marking...</span>
+                                <span>{isHi ? 'अंकन जारी...' : 'Marking...'}</span>
                               </>
                             ) : (
                               <>
                                 <Check className="h-3 w-3" aria-hidden="true" />
-                                <span>Mark as read</span>
+                                <span>{isHi ? 'पढ़ा गया चिह्नित करें' : 'Mark as read'}</span>
                               </>
                             )}
                           </button>
@@ -325,7 +326,9 @@ export function NotificationBell({ className }: NotificationBellProps) {
           {/* Footer */}
           <div className="border-t border-slate-100 bg-slate-50/50 px-4 py-2 text-center">
             <span className="text-[10px] text-slate-400">
-              In-App Notification Center &bull; JanSahayak
+              {isHi
+                ? 'इन-ऐप सूचना केंद्र • जनसहायक'
+                : 'In-App Notification Center • JanSahayak'}
             </span>
           </div>
         </div>

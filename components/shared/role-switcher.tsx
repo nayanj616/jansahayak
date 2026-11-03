@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import type { DemoRole } from '@/types';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 
 interface RoleSwitcherProps {
   currentRole: DemoRole;
@@ -20,6 +21,8 @@ interface RoleSwitcherProps {
 }
 
 export function RoleSwitcher({ currentRole, userName }: RoleSwitcherProps) {
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
   let router: ReturnType<typeof useRouter> | null = null;
   try {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -63,24 +66,24 @@ export function RoleSwitcher({ currentRole, userName }: RoleSwitcherProps) {
   }[] = [
     {
       role: 'citizen',
-      label: 'Citizen',
-      description: 'Report issues & explore schemes',
+      label: t('common.roles.citizen') || 'Citizen',
+      description: isHi ? 'समस्याएं दर्ज करें और योजनाएं खोजें' : 'Report issues & explore schemes',
       icon: User,
       path: '/citizen',
       badgeStyle: 'text-emerald-800 bg-emerald-100',
     },
     {
       role: 'worker',
-      label: 'Sanitation Worker',
-      description: 'View assignments & update progress',
+      label: t('common.roles.worker') || 'Sanitation Worker',
+      description: isHi ? 'आवंटित कार्य देखें और प्रगति अपडेट करें' : 'View assignments & update progress',
       icon: HardHat,
       path: '/worker',
       badgeStyle: 'text-civic-800 bg-civic-100',
     },
     {
       role: 'officer',
-      label: 'Municipal Officer',
-      description: 'Manage complaints & AI verification',
+      label: t('common.roles.officer') || 'Municipal Officer',
+      description: isHi ? 'शिकायतें प्रबंधित करें और सत्यापन करें' : 'Manage complaints & AI verification',
       icon: Building2,
       path: '/officer',
       badgeStyle: 'text-purple-800 bg-purple-100',
@@ -173,12 +176,14 @@ export function RoleSwitcher({ currentRole, userName }: RoleSwitcherProps) {
         <div className="absolute right-0 z-50 mt-2 w-72 max-w-[calc(100vw-2rem)] origin-top-right rounded-xl border border-slate-200 bg-white p-2 shadow-xl ring-1 ring-black/5 animate-in fade-in-0 zoom-in-95">
           <div className="px-3 py-2 border-b border-slate-100 mb-1">
             <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
-              Active Demonstration Role
+              {isHi ? 'सक्रिय प्रदर्शन भूमिका' : 'Active Demonstration Role'}
             </p>
             <p className="text-sm font-semibold text-slate-900 truncate">
               {userName || currentRoleConfig.label}
             </p>
-            <p className="text-xs text-slate-500 mt-0.5">Switch role to preview other dashboards:</p>
+            <p className="text-xs text-slate-500 mt-0.5">
+              {isHi ? 'अन्य डैशबोर्ड देखने हेतु भूमिका बदलें:' : 'Switch role to preview other dashboards:'}
+            </p>
           </div>
 
           <div className="space-y-1">
@@ -232,7 +237,7 @@ export function RoleSwitcher({ currentRole, userName }: RoleSwitcherProps) {
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-600 hover:bg-slate-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-civic-600"
             >
               <ExternalLink className="h-3.5 w-3.5 text-slate-400" aria-hidden="true" />
-              Role Selection Hub
+              {isHi ? 'भूमिका चयन केंद्र' : 'Role Selection Hub'}
             </button>
             <button
               type="button"
@@ -240,7 +245,7 @@ export function RoleSwitcher({ currentRole, userName }: RoleSwitcherProps) {
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs text-red-600 hover:bg-red-50 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600"
             >
               <LogOut className="h-3.5 w-3.5 text-red-500" aria-hidden="true" />
-              Exit Demonstration Session
+              {isHi ? 'प्रदर्शन सत्र से बाहर निकलें' : 'Exit Demonstration Session'}
             </button>
           </div>
         </div>

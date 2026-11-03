@@ -5,6 +5,7 @@ import { RefreshCw, ShieldAlert, CheckCircle2, AlertTriangle } from 'lucide-reac
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
+import { formatFrontendError } from '@/lib/errors';
 import { OfficerMetricsBar } from './officer-metrics-bar';
 import { OfficerChartPanel } from './officer-chart-panel';
 import { OfficerFilterToolbar } from './officer-filter-toolbar';
@@ -34,7 +35,8 @@ export function OfficerView({
   wards = [],
   workers = [],
 }: OfficerViewProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isHi = language === 'hi';
   const [complaints, setComplaints] = React.useState<ComplaintWithDetails[]>(initialComplaints);
   const [isRefreshing, setIsRefreshing] = React.useState(false);
   const [timeframe, setTimeframe] = React.useState('Last 30 days');
@@ -90,14 +92,16 @@ export function OfficerView({
         setComplaints(data.complaints);
         setNotification({
           type: 'success',
-          message: 'Dashboard complaint queue refreshed with live Supabase data.',
+          message: isHi
+            ? 'डैशबोर्ड शिकायत सूची सफलतापूर्वक रीफ़्रेश की गई।'
+            : 'Dashboard complaint queue refreshed successfully.',
         });
       }
     } catch (err) {
       console.error('Failed to refresh complaints:', err);
       setNotification({
         type: 'error',
-        message: 'Failed to refresh complaints from server.',
+        message: formatFrontendError(err, language, 'errors.refreshFailed'),
       });
     } finally {
       setIsRefreshing(false);
@@ -179,7 +183,7 @@ export function OfficerView({
 
       setAssignDialogComplaint(null);
     } catch (err) {
-      setAssignError(err instanceof Error ? err.message : 'Assignment failed');
+      setAssignError(formatFrontendError(err, language, 'errors.submissionFailed'));
     } finally {
       setIsAssigning(false);
     }
@@ -199,7 +203,7 @@ export function OfficerView({
     if (!reviewDialogComplaint) return;
 
     if (!reviewRemarks.trim()) {
-      setReviewError('Review remarks / evaluation notes are mandatory.');
+      setReviewError(t('officer.reviewDialog.mandatoryError'));
       return;
     }
 
@@ -225,7 +229,9 @@ export function OfficerView({
 
       setNotification({
         type: 'success',
-        message: data.message || 'Review action recorded successfully.',
+        message: isHi
+          ? 'समीक्षा निर्णय सफलतापूर्वक दर्ज किया गया।'
+          : 'Review decision recorded successfully.',
       });
 
       if (data.complaint) {
@@ -241,7 +247,7 @@ export function OfficerView({
 
       setReviewDialogComplaint(null);
     } catch (err) {
-      setReviewError(err instanceof Error ? err.message : 'Review submission failed');
+      setReviewError(formatFrontendError(err, language, 'errors.submissionFailed'));
     } finally {
       setIsReviewing(false);
     }
@@ -291,13 +297,12 @@ export function OfficerView({
       setNotification({
         type: 'success',
         message: data.cached
-          ? 'Retrieved cached verification findings.'
-          : 'Visual verification completed successfully with Gemini Vision.',
+          ? (isHi ? 'कैश किए गए सत्यापन निष्कर्ष प्राप्त हुए।' : 'Retrieved cached verification findings.')
+          : (isHi ? 'दृश्य सत्यापन सफलतापूर्वक पूर्ण हुआ।' : 'Visual verification completed successfully with Gemini Vision.'),
       });
     } catch (err) {
       console.error('Failed to run visual verification:', err);
-      const errMsg =
-        err instanceof Error ? err.message : 'Visual verification encountered an error.';
+      const errMsg = formatFrontendError(err, language, 'errors.visionFailed');
       setVerifyError(errMsg);
       setNotification({
         type: 'error',

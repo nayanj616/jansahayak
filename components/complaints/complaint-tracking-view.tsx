@@ -27,6 +27,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n';
+import { formatFrontendError } from '@/lib/errors';
+import { getLatestAiVerification } from '@/lib/verifications';
 import type { ComplaintWithDetails, VisionVerificationMetrics, ComplaintStatus } from '@/types';
 
 interface ComplaintTrackingViewProps {
@@ -42,6 +44,13 @@ export function ComplaintTrackingView({
   const isHi = language === 'hi';
 
   const [complaint, setComplaint] = React.useState<ComplaintWithDetails>(initialComplaint);
+  const [prevInitialComplaint, setPrevInitialComplaint] = React.useState<ComplaintWithDetails>(initialComplaint);
+
+  if (initialComplaint !== prevInitialComplaint) {
+    setPrevInitialComplaint(initialComplaint);
+    setComplaint(initialComplaint);
+  }
+
   const [activePhoto, setActivePhoto] = React.useState<{ url: string; title: string; subtitle?: string } | null>(null);
   const [photoError, setPhotoError] = React.useState<boolean>(false);
   const [photoLoading, setPhotoLoading] = React.useState<boolean>(true);
@@ -56,10 +65,7 @@ export function ComplaintTrackingView({
   const workerImage = complaint.images?.find((i) => i.image_type === 'after');
 
   // Normalized verification record
-  const rawVerif = complaint.ai_verification;
-  const verification = Array.isArray(rawVerif)
-    ? (rawVerif.length > 0 ? rawVerif[rawVerif.length - 1] : null)
-    : rawVerif;
+  const verification = getLatestAiVerification(complaint.ai_verification);
   const metrics = verification?.metrics as unknown as VisionVerificationMetrics | undefined;
   const isFailed = verification?.processing_status === 'failed';
   const isCompleted = verification?.processing_status === 'completed' && Boolean(metrics);
@@ -140,7 +146,7 @@ export function ComplaintTrackingView({
       }
     } catch (err) {
       console.error('Gemini verification error:', err);
-      setVerifyError(err instanceof Error ? err.message : 'Unknown verification error');
+      setVerifyError(formatFrontendError(err, language, 'errors.visionFailed'));
     } finally {
       setIsVerifying(false);
     }
@@ -201,8 +207,8 @@ export function ComplaintTrackingView({
               <MapPin className="h-4 w-4 text-civic-700 shrink-0" />
               <strong className="text-slate-800">
                 {complaint.ward
-                  ? `Ward ${complaint.ward.ward_no}: ${complaint.ward.ward_name}`
-                  : complaint.ward_id || (isHi ? 'वार्ड क्षेत्र' : 'Ward Area')}
+                  ? `${isHi ? 'वार्ड' : 'Ward'} ${complaint.ward.ward_no}: ${complaint.ward.ward_name}`
+                  : (isHi ? 'वार्ड क्षेत्र' : 'Ward Area')}
               </strong>
             </span>
             {complaint.location_description && (
@@ -492,7 +498,9 @@ export function ComplaintTrackingView({
             <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-800 flex items-start gap-2">
               <AlertCircle className="h-4 w-4 text-red-600 shrink-0 mt-0.5" />
               <div>
-                <strong className="block font-semibold">Verification Error</strong>
+                <strong className="block font-semibold">
+                  {isHi ? 'सत्यापन त्रुटि' : 'Verification Error'}
+                </strong>
                 <span>{verifyError}</span>
               </div>
             </div>
@@ -517,7 +525,7 @@ export function ComplaintTrackingView({
                       }
                       className="capitalize"
                     >
-                      {metrics.evaluation.confidenceLevel}
+                      {t(`officer.verification.confidenceLevels.${metrics.evaluation.confidenceLevel}`) || metrics.evaluation.confidenceLevel}
                     </Badge>
                   </div>
                 </div>
@@ -716,10 +724,14 @@ export function ComplaintTrackingView({
                     </div>
 
                     <div className="text-[11px] text-slate-500">
-                      <span>Status transition: </span>
-                      <span className="font-medium text-slate-700">{event.old_status || 'initial'}</span>
+                      <span>{t('common.statusTransition')} </span>
+                      <span className="font-medium text-slate-700">
+                        {event.old_status ? (t(`complaints.statuses.${event.old_status}`) || event.old_status) : t('common.initial')}
+                      </span>
                       {' → '}
-                      <span className="font-bold text-slate-900">{event.new_status}</span>
+                      <span className="font-bold text-slate-900">
+                        {event.new_status ? (t(`complaints.statuses.${event.new_status}`) || event.new_status) : ''}
+                      </span>
                     </div>
 
                     {event.remarks && (
@@ -789,14 +801,6 @@ export function ComplaintTrackingView({
                 <div className="flex flex-col items-center justify-center text-slate-400 p-6 text-center">
                   <AlertTriangle className="h-8 w-8 text-amber-400 mb-2" />
                   <p className="text-xs font-medium text-slate-300">{t('common.imageUnavailable')}</p>
-                  <a
-                    href={activePhoto.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 text-[11px] text-civic-400 underline hover:text-civic-300"
-                  >
-                    Direct Image Link
-                  </a>
                 </div>
               ) : (
                 <Image

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { User, HardHat, Building2 } from 'lucide-react';
 import type { DemoRole } from '@/types';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/lib/i18n';
 
 interface RoleBadgeProps {
   role: DemoRole;
@@ -16,21 +17,22 @@ export function RoleBadge({
   className,
   size = 'default',
 }: RoleBadgeProps) {
+  const { t } = useLanguage();
   const config = {
     citizen: {
-      label: 'Citizen',
+      label: t('common.roles.citizen') || 'Citizen',
       icon: User,
       classes: 'bg-emerald-50 text-emerald-800 border-emerald-200 ring-emerald-500/20',
       avatarBg: 'bg-emerald-600',
     },
     worker: {
-      label: 'Sanitation Worker',
+      label: t('common.roles.worker') || 'Sanitation Worker',
       icon: HardHat,
       classes: 'bg-blue-50 text-blue-800 border-blue-200 ring-blue-500/20',
       avatarBg: 'bg-blue-600',
     },
     officer: {
-      label: 'Municipal Officer',
+      label: t('common.roles.officer') || 'Municipal Officer',
       icon: Building2,
       classes: 'bg-purple-50 text-purple-800 border-purple-200 ring-purple-500/20',
       avatarBg: 'bg-purple-700',
